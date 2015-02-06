@@ -1,0 +1,14 @@
+## Interface: 60000
+
+## Title: Big Wigs [|cffeda55fMists of Pandaria|r]
+## Notes: A collection of Big Wigs modules from the Mists of Pandaria era.
+
+## LoadOnDemand: 1
+## Dependencies: BigWigs
+
+## X-Category: Raid
+## X-BigWigs-LoadOn-ZoneId: 896, 897, 886, 930, 953
+## X-BigWigs-LoadOn-WorldBoss: 807, 62346, 809, 60491, 928, 69099, 929, 69161, 951, 72057
+
+modules.xml
+
