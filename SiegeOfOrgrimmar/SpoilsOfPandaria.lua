@@ -18,6 +18,8 @@ local bossUnitPowers = {}
 local massiveCrates = 2
 local stoutCrates = 6
 local prevEnrage = 0
+local GetNumWorldStateUI = GetNumWorldStateUI
+local GetWorldStateUIInfo = GetWorldStateUIInfo
 
 local function checkPlayerSide()
 	local cy, cx = UnitPosition("player")
@@ -66,7 +68,7 @@ function mod:GetOptions()
 	}
 end
 
-function mod:OnRegister() -- XXX check out replacing this with the chest id
+function mod:OnRegister() -- Unit APIs don't work on chest mouseover :(
 	-- Kel'Thuzad v3
 	local f = CreateFrame("Frame")
 	local func = function()
@@ -342,20 +344,22 @@ function mod:UPDATE_WORLD_STATES()
 	-- Repeatedly running through LFR to test various methods was also a delightful experience.
 	-- Pretty much, I hate it. The only positive from this is that we don't need to schedule the messages.
 	-- If this ever breaks in a future patch, $#!+.
-	local _, _, _, enrage = GetWorldStateUIInfo(6)
-	if enrage then
-		local remaining = enrage:match("%d+")
-		if remaining then
-			local timeRemaining = tonumber(remaining)
-			if timeRemaining and timeRemaining > 0 then
-				if timeRemaining > prevEnrage or timeRemaining % 60 == 0 then
-					self:Bar("berserk", timeRemaining+1, 26662) -- +1s to compensate for timer rounding.
+	for i = 1, GetNumWorldStateUI() do
+		local _, state, _, enrage = GetWorldStateUIInfo(i)
+		if state > 0 and enrage then -- Check if state is visible and if text exists.
+			local remaining = enrage:match("%d+")
+			if remaining then
+				local timeRemaining = tonumber(remaining)
+				if timeRemaining and timeRemaining > 0 then
+					if timeRemaining > prevEnrage or timeRemaining % 60 == 0 then
+						self:Bar("berserk", timeRemaining+1, 26662) -- +1s to compensate for timer rounding.
+					end
+					-- It shouldn't fire the same value twice, but throttle for safety.
+					if timeRemaining ~= prevEnrage and (timeRemaining == 60 or timeRemaining == 30 or timeRemaining == 10 or timeRemaining == 5) then
+						self:Message("berserk", "Positive", nil, format(CL.custom_sec, self:SpellName(26662), timeRemaining), 26662)
+					end
+					prevEnrage = timeRemaining
 				end
-				-- It shouldn't fire the same value twice, but throttle for safety.
-				if timeRemaining ~= prevEnrage and (timeRemaining == 60 or timeRemaining == 30 or timeRemaining == 10 or timeRemaining == 5) then
-					self:Message("berserk", "Positive", nil, format(CL.custom_sec, self:SpellName(26662), timeRemaining), 26662)
-				end
-				prevEnrage = timeRemaining
 			end
 		end
 	end
