@@ -45,7 +45,7 @@ function mod:GetOptions()
 	return {
 		145215, 147207, "custom_off_fragment_mark",
 		"custom_off_titan_mark",
-		{146595, "PROXIMITY"}, 144400, -8257, {-8258, "FLASH"}, {146817, "FLASH", "PROXIMITY"}, -8270, {144351, "DISPEL"}, {144358, "TANK", "FLASH", "EMPHASIZE"}, -8262, 144800, 144563, 144832, -8349,
+		{146595, "PROXIMITY"}, 144400, -8257, {-8258, "FLASH"}, {146817, "FLASH", "PROXIMITY"}, -8270, {144351, "DISPEL"}, {144358, "TANK", "FLASH", "EMPHASIZE", "COUNTDOWN"}, -8262, 144800, 144563, 144832, -8349,
 		"altpower", "berserk", "bosskill",
 	}, {
 		[145215] = "mythic",

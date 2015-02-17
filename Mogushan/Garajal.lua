@@ -29,7 +29,7 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		122151, 116174, 116272, {116161, "EMPHASIZE"},
+		122151, 116174, 116272, {116161, "EMPHASIZE", "COUNTDOWN"},
 		-5759,
 		-6698, "berserk", "bosskill",
 	}, {

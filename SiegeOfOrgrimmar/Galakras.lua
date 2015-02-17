@@ -67,7 +67,7 @@ function mod:GetOptions()
 		"adds", "drakes", "demolisher", 147328, 146765, 146757, -8489, 146899, -- Foot Soldiers
 		"custom_off_shaman_marker",
 		{147068, "ICON", "FLASH", "PROXIMITY"},-- Galakras
-		"stages", {"warmup", "EMPHASIZE"}, "bosskill",
+		"stages", {"warmup", "COUNTDOWN"}, "bosskill",
 	}, {
 		["towers"] = -8421, -- Ranking Officials
 		["adds"] = -8427, -- Foot Soldiers
