@@ -156,7 +156,9 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "ToxicInjectionsRemoved", 142532, 142533, 142534) -- blue red yellow
 	self:Log("SPELL_AURA_APPLIED", "ToxicInjectionsApplied", 142532, 142533, 142534) -- blue red yellow
 	self:Log("SPELL_PERIODIC_DAMAGE", "ExplosiveRing", 142803)
+	self:Log("SPELL_PERIODIC_MISSED", "ExplosiveRing", 142803)
 	self:Log("SPELL_PERIODIC_DAMAGE", "CannedHeat", 143576)
+	self:Log("SPELL_PERIODIC_MISSED", "CannedHeat", 143576)
 	--Kaz'tik the Manipulator
 	self:Log("SPELL_AURA_APPLIED", "Mesmerize", 142671)
 	--Korven the Prime
@@ -177,6 +179,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "HurlAmber", 143759)
 	self:Log("SPELL_CAST_SUCCESS", "CausticAmber", 143735) -- this is half a sec faster than _DAMAGE
 	self:Log("SPELL_PERIODIC_DAMAGE", "CausticAmber", 143735)
+	self:Log("SPELL_PERIODIC_MISSED", "CausticAmber", 143735)
 	--Skeer the Bloodseeker
 	self:Log("SPELL_CAST_START", "Bloodletting", 143280)
 	--Rik'kal the Dissector

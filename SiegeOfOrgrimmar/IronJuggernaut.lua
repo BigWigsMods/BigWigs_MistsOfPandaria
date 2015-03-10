@@ -56,6 +56,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "MineArming", 144718) -- Detonation Sequence
 	-- Siege mode
 	self:Log("SPELL_PERIODIC_DAMAGE", "ExplosiveTar", 144498)
+	self:Log("SPELL_PERIODIC_MISSED", "ExplosiveTar", 144498)
 	self:Log("SPELL_AURA_REMOVED", "CutterLaserRemoved", 146325)
 	self:Log("SPELL_AURA_APPLIED", "CutterLaserApplied", 146325)
 	self:Log("SPELL_CAST_START", "ShockPulse", 144485)

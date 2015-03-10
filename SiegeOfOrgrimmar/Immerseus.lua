@@ -51,6 +51,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Swirl", 143309)
 	self:Log("SPELL_DAMAGE", "ShaBolt", 143295)
 	self:Log("SPELL_PERIODIC_DAMAGE", "ShaPoolDamage", 143297)
+	self:Log("SPELL_PERIODIC_MISSED", "ShaPoolDamage", 143297)
 end
 
 function mod:OnEngage()

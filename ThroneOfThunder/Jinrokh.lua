@@ -63,6 +63,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "StaticBurst", 137162)
 	self:Log("SPELL_DAMAGE", "StaticWoundConduction", 138375)
 	self:Log("SPELL_PERIODIC_DAMAGE", "ElectrifiedWaters", 138006)
+	self:Log("SPELL_PERIODIC_MISSED", "ElectrifiedWaters", 138006)
 
 	self:Log("SPELL_AURA_APPLIED", "StaticWound", 138349)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "StaticWound", 138349)

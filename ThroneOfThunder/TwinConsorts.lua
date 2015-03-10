@@ -66,6 +66,7 @@ function mod:OnBossEnable()
 		-- phase 2
 	self:Log("SPELL_CAST_START", "NuclearInferno", 137491)
 	self:Log("SPELL_PERIODIC_DAMAGE", "FlamesOfPassion", 137417)
+	self:Log("SPELL_PERIODIC_MISSED", "FlamesOfPassion", 137417)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "FanOfFlames", 137408)
 	self:Log("SPELL_AURA_APPLIED", "FanOfFlames", 137408)
 		-- phase 1

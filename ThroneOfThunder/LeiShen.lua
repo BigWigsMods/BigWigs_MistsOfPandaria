@@ -101,14 +101,15 @@ function mod:OnBossEnable()
 	-- Stage 2
 	self:Log("SPELL_CAST_START", "LightningWhip", 136850)
 	self:Log("SPELL_PERIODIC_DAMAGE", "LightningWhipDamage", 136853)
+	self:Log("SPELL_PERIODIC_MISSED", "LightningWhipDamage", 136853)
 	self:Log("SPELL_CAST_SUCCESS", "SummonBallLightning", 136543)
 	self:Log("SPELL_CAST_START", "FusionSlash", 136478)
 	-- Intermission
 	self:Emote("IntermissionEnd", "137176")
 	self:Log("SPELL_CAST_START", "IntermissionStart", 137045)
 	-- Stage 1
-	self:Log("SPELL_DAMAGE", "CrashingThunder", 135150)
 	self:Log("SPELL_PERIODIC_DAMAGE", "CrashingThunder", 135153)
+	self:Log("SPELL_PERIODIC_MISSED", "CrashingThunder", 135153)
 	self:Log("SPELL_CAST_START", "Thunderstruck", 135095)
 	self:Log("SPELL_AURA_APPLIED", "Decapitate", 134912)
 	-- Conduits: Overcharged -- Diffusion Chain -- Static Shock -- Bouncing Bolt
@@ -489,8 +490,8 @@ do
 		local t = GetTime()
 		if t-prev > 1 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL["underyou"]:format(args.spellName))
-			self:Flash(args.spellId)
+			self:Message(135150, "Personal", "Info", CL["underyou"]:format(args.spellName))
+			self:Flash(135150)
 		end
 	end
 end

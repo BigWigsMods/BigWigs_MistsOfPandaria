@@ -67,6 +67,7 @@ function mod:OnBossEnable()
 	self:Emote("BloodFrenzyPhase", "143440")
 	-- stage 1
 	self:Log("SPELL_PERIODIC_DAMAGE", "BurningBlood", 143783)
+	self:Log("SPELL_PERIODIC_MISSED", "BurningBlood", 143783)
 	self:Log("SPELL_DAMAGE", "BurningBlood", 143783)
 	self:Log("SPELL_MISSED", "BurningBlood", 143783)
 	self:Log("SPELL_AURA_APPLIED", "FrozenSolid", 143777)

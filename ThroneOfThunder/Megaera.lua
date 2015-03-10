@@ -56,6 +56,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "NetherTear", 140138)
 	-- Frost
 	self:Log("SPELL_PERIODIC_DAMAGE", "IcyGround", 139909)
+	self:Log("SPELL_PERIODIC_MISSED", "IcyGround", 139909)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "ArcticFreeze", 139843)
 	-- Fire
 	self:Log("SPELL_DAMAGE", "CindersDamage", 139836)
