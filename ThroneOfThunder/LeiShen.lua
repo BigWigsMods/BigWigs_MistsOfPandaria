@@ -39,12 +39,6 @@ if L then
 	L.custom_off_diffused_marker = "Diffused Lightning Marker"
 	L.custom_off_diffused_marker_desc = "Mark the Diffused Lightning adds using all raid icons, requires promoted or leader.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over all the adds is the fastest way to mark them.|r"
 
-	L.stuns = "Stuns"
-	L.stuns_desc = "Show bars for stun durations, for use with handling Ball Lightnings."
-
-	L.aoe_grip = "AoE grip"
-	L.aoe_grip_desc = "Warning for when a Death Knight uses Gorefiend's Grasp, for use with handling Ball Lightnings."
-
 	L.shock_self = "Static Shock on YOU"
 	L.shock_self_desc = "Show a duration bar for the Static Shock debuff on you."
 	L.shock_self_icon = 135695
@@ -87,9 +81,7 @@ end
 
 function mod:OnBossEnable()
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
-	-- Ball Lightning helpers
-	self:Log("SPELL_CAST_SUCCESS", "Stuns", 119381, 119072, 30283) -- Leg Sweep, Holy Wrath, Shadowfury
-	self:Log("SPELL_CAST_SUCCESS", "Grip", 108199) -- Gorefiend's Grasp
+
 	-- Marking
 	self:Log("SPELL_DAMAGE", "ChainLightning", 136018, 136019, 136021)
 	self:Log("SPELL_SUMMON", "SummonSmallDiffusedLightning", 135992)
@@ -151,26 +143,6 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
-
-function mod:Grip(args)
-	if phase < 2 then return end
-	if self:Me(args.sourceGUID) then
-		self:Say("aoe_grip", L["aoe_grip"]) -- to help with aoe stuns
-	end
-	self:TargetMessage("aoe_grip", args.sourceName, "Urgent", nil, L["aoe_grip"], 108199)
-end
-
-do
-	local stunDuration = {
-		[119381] = 5, -- Leg Sweep
-		[119072] = 3, -- Holy Wrath
-		[30283] = 3, -- Shadowfury
-	}
-	function mod:Stuns(args)
-		if phase < 2 then return end
-		self:TargetBar("stuns", stunDuration[args.spellId], args.sourceName, 9179, args.spellId) -- 9179 = "Stun"
-	end
-end
 
 local function updateProximity()
 	if not activeProximityAbilities[1] then

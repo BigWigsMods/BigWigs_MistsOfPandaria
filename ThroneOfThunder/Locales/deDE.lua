@@ -159,12 +159,6 @@ if L then
 	L.custom_off_diffused_marker = "Diffusionsblitze markieren"
 	L.custom_off_diffused_marker_desc = "Markiert die Diffusionsblitze mit allen Raidsymbolen. Benötigt Leiter oder Assistent.\n|cFFFF0000Um Konflikte beim Markieren zu vermeiden, sollte lediglich 1 Person im Raid diese Option aktivieren.|r\n|cFFADFF2FTIPP: Wenn Du diese Option aktivierst, ist die schnellste Methode zum Markieren das zügige Bewegen des Mauszeigers über alle Adds.|r"
 
-	L.stuns = "Betäubungen"
-	L.stuns_desc = "Zeigt Leisten mit der Dauer von Betäubungen an um bei der Bewältigung der Kugelblitze zu helfen."
-
-	L.aoe_grip = "AoE Griff"
-	L.aoe_grip_desc = "Gibt Warnungen aus, wenn ein Todesritter Blutschattens Griff nutzt um bei der Bewältigung der Kugelblitze zu helfen."
-
 	L.shock_self = "Elektroschock auf DIR"
 	L.shock_self_desc = "Eine Leiste für die Dauer des Elektroschock-Schwächungszaubers auf Dir anzeigen."
 

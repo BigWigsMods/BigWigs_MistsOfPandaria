@@ -166,12 +166,6 @@ if L then
 	L.custom_off_diffused_marker = "확산된 번개 공격대 아이콘"
 	L.custom_off_diffused_marker_desc = "당신이 공격대장이나 부공격대장일때, 확산된 번개에 모든 공격대 아이콘을 표시합니다.\n|cFFFF0000Only 1 person in the raid should have this enabled to prevent marking conflicts.|r\n|cFFADFF2FTIP: If the raid has chosen you to turn this on, quickly mousing over all the adds is the fastest way to mark them.|r"
 
-	L.stuns = "기절"
-	L.stuns_desc = "뛰어오르는 화살 처리를 위해 기절 지속 시간에 대한 바를 표시합니다."
-
-	L.aoe_grip = "뛰어오르는 화살 처리"
-	L.aoe_grip_desc = "죽음의 기사로 뛰어오르는 화살 처리를 위해 고어핀드의 손아귀를 사용할 수 있도록 경고합니다."
-
 	L.shock_self = "당신에 전하 충격"
 	L.shock_self_desc = "전하 충격 디버프의 지속시간 바를 표시합니다."
 

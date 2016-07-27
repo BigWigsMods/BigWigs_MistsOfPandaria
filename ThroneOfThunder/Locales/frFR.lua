@@ -158,12 +158,6 @@ if L then
 	L.custom_off_diffused_marker = "Marquages des Foudres diffuses"
 	L.custom_off_diffused_marker_desc = "Marque les Foudres diffuses en utilisant toutes les icônes de raid, nécessite d'être assistant ou chef de raid.\n|cFFFF0000Seule 1 personne du raid doit activer ceci afin d'éviter les conflits de marquage.|r\n|cFFADFF2FASTUCE : si le raid a décidé que c'est vous qui devez l'activer, survoler rapidement toutes les Foudres diffuses est le moyen le plus rapide de les marquer.|r"
 
-	L.stuns = "Étourdissements"
-	L.stuns_desc = "Affiche des barres pour les durées d'étourdissement, à utiliser avec la gestion des foudres en boule."
-
-	L.aoe_grip = "\"Grip\" de zone"
-	L.aoe_grip_desc = "Prévient quand un chevalier de la mort utilise Emprise de Fielsang, à utiliser avec la gestion des foudres en boule."
-
 	L.shock_self = "Horion statique sur VOUS"
 	L.shock_self_desc = "Affiche une barre de durée de l'affaiblissement Horion statique quand ce dernier est sur vous."
 

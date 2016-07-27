@@ -166,12 +166,6 @@ if L then
 	L.custom_off_diffused_marker = "散射闪电标记"
 	L.custom_off_diffused_marker_desc = "使用全部团队标记标记全部散射闪电，需要权限。\n|cFFFF0000团队中只有1名应该启用此选项以防止标记冲突。|r\n|cFFADFF2F提示：如果团队选择你用来标记散射闪电，鼠标悬停快速划过全部散射闪电是最快的标记方式。|r"
 
-	L.stuns = "昏迷"
-	L.stuns_desc = "显示昏迷持续计时条，用于处理球状闪电。"
-
-	L.aoe_grip = "AoE 之握"
-	L.aoe_grip_desc = "当死亡骑士使用血魔之握时发出警报，用于处理球状闪电。"
-
 	L.shock_self = "自身静电冲击"
 	L.shock_self_desc = "显示静电冲击减益持续计时条。"
 

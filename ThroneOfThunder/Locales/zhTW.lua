@@ -166,12 +166,6 @@ if L then
 	L.custom_off_diffused_marker = "散射電靈標記"
 	L.custom_off_diffused_marker_desc = "使用全部的團隊圖示標記散射電靈，需要權限。\n|cFFFF0000團隊中只需要有一人啟用此選項以防止標記衝突。|r\n|cFFADFF2F提示：如果團隊選擇你來啟用此項功能，滑鼠快速滑過所有散射電靈是最快的標記方式。|r"
 
-	L.stuns = "昏迷"
-	L.stuns_desc = "顯示昏迷持續時間計時條，用於處理閃電球。"
-
-	L.aoe_grip = "AoE控場"
-	L.aoe_grip_desc = "當死亡騎士使用血魔之握時發出警報，用於處理閃電球。"
-
 	L.shock_self = "自身靜電震擊"
 	L.shock_self_desc = "顯示靜電震擊減益的持續時間計時條。"
 

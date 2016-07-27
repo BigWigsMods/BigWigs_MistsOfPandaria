@@ -163,12 +163,6 @@ if L then
 	L.custom_off_diffused_marker = "Marcatore Fulmine Diffuso"
 	L.custom_off_diffused_marker_desc = "Marca gli add Fulmine Diffuso usando tutte le icone dell'incursione, richiede capogruppo o assistente.\n|cFFFF0000Solo 1 persona nell'incursione dovrebbe attivare questa opzione per evitare conflitti di marcamento.|r\n|cFFADFF2FTIP: Se l'incursione ha scelto te attivalo, e muovi velocemente il mouse sopra OGNI add per marcarli più velocemente possibile.|r"
 
-	L.stuns = "Disorientamenti"
-	L.stuns_desc = "Mostra delle barre per la durata dei disorientamenti, da usare per la gestione dei Fulmini Globulari."
-
-	L.aoe_grip = "Attrazione ad Area"
-	L.aoe_grip_desc = "Avvisa quando un cavaliere della Morte usa Presa di Malacarne, da usare per la gestione dei Fulmini Globulari."
-
 	L.shock_self = "Folgore Statica SU DI TE!!!"
 	L.shock_self_desc = "Mostra una barra di durata per il maleficio Folgore Statica su di te."
 

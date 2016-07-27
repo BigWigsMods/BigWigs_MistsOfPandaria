@@ -165,12 +165,6 @@ if L then
 	L.custom_off_diffused_marker = "Marcador de Relámpago difuminado"
 	L.custom_off_diffused_marker_desc = "Marca los adds Relámpago difuminado usando todos los iconos de raid, requiere ayudante o líder.\n|cFFFF0000Solo 1 persona en la raid debería tener esto activado para prevenir conflictos con las marcas.|r\n|cFFADFF2FCONSEJO: Si la raid te ha elegido para activar esto, mover el ratón rápidamente por encima de todos los adds es la forma más rápida de marcarlos.|r"
 
-	L.stuns = "Aturdimientos"
-	L.stuns_desc = "Muestra barras para la duración del aturdimiento, usar para controlar la Bola de relámpagos."
-
-	L.aoe_grip = "Agarre zonal"
-	L.aoe_grip_desc = "Avisa cuando un DK usa Abrazo de Sanguino, usar para controlar la Bola de relámpagos."
-
 	L.shock_self = "Choque estático en TI"
 	L.shock_self_desc = "Muestra una barra con la duración del debuff Choque estático en ti."
 
