@@ -382,9 +382,9 @@ do
 			thrashNext = nil
 		elseif self:Me(args.destGUID) then --just the current tank
 			if swingCounter > 0 then -- normal swing
-				self:Message("swing", "Positive", nil, CL["count"]:format(L["swing"], swingCounter), 5547) -- hammer icon (meeeeh)
+				self:Message("swing", "Positive", nil, CL["count"]:format(L["swing"], swingCounter), 5547) -- ability_thunderbolt / Swing / icon 132325
 			elseif swingCounter == 0 then -- last extra swing
-				self:Message("swing", "Positive", nil, CL["other"]:format(CL["count"]:format(L["swing"], thrashSwing), self:SpellName(131996)), 12972) -- Swing (4): Thrash (thrashy icon)
+				self:Message("swing", "Positive", nil, CL["other"]:format(CL["count"]:format(L["swing"], thrashSwing), self:SpellName(131996)), 158176) -- "Swing (4): Thrash" / ability_ghoulfrenzy / Thrash / icon 132152
 			end
 		end
 	end
@@ -431,7 +431,7 @@ end
 function mod:OminousCackle(args)
 	cackleCounter = cackleCounter + 1
 	local diff = self:Difficulty()
-	self:Bar(args.spellId, (diff == 4 or diff == 6) and 45 or 90, CL["count"]:format(args.spellName, cackleCounter))
+	self:Bar(129147, (diff == 4 or diff == 6) and 45 or 90, CL["count"]:format(args.spellName, cackleCounter))
 end
 
 function mod:OminousCackleRemoved(args) -- set it here, because at this point we are surely out of range of the other platforms
