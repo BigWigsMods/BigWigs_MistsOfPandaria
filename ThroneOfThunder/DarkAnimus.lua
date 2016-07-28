@@ -110,17 +110,17 @@ function mod:InterruptingJolt(args)
 	if caster then
 		-- heroic is 1.4s so a bar isn't really helpful
 		if self:LFR() then
-			self:Bar(args.spellId, 3.8, CL["cast"]:format(args.spellName))
+			self:Bar(138763, 3.8, CL["cast"]:format(args.spellName))
 		elseif not self:Heroic() then
-			self:Bar(args.spellId, 2.2, CL["cast"]:format(args.spellName))
+			self:Bar(138763, 2.2, CL["cast"]:format(args.spellName))
 		end
-		self:Flash(args.spellId)
+		self:Flash(138763)
 	end
 
 	self:StopBar(CL["count"]:format(args.spellName, joltCounter))
-	self:Message(args.spellId, caster and "Personal" or "Attention", caster and "Long", CL["count"]:format(args.spellName, joltCounter))
+	self:Message(138763, caster and "Personal" or "Attention", caster and "Long", CL["count"]:format(args.spellName, joltCounter))
 	joltCounter = joltCounter + 1
-	self:Bar(args.spellId, 22, CL["count"]:format(args.spellName, joltCounter))
+	self:Bar(138763, 22, CL["count"]:format(args.spellName, joltCounter))
 end
 
 function mod:EmpowerGolem(args)
