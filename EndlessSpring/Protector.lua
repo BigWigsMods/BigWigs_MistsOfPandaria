@@ -70,7 +70,7 @@ end
 
 function mod:OnEngage()
 	self:CDBar(117309, 11) -- Cleansing Waters
-	self:CDBar(111850, 15) -- Lightning Prison
+	self:CDBar(117436, 15) -- Lightning Prison
 	bossDead = 0
 	firstDeath = nil
 	self:Berserk(self:LFR() and 660 or 490)
