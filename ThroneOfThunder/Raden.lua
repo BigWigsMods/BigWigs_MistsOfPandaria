@@ -263,9 +263,9 @@ do
 		end
 	end
 	function mod:UnstableVitaRemoved(args)
-		self:StopBar(args.spellId)
+		self:StopBar(138297)
 		self:SecondaryIcon("unstablevitajumptarget")
-		self:PrimaryIcon(args.spellId)
+		self:PrimaryIcon(138297)
 		player = nil
 	end
 end
