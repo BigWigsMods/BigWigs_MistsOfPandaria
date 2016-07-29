@@ -100,7 +100,7 @@ function mod:GetOptions()
 		143484, {143716, "FLASH"}, 143536, {143872, "FLASH", "SAY"}, 143503,
 		"custom_off_bonecracker_marks",
 		-7920, {-7933, "FLASH"}, {143475, "FLASH", "ICON"}, "chain_heal", 143474, {143431, "DISPEL"}, "arcane_shock",
-		{143494, "TANK_HEALER"}, {143638, "HEALER"}, -7915, "proximity", "berserk", "bosskill",
+		{143494, "TANK_HEALER"}, {143638, "HEALER"}, -7915, "proximity", "berserk",
 	}, {
 		[143502] = "mythic",
 		[143484] = -7909,

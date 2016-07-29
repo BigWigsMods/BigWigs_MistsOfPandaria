@@ -31,7 +31,7 @@ function mod:GetOptions()
 	return {
 		122151, 116174, 116272, {116161, "EMPHASIZE", "COUNTDOWN"},
 		-5759,
-		-6698, "berserk", "bosskill",
+		-6698, "berserk",
 	}, {
 		[122151] = CL["phase"]:format(1),
 		[-5759] = CL["phase"]:format(2),

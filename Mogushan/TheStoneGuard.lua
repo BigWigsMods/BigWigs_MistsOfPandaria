@@ -36,7 +36,7 @@ function mod:GetOptions()
 		-5772,
 		130774,
 		{130395, "FLASH", "PROXIMITY"},
-		"overload", "petrifications", "berserk", "bosskill",
+		"overload", "petrifications", "berserk",
 	}, {
 		[116529] = "heroic",
 		[-5772] = -5771,

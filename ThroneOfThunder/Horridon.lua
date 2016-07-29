@@ -72,7 +72,7 @@ function mod:GetOptions()
 		{-7119, "DISPEL"}, {-7120, "HEALER"}, {136573, "FLASH"}, -- Drakkari
 		"fireball", "chain_lightning", {-7125, "DISPEL"}, {136490, "FLASH"}, -- Amani
 		136817, 136821, -- War-God Jalak
-		{-7078, "TANK_HEALER"}, 136741, {-7080, "FLASH", "SAY"}, 137240, "adds", "berserk", "bosskill",
+		{-7078, "TANK_HEALER"}, 136741, {-7080, "FLASH", "SAY"}, 137240, "adds", "berserk",
 	}, {
 		[137458] = "heroic",
 		[-7086] = -7086,

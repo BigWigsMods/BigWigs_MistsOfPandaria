@@ -29,7 +29,7 @@ function mod:GetOptions()
 	return {
 		-6969,
 		136037, {136050, "TANK"}, 136216, {136218, "PROXIMITY"}, {136228, "ICON"}, 136245, {136246, "PROXIMITY"}, -7830, {-6960, "FLASH"},
-		"berserk", "bosskill",
+		"berserk",
 	}, {
 		[-6969] = "heroic",
 		[136037] = "general",

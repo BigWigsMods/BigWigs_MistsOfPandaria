@@ -68,7 +68,7 @@ function mod:GetOptions()
 		{136478, "TANK"}, {136543, "PROXIMITY"}, {136850, "FLASH"},
 		{136914, "TANK"}, 136889,
 		{135695, "PROXIMITY"}, {"shock_self", "SAY", "FLASH", "EMPHASIZE", "COUNTDOWN"}, {135991, "PROXIMITY"}, 136295, {"overcharged_self", "SAY"}, 136366,
-		"stages", {"aoe_grip", "SAY"}, "stuns", "berserk", "proximity", "bosskill",
+		"stages", {"aoe_grip", "SAY"}, "stuns", "berserk", "proximity",
 	}, {
 		["custom_off_diffused_marker"] = L.custom_off_diffused_marker,
 		[139011] = "heroic",

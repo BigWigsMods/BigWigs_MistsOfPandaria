@@ -37,7 +37,7 @@ function mod:GetOptions()
 		142879, {142913, "FLASH", "PROXIMITY", "SAY"}, -- Rage Phase
 		"custom_off_energy_marks",
 		142826, {142851, "PROXIMITY"}, {142842, "FLASH"}, 142986, {142990, "TANK"}, -- Non rage phase
-		"berserk", "bosskill",
+		"berserk",
 	}, {
 		[142879] = 142879,
 		["custom_off_energy_marks"] = L.custom_off_energy_marks,

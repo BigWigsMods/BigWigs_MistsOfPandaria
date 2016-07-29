@@ -68,7 +68,7 @@ function mod:GetOptions()
 		"strength",
 		"courage",
 		"bosses", "combo", "arc",
-		-5670, "berserk", "bosskill",
+		-5670, "berserk",
 	}, {
 		[116829] = ("%s (%s)"):format(L["titan_spark"], CL["heroic"]),
 		rage = L["rage"],

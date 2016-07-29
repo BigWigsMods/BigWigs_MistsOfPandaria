@@ -34,7 +34,7 @@ function mod:GetOptions()
 	return {
 		-6294,
 		122735, 122754,
-		122774, 123495, {122835, "ICON"}, 123120, 123081, "berserk", "bosskill",
+		122774, 123495, {122835, "ICON"}, 123120, 123081, "berserk",
 	}, {
 		[-6294] = "heroic",
 		[122735] = INLINE_TANK_ICON..TANK,

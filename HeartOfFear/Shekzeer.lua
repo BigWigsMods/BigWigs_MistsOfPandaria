@@ -40,7 +40,7 @@ function mod:GetOptions()
 		-6325, {"eyes", "TANK"}, {123788, "FLASH", "ICON"}, {123735, "HEALER"}, "proximity",
 		{125390, "FLASH"}, 124097, 125826, 124827, {124077, "FLASH"},
 		{124862, "FLASH", "PROXIMITY", "SAY"}, { 124849, "FLASH" },
-		"phases", "berserk", "bosskill",
+		"phases", "berserk",
 	}, {
 		[123845] = "heroic",
 		[-6325] = -6336,

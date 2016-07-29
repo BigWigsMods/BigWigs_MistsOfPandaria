@@ -43,7 +43,7 @@ function mod:GetOptions()
 		{138485, "FLASH", "SAY"},
 		{138609, "FLASH", "ICON", "DISPEL"}, {"matterswap", "ICON"}, {-7770, "TANK"},
 		138644, 136954, 138691, 138780, {138763, "FLASH"}, {138729, "FLASH"},
-		"berserk", "bosskill",
+		"berserk",
 	}, {
 		[138485] = -7759, -- Large Anima Golem
 		[138609] = -7760, -- Massive Anima Golem

@@ -40,7 +40,7 @@ function mod:GetOptions()
 	return {
 		{125310, "FLASH"},
 		122842, {-6346, "ICON", "SAY", "PROXIMITY"}, {123175, "PROXIMITY"}, "custom_off_windstep", {123474, "TANK_HEALER"}, -6350,
-		"proximity", "berserk", "bosskill",
+		"proximity", "berserk",
 	}, {
 		[125310] = "heroic",
 		[122842] = "general",

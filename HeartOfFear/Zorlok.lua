@@ -49,7 +49,7 @@ L.force = L.force .." (".. L.force_message ..")"
 function mod:GetOptions()
 	return {
 		{"attenuation", "FLASH"}, {"force", "FLASH"}, 122740, {122761, "ICON"},
-		"stages", "berserk", "bosskill",
+		"stages", "berserk",
 	}
 end
 

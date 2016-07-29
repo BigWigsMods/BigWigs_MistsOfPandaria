@@ -58,7 +58,7 @@ function mod:GetOptions()
 		{116784, "ICON", "FLASH", "SAY"}, 116711,
 		{116417, "ICON", "SAY", "FLASH", "PROXIMITY"}, 116364,
 		118071,
-		115817, 115911, {"tank", "TANK"}, "stages", "berserk", "bosskill",
+		115817, 115911, {"tank", "TANK"}, "stages", "berserk",
 	}, {
 		[116157] = L["phase_lightning"],
 		[116784] = L["phase_flame"],

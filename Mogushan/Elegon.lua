@@ -45,7 +45,7 @@ function mod:GetOptions()
 		117960, "adds", -6186, {117878, "FLASH"},
 		119360,
 		{"floor", "FLASH", "EMPHASIZE", "COUNTDOWN"},
-		"stages", "berserk", "bosskill",
+		"stages", "berserk",
 	}, {
 		[117960] = -6174,
 		[119360] = -6175,

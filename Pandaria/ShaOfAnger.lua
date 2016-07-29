@@ -16,7 +16,6 @@ mod.worldBoss = 60491
 function mod:GetOptions()
 	return {
 		{119622, "FLASH", "PROXIMITY"}, 119626, 119488, {119610, "FLASH"},
-		"bosskill",
 	}
 end
 

@@ -38,7 +38,7 @@ function mod:GetOptions()
 		{139822, "FLASH", "ICON", "SAY"}, {137731, "HEALER"},
 		{139866, "FLASH", "ICON", "SAY"}, {139909, "FLASH"}, {139843, "TANK"},
 		{139840, "HEALER"},
-		139458, {"breaths", "FLASH"}, "proximity", "berserk", "bosskill",
+		139458, {"breaths", "FLASH"}, "proximity", "berserk",
 	}, {
 		[140138] = ("%s (%s)"):format(mod:SpellName(-7005), CL["heroic"]), -- Arcane Head
 		[139822] = -6998, -- Fire Head

@@ -46,7 +46,7 @@ function mod:GetOptions()
 		{137408, "TANK_HEALER"}, {-7638, "FLASH"}, {137491, "FLASH"}, -- phase 2
 		-- Celestial Aid
 		138300, 138318, 138306, 138855,
-		"proximity", "stages", "berserk", "bosskill",
+		"proximity", "stages", "berserk",
 	}, {
 		[-7631] = -7629,
 		[-7643] = -7642,

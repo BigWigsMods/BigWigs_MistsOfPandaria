@@ -26,7 +26,6 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		121600, 121787, -6200,
-		"bosskill",
 	}
 end
 

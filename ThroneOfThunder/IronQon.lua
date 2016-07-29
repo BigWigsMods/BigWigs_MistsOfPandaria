@@ -38,7 +38,7 @@ function mod:GetOptions()
 		-6914, 136520, 139180, 135145,
 		-6877, {137669, "FLASH"}, {136192, "ICON", "PROXIMITY", "SAY"}, {136193, "PROXIMITY"}, 77333,
 		"molten_energy", 137221, {-6870, "PROXIMITY"}, -6871, {137668, "FLASH"},
-		{134926, "FLASH", "ICON", "SAY"}, {134691, "TANK_HEALER"}, -6917, "berserk", "bosskill",
+		{134926, "FLASH", "ICON", "SAY"}, {134691, "TANK_HEALER"}, -6917, "berserk",
 	}, {
 		[-6914] = -6867, -- Dam'ren
 		[-6877] = -6866, -- Quet'zal

@@ -41,7 +41,7 @@ function mod:GetOptions()
 		{138732, "PROXIMITY"},
 		137313, "storm_duration",
 		{137162, "TANK"}, {138375, "TANK", "FLASH"}, {138349, "TANK"},
-		{137175, "PROXIMITY", "ICON"}, {139467, "FLASH"}, {-7741, "PROXIMITY", "ICON", "SAY"}, {138006, "FLASH"}, "berserk", "bosskill",
+		{137175, "PROXIMITY", "ICON"}, {139467, "FLASH"}, {-7741, "PROXIMITY", "ICON", "SAY"}, {138006, "FLASH"}, "berserk",
 	}, {
 		[138732] = "heroic",
 		[137313] = 137313,

@@ -76,7 +76,7 @@ function mod:GetOptions()
 		{-8195, "FLASH", "SAY", "ICON"}, "saw_blade_near_you", 145365, {143385, "TANK"}, -- Siegecrafter Blackfuse
 		-8199, 144208, 145444, -- Automated Shredders
 		-8202, -8207, 143639, {-8208, "FLASH", "SAY"}, 143856, 144466, {-8212, "FLASH"},
-		{146479, "FLASH", "SAY", "ICON"}, "berserk", "bosskill",
+		{146479, "FLASH", "SAY", "ICON"}, "berserk",
 	}, {
 		["custom_off_mine_marker"] = L.custom_off_mine_marker,
 		[-8408] = "mythic",

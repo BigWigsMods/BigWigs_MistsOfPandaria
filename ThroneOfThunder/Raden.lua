@@ -52,7 +52,7 @@ function mod:GetOptions()
 		"worm", {138333, "TANK_HEALER"}, {138288, "FLASH", "ICON", "PROXIMITY"},
 		138339, {138334, "TANK_HEALER"}, {138297, "FLASH", "ICON"}, "unstablevitajumptarget", {138372, "FLASH"},
 		"corruptedballs",
-		"balls", "stages", "berserk", "bosskill",
+		"balls", "stages", "berserk",
 		-- XXX 139040 fix desc last phase balls
 	}, {
 		["worm"] = L.anima_abilities,

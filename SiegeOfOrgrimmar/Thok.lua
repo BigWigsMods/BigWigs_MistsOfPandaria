@@ -42,7 +42,7 @@ function mod:GetOptions()
 		-7963, 143428, 143777, 143783, -- stage 1
 		-7981, {-7980, "ICON", "FLASH", "SAY"}, {146589, "FLASH"}, {145974, "DISPEL"},-- stage 2
 		{143766, "TANK"}, {143780, "TANK"}, {143767, "TANK"}, {143773, "TANK"},
-		"proximity", "berserk", "bosskill",
+		"proximity", "berserk",
 	}, {
 		[148145] = "mythic",
 		[-7963] = -7960, -- stage 1

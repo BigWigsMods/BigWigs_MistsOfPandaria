@@ -46,7 +46,7 @@ function mod:GetOptions()
 	return {
 		{123705, "PROXIMITY"},
 		"custom_off_addmarker",
-		{123121, "PROXIMITY", "TANK"}, 123461, 123250, 123244, "special", "berserk", "bosskill",
+		{123121, "PROXIMITY", "TANK"}, 123461, 123250, 123244, "special", "berserk",
 	}, {
 		[123705] = "heroic",
 		custom_off_addmarker = L.custom_off_addmarker,

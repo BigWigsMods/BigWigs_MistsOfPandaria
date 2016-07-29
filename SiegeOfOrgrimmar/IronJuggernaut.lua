@@ -42,7 +42,7 @@ function mod:GetOptions()
 		{-8179, "FLASH"}, {144459, "HEALER"}, {144467, "TANK_HEALER"}, -- Assault mode
 		144485, {-8190, "FLASH", "ICON"}, {144498, "FLASH"}, -- Siege mode
 		"custom_off_mine_marks",
-		"stages", -8183, "berserk", "bosskill",
+		"stages", -8183, "berserk",
 	}, {
 		[-8181] = "mythic",
 		[-8179] = -8177,

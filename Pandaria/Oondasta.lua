@@ -19,7 +19,7 @@ local roarCounter = 0
 --
 
 function mod:GetOptions()
-	return {{137504, "TANK_HEALER"}, 137457, 137505, "proximity", "bosskill"}
+	return {{137504, "TANK_HEALER"}, 137457, 137505, "proximity"}
 end
 
 function mod:OnBossEnable()

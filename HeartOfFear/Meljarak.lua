@@ -49,7 +49,7 @@ function mod:GetOptions()
 		122409,
 		{122149, "DISPEL"}, "mending",
 		122406, {122224, "FLASH"}, {121896, "FLASH"}, {131830, "SAY", "FLASH", "PROXIMITY"}, "recklessness",
-		"stages", "berserk", "bosskill",
+		"stages", "berserk",
 	}, {
 		[-6554] = "heroic",
 		[122064] = -6300,

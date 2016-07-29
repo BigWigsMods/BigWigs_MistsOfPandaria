@@ -34,7 +34,7 @@ L = mod:GetLocale()
 --
 
 function mod:GetOptions()
-	return { 136338, {136339, "FLASH"}, {136340, "PROXIMITY", "SAY"}, "ability", "bosskill" }
+	return { 136338, {136339, "FLASH"}, {136340, "PROXIMITY", "SAY"}, "ability" }
 end
 
 function mod:OnBossEnable()

@@ -48,7 +48,7 @@ function mod:GetOptions()
 	return {
 		"nest", {-7360, "FLASH"}, 140741, 137528,
 		{140092, "TANK_HEALER"}, {134366, "TANK_HEALER"}, {134380, "FLASH"}, 134370, {138923, "PROXIMITY"},
-		"proximity", "berserk", "bosskill",
+		"proximity", "berserk",
 	}, {
 		["nest"] = -7348,
 		[140092] = "general",

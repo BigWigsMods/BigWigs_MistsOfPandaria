@@ -63,7 +63,7 @@ function mod:GetOptions()
 		"custom_off_ray_controllers",
 		{133767, "TANK_HEALER"}, {133768, "TANK_HEALER"}, {134626, "PROXIMITY", "FLASH"}, {-6905, "FLASH", "SAY"}, {-6891, "FLASH"}, "adds",
 		{133798, "ICON", "SAY"}, {"initial_life_drain", "FLASH"}, -6882, 140502,
-		"berserk", "bosskill",
+		"berserk",
 	}, {
 		[-6889] = "heroic",
 		custom_off_ray_controllers = L.custom_off_ray_controllers,

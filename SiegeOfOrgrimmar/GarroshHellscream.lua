@@ -86,7 +86,7 @@ function mod:GetOptions(CL)
 		"custom_off_minion_marker",
 		{147209, "FLASH", "ICON", "SAY"}, 147235, "bombardment", {147665, "FLASH", "ICON"}, {"clump_check", "FLASH", "PROXIMITY"}, "manifest_rage", -- phase 4
 		{144758, "SAY", "FLASH", "ICON"},
-		"stages", "berserk", "bosskill",
+		"stages", "berserk",
 	}, {
 		[-8298] = -8288, -- phase 1
 		[-8294] = -8294, -- Farseer

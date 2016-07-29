@@ -66,7 +66,7 @@ function mod:GetOptions()
 		122784, 123059, "explosion_by_you", {"explosion_casting_by_you", "FLASH"}, 123060, "willpower",
 		"explosion_by_other", {"explosion_casting_by_other", "FLASH"}, 122413, 122408,
 		121995, 123020, {121949, "FLASH"},
-		"stages", "berserk", "bosskill",
+		"stages", "berserk",
 	}, {
 		[-6548] = "heroic",
 		[122784] = -6249,

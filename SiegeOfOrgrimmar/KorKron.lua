@@ -39,7 +39,7 @@ function mod:GetOptions()
 		{144330, "FLASH"}, 144328,
 		{144215, "TANK"}, "custom_off_mist_marks", {-8132, "FLASH", "ICON", "SAY"}, 144070, -- Earthbreaker Haromm
 		{144005, "FLASH", "SAY"}, {143990, "FLASH", "ICON"}, 143973, -- Wavebinder Kardris
-		-8124, 144302, "berserk", "bosskill",
+		-8124, 144302, "berserk",
 	}, {
 		[144330] = "mythic",
 		[144215] = -8128, -- Earthbreaker Haromm

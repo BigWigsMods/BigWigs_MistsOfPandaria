@@ -23,7 +23,7 @@ function mod:GetOptions()
 	return {
 		143574, {143579, "FLASH"},
 		{143295, "FLASH"}, 143309, 143020, 143469, 143436,
-		"berserk", "bosskill",
+		"berserk",
 	}, {
 		[143574] = "mythic",
 		[143295] = "general",

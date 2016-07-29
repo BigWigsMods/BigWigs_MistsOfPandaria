@@ -56,7 +56,7 @@ function mod:GetOptions()
 		{118303, "SAY", "ICON"}, {117697, "FLASH"}, -- Zian
 		118047, 118122, 118094, {118162, "FLASH"}, -- Subetai
 		"cowardice", 117708, {117837, "DISPEL"}, -- Meng
-		"bosses", "proximity", "casting_shields", "berserk", "bosskill",
+		"bosses", "proximity", "casting_shields", "berserk",
 	}, {
 		[117921] = -5841,
 		[118303] = -5852,

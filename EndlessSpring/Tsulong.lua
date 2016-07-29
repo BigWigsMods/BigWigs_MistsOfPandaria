@@ -43,7 +43,7 @@ function mod:GetOptions()
 		-6550,
 		122752, 122768, 122789, {122777, "PROXIMITY", "FLASH", "SAY"},
 		122855, "unstable_sha", 123011, "embodied_terror",
-		"phases", "berserk", "bosskill",
+		"phases", "berserk",
 	}, {
 		[-6550] = "heroic",
 		[122752] = -6310,

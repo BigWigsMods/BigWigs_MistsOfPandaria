@@ -65,7 +65,7 @@ function mod:GetOptions()
 		{143330, "TANK"}, {143292, "FLASH"}, {144367, "FLASH"}, {143840, "FLASH"}, -- He Softfoot
 		{143446, "DISPEL"}, 143491, 143564, {143423, "ICON", "SAY", "FLASH"}, -- Sun Tenderheart
 		"custom_off_bane_marks",
-		143497, "intermission", "berserk", "proximity", "bosskill",
+		143497, "intermission", "berserk", "proximity",
 	}, {
 		[144396] = -7885, -- Rook Stonetoe
 		[143330] = -7889, -- He Softfoot

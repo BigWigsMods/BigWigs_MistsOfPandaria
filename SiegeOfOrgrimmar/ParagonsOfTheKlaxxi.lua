@@ -124,7 +124,7 @@ function mod:GetOptions()
 		"custom_off_parasite_marks",
 		{-8073, "ICON", "FLASH"}, {143243, "FLASH"}, --Hisek the Swarmkeeper
 
-		-8003, "berserk", "bosskill",
+		-8003, "berserk",
 	}, {
 		[142931] = -8004, --Kil'ruk the Wind-Reaver
 		[-8034] = -8009, --Xaril the Poisoned Mind

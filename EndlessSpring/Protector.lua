@@ -34,7 +34,7 @@ function mod:GetOptions()
 		{117986, "FLASH"}, {117975},
 		{117436, "SAY", "PROXIMITY", "FLASH"} , {118077, "FLASH"},
 		117309, 117227,
-		117052, "berserk", "bosskill",
+		117052, "berserk",
 	}, {
 		[117986] = -5789,
 		[117436] = -5793,
