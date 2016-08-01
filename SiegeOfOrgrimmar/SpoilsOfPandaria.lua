@@ -214,7 +214,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and checkPlayerSide() < 0 then
 			prev = t
-			self:Message(145271, "Urgent", "Alarm")
+			self:Message(142947, "Urgent", "Alarm")
 		end
 	end
 end
