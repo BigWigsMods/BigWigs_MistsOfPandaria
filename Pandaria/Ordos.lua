@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ordos", 951, 861)
+local mod, CL = BigWigs:NewBoss("Ordos", -951, 861)
 if not mod then return end
 mod:RegisterEnableMob(72057)
 mod.otherMenu = 862

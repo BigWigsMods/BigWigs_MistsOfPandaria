@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Nalak", 928, 814)
+local mod, CL = BigWigs:NewBoss("Nalak", -928, 814)
 if not mod then return end
 mod:RegisterEnableMob(69099)
 mod.otherMenu = 862

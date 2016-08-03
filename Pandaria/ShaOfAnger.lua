@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Sha of Anger", 809, 691)
+local mod, CL = BigWigs:NewBoss("Sha of Anger", -809, 691)
 if not mod then return end
 mod:RegisterEnableMob(60491)
 mod.otherMenu = 862
