@@ -1,7 +1,13 @@
 local L = BigWigs:NewBossLocale("The Fallen Protectors", "deDE")
 if not L then return end
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/TheFallenProtectors", format="lua_additive_table", handle-unlocalized="ignore")@
+L["defile_you"] = "Geschändeter Boden unter Dir!"
+L["defile_you_desc"] = "Warnung wenn Geschändeter Boden unter Dir ist."
+L["inferno_self"] = "Infernostoß auf Dir"
+L["inferno_self_bar"] = "Du explodierst!"
+L["inferno_self_desc"] = "Spezieller Timer wenn Du von Infernostoß betroffen bist."
+L["intermission_desc"] = "Warnt wenn die Bosse Verzweifelte Maßnahmen verwenden."
+L["no_meditative_field"] = "Du bist nicht in der Blase!"
 
 	L.custom_off_bane_marks = "Schattenwort: Unheil markieren"
 	L.custom_off_bane_marks_desc = "Um bei der Einteilung zum Bannen zu helfen, werden die anfangs von Schattenwort: Unheil betroffenen Spieler mit {rt1}{rt2}{rt3}{rt4}{rt5} markiert (in dieser Reihenfolge, vielleicht werden nicht alle Symbole genutzt), benötigt Leiter oder Assistent."
@@ -9,12 +15,17 @@ end
 
 L = BigWigs:NewBossLocale("Norushen", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/Norushen", format="lua_additive_table", handle-unlocalized="ignore")@
+L["big_add"] = "Großes Add (%d)"
+L["big_add_killed"] = "Großes Add getötet (%d)"
+L["big_adds"] = "Große Adds"
+L["big_adds_desc"] = "Warnungen für die Entstehung und den Tod der großen Adds."
+L["warmup_trigger"] = "Nun gut, ich werde ein Feld erschaffen, das Eure Verderbnis eindämmt."
 end
 
 L = BigWigs:NewBossLocale("Sha of Pride", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/ShaOfPride", format="lua_additive_table", handle-unlocalized="ignore")@
+L["projection_green_arrow"] = "GRÜNER PFEIL"
+L["titan_pride"] = "Titanen+Stolz: %s"
 
 	L.custom_off_titan_mark = "Gabe der Titanen markieren"
 	L.custom_off_titan_mark_desc = "Markiert Spieler, die von Gabe der Titanen betroffen sind, mit {rt1}{rt2}{rt3}{rt4}{rt5}{rt6}, benötigt Leiter oder Assistent.\n|cFFFF0000Um Konflikte beim Markieren zu vermeiden, sollte lediglich 1 Person im Raid diese Option aktivieren.|r"
@@ -25,7 +36,19 @@ end
 
 L = BigWigs:NewBossLocale("Galakras", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/Galakras", format="lua_additive_table", handle-unlocalized="ignore")@
+L["adds_desc"] = "Zeigt an, wann neue Adds in den Kampf eintreten."
+L["demolisher_message"] = "Verwüster"
+L["drakes"] = "Protodrachen"
+L["north_tower"] = "Nördlicher Turm"
+L["north_tower_trigger"] = "Das Tor zum Nordturm ist durchbrochen!"
+L["south_tower"] = "Südlicher Turm"
+L["south_tower_trigger"] = "Das Tor zum Südturm ist durchbrochen!"
+L["start_trigger_alliance"] = "Gut gemacht! Landungstrupps, angetreten! Infanterie nach vorn!"
+L["start_trigger_horde"] = "Gute Arbeit. Die erste Kompanie ist an Land."
+L["tower_defender"] = "Turmverteidiger"
+L["towers"] = "Türme"
+L["towers_desc"] = "Warnungen für das Durchbrechen der Tore zu den Türmen."
+L["warlord_zaela"] = "Kriegsfürstin Zaela"
 
 	L.custom_off_shaman_marker = "Schamanen markieren"
 	L.custom_off_shaman_marker_desc = "Um bei der Einteilung zum Unterbrechen zu helfen, werden die Gezeitenschamanen des Drachenmals mit {rt1}{rt2}{rt3}{rt4}{rt5} markiert, benötigt Leiter oder Assistent.\n|cFFFF0000Um Konflikte beim Markieren zu vermeiden, sollte lediglich 1 Person im Raid diese Option aktivieren.|r\n|cFFADFF2FTIPP: Wenn Du diese Option aktivierst, ist die schnellste Methode zum Markieren das zügige Bewegen des Mauszeigers über die Schamanen.|r"
@@ -39,7 +62,7 @@ end
 
 L = BigWigs:NewBossLocale("Kor'kron Dark Shaman", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/KorkronDarkShaman", format="lua_additive_table", handle-unlocalized="ignore")@
+L["blobs"] = "Schleim"
 
 	L.custom_off_mist_marks = "Toxischer Nebel markieren"
 	L.custom_off_mist_marks_desc = "Um bei der Einteilung zum Heilen zu helfen, werden Spieler mit Toxischem Nebel mit {rt1}{rt2}{rt3}{rt4}{rt5} markiert, benötigt Leiter oder Assistent.\n|cFFFF0000Um Konflikte beim Markieren zu vermeiden, sollte lediglich 1 Person im Raid diese Option aktivieren.|r"
@@ -78,7 +101,9 @@ end
 
 L = BigWigs:NewBossLocale("Spoils of Pandaria", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/SpoilsOfPandaria", format="lua_additive_table", handle-unlocalized="ignore")@
+L["enable_zone"] = "Artefaktlagerraum"
+L["start_trigger"] = "Hallo? Mikrofontest"
+L["win_trigger"] = "System wird neu gestartet. Die Energieversorgung muss stabil bleiben, sonst fliegt die ganze Chose in die Luft."
 
 	L.crates = "Kisten"
 	L.crates_desc = "Nachrichten, für wie viel Energie du noch brauchst und wie viele große/mittlere/kleine Kisten das sind."
@@ -88,12 +113,29 @@ end
 
 L = BigWigs:NewBossLocale("Thok the Bloodthirsty", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/ThokTheBloodthirsty", format="lua_additive_table", handle-unlocalized="ignore")@
+L["adds_desc"] = "Warnungen für den Kampfeintritt der Fledermäuse oder des Yetis."
+L["cage_opened"] = "Käfig geöffnet"
+L["npc_akolik"] = "Akolik"
+L["npc_waterspeaker_gorai"] = "Wassersprecher Gorai"
 end
 
 L = BigWigs:NewBossLocale("Siegecrafter Blackfuse", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/SiegecrafterBlackfuse", format="lua_additive_table", handle-unlocalized="ignore")@
+L["assembly_line_items"] = "Waffen (%d): %s"
+L["assembly_line_message"] = "Unfertige Waffen (%d)"
+L["assembly_line_trigger"] = "Unfertige Waffen werden auf das Fabrikationsband befördert."
+L["disabled"] = "Deaktiviert"
+L["item_deathdealer"] = "Todesboten"
+L["item_laser"] = "Laser"
+L["item_magnet"] = "Magnet"
+L["item_mines"] = "Minen"
+L["item_missile"] = "Rakete"
+L["laser_on_you"] = "Laser auf Dir PEW PEW!"
+L["overcharged_crawler_mine"] = "Überladene Kriechermine"
+L["saw_blade_near_you"] = "Sägeblatt in der Nähe (nicht auf Dir)"
+L["saw_blade_near_you_desc"] = "Du kannst diese Option deaktivieren um Spam und Verwirrung zu vermeiden."
+L["shockwave_missile_trigger"] = "Ich präsentiere... den wunderschönen Erschütterungsraketenturm ST-03!"
+L["shredder_engage_trigger"] = "Ein automatisierter Schredder nähert sich!"
 
 	L.custom_off_mine_marker = "Minen markieren"
 	L.custom_off_mine_marker_desc = "Markiert die Minen zum Einteilen der Betäubungen. (Alle Zeichen werden genutzt)"
@@ -128,7 +170,20 @@ end
 
 L = BigWigs:NewBossLocale("Garrosh Hellscream", "deDE")
 if L then
---@localization(locale="deDE", namespace="SiegeOfOrgrimmar/GarroshHellscream", format="lua_additive_table", handle-unlocalized="ignore")@
+L["bombardment"] = "Bombardement"
+L["bombardment_desc"] = "Bombardiert Sturmwind und hinterlässt Feuer auf dem Boden. Eiserne Sterne der Kor'kron können nur während des Bombardements entstehen."
+L["chain_heal_bar"] = "Fokusziel: Kettenheilung"
+L["chain_heal_desc"] = "{focus}Heilt ein verbündetes Ziel um 40% ihrer maximalen Gesundheit. Springt auf nahe verbündete Ziele über."
+L["chain_heal_message"] = "Dein Fokusziel wirkt Kettenheilung!"
+L["clump_check_desc"] = "Prüft alle 3 Sekunden während des Bombardements, ob Spieler eng zusammenstehen, da hierdurch Eiserne Sterne der Kor'kron entstehen."
+L["clump_check_warning"] = "Gruppierung gefunden, Stern kommt"
+L["empowered_message"] = "%s ist jetzt mächtig!"
+L["farseer_trigger"] = "Scharfseher, heilt unsere Wunden!"
+L["ironstar_impact_desc"] = "Zeigt einen Timer für die Explosion der Eisernen Sterne an der jeweils gegenüberliegenden Wand."
+L["ironstar_rolling"] = "Eiserner Stern rollt!"
+L["manifest_rage"] = "Wut manifestieren"
+L["manifest_rage_desc"] = "Wenn Garrosh 100 Energie erreicht, wirkt er zwei Sekunden lang Wut manifestieren und kanalisiert diesen Zauber dann. Während des Kanalisierens entstehen große Adds. Zieht den Eisernen Stern in Garrosh, um ihn zu betäuben und den Zauber zu unterbrechen."
+L["phase_3_end_trigger"] = "Ihr glaubt GEWONNEN zu haben? BLIND seid ihr. ICH WERDE EUCH DIE AUGEN ÖFFNEN."
 
 	L.custom_off_shaman_marker = "Scharfseher markieren"
 	L.custom_off_shaman_marker_desc = "Um bei der Einteilung zum Unterbrechen zu helfen, werden die Scharfseherwolfsreiter mit {rt1}{rt2}{rt3}{rt4}{rt5}{rt6}{rt7} markiert, benötigt Leiter oder Assistent.\n|cFFFF0000Um Konflikte beim Markieren zu vermeiden, sollte lediglich 1 Person im Raid diese Option aktivieren.|r\n|cFFADFF2FTIPP: Wenn Du diese Option aktivierst, ist die schnellste Methode zum Markieren das zügige Bewegen des Mauszeigers über die Scharfseher.|r"
