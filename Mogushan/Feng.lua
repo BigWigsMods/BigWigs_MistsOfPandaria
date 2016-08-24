@@ -196,8 +196,8 @@ function mod:LightningPhase()
 end
 
 function mod:LightningFists(args)
-	self:Message(args.spellId, "Urgent")
-	self:CDBar(args.spellId, 13)
+	self:Message(116157, "Urgent")
+	self:CDBar(116157, 13)
 end
 
 function mod:Epicenter(args)
