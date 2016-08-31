@@ -14,7 +14,7 @@
 ## Notes: A collection of BigWigs modules from the Mists of Pandaria era.
 ## Notes-zhCN: BigWigs 熊猫人之谜模块。
 ## Notes-zhTW: BigWigs 潘達利亞之謎模組。
-## Notes-deDE: A collection of BigWigs modules from the Mists of Pandaria era.
+## Notes-deDE: Eine Sammlung von BigWigs-Modulen aus der Ära Mists of Pandaria.
 ## Notes-frFR: A collection of BigWigs modules from the Mists of Pandaria era.
 ## Notes-itIT: A collection of BigWigs modules from the Mists of Pandaria era.
 ## Notes-koKR: A collection of BigWigs modules from the Mists of Pandaria era.
