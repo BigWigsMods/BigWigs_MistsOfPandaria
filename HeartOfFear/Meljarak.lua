@@ -123,8 +123,8 @@ end
 
 function mod:WhirlingBladeDamage(args)
 	if not self:LFR() and self:Me(args.destGUID) then
-		self:Message(args.spellId, "Personal", "Info", CL["you"]:format(args.spellName))
-		self:Flash(args.spellId) -- we flash on cast too, but some more can't hurt
+		self:Message(121896, "Personal", "Info", CL["you"]:format(args.spellName))
+		self:Flash(121896) -- we flash on cast too, but some more can't hurt
 	end
 end
 
