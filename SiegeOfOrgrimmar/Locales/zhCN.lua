@@ -132,8 +132,6 @@ L["item_mines"] = "地雷"
 L["item_missile"] = "导弹"
 L["laser_on_you"] = ">你< 激光 BIU BIU！"
 L["overcharged_crawler_mine"] = "超载的蛛形地雷"
-L["saw_blade_near_you"] = "锯刃在旁边（不是在你）"
-L["saw_blade_near_you_desc"] = "你可能想关闭这个功能以避免骚扰，如果你的团队大多是根据自己的战术安排。"
 L["shockwave_missile_trigger"] = "为各位送上"
 L["shredder_engage_trigger"] = "一台自动伐木机正在靠近！"
 

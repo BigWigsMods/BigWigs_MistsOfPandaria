@@ -569,10 +569,6 @@ do
 		if self:Me(guid) then
 			self:Flash(144758)
 			self:Say(144758)
-		elseif self:Range(name) < 15 then
-			self:Flash(144758)
-			self:RangeMessage(144758, "Urgent", "Alarm")
-			return
 		end
 		self:TargetMessage(144758, name, "Urgent", "Alarm")
 	end

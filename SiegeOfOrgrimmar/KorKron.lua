@@ -181,10 +181,6 @@ function mod:FoulGeyser(args) -- Blobs
 	self:Bar(args.spellId, 32, L.blobs)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-	elseif self:Range(args.destName) < 5 then -- splash is 3 but want bigger warning so people know that blobs will be around that area
-		self:RangeMessage(args.spellId, "Personal", "Alert", L.blobs)
-		self:Flash(args.spellId)
-		return
 	end
 	self:TargetMessage(args.spellId, args.destName, "Important", "Alert", L.blobs)
 end
@@ -212,9 +208,6 @@ do
 	local function printTarget(self, name, guid)
 		if self:Me(guid) then
 			self:Say(144005)
-		elseif self:Range(name) < 10 then
-			self:RangeMessage(144005, "Personal", "Alert")
-			return
 		end
 		self:TargetMessage(144005, name, "Urgent", "Alert")
 	end

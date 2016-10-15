@@ -132,8 +132,6 @@ L["item_mines"] = "Mines"
 L["item_missile"] = "Missile"
 L["laser_on_you"] = "Laser sur vous PIOU PIOU !"
 L["overcharged_crawler_mine"] = "Mine rampante surchargée"
-L["saw_blade_near_you"] = "Lame de scie près de vous (pas sur vous)"
-L["saw_blade_near_you_desc"] = "Vous devriez désactiver ceci pour éviter d'être spammé si votre raid est regroupé dans votre stratégie."
 L["shockwave_missile_trigger"] = "Je vous présente ma merveilleuse tourelle lance-missiles Onde de Choc TOC-03 !"
 L["shredder_engage_trigger"] = "Un déchiqueteur automatisé approche !"
 

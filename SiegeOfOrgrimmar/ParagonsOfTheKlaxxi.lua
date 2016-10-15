@@ -449,10 +449,6 @@ do
 				mod:Message(143701, "Personal", "Info", CL.you:format(mod:SpellName(143701)))
 				mod:Flash(143701)
 				mod:Say(143701)
-			else
-				if mod:Range(target) < 10 then
-					mod:RangeMessage(143701)
-				end
 			end
 		end
 	end
@@ -705,9 +701,6 @@ do
 			mod:Flash(-8008)
 			mod:Say(-8008)
 			mod:TargetMessage(-8008, name, "Urgent", "Alarm")
-		elseif mod:Range(target) < 5 then
-			mod:RangeMessage(-8008)
-			mod:Flash(-8008)
 		else
 			mod:TargetMessage(-8008, name, "Urgent")
 		end

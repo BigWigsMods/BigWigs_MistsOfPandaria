@@ -309,14 +309,10 @@ end
 
 function mod:ForceOfWill(args)
 	if self:Me(args.destGUID) then
-		self:Message(-6905, "Personal", "Long", CL["you"]:format(self:SpellName(-6905)))
 		self:Flash(-6905)
 		self:Say(-6905)
-	elseif self:Range(args.destName) < 6 then
-		self:RangeMessage(-6905)
-	else
-		self:Message(-6905, "Attention")
 	end
+	self:TargetMessage(-6905, args.destName, "Attention", "Long")
 	self:CDBar(-6905, 20)
 end
 

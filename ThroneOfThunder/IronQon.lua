@@ -113,10 +113,6 @@ do
 		if tanking or status == 3 then return end
 		if initialTarget and UnitIsUnit("boss1target", initialTarget) then return end
 
-		-- blizzard decided to let eminence healing be safe
-		local _, class = UnitClass("boss1target")
-		if class == "MONK" and mod:Range("boss1target", "boss2target") < 15 then return end
-
 		local name = mod:UnitName("boss1target")
 		mod:TargetMessage(134926, name, "Urgent", "Alarm", nil, nil, true)
 		mod:SecondaryIcon(134926, name)

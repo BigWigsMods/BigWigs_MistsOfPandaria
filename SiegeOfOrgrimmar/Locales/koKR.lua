@@ -132,8 +132,6 @@ L["item_mines"] = "지뢰"
 L["item_missile"] = "미사일"
 L["laser_on_you"] = "레이저가 당신에게 꽂힙니다!"
 L["overcharged_crawler_mine"] = "과충전된 거미 지뢰"
-L["saw_blade_near_you"] = "근처에 톱날이 날아옵니다!"
-L["saw_blade_near_you_desc"] = "공격대의 택틱이 뭉쳐서 하는 것이라면 스팸 메시지를 피하기 위해 이 옵션을 꺼주세요."
 L["shockwave_missile_trigger"] = "내 이쁜이 ST-03 충격파 미사일 포탑을 소개하지!"
 L["shredder_engage_trigger"] = "자동 분쇄기가 다가옵니다!"
 

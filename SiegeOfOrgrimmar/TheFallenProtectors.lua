@@ -395,10 +395,6 @@ do
 		else
 			if self:Me(guid) then
 				self:Flash(143958)
-			elseif self:Range(name) < 4 then
-				self:RangeMessage(143958)
-				self:Flash(143958)
-				return
 			end
 			self:TargetMessage(143958, name, "Personal", "Info")
 		end
@@ -422,10 +418,6 @@ do
 		if self:Me(guid) then
 			self:Flash(143019)
 			self:Say(143019)
-		elseif self:Range(name) < 5 then
-			self:RangeMessage(143019)
-			self:Flash(143019)
-			return
 		end
 		self:TargetMessage(143019, name, "Personal", "Info")
 	end

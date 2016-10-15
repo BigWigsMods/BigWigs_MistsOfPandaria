@@ -259,12 +259,7 @@ function mod:Ravager(args)
 		self:Flash(args.spellId)
 		self:Say(args.spellId)
 	end
-	if self:Range(args.destName) < 6 then
-		self:RangeMessage(args.spellId)
-		self:Flash(args.spellId)
-	else
-		self:TargetMessage(args.spellId, args.destName, "Urgent", "Alarm")
-	end
+	self:TargetMessage(args.spellId, args.destName, "Urgent", "Alarm")
 end
 
 function mod:Banner(args)
@@ -275,10 +270,6 @@ do
 	local function warnShockwave(self, player, guid)
 		if self:Me(guid) then
 			self:Flash(143716)
-		elseif self:Range(player) < 8 then
-			self:RangeMessage(143716, "Personal", "Alarm")
-			self:Flash(143716)
-			return
 		end
 		self:TargetMessage(143716, player, "Urgent", "Alarm")
 	end

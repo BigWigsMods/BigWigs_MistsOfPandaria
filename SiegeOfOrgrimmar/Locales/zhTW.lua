@@ -132,8 +132,6 @@ L["item_mines"] = "地雷"
 L["item_missile"] = "飛彈"
 L["laser_on_you"] = "雷射正在追＞你＜！"
 L["overcharged_crawler_mine"] = "超載的爬行者地雷"
-L["saw_blade_near_you"] = "投擲鋸刃在你附近（目標不是你）"
-L["saw_blade_near_you_desc"] = "如果你們的戰術是團隊集中站位，你該考慮把這項警告停用。"
 L["shockwave_missile_trigger"] = "來看看全新的ST-03衝擊波飛彈砲台！"
 L["shredder_engage_trigger"] = "有個自動化伐木機靠近了!"
 

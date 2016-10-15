@@ -293,7 +293,6 @@ do
 			self:Bar(-8258, 6, you, "Achievement_pvp_g_01.png")
 		end
 
-		local warned = nil
 		for unit in self:IterateGroup() do
 			local power = UnitPower(unit, 10)
 			if power == 100 then
@@ -301,9 +300,6 @@ do
 				if not scheduled then
 					scheduled = self:ScheduleTimer(warnOvercome, 0.1)
 				end
-			elseif not warned and not playerBursting and power > 24 and power < 50 and self:Range(unit) < 5 then -- someone near has bursting pride, but not you
-				warned = true
-				self:RangeMessage(-8257)
 			end
 		end
 	end

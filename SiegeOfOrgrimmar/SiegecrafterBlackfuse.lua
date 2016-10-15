@@ -27,10 +27,6 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.overcharged_crawler_mine = "Overcharged Crawler Mine" -- sadly this is needed since they have same mobId
 
-	L.saw_blade_near_you = "Saw blade near you (not on you)"
-	L.saw_blade_near_you_desc = "You might want to turn this off to avoid spam if your raid is mostly bunched up according to your tactics."
-	L.saw_blade_near_you_icon = 143265
-
 	L.disabled = "Disabled"
 
 	L.shredder_engage_trigger = "An Automated Shredder draws near!"
@@ -73,7 +69,7 @@ function mod:GetOptions()
 	return {
 		"custom_off_mine_marker",
 		-8408,
-		{-8195, "FLASH", "SAY", "ICON"}, "saw_blade_near_you", 145365, {143385, "TANK"}, -- Siegecrafter Blackfuse
+		{-8195, "FLASH", "SAY", "ICON"}, 145365, {143385, "TANK"}, -- Siegecrafter Blackfuse
 		-8199, 144208, 145444, -- Automated Shredders
 		-8202, -8207, 143639, {-8208, "FLASH", "SAY"}, 143856, 144466, {-8212, "FLASH"},
 		{146479, "FLASH", "SAY", "ICON"}, "berserk",
@@ -348,11 +344,7 @@ do
 		sawbladeTarget = guid
 		self:PrimaryIcon(-8195, target)
 		if not self:Me(guid) then -- we warn for ourself from the BOSS_WHISPER
-			if self:Range(target) < 8 then -- 8 is guessed
-				self:RangeMessage("saw_blade_near_you", "Personal", "Alarm", mod:SpellName(-8195), 143265)
-			else
-				self:TargetMessage(-8195, target, "Positive", "Info")
-			end
+			self:TargetMessage(-8195, target, "Positive", "Info")
 		end
 	end
 	function mod:Sawblade(args)

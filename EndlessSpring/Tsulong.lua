@@ -152,10 +152,6 @@ do
 			if UnitIsUnit("boss1target", "player") then
 				mod:Flash(spellId)
 				mod:Say(spellId)
-			elseif mod:Range("boss1target") < 9 then
-				mod:RangeMessage(spellId)
-				mod:Flash(spellId)
-				return
 			end
 			mod:TargetMessage(spellId, player, "Important", "Alert")
 			return

@@ -132,8 +132,6 @@ L["item_mines"] = "Minen"
 L["item_missile"] = "Rakete"
 L["laser_on_you"] = "Laser auf Dir PEW PEW!"
 L["overcharged_crawler_mine"] = "Überladene Kriechermine"
-L["saw_blade_near_you"] = "Sägeblatt in der Nähe (nicht auf Dir)"
-L["saw_blade_near_you_desc"] = "Du kannst diese Option deaktivieren um Spam und Verwirrung zu vermeiden."
 L["shockwave_missile_trigger"] = "Ich präsentiere... den wunderschönen Erschütterungsraketenturm ST-03!"
 L["shredder_engage_trigger"] = "Ein automatisierter Schredder nähert sich!"
 
