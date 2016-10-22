@@ -49,7 +49,7 @@ end
 
 function mod:OnBossEnable()
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "TayakCasts", "boss1")
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "InstructorUnseenStrike", "target")
+	self:RegisterEvent("UNIT_SPELLCAST_SUCCEEDED", "InstructorUnseenStrike")
 
 	self:Log("SPELL_CAST_START", "BladeTempest", 125310)
 	self:Log("SPELL_CAST_SUCCESS", "WindStep", 123175)
@@ -61,7 +61,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "AssaultCast", 123474)
 
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
-	self:AddSyncListener("Strike")
+	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Death("Win", 62543)
 end
@@ -82,7 +82,7 @@ function mod:OnEngage()
 	strikeCounter = 1
 
 	-- Engaging the boss means the Instructor is dead, so unregister this
-	self:UnregisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "target")
+	self:UnregisterEvent("UNIT_SPELLCAST_SUCCEEDED")
 end
 
 --------------------------------------------------------------------------------
@@ -130,7 +130,6 @@ end
 
 do
 	local timer = nil
-	local strike = mod:SpellName(122994)
 	local function removeIcon(notBoss)
 		mod:CloseProximity(-6346)
 		if not notBoss then
@@ -143,6 +142,7 @@ do
 		end
 	end
 	local function warnStrike(notBoss)
+		local strike = mod:SpellName(122994)
 		local player = UnitDebuff("boss1target", strike) and "boss1target"
 		if not player then -- Most of the time this won't run as boss1target works
 			for unit in mod:IterateGroup() do
@@ -171,7 +171,7 @@ do
 	end
 	function mod:TayakCasts(_, spellName, _, _, spellId)
 		if spellId == 122949 then --Unseen Strike
-			self:CDBar(-6346, 53, CL["count"]:format(strike, strikeCounter+1)) -- 53-60
+			self:CDBar(-6346, 53, CL["count"]:format(self:SpellName(122994), strikeCounter+1)) -- Unseen Strike, 53-60
 			self:DelayedMessage(-6346, 48, "Attention", L["unseenstrike_soon"]:format(strikeCounter+1), false, "Alarm")
 			if not timer then
 				timer = self:ScheduleRepeatingTimer(warnStrike, 0.05) -- ~1s faster than boss emote
@@ -184,20 +184,22 @@ do
 			self:StopBar(125310) --Blade Tempest
 			self:StopBar(L["assault_message"])
 			self:StopBar(122839) --Tempest Slash
-			self:StopBar(CL["count"]:format(strike, strikeCounter)) --Unseen Strike
+			self:StopBar(CL["count"]:format(self:SpellName(122994), strikeCounter)) -- Unseen Strike
 			self:CancelDelayedMessage(L["unseenstrike_soon"]:format(strikeCounter))
 			self:StopBar(123175) --Wind Step
 			self:CloseProximity(123175)
 		end
 	end
 
-	function mod:InstructorUnseenStrike(_, _, _, _, spellId)
-		if spellId == 122949 and self:MobId(UnitGUID("target")) == 64340 then
-			self:Sync("Strike") -- Instructor Maltik
+	local casts = {}
+	function mod:InstructorUnseenStrike(_, unit, _, _, spellCastGUID, spellId)
+		if spellId == 122949 and not casts[spellCastGUID] and self:MobId(UnitGUID(unit)) == 64340 then
+			self:Sync("Strike", spellCastGUID) -- Instructor Maltik
 		end
 	end
-	function mod:OnSync(sync)
-		if sync == "Strike" then
+	function mod:BigWigs_BossComm(_, msg, spellCastGUID)
+		if msg == "Strike" and not casts[spellCastGUID] then
+			casts[spellCastGUID] = true
 			if not timer then
 				timer = self:ScheduleRepeatingTimer(warnStrike, 0.05, "notboss")
 			end

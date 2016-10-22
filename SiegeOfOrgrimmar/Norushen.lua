@@ -74,13 +74,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Phase2", 146179) -- Phase 2, "Frayed"
 	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
 
-	self:AddSyncListener("BlindHatred")
-	self:AddSyncListener("InsideBigAddDeath", 0)
-	self:AddSyncListener("OutsideBigAddDeath", 0)
-	self:AddSyncListener("Phase2BigAddSpawn")
-	self:AddSyncListener("Phase2")
-
-	self:RegisterMessage("DBM_AddonMessage", "OnDBMSync") -- Catch DBM users killing big adds
+	self:RegisterMessage("BigWigs_BossComm")
+	self:RegisterMessage("DBM_AddonMessage") -- Catch DBM users killing big adds
 
 	self:Death("Deaths", 71977, 72264) -- Manifestation of Corruption, Unleashed Manifestation of Corruption
 end
@@ -91,9 +86,9 @@ end
 
 function mod:OnEngage()
 	bigAddSpawnCounter, bigAddKillCounter = 0, 0
+	bigAddKills = {}
 	self:Berserk(self:LFR() and 600 or 418)
 	self:Bar(145226, 25) -- Blind Hatred
-	wipe(bigAddKills)
 	percent = 50
 	self:OpenAltPower("altpower", 147800, "AZ", true) -- Corruption
 end
@@ -171,47 +166,57 @@ function mod:UnleashCorruption()
 	self:Sync("Phase2BigAddSpawn") -- Big adds spawning outside in p2
 end
 
-function mod:OnSync(sync, rest)
-	if sync == "BlindHatred" then
-		self:Message(145226, "Important", "Long")
-		self:Bar(145226, 60)
-	elseif sync == "Phase2" then
-		self:Message("stages", "Neutral", "Warning", CL.phase:format(2), 146179)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
-	elseif sync == "InsideBigAddDeath" and rest then
-		-- Custom throttle to work around a really rare bug in the encounter where the normal phase will sometimes merge with the "inside" phase and everyone sees the death event of the add, rather than the 1 person.
-		if bigAddKills[rest] then return else bigAddKills[rest] = true end
-
-		bigAddSpawnCounter = bigAddSpawnCounter + 1
-		if self:LFR() then
-			self:Message("big_adds", "Urgent", nil, CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
-		else
-			self:Message("big_adds", "Urgent", "Alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
-			self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
+do
+	local times = {
+		["BlindHatred"] = 0,
+		["Phase2"] = 0,
+		["Phase2BigAddSpawn"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg, guid)
+		if msg == "InsideBigAddDeath" and not bigAddKills[guid] then
+			bigAddKills[guid] = true
+			bigAddSpawnCounter = bigAddSpawnCounter + 1
+			if self:LFR() then
+				self:Message("big_adds", "Urgent", nil, CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
+			else
+				self:Message("big_adds", "Urgent", "Alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
+				self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
+			end
+		elseif msg == "OutsideBigAddDeath" and not bigAddKills[guid] then
+			bigAddKills[guid] = true
+			bigAddKillCounter = bigAddKillCounter + 1
+			if bigAddKillCounter > bigAddSpawnCounter then
+				bigAddSpawnCounter = bigAddKillCounter -- Compensate for no boss mod players (LFR) :[
+			end
+			self:Message("big_adds", "Attention", "Alert", L.big_add_killed:format(bigAddKillCounter), 147082) -- this could probably live wouthout sound but this way people know for sure that they need to check if it is their turn to soak
+		elseif times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				if msg == "BlindHatred" then
+					self:Message(145226, "Important", "Long")
+					self:Bar(145226, 60)
+				elseif msg == "Phase2" then
+					self:Message("stages", "Neutral", "Warning", CL.phase:format(2), 146179)
+					self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+				elseif msg == "Phase2BigAddSpawn" then
+					bigAddSpawnCounter = bigAddSpawnCounter + 1
+					if self:LFR() then
+						self:Message("big_adds", "Urgent", nil, ("%d%% - "):format(percent) .. CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
+					else
+						self:Message("big_adds", "Urgent", "Alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
+						self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
+					end
+					percent = percent - 10
+				end
+			end
 		end
-	elseif sync == "Phase2BigAddSpawn" then
-		bigAddSpawnCounter = bigAddSpawnCounter + 1
-		if self:LFR() then
-			self:Message("big_adds", "Urgent", nil, ("%d%% - "):format(percent) .. CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
-		else
-			self:Message("big_adds", "Urgent", "Alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
-			self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
-		end
-		percent = percent - 10
-	elseif sync == "OutsideBigAddDeath" and rest then
-		if bigAddKills[rest] then return else bigAddKills[rest] = true end -- Custom throttle to catch 2 big adds dieing outside at the same time
-
-		bigAddKillCounter = bigAddKillCounter + 1
-		if bigAddKillCounter > bigAddSpawnCounter then
-			bigAddSpawnCounter = bigAddKillCounter -- Compensate for no boss mod players (LFR) :[
-		end
-		self:Message("big_adds", "Attention", "Alert", L.big_add_killed:format(bigAddKillCounter), 147082) -- this could probably live wouthout sound but this way people know for sure that they need to check if it is their turn to soak
 	end
 end
 
-function mod:OnDBMSync(_, _, prefix, _, _, event, guid)
+function mod:DBM_AddonMessage(_, _, prefix, _, _, event, guid)
 	if prefix == "M" and event == "ManifestationDied" and guid ~= "" then
-		self:OnSync("InsideBigAddDeath", guid)
+		self:BigWigs_BossComm(nil, "InsideBigAddDeath", guid)
 	end
 end
 

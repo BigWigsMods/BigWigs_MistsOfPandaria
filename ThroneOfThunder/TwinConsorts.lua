@@ -85,13 +85,7 @@ function mod:OnBossEnable()
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Phase2", "boss1", "boss2")
 	self:Yell("Phase3", L["last_phase_yell_trigger"])
 
-	self:AddSyncListener("Phase2")
-	self:AddSyncListener("Phase3")
-	self:AddSyncListener("TidalForce")
-	self:AddSyncListener("TearsOfTheSunApplied")
-	self:AddSyncListener("NuclearInferno")
-	self:AddSyncListener("IceComet")
-	self:AddSyncListener("CosmicBarrage")
+	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Death("Deaths", 68905, 68904)
 end
@@ -119,47 +113,60 @@ do
 		inferno = nil
 		mod:Message(spellId, "Positive", nil, CL["over"]:format(mod:SpellName(137491))) -- Nuclear Inferno
 	end
-	function mod:OnSync(sync)
-		if sync == "Phase2" then -- Day
-			self:Bar("stages", 184, CL["phase"]:format(3), 138688)
-			self:Message("stages", "Positive", "Long", CL["phase"]:format(2), 137401)
-			self:StopBar(137404) -- Tears of the Sun
-			self:StopBar(-7634) -- Beast of Nightmares
-			self:StopBar(-7631) -- Cosmic Barrage
-			self:CDBar(-7649, 18) -- Ice Comet
-			self:CDBar(137408, 11) -- Fan of Flames
-			if self:Heroic() then
-				self:Bar(137491, 50) -- Nuclear Inferno
+	local times = {
+		["Phase2"] = 0,
+		["Phase3"] = 0,
+		["TidalForce"] = 0,
+		["TearsOfTheSunApplied"] = 0,
+		["NuclearInferno"] = 0,
+		["IceComet"] = 0,
+		["CosmicBarrage"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		local t = GetTime()
+		if t-times[msg] > 5 then
+			times[msg] = t
+			if msg == "Phase2" then -- Day
+				self:Bar("stages", 184, CL["phase"]:format(3), 138688)
+				self:Message("stages", "Positive", "Long", CL["phase"]:format(2), 137401)
+				self:StopBar(137404) -- Tears of the Sun
+				self:StopBar(-7634) -- Beast of Nightmares
+				self:StopBar(-7631) -- Cosmic Barrage
+				self:CDBar(-7649, 18) -- Ice Comet
+				self:CDBar(137408, 11) -- Fan of Flames
+				if self:Heroic() then
+					self:Bar(137491, 50) -- Nuclear Inferno
+				end
+			elseif msg == "Phase3" then -- Dusk
+				phase3 = true
+				self:Message("stages", "Positive", "Long", CL["phase"]:format(3), 137401)
+				self:StopBar(137408) -- Fan of Flames
+				self:CDBar(-7649, 17) -- Ice Comet
+				self:Bar(137531, self:Heroic() and 19 or 34) -- Tidal Force
+				if self:Heroic() then
+					self:Bar(137491, 63) -- Nuclear Inferno
+				end
+			elseif msg == "TidalForce" then
+				self:Message(137531, "Urgent", "Alarm")
+				self:CDBar(137531, 71)
+			elseif msg == "TearsOfTheSunApplied" then
+				self:Message(-7643, "Attention", "Warning")
+				self:Bar(-7643, 41)
+			elseif msg == "NuclearInferno" then
+				inferno = true
+				self:Message(137491, "Important", "Alert")
+				self:Flash(137491)
+				self:Bar(137491, phase3 and 71 or 55)
+				self:Bar(137491, 12, CL["cast"]:format(self:SpellName(137491))) -- Nuclear Inferno
+				self:ScheduleTimer(infernoOver, 12, 137491)
+			elseif msg == "IceComet" then
+				self:Message(-7649, "Positive")
+				self:CDBar(-7649, phase3 and 30 or 20)
+			elseif msg == "CosmicBarrage" then
+				self:Message(-7631, "Urgent", "Alarm")
+				self:CDBar(-7631, 20)
+				self:ScheduleTimer("Message", 4.5, -7631, "Urgent", "Alarm", L["barrage_fired"]) -- This is when the little orbs start to move
 			end
-		elseif sync == "Phase3" then -- Dusk
-			phase3 = true
-			self:Message("stages", "Positive", "Long", CL["phase"]:format(3), 137401)
-			self:StopBar(137408) -- Fan of Flames
-			self:CDBar(-7649, 17) -- Ice Comet
-			self:Bar(137531, self:Heroic() and 19 or 34) -- Tidal Force
-			if self:Heroic() then
-				self:Bar(137491, 63) -- Nuclear Inferno
-			end
-		elseif sync == "TidalForce" then
-			self:Message(137531, "Urgent", "Alarm")
-			self:CDBar(137531, 71)
-		elseif sync == "TearsOfTheSunApplied" then
-			self:Message(-7643, "Attention", "Warning")
-			self:Bar(-7643, 41)
-		elseif sync == "NuclearInferno" then
-			inferno = true
-			self:Message(137491, "Important", "Alert")
-			self:Flash(137491)
-			self:Bar(137491, phase3 and 71 or 55)
-			self:Bar(137491, 12, CL["cast"]:format(self:SpellName(137491))) -- Nuclear Inferno
-			self:ScheduleTimer(infernoOver, 12, 137491)
-		elseif sync == "IceComet" then
-			self:Message(-7649, "Positive")
-			self:CDBar(-7649, phase3 and 30 or 20)
-		elseif sync == "CosmicBarrage" then
-			self:Message(-7631, "Urgent", "Alarm")
-			self:CDBar(-7631, 20)
-			self:ScheduleTimer("Message", 4.5, -7631, "Urgent", "Alarm", L["barrage_fired"]) -- This is when the little orbs start to move
 		end
 	end
 end

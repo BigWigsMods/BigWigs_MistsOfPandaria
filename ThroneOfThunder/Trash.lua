@@ -12,7 +12,6 @@ mod:RegisterEnableMob(
 	70440, -- Monara
 	70430, -- Rocky Horror
 	69821 -- Thunder Lord
-	--68220 -- Gastropod
 )
 
 --------------------------------------------------------------------------------
@@ -68,10 +67,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "ConductiveShield", 140296)
 
 	self:Log("SPELL_CAST_START", "ShadowNova", 139899)
-	self:AddSyncListener("MonaraSN")
-	self:AddSyncListener("MonaraDies")
-
-	--self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Fixated", "target")
+	self:RegisterMessage("BigWigs_BossComm")
 
 	self:Death("Disable", 70236, 70445, 70430, 69821)
 	self:Death("MonaraDies", 70440)
@@ -123,16 +119,24 @@ end
 
 do
 	-- Sync for corpse runners
-	function mod:OnSync(sync)
-		if sync == "MonaraDies" then
-			self:Disable()
-		elseif sync == "MonaraSN" then
-			local spellId = 139899
-			local name = self:SpellName(spellId)
-			self:Message(spellId, "Urgent", "Long", CL["incoming"]:format(name))
-			self:Bar(spellId, 3, CL["cast"]:format(name))
-			self:Bar(spellId, 14.4)
-			self:Flash(spellId)
+	local times = {
+		["MonaraDies"] = 0,
+		["MonaraSN"] = 0,
+	}
+	function mod:BigWigs_BossComm(_, msg)
+		local t = GetTime()
+		if t-times[msg] > 5 then
+			times[msg] = t
+			if msg == "MonaraDies" then
+				self:Disable()
+			elseif msg == "MonaraSN" then
+				local spellId = 139899
+				local name = self:SpellName(spellId)
+				self:Message(spellId, "Urgent", "Long", CL["incoming"]:format(name))
+				self:Bar(spellId, 3, CL["cast"]:format(name))
+				self:Bar(spellId, 14.4)
+				self:Flash(spellId)
+			end
 		end
 	end
 	function mod:ShadowNova(args)
@@ -142,23 +146,3 @@ do
 		self:Sync("MonaraDies")
 	end
 end
-
---[[
-do
-	local function scan()
-		--self:TargetMessage(args.spellId, args.destName, "Urgent", "Alert")
-		print(UnitName("targettarget"), UnitName("targettargettarget"))
-	end
-	function mod:Fixated(_, _, _, _, spellId)
-		if spellId == 140306 then
-			print(UnitName("targettarget"), UnitName("targettargettarget"))
-			self:ScheduleTimer(scan, 0.05)
-			self:ScheduleTimer(scan, 0.1)
-			self:ScheduleTimer(scan, 0.2)
-			self:ScheduleTimer(scan, 0.3)
-			self:ScheduleTimer(scan, 0.4)
-			self:ScheduleTimer(scan, 0.5)
-		end
-	end
-end
-]]
