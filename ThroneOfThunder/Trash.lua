@@ -124,18 +124,20 @@ do
 		["MonaraSN"] = 0,
 	}
 	function mod:BigWigs_BossComm(_, msg)
-		local t = GetTime()
-		if t-times[msg] > 5 then
-			times[msg] = t
-			if msg == "MonaraDies" then
-				self:Disable()
-			elseif msg == "MonaraSN" then
-				local spellId = 139899
-				local name = self:SpellName(spellId)
-				self:Message(spellId, "Urgent", "Long", CL["incoming"]:format(name))
-				self:Bar(spellId, 3, CL["cast"]:format(name))
-				self:Bar(spellId, 14.4)
-				self:Flash(spellId)
+		if times[msg] then
+			local t = GetTime()
+			if t-times[msg] > 5 then
+				times[msg] = t
+				if msg == "MonaraDies" then
+					self:Disable()
+				elseif msg == "MonaraSN" then
+					local spellId = 139899
+					local name = self:SpellName(spellId)
+					self:Message(spellId, "Urgent", "Long", CL["incoming"]:format(name))
+					self:Bar(spellId, 3, CL["cast"]:format(name))
+					self:Bar(spellId, 14.4)
+					self:Flash(spellId)
+				end
 			end
 		end
 	end
