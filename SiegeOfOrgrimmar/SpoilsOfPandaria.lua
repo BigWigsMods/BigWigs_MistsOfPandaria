@@ -22,11 +22,7 @@ local GetNumWorldStateUI = GetNumWorldStateUI
 local GetWorldStateUIInfo = GetWorldStateUIInfo
 
 local function checkPlayerSide()
-	local cy, cx = UnitPosition("player")
-	if cy == 0 then return 0 end
-
-	-- simplified cross product: mantid > 0 > mogu
-	return -(-27.2 * (5134.9 + cx) + 17.5 * (-1618.5 + cy))
+	return 1 -- XXX fixme
 end
 
 --------------------------------------------------------------------------------
