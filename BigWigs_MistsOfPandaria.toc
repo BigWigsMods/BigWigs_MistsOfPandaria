@@ -6,7 +6,7 @@
 ## Title-deDE: BigWigs [|cffeda55fMists of Pandaria|r]
 ## Title-frFR: BigWigs [|cffeda55fMists of Pandaria|r]
 ## Title-itIT: BigWigs [|cffeda55fMists of Pandaria|r]
-## Title-koKR: BigWigs [|cffeda55fMists of Pandaria|r]
+## Title-koKR: BigWigs [|cffeda55f판다리아의 안개|r]
 ## Title-ruRU: BigWigs [|cffeda55fMists of Pandaria|r]
 ## Title-ptBR: BigWigs [|cffeda55fMists of Pandaria|r]
 ## Title-esES: BigWigs [|cffeda55fMists of Pandaria|r]
@@ -17,7 +17,7 @@
 ## Notes-deDE: Eine Sammlung von BigWigs-Modulen aus der Ära Mists of Pandaria.
 ## Notes-frFR: A collection of BigWigs modules from the Mists of Pandaria era.
 ## Notes-itIT: A collection of BigWigs modules from the Mists of Pandaria era.
-## Notes-koKR: A collection of BigWigs modules from the Mists of Pandaria era.
+## Notes-koKR: 판다리아의 안개 BigWigs 모듈 모음집입니다.
 ## Notes-ruRU: A collection of BigWigs modules from the Mists of Pandaria era.
 ## Notes-ptBR: A collection of BigWigs modules from the Mists of Pandaria era.
 ## Notes-esES: A collection of BigWigs modules from the Mists of Pandaria era.
