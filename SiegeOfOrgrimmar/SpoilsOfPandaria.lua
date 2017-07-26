@@ -127,7 +127,7 @@ end
 function mod:UNIT_POWER_FREQUENT(unit, powerType)
 	if powerType ~= "ALTERNATE" then return end
 
-	local power = UnitPower(unit, 10)
+	local power = UnitPower(unit, 10) -- Enum.PowerType.Alternate = 10
 	if power == 0 then return end -- might be needed when you change rooms
 
 	local mobId = self:MobId(UnitGUID(unit))

@@ -251,7 +251,7 @@ do
 		if powerType == "ALTERNATE" then
 			local t = GetTime()
 			if t-prev > 1 then
-				local willpower = UnitPower(unitId, 10)
+				local willpower = UnitPower(unitId, 10) -- Enum.PowerType.Alternate = 10
 				if willpower < 20 and willpower > 0 then
 					prev = t
 					self:Message("willpower", "Personal", nil, L["willpower_message"]:format(willpower), 124824)
