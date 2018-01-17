@@ -10,16 +10,21 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "zhTW")
 if L then
+	L.focus_only = "|cffff0000只警報專注目標。|r "
+
 	L.charge_trigger = "用力拍動尾巴!"
 	L.door_trigger = "的門蜂擁而出!"
 	--L.orb_trigger = "charge" -- PLAYERNAME forces Horridon to charge the Farraki door!
 
+	L.chain_lightning_desc = L.focus_only .. "{-7124}"
 	L.chain_lightning_message = "你的專注目標正在施展閃電鏈！"
 	L.chain_lightning_bar = "專注目標：閃電鏈"
 
+	L.fireball_desc = L.focus_only .. "{-7122}"
 	L.fireball_message = "你的專注目標正在施展火球術！"
 	L.fireball_bar = "專注目標：火球術"
 
+	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
 	L.venom_bolt_volley_message = "你的專注目標正在施展毒箭之雨！"
 	L.venom_bolt_volley_bar = "專注目標：毒箭之雨"
 
@@ -30,8 +35,6 @@ if L then
 	L.door_bar = "下一道門（%d）"
 	L.balcony_adds = "上層看臺小怪"
 	L.orb_message = "控獸寶珠掉落！"
-
-	L.focus_only = "|cffff0000只警報專注目標。|r "
 end
 
 L = BigWigs:NewBossLocale("Council of Elders", "zhTW")

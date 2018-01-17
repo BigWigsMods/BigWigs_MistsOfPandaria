@@ -33,10 +33,12 @@ if L then
 
 	L.target_only = "|cFFFF0000This warning only shows for the boss you're targeting.|r "
 
-	L.combo, L.combo_desc = -5672, -5672
+	L.combo = -5672
+	L.combo_desc = L.target_only .. "{-5672}"
 	L.combo_message = "%s: Combo soon!"
 
-	L.arc, L.arc_desc = -5673, -5673
+	L.arc = -5673
+	L.arc_desc = L.target_only .. "{-5673}"
 	L.arc_icon = 116835
 
 	L.rage, L.rage_desc = -5678, -5678
@@ -54,8 +56,6 @@ if L then
 	L.bosses_icon = "achievement_moguraid_06"
 end
 L = mod:GetLocale()
-L.combo_desc = L.target_only .. L.combo_desc
-L.arc_desc = L.target_only .. L.arc_desc
 
 --------------------------------------------------------------------------------
 -- Initialization

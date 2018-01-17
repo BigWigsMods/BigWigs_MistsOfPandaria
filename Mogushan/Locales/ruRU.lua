@@ -85,7 +85,11 @@ if L then
 	L.gas_overdrive_trigger = "Древняя машина могу перегружена!"
 
 	L.target_only = "|cFFFF0000Это предупреждение показывается только для выбранного в цель босса.|r "
+
 	L.combo = "Череда ударов"
+	L.combo_desc = L.target_only .. "{-5672}"
 	L.combo_message = "%s: Череда ударов скоро!"
+
+	L.arc_desc = L.target_only .. "{-5673}"
 end
 

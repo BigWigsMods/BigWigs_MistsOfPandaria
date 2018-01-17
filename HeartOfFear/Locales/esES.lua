@@ -3,6 +3,7 @@ if not L then return end
 if L then
 	L.engage_yell = "La Divina nos ha elegido para dar voz mortal a Su pensamiento eterno. Solo somos el brazo que ejecuta Su voluntad."
 
+	L.force = "{-6427} (Pulso AoE)"
 	L.force_message = "Pulso AoE"
 
 	L.attenuation = "{-6426} (Discos)"
@@ -41,7 +42,7 @@ L = BigWigs:NewBossLocale("Wind Lord Mel'jarak", "esES") or BigWigs:NewBossLocal
 if L then
 	L.spear_removed = "¡Tu Lanza empaladora fue eliminada!"
 
-	L.mending_desc = "|cFFFF0000WARNING: Solo se mostrará el temporizador para tu 'focus' porque todos los Ensalmador de batalla Zar'thik tienen diferentes CDs de sanación.|r "
+	L.mending_desc = "|cFFFF0000WARNING: Solo se mostrará el temporizador para tu 'focus' porque todos los Ensalmador de batalla Zar'thik tienen diferentes CDs de sanación.|r {-6306}"
 	L.mending_warning = "¡Tu focus está casteando Aliviar!"
 	L.mending_bar = "Focus: Aliviar"
 end

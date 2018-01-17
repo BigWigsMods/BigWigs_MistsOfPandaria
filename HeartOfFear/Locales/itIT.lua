@@ -3,6 +3,7 @@ if not L then return end
 if L then
 	L.engage_yell = "Siamo stati scelti per essere la voce mortale del Suo divino potere. Siamo solo uno strumento sotto il Suo controllo."
 
+	L.force = "{-6427} (Pulsazione ad Area)"
 	L.force_message = "Pulsazione ad Area"
 
 	L.attenuation = "{-6426} (Dischi)"
@@ -41,7 +42,7 @@ L = BigWigs:NewBossLocale("Wind Lord Mel'jarak", "itIT")
 if L then
 	L.spear_removed = "La tua Lancia Impalante è stata rimossa!"
 
-	L.mending_desc = "|cFFFF0000AVVISO: viene visualizzato solo il timer del tuo bersaglio 'focus' perché tutte i Guaritori da Barttaglia Zar'thik hanno tempi di lancio e di recupero separati per le cure.|r "
+	L.mending_desc = "|cFFFF0000AVVISO: viene visualizzato solo il timer del tuo bersaglio 'focus' perché tutte i Guaritori da Barttaglia Zar'thik hanno tempi di lancio e di recupero separati per le cure.|r {-6306}"
 	L.mending_warning = "Il tuo focus sta lanciando Guarigione!"
 	L.mending_bar = "Focus: Guarigione"
 end

@@ -86,6 +86,10 @@ if L then
 	L.gas_overdrive_trigger = "La Macchina Antica dei Mogu va in sovraccarico!"
 
 	L.target_only = "|cFFFF0000Questo messaggio verrà visualizzato solo per il boss che stai selezionando.|r "
+
+	L.combo_desc = L.target_only .. "{-5672}"
 	L.combo_message = "%s: Combo IN ARRIVO!"
+
+	L.arc_desc = L.target_only .. "{-5673}"
 end
 

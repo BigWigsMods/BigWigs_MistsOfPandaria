@@ -87,6 +87,9 @@ if L then
 
 	L.target_only = "|cFFFF0000這個警告只會顯示你設為目標的首領。|r "
 
+	L.combo_desc = L.target_only .. "{-5672}"
 	L.combo_message = "%s: 毀滅連擊快要來了!"
+
+	L.arc_desc = L.target_only .. "{-5673}"
 end
 

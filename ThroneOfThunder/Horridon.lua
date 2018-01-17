@@ -23,22 +23,27 @@ local doorCounter = 1
 
 local L = mod:NewLocale("enUS", true)
 if L then
+	L.focus_only = "|cffff0000Focus target alerts only.|r "
+
 	L.charge_trigger = "sets his eyes" -- Horridon sets his eyes on PLAYERNAME and stamps his tail!
 	L.door_trigger = "pour" -- Farraki forces pour from the Farraki Tribal Door!
 	L.orb_trigger = "charge" -- PLAYERNAME forces Horridon to charge the Farraki door!
  
 
-	L.chain_lightning, L.chain_lightning_desc = -7124, -7124
+	L.chain_lightning = -7124
+	L.chain_lightning_desc = L.focus_only .. "{-7124}"
 	L.chain_lightning_icon = 136480
 	L.chain_lightning_message = "Your focus is casting Chain Lightning!"
 	L.chain_lightning_bar = "Focus: Chain Lightning"
 
-	L.fireball, L.fireball_desc = -7122, -7122
+	L.fireball = -7122
+	L.fireball_desc = L.focus_only .. "{-7122}"
 	L.fireball_icon = 136465
 	L.fireball_message = "Your focus is casting Fireball!"
 	L.fireball_bar = "Focus: Fireball"
 
-	L.venom_bolt_volley, L.venom_bolt_volley_desc = -7112, -7112
+	L.venom_bolt_volley = -7112
+	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
 	L.venom_bolt_volley_icon = 136587
 	L.venom_bolt_volley_message = "Your focus is casting Volley!"
 	L.venom_bolt_volley_bar = "Focus: Volley"
@@ -51,13 +56,8 @@ if L then
 	L.door_bar = "Next door (%d)"
 	L.balcony_adds = "Balcony adds"
 	L.orb_message = "Orb of Control dropped!"
-
-	L.focus_only = "|cffff0000Focus target alerts only.|r "
 end
 L = mod:GetLocale()
-L.venom_bolt_volley_desc = L.focus_only..L.venom_bolt_volley_desc
-L.fireball_desc = L.focus_only..L.fireball_desc
-L.chain_lightning_desc = L.focus_only..L.chain_lightning_desc
 
 --------------------------------------------------------------------------------
 -- Initialization

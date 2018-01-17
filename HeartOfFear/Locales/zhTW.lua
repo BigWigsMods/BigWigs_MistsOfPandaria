@@ -3,6 +3,7 @@ if not L then return end
 if L then
 	L.engage_yell = "聖女皇選上我們將她神聖的意志傳達給凡人。我們只是實現她意志的軀殼。"
 
+	L.force = "{-6427} (力與魄(AoE))"
 	L.force_message = "力與魄(AoE)"
 
 	L.attenuation = "{-6426} （跳舞）"
@@ -41,7 +42,7 @@ L = BigWigs:NewBossLocale("Wind Lord Mel'jarak", "zhTW")
 if L then
 	L.spear_removed = "你的穿刺之矛被移除了！"
 
-	L.mending_desc = "|cFFFF0000注意: 只有你的'專注'目標的計時條會顯示，因為所有的Zar'thik Battle-Menders有分離的治療冷卻時間。|r "
+	L.mending_desc = "|cFFFF0000注意: 只有你的'專注'目標的計時條會顯示，因為所有的Zar'thik Battle-Menders有分離的治療冷卻時間。|r {-6306}"
 	L.mending_warning = "你的專注目標正在施放癒合！"
 	L.mending_bar = "專注目標: 癒合"
 end

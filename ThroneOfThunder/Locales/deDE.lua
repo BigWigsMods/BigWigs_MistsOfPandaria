@@ -10,16 +10,21 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "deDE")
 if L then
+	L.focus_only = "|cffff0000Nur Meldungen für Fokusziele.|r "
+
 	L.charge_trigger = "richtet seinen Blick"
 	L.door_trigger = "stürmen"
 	--L.orb_trigger = "charge" -- PLAYERNAME forces Horridon to charge the Farraki door!
 
+	L.chain_lightning_desc = L.focus_only .. "{-7124}"
 	L.chain_lightning_message = "Dein Fokus wirkt Kettenblitzschlag!"
 	L.chain_lightning_bar = "Fokus: Kettenblitzschlag"
 
+	L.fireball_desc = L.focus_only .. "{-7122}"
 	L.fireball_message = "Dein Fokus wirkt Feuerball!"
 	L.fireball_bar = "Fokus: Feuerball"
 
+	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
 	L.venom_bolt_volley_message = "Dein Fokus wirkt Salve!"
 	L.venom_bolt_volley_bar = "Fokus: Salve"
 
@@ -30,8 +35,6 @@ if L then
 	L.door_bar = "Nächstes Tor (%d)"
 	L.balcony_adds = "Adds von oben"
 	L.orb_message = "Kugel der Kontrolle gefallen!"
-
-	L.focus_only = "|cffff0000Nur Meldungen für Fokusziele.|r "
 end
 
 L = BigWigs:NewBossLocale("Council of Elders", "deDE")

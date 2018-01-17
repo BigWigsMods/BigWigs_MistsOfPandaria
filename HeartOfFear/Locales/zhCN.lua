@@ -3,6 +3,7 @@ if not L then return end
 if L then
 	L.engage_yell = "我们不会向黑暗虚空的绝望屈服。如果女皇要我们去死，我们便照做。"
 
+	L.force = "{-6427} (力与魄脉冲)"
 	L.force_message = "力与魄脉冲"
 
 	L.attenuation = "{-6426} （跳舞）"
@@ -41,7 +42,7 @@ L = BigWigs:NewBossLocale("Wind Lord Mel'jarak", "zhCN")
 if L then
 	L.spear_removed = "你的穿刺之矛被移除了！"
 
-	L.mending_desc = "|cFFFF0000警告: 计时条仅对你的“焦点”目标显示，因为每个扎尔提克助战者有独立的治疗冷却。|r "
+	L.mending_desc = "|cFFFF0000警告: 计时条仅对你的“焦点”目标显示，因为每个扎尔提克助战者有独立的治疗冷却。|r {-6306}"
 	L.mending_warning = "你的焦点目标正在施放治疗！"
 	L.mending_bar = "焦点：治疗"
 end

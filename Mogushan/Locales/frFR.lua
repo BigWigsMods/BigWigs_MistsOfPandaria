@@ -86,6 +86,10 @@ if L then
 	L.gas_overdrive_trigger = "La machine mogu antique s’emballe !" -- à vérifier
 
 	L.target_only = "|cFFFF0000Cette alerte ne s'affichera que pour le boss que vous ciblez.|r "
+
+	L.combo_desc = L.target_only .. "{-5672}"
 	L.combo_message = "%s : combo imminent !"
+
+	L.arc_desc = L.target_only .. "{-5673}"
 end
 

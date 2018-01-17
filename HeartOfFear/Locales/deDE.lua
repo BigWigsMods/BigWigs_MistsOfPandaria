@@ -3,9 +3,10 @@ if not L then return end
 if L then
 	L.engage_yell = "Die Göttliche erwählte uns als sterbliche Stimme für Ihren göttlichen Willen. Wir existieren, um Ihren Willen auszuführen"
 
+	L.force = "{-6427} (AoE Puls)"
 	L.force_message = "AoE Puls"
 
-	L.attenuation = "{-6426} Scheiben)"
+	L.attenuation = "{-6426} (Scheiben)"
 	L.attenuation_bar = "Scheiben... tanzen!"
 	L.attenuation_message = "%s tanzt %s"
 	L.echo = "|c001cc986Echo|r"
@@ -41,7 +42,7 @@ L = BigWigs:NewBossLocale("Wind Lord Mel'jarak", "deDE")
 if L then
 	L.spear_removed = "Dein durchbohrender Speer wurde entfernt!"
 
-	L.mending_desc = "|cFFFF0000WARNUNG: Nur der Timer für dein 'Fokusziel' wird angezeigt, da alle Schlachtheiler der Zar'thik einen seperaten Heilungs-Cooldown haben.|r "
+	L.mending_desc = "|cFFFF0000WARNUNG: Nur der Timer für dein 'Fokusziel' wird angezeigt, da alle Schlachtheiler der Zar'thik einen seperaten Heilungs-Cooldown haben.|r {-6306}"
 	L.mending_warning = "Dein Fokusziel wirkt Besserung!"
 	L.mending_bar = "Fokus: Besserung"
 end

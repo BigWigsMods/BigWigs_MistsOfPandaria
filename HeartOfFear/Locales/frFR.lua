@@ -3,6 +3,7 @@ if not L then return end
 if L then
 	L.engage_yell = "La Divine a choisi de donner une voix mortelle à Sa divine volonté. Nous ne sommes que l'instrument qui promulge Sa volonté." -- à vérifier
 
+	L.force = "{-6427} (Impulsion de zone)"
 	L.force_message = "Impulsion de zone"
 
 	L.attenuation = "{-6426} (anneaux)"
@@ -41,7 +42,7 @@ L = BigWigs:NewBossLocale("Wind Lord Mel'jarak", "frFR")
 if L then
 	L.spear_removed = "Votre Lance de perforation a été enlevée !"
 
-	L.mending_desc = "|cFFFF0000AVERTISSEMENT : seul le délai de votre cible de focalisation sera affiché étant donné que les Soigneurs de bataille zar’thik ont des temps de recharge de soins différents.|r "
+	L.mending_desc = "|cFFFF0000AVERTISSEMENT : seul le délai de votre cible de focalisation sera affiché étant donné que les Soigneurs de bataille zar’thik ont des temps de recharge de soins différents.|r {-6306}"
 	L.mending_warning = "Votre focalisation est en train d'incanter Guérison !"
 	L.mending_bar = "Focalisation : Guérison"
 end

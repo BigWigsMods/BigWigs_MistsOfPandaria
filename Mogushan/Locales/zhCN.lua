@@ -87,6 +87,9 @@ if L then
 
 	L.target_only = "|cFFFF0000该提示信息仅在你为首领目标时显示。|r "
 
+	L.combo_desc = L.target_only .. "{-5672}"
 	L.combo_message = "%s：即将连击！"
+
+	L.arc_desc = L.target_only .. "{-5673}"
 end
 
