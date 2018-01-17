@@ -181,7 +181,8 @@ function mod:BreathOfFire(args)
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
 	local player = unit and unit:match("^(.-)target$") -- should always be a player or nil
 
-	if not player or self:Range(player) < 30 then
+	-- XXX no range checking now
+	if not player then --or self:Range(player) < 30 then
 		self:Message(args.spellId, "Attention")
 		if UnitDebuff("player", self:SpellName(146217)) then -- Keg Toss
 			self:PlaySound(args.spellId, "Long")

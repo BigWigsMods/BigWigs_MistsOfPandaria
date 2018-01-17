@@ -541,9 +541,10 @@ do
 			self:TargetBar("overcharged_self", 6, args.destName, args.spellId)
 			overchargedOnMe = true
 		end
-		if self:Range(args.destName) < 50 then -- XXX verify range ( should be more than 40 )
+		-- XXX no range checking now
+		--if self:Range(args.destName) < 50 then -- XXX verify range ( should be more than 40 )
 			tooCloseForOvercharged = true
-		end
+		--end
 		overchargedList[#overchargedList+1] = args.destName
 		if not scheduled then
 			scheduled = self:ScheduleTimer(warnOvercharged, 0.2, args.spellId)
@@ -616,13 +617,14 @@ do
 			mod:Bar(spellId, 20, spellId)
 			-- ignore other quadrants during the intermission
 			local closest, distance = nil, 200
-			for player in next, staticShockList do
-				local playerDistance = mod:Range(player)
-				if playerDistance < distance then
-					distance = playerDistance
-					closest = player
-				end
-			end
+			-- XXX no range checking now
+			--for player in next, staticShockList do
+			--	local playerDistance = mod:Range(player)
+			--	if playerDistance < distance then
+			--		distance = playerDistance
+			--		closest = player
+			--	end
+			--end
 			if distance < 40 then
 				mod:CloseProximity("proximity")
 				activeProximityAbilities[1] = true -- static shock

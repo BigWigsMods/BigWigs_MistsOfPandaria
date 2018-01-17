@@ -262,7 +262,8 @@ do
 
 		last = nil
 		if not timer and not self:LFR() and self.db.profile.matterswap > 0 then -- pretty wasteful to do the scanning if the option isn't on
-			timer = self:ScheduleRepeatingTimer(warnSwapTarget, 0.5)
+			-- XXX no range checking now
+			--timer = self:ScheduleRepeatingTimer(warnSwapTarget, 0.5)
 		end
 	end
 

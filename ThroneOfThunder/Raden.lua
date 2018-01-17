@@ -259,7 +259,8 @@ do
 		last = nil
 		player = args.destName
 		if not timer and self.db.profile.unstablevitajumptarget > 0 then -- pretty wasteful to do the scanning if the option isn't on
-			timer = self:ScheduleRepeatingTimer(warnJumpTarget, 0.5)
+			-- XXX no range checking now
+			--timer = self:ScheduleRepeatingTimer(warnJumpTarget, 0.5)
 		end
 	end
 	function mod:UnstableVitaRemoved(args)
