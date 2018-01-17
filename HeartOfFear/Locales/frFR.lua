@@ -5,7 +5,7 @@ if L then
 
 	L.force_message = "Impulsion de zone"
 
-	L.attenuation = EJ_GetSectionInfo(6426) .. " (anneaux)"
+	L.attenuation = "{-6426} (anneaux)"
 	L.attenuation_bar = "Anneaux... dansez !"
 	L.attenuation_message = "Danse |2 %s %s"
 	L.echo = "|c001cc986l'Echo|r"

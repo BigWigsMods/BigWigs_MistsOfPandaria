@@ -18,10 +18,10 @@ mod:RegisterEnableMob(
 
 local spellReflect = mod:SpellName(69901)
 
-local meng = EJ_GetSectionInfo(5835)
-local qiang = EJ_GetSectionInfo(5841)
-local subetai = EJ_GetSectionInfo(5846)
-local zian = EJ_GetSectionInfo(5852)
+local meng = mod:SpellName(-5835)
+local qiang = mod:SpellName(-5841)
+local subetai = mod:SpellName(-5846)
+local zian = mod:SpellName(-5852)
 
 local bossActivated = {}
 local bossWarned = 0
@@ -40,8 +40,8 @@ if L then
 	L.casting_shields_desc = "Warnings for when shields are casted for all bosses."
 	L.casting_shields_icon = 871
 
-	L.cowardice = EJ_GetSectionInfo(5838) .." (".. spellReflect ..")"
-	L.cowardice_desc = select(2, EJ_GetSectionInfo(5838))
+	L.cowardice = "{-5838} (".. spellReflect ..")"
+	L.cowardice_desc = -5838
 	L.cowardice_icon = 117756
 end
 L = mod:GetLocale()

@@ -21,12 +21,12 @@ local L = mod:NewLocale("enUS", true)
 if L then
 	L.engage_yell = "The Divine chose us to give mortal voice to Her divine will. We are but the vessel that enacts Her will."
 
-	L.force, L.force_desc = EJ_GetSectionInfo(6427)
+	L.force, L.force_desc = -6427, -6427
 	L.force_icon = 122713
 	L.force_message = "AoE Pulse"
 
-	L.attenuation = EJ_GetSectionInfo(6426) .. " (Discs)"
-	L.attenuation_desc = select(2, EJ_GetSectionInfo(6426))
+	L.attenuation = "{-6426} (Discs)"
+	L.attenuation_desc = -6426
 	L.attenuation_icon = 127834
 	L.attenuation_bar = "Discs... Dance!"
 	L.attenuation_message = "%s Dancing %s"

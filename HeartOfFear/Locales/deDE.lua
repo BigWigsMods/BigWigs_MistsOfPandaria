@@ -5,7 +5,7 @@ if L then
 
 	L.force_message = "AoE Puls"
 
-	L.attenuation = EJ_GetSectionInfo(6426) .. " (Scheiben)"
+	L.attenuation = "{-6426} Scheiben)"
 	L.attenuation_bar = "Scheiben... tanzen!"
 	L.attenuation_message = "%s tanzt %s"
 	L.echo = "|c001cc986Echo|r"

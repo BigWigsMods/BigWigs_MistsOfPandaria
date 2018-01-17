@@ -22,7 +22,7 @@ local quetzalDead = nil
 local L = mod:NewLocale("enUS", true)
 if L then
 	L.molten_energy = "Molten Energy"
-	L.molten_energy_desc = select(2, EJ_GetSectionInfo(6973))
+	L.molten_energy_desc = -6973
 	L.molten_energy_icon = 137221
 
 	L.arcing_lightning_cleared = "Raid clear of Arcing Lightning"

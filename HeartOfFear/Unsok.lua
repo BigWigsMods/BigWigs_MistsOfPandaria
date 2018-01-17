@@ -40,7 +40,7 @@ if L then
 	L.explosion_casting_by_you_icon = 122398
 
 	L.willpower = "Willpower"
-	L.willpower_desc = select(2, EJ_GetSectionInfo(6249))
+	L.willpower_desc = -6249
 	L.willpower_icon = 124824
 	L.willpower_message = "Willpower at %d!"
 

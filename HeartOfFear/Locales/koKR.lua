@@ -5,7 +5,7 @@ if L then
 
   L.force_message = "광역 음파"
 
-  L.attenuation = EJ_GetSectionInfo(6426) .. " (고리)"
+  L.attenuation = "{-6426} (고리)"
   L.attenuation_bar = "고리... 춤!"
   L.attenuation_message = "%s|1이;가; %s|1으로;로; 춤춥니다"
   L.echo = "|c001cc986메아리|r"

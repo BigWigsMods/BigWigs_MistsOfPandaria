@@ -12,7 +12,7 @@ mod:RegisterEnableMob(67977)
 
 local L = mod:NewLocale("enUS", true)
 if L then
-	L.bats = EJ_GetSectionInfo(7140)
+	L.bats = -7140
 	L.bats_desc = "Many bats. Handle it."
 	L.bats_icon = 136686
 

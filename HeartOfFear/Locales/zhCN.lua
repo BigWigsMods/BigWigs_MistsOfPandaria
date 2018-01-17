@@ -5,7 +5,7 @@ if L then
 
 	L.force_message = "力与魄脉冲"
 
-	L.attenuation = EJ_GetSectionInfo(6426) .. "（跳舞）"
+	L.attenuation = "{-6426} （跳舞）"
 	L.attenuation_bar = "音波衰减"
 	L.attenuation_message = "%s 音波衰减 %s"
 	L.echo = "|c001cc986回响傀儡|r"
