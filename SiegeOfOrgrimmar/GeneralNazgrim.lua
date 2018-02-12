@@ -116,7 +116,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Execute", 143502)
 	-- Adds
 	self:Log("SPELL_CAST_START", "ArcaneShock", 143432)
-	self:Log("SPELL_CAST_START", "ChainHeal", 143473)
 	self:Log("SPELL_AURA_APPLIED", "Magistrike", 143431)
 	self:Log("SPELL_CAST_SUCCESS", "HealingTideTotem", 143474)
 	self:Log("SPELL_CAST_START", "ChainHeal", 143473)
