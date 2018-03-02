@@ -19,6 +19,7 @@ mod.engageId = 1622
 local towerAddTimer = nil
 local addsCounter = 0
 local prevMarkedMob = nil
+local prevWin = 0
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -75,6 +76,10 @@ function mod:GetOptions()
 		[147068] = -8418, -- Galakras
 		["stages"] = "general",
 	}
+end
+
+function mod:VerifyEnable()
+	return (GetTime() - prevWin) > 180
 end
 
 function mod:OnBossEnable()
@@ -142,6 +147,10 @@ function mod:OnEngage()
 		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", "UNIT_TARGET")
 		self:RegisterEvent("UNIT_TARGET")
 	end
+end
+
+function mod:OnWin()
+	prevWin = GetTime()
 end
 
 --------------------------------------------------------------------------------
