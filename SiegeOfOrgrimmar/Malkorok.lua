@@ -54,7 +54,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "BloodRage", 142879)
 	self:Log("SPELL_CAST_START", "ExpelMiasma", 143199) -- spell used at the end of rage phase
 	-- Non rage phase
-	self:Log("SPELL_AURA_APPLIED_DOSE" , "FatalStrike", 142990)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "FatalStrike", 142990)
 	self:Log("SPELL_CAST_START", "BreathOfYShaarj", 142842)
 	self:Log("SPELL_CAST_SUCCESS", "SeismicSlam", 142851)
 	-- Arcing Smash has double CLEU events, pay attention if the warning stops working. 142826 first, 143805 second.

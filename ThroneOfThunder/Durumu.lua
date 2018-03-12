@@ -324,13 +324,15 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, _, _, _, target)
 		self:Flash("initial_life_drain", 133798)
 
 	elseif msg:find(L["red_spawn_trigger"]) then
-		local sound = (UnitIsUnit("player", redController) or self:Damager()) and "Warning" or nil
-		self:Message("adds", "Urgent", sound, L["red_add"], 134123)
-
+		self:Message("adds", "Urgent", nil, L["red_add"], 134123)
+		if UnitIsUnit("player", redController) or self:Damager() then
+			self:PlaySound("adds", "Warning")
+		end
 	elseif msg:find(L["blue_spawn_trigger"]) then
-		local sound = (UnitIsUnit("player", blueController) or self:Damager()) and "Warning" or nil
-		self:Message("adds", "Attention", sound, L["blue_add"], 134122)
-
+		self:Message("adds", "Attention", nil, L["blue_add"], 134122)
+		if UnitIsUnit("player", blueController) or self:Damager() then
+			self:PlaySound("adds", "Warning")
+		end
 	elseif msg:find(L["yellow_spawn_trigger"]) then
 		self:Message("adds", "Attention", nil, L["yellow_add"], 134124)
 

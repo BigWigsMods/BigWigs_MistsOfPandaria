@@ -753,7 +753,7 @@ end
 function mod:ReadyToFight(args)
 	local mobId = self:MobId(args.destGUID)
 	if mobId ~= 71152 and mobId ~= 71158 and mobId ~= 71153 then -- don't spam at the start, although engage to jump down varies
-		self:Message(-8003, "Neutral", false, args.destName, false)
+		self:Message(-8003, "Neutral", nil, args.destName, false)
 	end
 	if mobId == 71161 then -- Kil'ruk the Wind-Reaver
 		self:CDBar(148677, 42) -- Reave

@@ -100,22 +100,21 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 	local diff = self:Difficulty()
 	nestCounter = nestCounter + 1
 
-	local color, text, icon
 	if msg:find(L["upper_hatch_trigger"]) then
-		color = "Attention"
-		text = CL["count"]:format(L["upper_nest"], nestCounter)
-		icon = "misc_arrowlup"
+		local text = CL["count"]:format(L["upper_nest"], nestCounter)
+		-- one message for 10h nests with a guardian
+		if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
+			text = L["big_add_message"]:format(text)
+		end
+		self:Message("nest", "Attention", "Alert", text, "misc_arrowlup") -- XXX keep this here till all the nest rotations are 100% figured out
 	else
-		color = "Urgent"
-		text = CL["count"]:format(L["lower_nest"], nestCounter)
-		icon = "misc_arrowdown"
+		local text = CL["count"]:format(L["lower_nest"], nestCounter)
+		-- one message for 10h nests with a guardian
+		if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
+			text = L["big_add_message"]:format(text)
+		end
+		self:Message("nest", "Urgent", "Alert", text, "misc_arrowdown") -- XXX keep this here till all the nest rotations are 100% figured out
 	end
-
-	-- one message for 10h nests with a guardian
-	if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
-		text = L["big_add_message"]:format(text)
-	end
-	self:Message("nest", color, "Alert", text, icon) -- XXX keep this here till all the nest rotations are 100% figured out
 
 	local nextNest = nestCounter + 1
 	if diff == 7 then -- LFR

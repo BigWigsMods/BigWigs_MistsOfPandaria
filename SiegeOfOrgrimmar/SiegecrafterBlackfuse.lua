@@ -279,7 +279,7 @@ end
 
 function mod:PatternRecognitionRemoved(args)
 	if self:Me(args.destGUID) then
-		self:Message(-8207, "Positive", CL.over:format(args.spellName))
+		self:Message(-8207, "Positive", nil, CL.over:format(args.spellName))
 	end
 end
 

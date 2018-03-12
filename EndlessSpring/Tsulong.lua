@@ -141,26 +141,11 @@ do
 		end
 	end
 
-	local fired, timer = 0, nil
-	local function getNightmaresTarget(spellId)
-		fired = fired + 1
-		local player = mod:UnitName("boss1target")
-		if player and ((not UnitDetailedThreatSituation("boss1target", "boss1") and not mod:Tank("boss1target")) or fired > 13) then
-			-- If we've done 14 (0.7s) checks and still not passing the threat check, it's probably being cast on the tank
-			mod:CancelTimer(timer)
-			timer = nil
-			if UnitIsUnit("boss1target", "player") then
-				mod:Flash(spellId)
-				mod:Say(spellId)
-			end
-			mod:TargetMessage(spellId, player, "Important", "Alert")
-			return
-		end
-		-- 19 == 0.95sec
-		-- Safety check if the unit doesn't exist
-		if fired > 18 then
-			mod:CancelTimer(timer)
-			timer = nil
+	local function printTarget(self, name, guid) -- Nightmares
+		self:TargetMessage(122777, name, "Important", "Alert")
+		if self:Me(guid) then
+			self:Flash(122777)
+			self:Say(122777)
 		end
 	end
 
@@ -202,8 +187,7 @@ do
 			elseif spellId == 122775 then -- Nightmares
 				self:Bar(122777, 15)
 				if self:Difficulty() == 3 or self:Difficulty() == 5 then -- Only 1 nightmare spawns in 10 man modes
-					fired = 0
-					timer = self:ScheduleRepeatingTimer(getNightmaresTarget, 0.05, 122777)
+					self:GetBossTarget(printTarget, 0.7, UnitGUID(unitId))
 				else
 					self:Message(122777, "Attention")
 				end
