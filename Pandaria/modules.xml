@@ -7,5 +7,6 @@
 <Script file="Oondasta.lua"/>
 <Script file="Ordos.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>

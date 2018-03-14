@@ -16,5 +16,6 @@
 <Script file="ParagonsOfTheKlaxxi.lua"/>
 <Script file="GarroshHellscream.lua"/>
 
-</Ui>
+<Include file="Options\options.xml"/>
 
+</Ui>
