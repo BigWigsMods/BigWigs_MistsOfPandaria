@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Dark Animus", 930, 824)
+local mod, CL = BigWigs:NewBoss("Dark Animus", 1098, 824)
 if not mod then return end
 mod:RegisterEnableMob(69701, 69700, 69699, 69427) -- Anima Golem, Large Anima Golem, Massive Anima Golem, Dark Animus
 

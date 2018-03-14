@@ -9,7 +9,7 @@ TODO:
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Fallen Protectors", 953, 849)
+local mod, CL = BigWigs:NewBoss("The Fallen Protectors", 1136, 849)
 if not mod then return end
 mod:RegisterEnableMob(71475, 71479, 71480) -- Rook Stonetoe, He Softfoot, Sun Tenderheart
 mod.engageId = 1598

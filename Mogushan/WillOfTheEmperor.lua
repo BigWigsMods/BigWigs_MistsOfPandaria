@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Will of the Emperor", 896, 677)
+local mod, CL = BigWigs:NewBoss("Will of the Emperor", 1008, 677)
 if not mod then return end
 
 --------------------------------------------------------------------------------

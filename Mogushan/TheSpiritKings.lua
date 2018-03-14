@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Spirit Kings", 896, 687)
+local mod, CL = BigWigs:NewBoss("The Spirit Kings", 1008, 687)
 if not mod then return end
 mod:RegisterEnableMob(
 	60701, 61421, -- Zian of the Endless Shadows

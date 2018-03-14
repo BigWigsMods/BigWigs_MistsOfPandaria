@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Protectors of the Endless", 886, 683)
+local mod, CL = BigWigs:NewBoss("Protectors of the Endless", 996, 683)
 if not mod then return end
 mod:RegisterEnableMob(60583, 60585, 60586) -- Kaolan, Regail, Asani
 

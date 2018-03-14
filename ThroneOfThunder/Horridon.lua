@@ -7,7 +7,7 @@ TODO:
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Horridon", 930, 819)
+local mod, CL = BigWigs:NewBoss("Horridon", 1098, 819)
 if not mod then return end
 mod:RegisterEnableMob(68476, 69374) -- Horridon, War-God Jalak
 

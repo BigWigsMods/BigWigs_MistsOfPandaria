@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Megaera", 930, 821)
+local mod, CL = BigWigs:NewBoss("Megaera", 1098, 821)
 if not mod then return end
 mod:RegisterEnableMob(70248, 70212, 70235, 70247, 68065) -- Arcane Head, Flaming Head, Frozen Head, Venomous Head, Megaera
 

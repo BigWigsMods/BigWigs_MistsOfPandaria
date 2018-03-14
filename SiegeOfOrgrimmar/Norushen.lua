@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Norushen", 953, 866)
+local mod, CL = BigWigs:NewBoss("Norushen", 1136, 866)
 if not mod then return end
 mod:RegisterEnableMob(72276, 71977, 71976, 71967) -- Amalgam of Corruption, Manifestation of Corruption, Essence of Corruption, Norushen
 mod.engageId = 1624

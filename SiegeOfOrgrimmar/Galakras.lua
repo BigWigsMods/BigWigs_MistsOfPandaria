@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Galakras", 953, 868)
+local mod, CL = BigWigs:NewBoss("Galakras", 1136, 868)
 if not mod then return end
 mod:RegisterEnableMob(
 	72249, 72358, -- Galakras, Kor'kron Cannon

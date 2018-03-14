@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Iron Qon", 930, 817)
+local mod, CL = BigWigs:NewBoss("Iron Qon", 1098, 817)
 if not mod then return end
 mod:RegisterEnableMob(68078, 68079, 68080, 68081) -- Iron Qon, Ro'shak, Quet'zal, Dam'ren
 

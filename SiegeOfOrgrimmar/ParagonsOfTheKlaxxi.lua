@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Paragons of the Klaxxi", 953, 853)
+local mod, CL = BigWigs:NewBoss("Paragons of the Klaxxi", 1136, 853)
 if not mod then return end
 mod:RegisterEnableMob(
 	71161, 71157, 71156, 71155, -- Kil'ruk the Wind-Reaver, Xaril the Poisoned Mind, Kaz'tik the Manipulator, Korven the Prime

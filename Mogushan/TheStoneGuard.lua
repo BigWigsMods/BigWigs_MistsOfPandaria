@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("The Stone Guard", 896, 679)
+local mod, CL = BigWigs:NewBoss("The Stone Guard", 1008, 679)
 if not mod then return end
 mod:RegisterEnableMob(60051, 60047, 60043, 59915) -- Cobalt, Amethyst, Jade, Jasper
 

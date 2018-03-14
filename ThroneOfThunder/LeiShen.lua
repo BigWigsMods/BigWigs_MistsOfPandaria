@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Lei Shen", 930, 832)
+local mod, CL = BigWigs:NewBoss("Lei Shen", 1098, 832)
 if not mod then return end
 mod:RegisterEnableMob(68397, 68398, 68696, 68697, 68698) -- Lei Shen, Static Shock Conduit, Diffusion Chain Conduit, Overcharge Conduit, Bouncing Bolt Conduit
 

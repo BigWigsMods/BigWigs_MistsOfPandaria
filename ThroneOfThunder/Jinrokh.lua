@@ -7,7 +7,7 @@ TODO:
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Jin'rokh the Breaker", 930, 827)
+local mod, CL = BigWigs:NewBoss("Jin'rokh the Breaker", 1098, 827)
 if not mod then return end
 mod:RegisterEnableMob(69465)
 

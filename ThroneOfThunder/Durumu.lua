@@ -2,7 +2,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Durumu the Forgotten", 930, 818)
+local mod, CL = BigWigs:NewBoss("Durumu the Forgotten", 1098, 818)
 if not mod then return end
 mod:RegisterEnableMob(68036)
 

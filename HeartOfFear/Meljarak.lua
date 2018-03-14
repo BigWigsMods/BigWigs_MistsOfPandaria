@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Wind Lord Mel'jarak", 897, 741)
+local mod, CL = BigWigs:NewBoss("Wind Lord Mel'jarak", 1009, 741)
 if not mod then return end
 mod:RegisterEnableMob(
 	62397, 62408, 62402, 62405, -- Mel'jarak, Zar'thik Battle-Mender, Kor'thik Elite Blademaster, Sra'thik Amber-Trapper

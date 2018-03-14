@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Garrosh Hellscream", 953, 869)
+local mod, CL = BigWigs:NewBoss("Garrosh Hellscream", 1136, 869)
 if not mod then return end
 mod:RegisterEnableMob(71865)
 mod.engageId = 1623

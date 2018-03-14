@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Council of Elders", 930, 816)
+local mod, CL = BigWigs:NewBoss("Council of Elders", 1098, 816)
 if not mod then return end
 mod:RegisterEnableMob(69132, 69131, 69134, 69078) -- High Priestess Mar'li, Frost King Malakk, Kazra'jin, Sul the Sandcrawler
 

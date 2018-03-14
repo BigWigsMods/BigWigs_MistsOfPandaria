@@ -7,7 +7,7 @@ TODO:
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Twin Consorts", 930, 829)
+local mod, CL = BigWigs:NewBoss("Twin Consorts", 1098, 829)
 if not mod then return end
 mod:RegisterEnableMob(68905, 68904) -- Lu'lin, Suen
 

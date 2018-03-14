@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Amber-Shaper Un'sok", 897, 737)
+local mod, CL = BigWigs:NewBoss("Amber-Shaper Un'sok", 1009, 737)
 if not mod then return end
 mod:RegisterEnableMob(62511, 62711) -- Un'sok, Monstrosity
 

@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Imperial Vizier Zor'lok", 897, 745)
+local mod, CL = BigWigs:NewBoss("Imperial Vizier Zor'lok", 1009, 745)
 if not mod then return end
 mod:RegisterEnableMob(62980)
 

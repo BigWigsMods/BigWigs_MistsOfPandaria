@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Blade Lord Ta'yak", 897, 744)
+local mod, CL = BigWigs:NewBoss("Blade Lord Ta'yak", 1009, 744)
 if not mod then return end
 mod:RegisterEnableMob(62543)
 

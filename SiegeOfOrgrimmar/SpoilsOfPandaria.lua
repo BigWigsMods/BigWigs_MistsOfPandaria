@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Spoils of Pandaria", 953, 870)
+local mod, CL = BigWigs:NewBoss("Spoils of Pandaria", 1136, 870)
 if not mod then return end
 mod:RegisterEnableMob(73152, 73720, 71512) -- Storeroom Guard ( trash guy ), Mogu Spoils, Mantid Spoils
 mod.engageId = 1594

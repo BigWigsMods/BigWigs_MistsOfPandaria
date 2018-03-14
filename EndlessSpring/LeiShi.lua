@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Lei Shi", 886, 729)
+local mod, CL = BigWigs:NewBoss("Lei Shi", 996, 729)
 if not mod then return end
 mod:RegisterEnableMob(62983, 63275) -- Lei Shi, Corrupted Protector
 

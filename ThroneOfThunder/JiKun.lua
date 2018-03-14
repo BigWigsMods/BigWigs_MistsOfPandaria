@@ -7,7 +7,7 @@ TODO:
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Ji-Kun", 930, 828)
+local mod, CL = BigWigs:NewBoss("Ji-Kun", 1098, 828)
 if not mod then return end
 mod:RegisterEnableMob(69712) -- Ji-Kun
 

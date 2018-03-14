@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Sha of Fear", 886, 709)
+local mod, CL = BigWigs:NewBoss("Sha of Fear", 996, 709)
 if not mod then return end
 mod:RegisterEnableMob(60999, 61003) -- Sha of Fear, Dread Spawn
 

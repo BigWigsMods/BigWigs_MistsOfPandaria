@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Kor'kron Dark Shaman", 953, 856)
+local mod, CL = BigWigs:NewBoss("Kor'kron Dark Shaman", 1136, 856)
 if not mod then return end
 mod:RegisterEnableMob(71859, 71858, 71923, 71921) -- Earthbreaker Haromm, Wavebinder Kardris, Bloodclaw, Darkfang
 mod.engageId = 1606

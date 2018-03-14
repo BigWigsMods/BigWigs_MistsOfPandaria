@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Garalon", 897, 713)
+local mod, CL = BigWigs:NewBoss("Garalon", 1009, 713)
 if not mod then return end
 mod:RegisterEnableMob(63191, 63053) -- Garalon, Garalon's Leg
 

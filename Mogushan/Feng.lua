@@ -3,7 +3,7 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Feng the Accursed", 896, 689)
+local mod, CL = BigWigs:NewBoss("Feng the Accursed", 1008, 689)
 if not mod then return end
 mod:RegisterEnableMob(60009)
 
