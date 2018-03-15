@@ -109,9 +109,9 @@ end
 --
 
 do
-	local function infernoOver(spellId)
+	local function infernoOver()
 		inferno = nil
-		mod:Message(spellId, "Positive", nil, CL["over"]:format(mod:SpellName(137491))) -- Nuclear Inferno
+		mod:Message(137491, "Positive", nil, CL["over"]:format(mod:SpellName(137491))) -- Nuclear Inferno
 	end
 	local times = {
 		["Phase2"] = 0,
@@ -159,7 +159,7 @@ do
 					self:Flash(137491)
 					self:Bar(137491, phase3 and 71 or 55)
 					self:Bar(137491, 12, CL["cast"]:format(self:SpellName(137491))) -- Nuclear Inferno
-					self:ScheduleTimer(infernoOver, 12, 137491)
+					self:ScheduleTimer(infernoOver, 12)
 				elseif msg == "IceComet" then
 					self:Message(-7649, "Positive")
 					self:CDBar(-7649, phase3 and 30 or 20)
