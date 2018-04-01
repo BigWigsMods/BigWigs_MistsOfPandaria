@@ -389,18 +389,27 @@ do
 end
 
 do
-	local function printTarget(self, name, guid, elapsed)
-		if elapsed > 0.2 then
-			self:Message(143958, "Personal", "Info")
-		else
+	local prev = 0
+	local function printTarget(self, name, guid)
+		local t = GetTime()
+		if t-prev > 5 then
+			prev = t
 			if self:Me(guid) then
 				self:Flash(143958)
 			end
 			self:TargetMessage(143958, name, "Personal", "Info")
 		end
 	end
+	local function printFallback()
+		local t = GetTime()
+		if t-prev > 5 then
+			prev = t
+			mod:Message(143958, "Personal", "Info")
+		end
+	end
 	function mod:CorruptionShock(args)
-		self:GetBossTarget(printTarget, 0.2, args.sourceGUID)
+		self:SimpleTimer(printFallback, 0.2)
+		self:GetBossTarget(printTarget, 0.3, args.sourceGUID)
 	end
 end
 
