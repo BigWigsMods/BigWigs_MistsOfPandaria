@@ -134,7 +134,7 @@ end
 --
 
 function mod:Rage()
-	self:Message("rage", "Attention", nil, CL["custom_sec"]:format(L["rage"], 13), L.rage_icon)
+	self:Message("rage", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["rage"]), 13), L.rage_icon)
 	self:Bar("rage", 13, L["rage"], L.rage_icon)
 	self:DelayedMessage("rage", 13, "Attention", L["rage"], L.rage_icon)
 end
@@ -152,19 +152,19 @@ end
 
 function mod:Strength()
 	strengthCounter = strengthCounter + 1
-	self:Message("strength", "Attention", nil, CL["custom_sec"]:format(L["strength"], 8), L.strength_icon)
-	self:Bar("strength", 8, CL["count"]:format(L["strength"], strengthCounter), L.strength_icon)
-	self:DelayedMessage("strength", 8, "Attention", CL["count"]:format(L["strength"], strengthCounter), L.strength_icon)
+	self:Message("strength", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["strength"]), 8), L.strength_icon)
+	self:Bar("strength", 8, CL["count"]:format(self:SpellName(L["strength"]), strengthCounter), L.strength_icon)
+	self:DelayedMessage("strength", 8, "Attention", CL["count"]:format(self:SpellName(L["strength"]), strengthCounter), L.strength_icon)
 end
 
 function mod:Courage()
-	self:Message("courage", "Attention", nil, CL["custom_sec"]:format(L["courage"], 11), L.courage_icon)
+	self:Message("courage", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["courage"]), 11), L.courage_icon)
 	self:Bar("courage", 11, L["courage"], L.courage_icon) -- shield like icon
 	self:DelayedMessage("courage", 11, "Attention", L["courage"], L.courage_icon)
 end
 
 function mod:Bosses()
-	self:Message("bosses", "Attention", nil, CL["custom_sec"]:format(L["bosses"], 13), L.bosses_icon)
+	self:Message("bosses", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["bosses"]), 13), L.bosses_icon)
 	self:Bar("bosses", 13, L["bosses"], L.bosses_icon)
 	self:DelayedMessage("bosses", 13, "Attention", L["bosses"], L.bosses_icon)
 	if not self:Heroic() then
@@ -224,4 +224,3 @@ do
 		end
 	end
 end
-
