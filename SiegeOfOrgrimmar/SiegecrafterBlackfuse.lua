@@ -294,7 +294,7 @@ function mod:ShredderEngage()
 end
 
 function mod:DeathFromAboveApplied(args)
-	self:Message(args.spellId, "Attention", "Alert")
+	self:Message(144208, "Attention", "Alert")
 end
 
 function mod:DeathFromAbove(args)

@@ -38,15 +38,6 @@ local quakeCounter = 0
 local kickable = 0
 local crystalTimer = nil
 
-local function warnCrystalShell(spellName)
-	if mod:UnitDebuff("player", spellName) or not UnitAffectingCombat("player") then
-		mod:CancelTimer(crystalTimer)
-		crystalTimer = nil
-	else
-		mod:Message(137633, "Personal", "Info", L["no_crystal_shell"])
-	end
-end
-
 -- marking
 local markableMobs = {}
 local marksUsed = {}
@@ -100,7 +91,7 @@ function mod:OnEngage()
 	self:Bar(136294, 21) -- Call of Tortos
 	self:CDBar(134920, 28, CL["count"]:format(self:SpellName(134920), 1)) -- Quake Stomp
 	if self:Heroic() then
-		crystalTimer = self:ScheduleRepeatingTimer(warnCrystalShell, 3, self:SpellName(137633))
+		crystalTimer = self:ScheduleRepeatingTimer("CrystalShell", 3, self:SpellName(137633))
 	end
 	-- marking
 	if self.db.profile.custom_off_turtlemarker then
@@ -128,12 +119,21 @@ function mod:BreathUpdate(unit)
 	end
 end
 
+function mod:CrystalShell(spellName)
+	if self:UnitDebuff("player", spellName) or not UnitAffectingCombat("player") then
+		mod:CancelTimer(crystalTimer)
+		crystalTimer = nil
+	else
+		mod:Message(137633, "Personal", "Info", L["no_crystal_shell"])
+	end
+end
+
 function mod:CrystalShellRemoved(args)
 	if not self:Me(args.destGUID) or not self.isEngaged then return end
 	self:Message(args.spellId, "Personal", "Alarm", CL["removed"]:format(args.spellName))
 	if not self:Tank() then
 		self:Flash(args.spellId)
-		crystalTimer = self:ScheduleRepeatingTimer(warnCrystalShell, 3, args.spellName)
+		crystalTimer = self:ScheduleRepeatingTimer("CrystalShell", 3, args.spellName)
 	end
 end
 

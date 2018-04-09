@@ -76,7 +76,7 @@ L = mod:GetLocale()
 -- Initialization
 --
 
-function mod:GetOptions(CL)
+function mod:GetOptions()
 	return {
 		-8298, 144616, "ironstar_impact", -8292, 144821, -- phase 1
 		-8294, "chain_heal", "custom_off_shaman_marker", -- Farseer
