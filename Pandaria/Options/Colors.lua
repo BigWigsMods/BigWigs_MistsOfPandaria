@@ -1,9 +1,9 @@
 
 BigWigs:AddColors("Sha of Anger", {
-	[119610] = "Personal",
 	[119488] = "Important",
-	[119626] = {"Attention","Urgent","Personal"},
+	[119610] = "Personal",
 	[119622] = "Personal",
+	[119626] = {"Attention","Personal","Urgent"},
 })
 
 BigWigs:AddColors("Salyis's Warband", {
@@ -13,20 +13,20 @@ BigWigs:AddColors("Salyis's Warband", {
 })
 
 BigWigs:AddColors("Nalak", {
-	[136339] = "Personal",
 	[136338] = "Important",
+	[136339] = "Personal",
 	[136340] = {"Attention","Personal"},
 })
 
 BigWigs:AddColors("Oondasta", {
 	[137457] = "Attention",
-	[137504] = {"Urgent","Personal"},
+	[137504] = {"Personal","Urgent"},
 	[137505] = "Important",
 })
 
 BigWigs:AddColors("Ordos", {
 	[144688] = "Urgent",
-	[144689] = {"Urgent","Personal"},
+	[144689] = {"Personal","Urgent"},
 	[144692] = {"Attention","Personal"},
 	[144695] = {"Attention","Personal"},
 })

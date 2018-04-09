@@ -1,8 +1,8 @@
 
 BigWigs:AddSounds("Sha of Anger", {
+	[119610] = "Info",
 	[119622] = "Alert",
 	[119626] = "Alarm",
-	[119610] = "Info",
 })
 
 BigWigs:AddSounds("Salyis's Warband", {
@@ -10,8 +10,8 @@ BigWigs:AddSounds("Salyis's Warband", {
 })
 
 BigWigs:AddSounds("Nalak", {
-	[136339] = "Alert",
 	[136338] = "Alarm",
+	[136339] = "Alert",
 	[136340] = {"Alert","Info"},
 })
 
@@ -23,6 +23,6 @@ BigWigs:AddSounds("Oondasta", {
 
 BigWigs:AddSounds("Ordos", {
 	[144689] = "Alert",
-	[144695] = "Info",
 	[144692] = {"Alarm","Info"},
+	[144695] = "Info",
 })
