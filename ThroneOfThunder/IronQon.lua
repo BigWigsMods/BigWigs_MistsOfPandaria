@@ -154,7 +154,7 @@ end
 -- Dam'ren
 
 function mod:Freeze(args)
-	local _, _, _, _, _, duration = UnitDebuff(args.destName, args.spellName)
+	local _, _, duration = self:UnitDebuff(args.destName, args.spellName)
 	self:Bar(args.spellId, duration, CL["incoming"]:format(args.spellName)) -- so people can use personal cooldowns for when the damage happens
 end
 
@@ -184,7 +184,7 @@ do
 		if not mod.isEngaged then return end -- This can run after wipe, so check if the encounter is engaged
 		local debuffs = nil
 		for unit in mod:IterateGroup() do
-			if UnitDebuff(unit, spellName) then
+			if self:UnitDebuff(unit, spellName) then
 				debuffs = true
 				break
 			end
@@ -195,7 +195,7 @@ do
 		scheduled = nil
 		if mod:LFR() then return end
 
-		if UnitDebuff("player", spellName) then
+		if self:UnitDebuff("player", spellName) then
 			mod:OpenProximity(136193, 12) -- open Arcing Lighning
 		elseif checkOpen then
 			mod:CloseProximity(136193) -- close multi-target
@@ -353,7 +353,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spellName, _, _, spellId)
 			self:StopBar(139180) -- Frost Spike
 			self:StopBar(-6877) -- Windstorm
 			self:StopBar(136192) -- Lightning Storm
-			if not UnitDebuff("player", arcingLightning) then
+			if not self:UnitDebuff("player", arcingLightning) then
 				self:CloseProximity(136192) -- Lightning Storm
 				self:OpenProximity(-6870, 10) -- Unleashed Flame
 			end
@@ -365,7 +365,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spellName, _, _, spellId)
 			phase = 4
 			self:StopBar(-6870) -- Unleashed Flame
 			self:StopBar(-6914) -- Dead Zone
-			if not UnitDebuff("player", arcingLightning) then
+			if not self:UnitDebuff("player", arcingLightning) then
 				self:CloseProximity(-6870) -- Unleashed Flame
 				self:OpenProximity(136192, 12) -- Lightning Storm (12 to be safe)
 			end
@@ -412,7 +412,7 @@ function mod:Deaths(args)
 	elseif args.mobId == 68080 then
 		-- Quet'zal
 		self:StopBar(136192) -- Lightning Storm
-		if not UnitDebuff("player", arcingLightning) or self:LFR() then
+		if not self:UnitDebuff("player", arcingLightning) or self:LFR() then
 			self:CloseProximity(136192) -- Lightning Storm
 		end
 		if not self:Heroic() then

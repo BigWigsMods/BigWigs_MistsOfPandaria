@@ -330,7 +330,7 @@ do
 		end
 	end
 	function mod:TitanGiftApplied(args)
-		local _, _, _, _, _, _, prideExpires = UnitDebuff(args.destName, auraOfPride) -- this is to check if the person has aura of pride then later spawn remaining duration bar
+		local _, _, _, prideExpires = self:UnitDebuff(args.destName, auraOfPride) -- this is to check if the person has aura of pride then later spawn remaining duration bar
 		if self:Me(args.destGUID) then
 			isOnMe = true
 			if prideExpires then -- Aura of Pride 5 yard aoe

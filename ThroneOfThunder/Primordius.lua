@@ -89,11 +89,11 @@ do
 	local function warnPlayerMutations()
 		local totalP, totalN = 0, 0
 		for _, spell in next, theGood do
-			local _, _, _, count = UnitDebuff("player", spell)
+			local _, count = self:UnitDebuff("player", spell)
 			totalP = totalP + (count or 0)
 		end
 		for _, spell in next, theBad do
-			local _, _, _, count = UnitDebuff("player", spell)
+			local _, count = self:UnitDebuff("player", spell)
 			totalN = totalN + (count or 0)
 		end
 
@@ -125,13 +125,13 @@ function mod:FullyMutatedApplied(args)
 end
 
 function mod:EruptingPustulesRemoved(args)
-	if not UnitBuff("boss1", self:SpellName(136218)) then -- Acidic Spines
+	if not self:UnitBuff("boss1", self:SpellName(136218)) then -- Acidic Spines
 		self:CloseProximity(args.spellId)
 	end
 end
 
 function mod:EruptingPustulesApplied(args)
-	if not UnitBuff("boss1", self:SpellName(136218)) then -- Acidic Spines
+	if not self:UnitBuff("boss1", self:SpellName(136218)) then -- Acidic Spines
 		self:OpenProximity(args.spellId, 2)
 	end
 	self:Message(args.spellId, "Attention")
@@ -167,7 +167,7 @@ end
 function mod:AcidicSpinesRemoved(args)
 	self:Message(args.spellId, "Positive", "Alert", CL["over"]:format(args.spellName))
 	self:CloseProximity(args.spellId)
-	if UnitBuff("boss1", self:SpellName(136246)) then -- Erupting Pustules
+	if self:UnitBuff("boss1", self:SpellName(136246)) then -- Erupting Pustules
 		self:OpenProximity(136246, 2)
 	end
 end

@@ -128,12 +128,11 @@ end
 
 do
 	local korthikStrike = mod:SpellName(122409)
-	local UnitDebuff = UnitDebuff
 	local function allowKorthikStrike(player)
 		korthikStrikeWarned[player] = nil
 	end
 	function mod:UNIT_AURA(_, unitId)
-		if UnitDebuff(unitId, korthikStrike) then
+		if self:UnitDebuff(unitId, korthikStrike) then
 			local player = self:UnitName(unitId)
 			if not korthikStrikeWarned[player] then
 				korthikStrikeWarned[player] = true

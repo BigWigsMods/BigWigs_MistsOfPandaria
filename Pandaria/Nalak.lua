@@ -126,7 +126,7 @@ do
 	function mod:StormcloudDamage(args)
 		if self:Me(args.destGUID) then
 			local t = GetTime()
-			if t-prev > 2 and not UnitDebuff("player", args.spellName) then
+			if t-prev > 2 and not self:UnitDebuff("player", args.spellName) then
 				self:Message(136340, "Personal", "Info", CL["underyou"]:format(args.spellName))
 				prev = t
 			end

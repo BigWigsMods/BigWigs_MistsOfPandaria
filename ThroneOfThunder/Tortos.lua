@@ -39,7 +39,7 @@ local kickable = 0
 local crystalTimer = nil
 
 local function warnCrystalShell(spellName)
-	if UnitDebuff("player", spellName) or not UnitAffectingCombat("player") then
+	if mod:UnitDebuff("player", spellName) or not UnitAffectingCombat("player") then
 		mod:CancelTimer(crystalTimer)
 		crystalTimer = nil
 	else
@@ -209,9 +209,8 @@ end
 do
 	local concussion = mod:SpellName(136431)
 	local prev = 0
-	local UnitDebuff = UnitDebuff
 	function mod:ShellConcussionCheck(unit)
-		local _, _, _, _, _, _, expires = UnitDebuff(unit, concussion)
+		local _, _, _, expires = self:UnitDebuff(unit, concussion)
 		if expires and expires ~= prev then
 			local t = GetTime()
 			if prev < t then -- buff fell off

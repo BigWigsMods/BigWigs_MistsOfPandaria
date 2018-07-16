@@ -113,7 +113,7 @@ do
 	local function reportFog(spellName)
 		local highestStack, highestStackPlayer = 0
 		for unit in mod:IterateGroup() do
-			local _, _, _, stack, _, duration = UnitDebuff(unit, spellName)
+			local _, stack, duration = self:UnitDebuff(unit, spellName)
 			if stack and stack > highestStack and duration > 0 then
 				highestStack = stack
 				highestStackPlayer = unit

@@ -48,7 +48,7 @@ do
 	local prev = 0
 	local bitterThoughts = mod:SpellName(119610)
 	function mod:BitterThoughts()
-		if UnitDebuff("player", bitterThoughts) then
+		if self:UnitDebuff("player", bitterThoughts) then
 			local t = GetTime()
 			if t-prev > 2 then -- throttle so the timer can catch it sooner
 				prev = t

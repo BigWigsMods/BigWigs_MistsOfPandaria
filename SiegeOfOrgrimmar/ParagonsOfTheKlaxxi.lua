@@ -15,7 +15,7 @@ mod.engageId = 1593
 -- Locals
 --
 
-local UnitDetailedThreatSituation, UnitExists, UnitIsUnit, UnitDebuff, UnitGUID = UnitDetailedThreatSituation, UnitExists, UnitIsUnit, UnitDebuff, UnitGUID
+local UnitDetailedThreatSituation, UnitExists, UnitIsUnit, UnitGUID = UnitDetailedThreatSituation, UnitExists, UnitIsUnit, UnitGUID
 
 local function getBossByMobId(mobId)
 	for i=1, 5 do
@@ -277,7 +277,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t																										   -- injection
-			self:Message(args.spellId, "Attention", (self:Healer() or (self:Tank() and UnitDebuff("player", self:SpellName(143339)))) and "Alert", CL.count:format(self:SpellName(-8068), mutateCastCounter))
+			self:Message(args.spellId, "Attention", (self:Healer() or (self:Tank() and self:UnitDebuff("player", self:SpellName(143339)))) and "Alert", CL.count:format(self:SpellName(-8068), mutateCastCounter))
 			mutateCastCounter = mutateCastCounter + 1
 			-- this text has "Amber Scorpion" in it's name, so it is more obvious
 			self:Bar(args.spellId, 32, CL.count:format(args.spellName, mutateCastCounter))
@@ -504,27 +504,27 @@ local staff  = {mod:SpellName(143627), mod:SpellName(143628), mod:SpellName(1436
 local function parseDebuff(player)
 	local _, count
 	for i=1, 5 do
-		_, _, _, count = UnitDebuff(player, sword[i])
+		_, count = self:UnitDebuff(player, sword[i])
 		if count then
 			return "sword", colors[i], (count == 0) and 1 or count
 		end
 
-		_, _, _, count = UnitDebuff(player, drum[i])
+		_, count = self:UnitDebuff(player, drum[i])
 		if count then
 			return "drum", colors[i], (count == 0) and 1 or count
 		end
 
-		_, _, _, count = UnitDebuff(player, bomb[i])
+		_, count = self:UnitDebuff(player, bomb[i])
 		if count then
 			return "bomb", colors[i], (count == 0) and 1 or count
 		end
 
-		_, _, _, count = UnitDebuff(player, mantid[i])
+		_, count = self:UnitDebuff(player, mantid[i])
 		if count then
 			return "mantid", colors[i], (count == 0) and 1 or count
 		end
 
-		_, _, _, count = UnitDebuff(player, staff[i])
+		_, count = self:UnitDebuff(player, staff[i])
 		if count then
 			return "staff", colors[i], (count == 0) and 1 or count
 		end
@@ -589,7 +589,7 @@ do
 end
 
 function mod:EncaseInEmber(args)
-	if UnitDebuff("player", self:SpellName(148650)) then
+	if self:UnitDebuff("player", self:SpellName(148650)) then
 		self:Flash(148650) -- Strong Legs
 	end
 	self:TargetMessage(args.spellId, args.destName, "Important", self:Damager() and "Warning")
@@ -635,11 +635,11 @@ do
 	local function handleCatalystProximity()
 		wipe(redPlayers)
 		for unit in mod:IterateGroup() do
-			if not UnitIsUnit("player", unit) and (UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
+			if not UnitIsUnit("player", unit) and (self:UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and self:UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
 				redPlayers[#redPlayers+1] = mod:UnitName(unit)
 			end
 		end
-		local myDebuff = UnitDebuff("player", mod:SpellName(142532)) or UnitDebuff("player", mod:SpellName(142533)) or UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
+		local myDebuff = self:UnitDebuff("player", mod:SpellName(142532)) or self:UnitDebuff("player", mod:SpellName(142533)) or self:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
 		if myDebuff then
 			mod:OpenProximity(-8034, 10, matches[myDebuff][mod:Mythic() and "proximityH" or "proximityN"])
 		end
@@ -647,7 +647,7 @@ do
 	end
 	function mod:Catalysts(args)
 		self:CDBar(-8034, 25, -8036, -8034) -- Choose Catalyst
-		local myDebuff = UnitDebuff("player", mod:SpellName(142532)) or UnitDebuff("player", mod:SpellName(142533)) or UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
+		local myDebuff = self:UnitDebuff("player", mod:SpellName(142532)) or self:UnitDebuff("player", mod:SpellName(142533)) or self:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
 		self:Message(-8034, "Neutral", "Alert", (myDebuff and matches[myDebuff][args.spellId]) and L.catalyst_match:format(matches[myDebuff][args.spellId]) or args.spellName, args.spellId)
 		self:CancelTimer(catalystProximityHandler) -- stop our previous timer it should have happened by now, but first one is tricky, so be safe and just stop it, 2nd one will be accurate
 		catalystProximityHandler = self:ScheduleTimer(handleCatalystProximity, 20)

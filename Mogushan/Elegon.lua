@@ -124,7 +124,7 @@ do
 	local overcharged = mod:SpellName(117878)
 	function mod:StabilityFlux(args)
 		-- this gives an 1 sec warning before damage
-		local playerOvercharged, _, _, stack = UnitDebuff("player", overcharged)
+		local playerOvercharged, stack = self:UnitDebuff("player", overcharged)
 		local hc = self:Heroic()
 		if playerOvercharged and ((hc and stack > 9) or (not hc and stack > 14)) then
 			self:Flash(117878)
@@ -134,7 +134,7 @@ do
 	-- This will spam, but it is apparantly needed for some people
 	local prev = 0
 	function mod:StabilityFluxDamage(args)
-		local playerOvercharged, _, _, stack = UnitDebuff("player", overcharged)
+		local playerOvercharged, stack = self:UnitDebuff("player", overcharged)
 		local hc = self:Heroic()
 		if playerOvercharged and ((hc and stack > 9) or (not hc and stack > 14)) then
 			local t = GetTime()

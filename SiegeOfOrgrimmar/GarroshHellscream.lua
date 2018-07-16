@@ -218,7 +218,7 @@ do
 		end
 
 		local t = GetTime()
-		if t-prev > 1 and UnitDebuff("player", self:SpellName(147209)) then -- Malice Debuff
+		if t-prev > 1 and self:UnitDebuff("player", self:SpellName(147209)) then -- Malice Debuff
 			prev = t
 			self:Bar(args.spellId, 2) -- Bar for when you as the player with Malice will spread Malicious Blast to others
 		end
@@ -443,7 +443,7 @@ do
 	local hopeList = mod:NewTargetList()
 	local function announceHopeless()
 		for unit in mod:IterateGroup() do
-			if UnitAffectingCombat(unit) and not UnitDebuff(unit, hope) and not UnitDebuff(unit, courage) and not UnitDebuff(unit, faith) then
+			if UnitAffectingCombat(unit) and not self:UnitDebuff(unit, hope) and not self:UnitDebuff(unit, courage) and not self:UnitDebuff(unit, faith) then
 				hopeList[#hopeList+1] = mod:UnitName(unit)
 			end
 		end

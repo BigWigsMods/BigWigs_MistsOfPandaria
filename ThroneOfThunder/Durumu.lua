@@ -236,7 +236,7 @@ do
 	-- Even though they're SPELL_CAST_SUCCESS, they don't provide the target ;[
 	local function findDebuff(spellName, spellId)
 		for unit in mod:IterateGroup() do
-			if UnitDebuff(unit, spellName) then
+			if self:UnitDebuff(unit, spellName) then
 				local name = mod:UnitName(unit)
 				if spellId == 139202 then
 					if blueController ~= name then

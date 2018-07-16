@@ -195,7 +195,7 @@ end
 -- Kazra'jin
 
 function mod:RecklessCharge(unit, _, _, _, spellId)
-	if spellId == 137107 and UnitBuff(unit, self:SpellName(136442)) then
+	if spellId == 137107 and self:UnitBuff(unit, 136442) then
 		self:Bar(137122, 21) -- Show timer when possessed
 	end
 end
@@ -219,14 +219,13 @@ do
 	-- ugly UNIT_AURA polling
 	local hasFrostbite, hasChilledToTheBone, someoneHasBodyHeat = nil, nil, nil
 	local bodyHeat, chilledToTheBone = mod:SpellName(137084), mod:SpellName(137085)
-	local UnitDebuff = UnitDebuff
 	local function reset(chill) -- one unblocking function to rule them all
 		if chill then hasChilledToTheBone = nil
 		else someoneHasBodyHeat = nil end
 	end
 	function mod:UNIT_AURA(_, unit)
 		if hasFrostbite and not someoneHasBodyHeat then
-			local _, _, _, _, _, duration = UnitDebuff(unit, bodyHeat)
+			local _, _, duration = self:UnitDebuff(unit, bodyHeat)
 			if duration and duration > 7 then
 				-- everyone should be stacked and get their debuffs at the same time (having four bars up would be annoying)
 				someoneHasBodyHeat = true
@@ -234,7 +233,7 @@ do
 				self:ScheduleTimer(reset, duration)
 			end
 		end
-		if unit == "player" and not hasChilledToTheBone and UnitDebuff(unit, chilledToTheBone) then
+		if unit == "player" and not hasChilledToTheBone and self:UnitDebuff(unit, chilledToTheBone) then
 			hasChilledToTheBone = true
 			self:Message(137085, "Personal", "Info") -- run away little girl!
 			self:Flash(137085)
@@ -304,14 +303,13 @@ end
 -- General
 
 function mod:ShadowedSoul(args)
-	if self:Me(args.destGUID) and UnitDebuff("player", self:SpellName(137641)) and args.amount > 9 then -- Soul Fragment on, aka gaining more stacks, 10 stacks = 20% extra damage taken
+	if self:Me(args.destGUID) and self:UnitDebuff("player", self:SpellName(137641)) and args.amount > 9 then -- Soul Fragment on, aka gaining more stacks, 10 stacks = 20% extra damage taken
 		self:Message(args.spellId, "Personal", "Info", CL["count"]:format(args.spellName, args.amount))
 	end
 end
 
 do
 	local prevPower = 0
-	local possessed = mod:SpellName(136442)
 	local function warnFullPower(guid, lastPercHPToGo)
 		if prevPower < 100 then return end
 
@@ -336,7 +334,7 @@ do
 	end
 
 	function mod:PossessedHPToGo(unitId)
-		if not UnitBuff(unitId, possessed) then return end
+		if not self:UnitBuff(unitId, 136442) then return end
 		local maxHealth, currHealth = UnitHealthMax(unitId), UnitHealth(unitId)
 		local percHPToGo = 25 - math.floor((posessHPStart - currHealth) / maxHealth * 100)
 		if percHPToGo < 1 then return end
@@ -372,11 +370,13 @@ do
 		for i=1,5 do
 			local boss = ("boss%d"):format(i)
 			if UnitGUID(boss) == args.destGUID then
-				lingeringCount = select(4, UnitBuff(boss, self:SpellName(136467))) or 0
+				local _
+				_, lingeringCount = self:UnitBuff(boss, self:SpellName(136467))) or 0
 				posessHPStart = UnitHealth(boss)
 				if self.db.profile.custom_on_markpossessed then
 					SetRaidTarget(boss, 8)
 				end
+				break
 			end
 		end
 
@@ -432,7 +432,7 @@ function mod:Deaths(args)
 		sandGuyDead = true
 		self:StopBar(-7062) -- Quicksand
 		self:StopBar(136894) -- Sandstorm
-		if not UnitDebuff("player", self:SpellName(136992)) then -- Biting Cold
+		if not self:UnitDebuff("player", self:SpellName(136992)) then -- Biting Cold
 			self:CloseProximity()
 		end
 	elseif args.mobId == 69132 then -- Priestess

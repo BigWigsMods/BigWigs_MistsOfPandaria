@@ -313,7 +313,7 @@ do
 		self:DelayedMessage("explosion_by_other", 40, "Attention", CL["custom_sec"]:format(explosion, 5), args.spellId)
 		self:Bar("explosion_casting_by_other", 2.5, "<".. L["monstrosity_is_casting"] ..">", 122398)
 		self:CDBar("explosion_by_other", 45, L["monstrosity_is_casting"], args.spellId) -- cooldown, don't move this
-		if UnitDebuff("player", self:SpellName(122784)) then -- Reshape Life
+		if self:UnitDebuff("player", self:SpellName(122784)) then -- Reshape Life
 			self:Flash("explosion_casting_by_other", args.spellId)
 			warningSpam(args.spellName)
 		end

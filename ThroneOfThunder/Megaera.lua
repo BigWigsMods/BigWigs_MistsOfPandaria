@@ -192,7 +192,6 @@ end
 
 do
 	local iceTorrent, torrentList = mod:SpellName(139857), {}
-	local UnitDebuff = UnitDebuff
 	local function torrentOver(expires)
 		torrentList[expires] = nil
 		if not next(torrentList) then
@@ -200,7 +199,7 @@ do
 		end
 	end
 	function mod:UNIT_AURA(_, unit)
-		local _, _, _, _, _, _, expires = UnitDebuff(unit, iceTorrent)
+		local _, _, _, expires = self:UnitDebuff(unit, iceTorrent)
 		if expires and not torrentList[expires] then
 			local duration = expires - GetTime() -- EJ says 8, spell tooltip says 11
 			local player = self:UnitName(unit)

@@ -133,7 +133,7 @@ end
 do
 	local meditativeField = mod:SpellName(143564)
 	local function warnDarkMeditation(spellId)
-		if not UnitDebuff("player", meditativeField) and UnitAffectingCombat("player") then
+		if not self:UnitDebuff("player", meditativeField) and UnitAffectingCombat("player") then
 			mod:Message(143564, "Personal", "Info", L.no_meditative_field)
 		end
 	end
@@ -208,7 +208,7 @@ do
 				wipe(marksUsed)
 			end
 			-- no _DOSE for this so gotta get stacks like this:
-			local _, _, _, amount = UnitDebuff(args.destName, args.spellName)
+			local _, amount = self:UnitDebuff(args.destName, args.spellName)
 			if amount and amount == 3 then -- only mark the initial cast
 				markBane(args.destName)
 			end
@@ -243,7 +243,7 @@ end
 
 function mod:LingeringAnguish(args)
 	-- inform the player with the debuff if stacks are getting high, the values might need adjusting (one warning about every 6 sec atm)
-	if UnitDebuff("player", self:SpellName(143840)) and (args.amount > 7 and args.amount % 2 == 0) then -- Mark of Anguish
+	if self:UnitDebuff("player", self:SpellName(143840)) and (args.amount > 7 and args.amount % 2 == 0) then -- Mark of Anguish
 		self:StackMessage(143840, args.destName, args.amount, "Personal", "Info", 144176, 144176)
 	end
 end

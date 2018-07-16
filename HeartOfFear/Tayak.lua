@@ -143,10 +143,10 @@ do
 	end
 	local function warnStrike(notBoss)
 		local strike = mod:SpellName(122994)
-		local player = UnitDebuff("boss1target", strike) and "boss1target"
+		local player = self:UnitDebuff("boss1target", strike) and "boss1target"
 		if not player then -- Most of the time this won't run as boss1target works
 			for unit in mod:IterateGroup() do
-				player = UnitDebuff(unit, strike) and unit
+				player = self:UnitDebuff(unit, strike) and unit
 				if player then break end
 			end
 		end

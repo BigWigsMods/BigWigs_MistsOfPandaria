@@ -13,6 +13,7 @@ mod:RegisterEnableMob(63191, 63053) -- Garalon, Garalon's Leg
 
 local legCounter, crushCounter = 4, 0
 local mendLegTimerRunning = nil
+local pheromonesOnMe = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -66,6 +67,7 @@ end
 function mod:OnEngage(diff)
 	legCounter, crushCounter = 4, 0
 	mendLegTimerRunning = nil
+	pheromonesOnMe = false
 
 	self:Berserk(self:Heroic() and 420 or 720)
 	self:Bar(122735, 11) -- Furious Swipe
@@ -86,7 +88,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", not UnitBuff("player", self:SpellName(122835)) and "Alert", CL["underyou"]:format(args.spellName)) -- even tho we usually use Alarm, Alarm has been used too much in the module
+			self:Message(args.spellId, "Personal", not pheromonesOnMe and "Alert", CL["underyou"]:format(args.spellName)) -- even tho we usually use Alarm, Alarm has been used too much in the module
 		end
 	end
 end
@@ -116,7 +118,7 @@ end
 function mod:PheromonesApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
-		-- Local message with personal and info for when you gain the debuff, others don't care that you got it
+		pheromonesOnMe = true
 		self:Message(args.spellId, "Personal", "Info", CL["you"]:format(args.spellName))
 	elseif self:Healer() then
 		self:TargetMessage(args.spellId, args.destName, "Attention", nil, nil, nil, true)
@@ -125,7 +127,7 @@ end
 
 function mod:PheromonesRemoved(args)
 	if self:Me(args.destGUID) then
-		-- Local message with important and alarm for when you loose the debuff, others don't care that you lost it
+		pheromonesOnMe = false
 		self:Message(args.spellId, "Important", "Alarm", L["removed"]:format(args.spellName))
 	end
 end

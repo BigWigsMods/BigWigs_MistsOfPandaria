@@ -116,7 +116,11 @@ function mod:OnEngage()
 	wipe(setToBlow)
 	wipe(bossUnitPowers)
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", nil, "boss1", "boss2")
-	self:RegisterEvent("UPDATE_WORLD_STATES")
+	if not C_UIWidgetManager then -- XXX 8.0
+		self:RegisterEvent("UPDATE_WORLD_STATES")
+	else
+		self:RegisterWidgetEvent(527, "UpdateBerserkTimer")
+	end
 	self:OpenProximity("proximity", 3)
 end
 
@@ -184,7 +188,7 @@ function mod:BreathOfFire(args)
 	-- XXX no range checking now
 	if not player then --or self:Range(player) < 30 then
 		self:Message(args.spellId, "Attention")
-		if UnitDebuff("player", self:SpellName(146217)) then -- Keg Toss
+		if self:UnitDebuff("player", self:SpellName(146217)) then -- Keg Toss
 			self:PlaySound(args.spellId, "Long")
 			self:Flash(146217) -- flash again
 		end
@@ -333,7 +337,7 @@ do
 	end
 end
 
-function mod:UPDATE_WORLD_STATES()
+function mod:UPDATE_WORLD_STATES() -- XXX 8.0
 	-- NEW MISSION! I want you to blow up... THE OCEAN!
 	-- If it wasn't clear from this code, I don't trust this API at all.
 	-- Hardcoding the values and firing :Berserk on engage/room change seemed to end up with timers going out of sync.
@@ -362,3 +366,19 @@ function mod:UPDATE_WORLD_STATES()
 	end
 end
 
+function mod:UpdateBerserkTimer(_, text)
+	local remaining = text:match("%d+")
+	if remaining then
+		local timeRemaining = tonumber(remaining)
+		if timeRemaining and timeRemaining > 0 then
+			if timeRemaining > prevEnrage or timeRemaining % 60 == 0 then
+				self:Bar("berserk", timeRemaining+1, 26662) -- +1s to compensate for timer rounding.
+			end
+			-- It shouldn't fire the same value twice, but throttle for safety.
+			if timeRemaining ~= prevEnrage and (timeRemaining == 60 or timeRemaining == 30 or timeRemaining == 10 or timeRemaining == 5) then
+				self:Message("berserk", "Positive", nil, format(CL.custom_sec, self:SpellName(26662), timeRemaining), 26662)
+			end
+			prevEnrage = timeRemaining
+		end
+	end
+end

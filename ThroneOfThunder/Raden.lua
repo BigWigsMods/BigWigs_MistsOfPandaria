@@ -131,7 +131,7 @@ do
 				targets[#targets+1] = k
 			end
 		end
-		if UnitDebuff("player", mod:SpellName(138288)) then -- Unstable Anima
+		if self:UnitDebuff("player", mod:SpellName(138288)) then -- Unstable Anima
 			mod:OpenProximity(138288, 8, targets)
 		end
 	end
@@ -235,7 +235,7 @@ do
 			mod:SecondaryIcon("unstablevitajumptarget", furthest)
 			if UnitIsUnit(furthest, "player") then
 
-				if UnitDebuff("player", mod:SpellName(138372)) then -- Vita Sensitivity
+				if self:UnitDebuff("player", mod:SpellName(138372)) then -- Vita Sensitivity
 					mod:Flash(138372) -- Vita Sensitivity
 					mod:Message("unstablevitajumptarget", "Personal", "Long", L["sensitivityfurthestbad"], 138372)
 				else
@@ -297,7 +297,7 @@ end
 
 function mod:TankAbilityUpdate(unit)
 	local power = UnitPower(unit)
-	if UnitBuff(unit, self:SpellName(138331)) then -- Anima - Murderous Strike
+	if self:UnitBuff(unit, self:SpellName(138331)) then -- Anima - Murderous Strike
 		if power == 30 then
 			self:Bar(138333, 25)
 		elseif power == 60 then
@@ -305,7 +305,7 @@ function mod:TankAbilityUpdate(unit)
 		elseif power == 90 then
 			self:Bar(138333, 5)
 		end
-	elseif UnitBuff(unit, self:SpellName(138332)) then -- Vita - Fatal Strike
+	elseif self:UnitBuff(unit, self:SpellName(138332)) then -- Vita - Fatal Strike
 		if power == 20 then
 			self:Bar(138334, 8)
 		elseif power == 40 then
