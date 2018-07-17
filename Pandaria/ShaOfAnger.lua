@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Sha of Anger", -379, 691)
 if not mod then return end
 mod:RegisterEnableMob(60491)
-mod.otherMenu = -1153
+mod.otherMenu = -424
 mod.worldBoss = 60491
 
 --------------------------------------------------------------------------------

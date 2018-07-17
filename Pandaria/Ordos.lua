@@ -6,7 +6,7 @@
 local mod, CL = BigWigs:NewBoss("Ordos", -554, 861)
 if not mod then return end
 mod:RegisterEnableMob(72057)
-mod.otherMenu = -1153
+mod.otherMenu = -424
 mod.worldBoss = 72057
 
 --------------------------------------------------------------------------------
