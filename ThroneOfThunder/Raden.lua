@@ -131,7 +131,7 @@ do
 				targets[#targets+1] = k
 			end
 		end
-		if self:UnitDebuff("player", mod:SpellName(138288)) then -- Unstable Anima
+		if mod:UnitDebuff("player", mod:SpellName(138288)) then -- Unstable Anima
 			mod:OpenProximity(138288, 8, targets)
 		end
 	end
@@ -235,7 +235,7 @@ do
 			mod:SecondaryIcon("unstablevitajumptarget", furthest)
 			if UnitIsUnit(furthest, "player") then
 
-				if self:UnitDebuff("player", mod:SpellName(138372)) then -- Vita Sensitivity
+				if mod:UnitDebuff("player", mod:SpellName(138372)) then -- Vita Sensitivity
 					mod:Flash(138372) -- Vita Sensitivity
 					mod:Message("unstablevitajumptarget", "Personal", "Long", L["sensitivityfurthestbad"], 138372)
 				else

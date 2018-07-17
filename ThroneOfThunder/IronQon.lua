@@ -179,12 +179,12 @@ end
 -- Quet'zal
 
 do
-	local scheduled = {}, nil
+	local scheduled = {}
 	local function checkArcLightning(spellName, checkOpen)
 		if not mod.isEngaged then return end -- This can run after wipe, so check if the encounter is engaged
 		local debuffs = nil
 		for unit in mod:IterateGroup() do
-			if self:UnitDebuff(unit, spellName) then
+			if mod:UnitDebuff(unit, spellName) then
 				debuffs = true
 				break
 			end
@@ -195,7 +195,7 @@ do
 		scheduled = nil
 		if mod:LFR() then return end
 
-		if self:UnitDebuff("player", spellName) then
+		if mod:UnitDebuff("player", spellName) then
 			mod:OpenProximity(136193, 12) -- open Arcing Lighning
 		elseif checkOpen then
 			mod:CloseProximity(136193) -- close multi-target

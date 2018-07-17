@@ -195,7 +195,7 @@ if L then
 	L.unstablevitajumptarget_desc = "Ti avvisa quando sei il più distante da un giocatore con Vita Instabile. Se enfatizzi questo avviso, attiverai un conto alla rovescia che indica quando Vita Instabile salterà SU DI TE."
 	L.unstablevitajumptarget_message = "Sei il più lontano da Vita Instabile"
 	L.sensitivityfurthestbad = "Sensitività Vita + più lontano = |cffff0000NON BENE|r!"
-	L.kill_trigger = "Fermi!" 
+	L.kill_trigger = "Fermi!"
 
 	L.assistPrint = "Un plugin di nome 'BigWigs_Ra-denAssist' è stato rilasciato e reso disponibile per assistenza durante lo scontro con Ra-den che potrebbe interessare alla tua gilda."
 end

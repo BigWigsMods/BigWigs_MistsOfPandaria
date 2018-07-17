@@ -370,8 +370,8 @@ do
 		for i=1,5 do
 			local boss = ("boss%d"):format(i)
 			if UnitGUID(boss) == args.destGUID then
-				local _
-				_, lingeringCount = self:UnitBuff(boss, self:SpellName(136467))) or 0
+				local _, stack = self:UnitBuff(boss, self:SpellName(136467))
+				lingeringCount = stack or 0
 				posessHPStart = UnitHealth(boss)
 				if self.db.profile.custom_on_markpossessed then
 					SetRaidTarget(boss, 8)

@@ -28,7 +28,7 @@ if L then
 	L.charge_trigger = "sets his eyes" -- Horridon sets his eyes on PLAYERNAME and stamps his tail!
 	L.door_trigger = "pour" -- Farraki forces pour from the Farraki Tribal Door!
 	L.orb_trigger = "charge" -- PLAYERNAME forces Horridon to charge the Farraki door!
- 
+
 
 	L.chain_lightning = -7124
 	L.chain_lightning_desc = L.focus_only .. "{-7124}"

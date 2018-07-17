@@ -504,27 +504,27 @@ local staff  = {mod:SpellName(143627), mod:SpellName(143628), mod:SpellName(1436
 local function parseDebuff(player)
 	local _, count
 	for i=1, 5 do
-		_, count = self:UnitDebuff(player, sword[i])
+		_, count = mod:UnitDebuff(player, sword[i])
 		if count then
 			return "sword", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = self:UnitDebuff(player, drum[i])
+		_, count = mod:UnitDebuff(player, drum[i])
 		if count then
 			return "drum", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = self:UnitDebuff(player, bomb[i])
+		_, count = mod:UnitDebuff(player, bomb[i])
 		if count then
 			return "bomb", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = self:UnitDebuff(player, mantid[i])
+		_, count = mod:UnitDebuff(player, mantid[i])
 		if count then
 			return "mantid", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = self:UnitDebuff(player, staff[i])
+		_, count = mod:UnitDebuff(player, staff[i])
 		if count then
 			return "staff", colors[i], (count == 0) and 1 or count
 		end
@@ -635,11 +635,11 @@ do
 	local function handleCatalystProximity()
 		wipe(redPlayers)
 		for unit in mod:IterateGroup() do
-			if not UnitIsUnit("player", unit) and (self:UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and self:UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
+			if not UnitIsUnit("player", unit) and (mod:UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and mod:UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
 				redPlayers[#redPlayers+1] = mod:UnitName(unit)
 			end
 		end
-		local myDebuff = self:UnitDebuff("player", mod:SpellName(142532)) or self:UnitDebuff("player", mod:SpellName(142533)) or self:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
+		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533)) or mod:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
 		if myDebuff then
 			mod:OpenProximity(-8034, 10, matches[myDebuff][mod:Mythic() and "proximityH" or "proximityN"])
 		end
@@ -726,7 +726,7 @@ do
 		self:CDBar(-8008, 22)
 		deathFromAboveStartTimer = self:ScheduleTimer("StartDeathFromAboveScan", 17)
 	end
-	
+
 	function mod:Reave(args)
 		-- stop scanning for Death from Above during Reave
 		if deathFromAboveTimer or deathFromAboveStartTimer then

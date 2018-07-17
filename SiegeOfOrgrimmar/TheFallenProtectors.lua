@@ -133,7 +133,7 @@ end
 do
 	local meditativeField = mod:SpellName(143564)
 	local function warnDarkMeditation(spellId)
-		if not self:UnitDebuff("player", meditativeField) and UnitAffectingCombat("player") then
+		if not mod:UnitDebuff("player", meditativeField) and UnitAffectingCombat("player") then
 			mod:Message(143564, "Personal", "Info", L.no_meditative_field)
 		end
 	end

@@ -200,7 +200,7 @@ end
 do
 	local scheduled = {}
 	local function warnSlam(destName, spellName)
-		local _, amount = self:UnitDebuff(destName, spellName)
+		local _, amount = mod:UnitDebuff(destName, spellName)
 		if amount then
 			mod:StackMessage(-7770, destName, amount, "Urgent", not mod:LFR() and amount > 3 and "Info", L["slam_message"])
 		end

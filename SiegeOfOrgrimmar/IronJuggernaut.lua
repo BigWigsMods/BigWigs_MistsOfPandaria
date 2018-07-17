@@ -228,7 +228,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(unitId, spellName, _, _, spellId)
 			self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 			self:ScheduleTimer("ResetMarking", 18) -- cast time is 15, we should be safe with 18
 		end
-	elseif spellId == 144492 then -- Explosive Tar 
+	elseif spellId == 144492 then -- Explosive Tar
 		self:Message(144498, "Attention")
 		self:CDBar(144498, 20)
 	elseif spellId == 146359 then -- Regeneration (Assault mode)

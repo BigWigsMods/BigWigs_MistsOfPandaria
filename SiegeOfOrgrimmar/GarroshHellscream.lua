@@ -443,7 +443,7 @@ do
 	local hopeList = mod:NewTargetList()
 	local function announceHopeless()
 		for unit in mod:IterateGroup() do
-			if UnitAffectingCombat(unit) and not self:UnitDebuff(unit, hope) and not self:UnitDebuff(unit, courage) and not self:UnitDebuff(unit, faith) then
+			if UnitAffectingCombat(unit) and not mod:UnitDebuff(unit, hope) and not mod:UnitDebuff(unit, courage) and not mod:UnitDebuff(unit, faith) then
 				hopeList[#hopeList+1] = mod:UnitName(unit)
 			end
 		end
