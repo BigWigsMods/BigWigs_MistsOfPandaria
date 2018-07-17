@@ -2,10 +2,10 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Oondasta", -929, 826)
+local mod, CL = BigWigs:NewBoss("Oondasta", -507, 826)
 if not mod then return end
 mod:RegisterEnableMob(69161)
-mod.otherMenu = -862
+mod.otherMenu = -1153
 mod.worldBoss = 69161
 
 --------------------------------------------------------------------------------

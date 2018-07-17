@@ -3,10 +3,10 @@
 -- Module Declaration
 --
 
-local mod, CL = BigWigs:NewBoss("Salyis's Warband", -807, 725)
+local mod, CL = BigWigs:NewBoss("Salyis's Warband", -376, 725)
 if not mod then return end
 mod:RegisterEnableMob(62346)
-mod.otherMenu = -862
+mod.otherMenu = -1153
 mod.worldBoss = 62346
 
 --------------------------------------------------------------------------------
