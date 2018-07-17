@@ -108,7 +108,11 @@ end
 function mod:OnEngage()
 	p2, p3 = nil, nil
 	counter = 1
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", self:Heroic() and "PhaseChangeHC" or "PhaseChange", "boss1")
+	if self:Heroic() then
+		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseChangeHC", "boss1")
+	else
+		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseChange", "boss1")
+	end
 	self:Berserk(600)
 end
 
