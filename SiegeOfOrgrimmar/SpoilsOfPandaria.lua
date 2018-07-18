@@ -116,11 +116,7 @@ function mod:OnEngage()
 	wipe(setToBlow)
 	wipe(bossUnitPowers)
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", nil, "boss1", "boss2")
-	if not C_UIWidgetManager then -- XXX 8.0
-		self:RegisterEvent("UPDATE_WORLD_STATES")
-	else
-		self:RegisterWidgetEvent(527, "UpdateBerserkTimer")
-	end
+	--self:RegisterWidgetEvent(527, "UpdateBerserkTimer") -- XXX get the correct widget
 	self:OpenProximity("proximity", 3)
 end
 
@@ -337,7 +333,7 @@ do
 	end
 end
 
-function mod:UPDATE_WORLD_STATES() -- XXX 8.0
+function mod:UpdateBerserkTimer(_, text)
 	-- NEW MISSION! I want you to blow up... THE OCEAN!
 	-- If it wasn't clear from this code, I don't trust this API at all.
 	-- Hardcoding the values and firing :Berserk on engage/room change seemed to end up with timers going out of sync.
@@ -345,28 +341,6 @@ function mod:UPDATE_WORLD_STATES() -- XXX 8.0
 	-- Repeatedly running through LFR to test various methods was also a delightful experience.
 	-- Pretty much, I hate it. The only positive from this is that we don't need to schedule the messages.
 	-- If this ever breaks in a future patch, $#!+.
-	for i = 1, GetNumWorldStateUI() do
-		local _, state, _, enrage = GetWorldStateUIInfo(i)
-		if state > 0 and enrage then -- Check if state is visible and if text exists.
-			local remaining = enrage:match("%d+")
-			if remaining then
-				local timeRemaining = tonumber(remaining)
-				if timeRemaining and timeRemaining > 0 then
-					if timeRemaining > prevEnrage or timeRemaining % 60 == 0 then
-						self:Bar("berserk", timeRemaining+1, 26662) -- +1s to compensate for timer rounding.
-					end
-					-- It shouldn't fire the same value twice, but throttle for safety.
-					if timeRemaining ~= prevEnrage and (timeRemaining == 60 or timeRemaining == 30 or timeRemaining == 10 or timeRemaining == 5) then
-						self:Message("berserk", "Positive", nil, format(CL.custom_sec, self:SpellName(26662), timeRemaining), 26662)
-					end
-					prevEnrage = timeRemaining
-				end
-			end
-		end
-	end
-end
-
-function mod:UpdateBerserkTimer(_, text)
 	local remaining = text:match("%d+")
 	if remaining then
 		local timeRemaining = tonumber(remaining)
