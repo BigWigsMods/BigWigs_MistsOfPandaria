@@ -439,11 +439,10 @@ end
 -- Intermission
 
 do
-	local hope, courage, faith = mod:SpellName(149004), mod:SpellName(148983), mod:SpellName(148994)
 	local hopeList = mod:NewTargetList()
 	local function announceHopeless()
 		for unit in mod:IterateGroup() do
-			if UnitAffectingCombat(unit) and not mod:UnitDebuff(unit, hope) and not mod:UnitDebuff(unit, courage) and not mod:UnitDebuff(unit, faith) then
+			if UnitAffectingCombat(unit) and not mod:UnitDebuff(unit, 149004) and not mod:UnitDebuff(unit, 148983) and not mod:UnitDebuff(unit, 148994) then -- Hope, Courage, Faith
 				hopeList[#hopeList+1] = mod:UnitName(unit)
 			end
 		end
