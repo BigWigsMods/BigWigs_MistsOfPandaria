@@ -231,7 +231,7 @@ do
 	end
 end
 
-function mod:Interrupt(unitId, _, _, _, spellId)
+function mod:Interrupt(_, unitId, _, spellId)
 	--Mutated Construct's Struggle for Control doesn't fire a SPELL_INTERRUPT
 	if spellId == 122398 then
 		if unitId == "player" then
@@ -247,7 +247,7 @@ end
 --Willpower
 do
 	local prev = 0
-	function mod:MyWillpower(unitId, powerType)
+	function mod:MyWillpower(_, unitId, powerType)
 		if powerType == "ALTERNATE" then
 			local t = GetTime()
 			if t-prev > 1 then
@@ -261,17 +261,17 @@ do
 	end
 end
 
-function mod:MonstrosityInc(unitId)
+function mod:MonstrosityInc(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 75 then -- phase starts at 70
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 		self:Message("stages", "Positive", "Long", CL["soon"]:format(self:SpellName(-6254)), false) -- Monstrosity
 	end
 end
 
 do
 	local prev = 0
-	function mod:BreakFreeHP(unitId)
+	function mod:BreakFreeHP(_, unitId)
 		local t = GetTime()
 		if t-prev > 1 then
 			local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
@@ -321,7 +321,7 @@ do
 end
 
 --Monstrosity's Amber Explosion
-function mod:MonstrosityStopCast(_, _, _, _, spellId)
+function mod:MonstrosityStopCast(_, _, _, spellId)
 	if spellId == 122402 then
 		self:StopBar("<".. L["monstrosity_is_casting"] ..">")
 	end

@@ -105,7 +105,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "Thunderstruck", 135095)
 	self:Log("SPELL_AURA_APPLIED", "Decapitate", 134912)
 	-- Conduits: Overcharged -- Diffusion Chain -- Static Shock -- Bouncing Bolt
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Boss1Succeeded", "boss1")
+	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1")
 	self:Log("SPELL_AURA_APPLIED", "Overcharged", 136295)
 	self:Log("SPELL_CAST_SUCCESS", "DiffusionChain", 135991)
 	self:Log("SPELL_DAMAGE", "DiffusionChainDamage", 135991) -- add spawn
@@ -439,14 +439,14 @@ function mod:IntermissionStart(args)
 	self:DelayedMessage("stages", 40, "Positive", L["last_inermission_ability"])
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if phase == 1 and hp < 68 then
 		self:Message("stages", "Neutral", "Info", CL["soon"]:format(CL.intermission), false)
 		phase = 2
 	elseif phase == 2 and hp < 33 then
 		self:Message("stages", "Neutral", "Info", CL["soon"]:format(CL.intermission), false)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 		phase = 3
 	end
 end
@@ -492,9 +492,9 @@ end
 -- Conduits
 --
 
-function mod:Boss1Succeeded(unitId, spellName, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 	if spellId == 136395 then -- Bouncing Bolt
-		if not UnitExists("boss1") then -- poor mans intermission check
+		if not UnitExists(unit) then -- poor mans intermission check
 			self:Bar(136366, 24)
 		else
 			if phase == 1 or not self:Heroic() then stopConduitAbilityBars() end

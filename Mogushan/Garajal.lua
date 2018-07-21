@@ -83,7 +83,7 @@ end
 -- Event Handlers
 --
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 116964 then
 		self:Sync("Totem") -- LFR only, no combat log event for some reason
 	elseif (spellId == 117215 or spellId == 117218 or spellId == 117219 or spellId == 117222) and self:Heroic() then
@@ -178,11 +178,11 @@ function mod:SoulSeverRemoved(args)
 	end
 end
 
-function mod:FrenzyCheck(unitId)
+function mod:FrenzyCheck(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 25 then -- phase starts at 20
 		self:Message(-5759, "Positive", "Info", CL["soon"]:format(self:SpellName(-5759)))
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 	end
 end
 

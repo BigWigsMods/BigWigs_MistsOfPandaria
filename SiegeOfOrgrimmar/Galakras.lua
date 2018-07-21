@@ -187,7 +187,7 @@ function mod:FlamesOfGalakrondApplied(args)
 	end
 end
 
-function mod:LastPhase(unitId, _, _, _, spellId)
+function mod:LastPhase(_, unitId, _, spellId)
 	if spellId == 50630 then -- Eject All Passengers
 		self:UnregisterEvent("CHAT_MSG_MONSTER_YELL")
 		self:Message("stages", "Neutral", "Warning", CL.incoming:format(UnitName(unitId)), "ability_mount_drake_proto")

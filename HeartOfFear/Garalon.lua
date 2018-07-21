@@ -164,13 +164,13 @@ function mod:FuriousSwipe(args)
 	self:ScheduleTimer("Bar", 2.5, args.spellId, 8)
 end
 
-function mod:PrePhase2(unitId)
+function mod:PrePhase2(event, unitId)
 	local id = self:MobId(UnitGUID(unitId))
 	if id == 62164 or id == 63191 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 38 then -- phase starts at 33
 			self:Message(-6294, "Positive", "Long", CL["soon"]:format(CL["phase"]:format(2)), false)
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1", "boss2", "boss3", "boss4", "boss5")
+			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4", "boss5")
 		end
 	end
 end

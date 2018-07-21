@@ -76,7 +76,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "BossSucceeded", "boss1", "boss2", "boss3", "boss4", "boss5")
+	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1", "boss2", "boss3", "boss4", "boss5")
 	self:Log("SPELL_CAST_START", "Heal", 143497)
 	-- Sun Tenderheart
 	self:Log("SPELL_AURA_APPLIED", "SunIntermission", 143546) -- Dark Meditation
@@ -430,7 +430,7 @@ do
 		end
 		self:TargetMessage(143019, name, "Personal", "Info")
 	end
-	function mod:BossSucceeded(unitId, spellName, _, _, spellId)
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 		if spellId == 143019 then -- Corrupted Brew
 			-- timer is all over the place, need to figure out if something delays it or what
 			self:CDBar(spellId, 11)
@@ -498,7 +498,7 @@ function mod:Heal(args)
 	self:Message(args.spellId, "Positive", "Warning", CL.other:format(self:SpellName(37455), args.sourceName)) -- "Healing"
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local mobId = self:MobId(UnitGUID(unitId))
 	if mobId == 71475 or mobId == 71479 or mobId == 71480 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
@@ -511,7 +511,7 @@ function mod:UNIT_HEALTH_FREQUENT(unitId)
 			self:Message("intermission", "Neutral", "Info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
 			intermission[mobId] = 2
 			if intermission[71475] == 2 and intermission[71479] == 2 and intermission[71480] == 2 then
-				self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1", "boss2", "boss3")
+				self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")
 			end
 		end
 	end

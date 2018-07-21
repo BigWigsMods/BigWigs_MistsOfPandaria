@@ -211,11 +211,12 @@ do
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(unitId, spellName, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 144296 then -- Borer Drill
 		self:Message(-8179, "Attention")
 		self:CDBar(-8179, 19)
 	elseif spellId == 144673 then -- Crawler Mine
+		local spellName = self:SpellName(spellId)
 		self:Message(-8183, "Urgent", nil, CL.count:format(spellName, mineCounter))
 		self:Bar(-8183, 18, 144718) -- 48732 = Mine Explosion?
 		mineCounter = mineCounter + 1

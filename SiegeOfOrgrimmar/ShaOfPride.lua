@@ -195,11 +195,11 @@ function mod:Unleashed() -- Final Gift
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 34 then -- 30%
 		self:Message(144832, "Neutral", "Info", CL.soon:format(self:SpellName(144832))) -- Unleashed
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
 

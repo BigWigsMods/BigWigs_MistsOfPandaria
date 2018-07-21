@@ -272,7 +272,7 @@ end
 -- General
 --
 
-function mod:Phase2(_, _, _, _, spellId)
+function mod:Phase2(_, _, _, spellId)
 	if spellId == 137187 then -- Lu'lin Dissipate
 		self:Sync("Phase2")
 	end

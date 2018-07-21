@@ -129,20 +129,21 @@ do
 end
 
 do
-	local function rampageOver(spellId, spellName)
-		mod:Message(spellId, "Positive", nil, CL["over"]:format(spellName))
-		if frostOrFireDead and not mod:LFR() then
-			mod:OpenProximity("proximity", 5)
+	local function rampageOver(self, spellId, spellName)
+		self:Message(spellId, "Positive", nil, CL["over"]:format(spellName))
+		if frostOrFireDead and not self:LFR() then
+			self:OpenProximity("proximity", 5)
 		end
-		mod:RegisterEvent("UNIT_AURA")
+		self:RegisterEvent("UNIT_AURA")
 	end
-	function mod:Rampage(unit, spellName, _, _, spellId)
+	function mod:Rampage(_, _, _, spellId)
 		if spellId == 139458 then
 			self:UnregisterEvent("UNIT_AURA")
 			self:Bar("breaths", 30, L["breaths"], L.breaths_icon)
+			local spellName = self:SpellName(spellId)
 			self:Message(spellId, "Important", "Long", CL["count"]:format(spellName, headCounter))
 			self:Bar(spellId, 20, CL["count"]:format(spellName, headCounter))
-			self:ScheduleTimer(rampageOver, 20, spellId, spellName)
+			self:ScheduleTimer(rampageOver, 20, self, spellId, spellName)
 			breathCounter = 0
 		end
 	end

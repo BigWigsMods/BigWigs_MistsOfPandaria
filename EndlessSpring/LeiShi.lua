@@ -169,7 +169,7 @@ do
 
 	local prev = 0
 	local lastHpToGo
-	function mod:HealthCheck(unitId)
+	function mod:HealthCheck(_, unitId)
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < nextProtectWarning then
 			self:Message(123250, "Positive", nil, CL["soon"]:format(self:SpellName(123250))) -- Protect
@@ -209,7 +209,7 @@ function mod:ProtectRemoved()
 	wipe(marksUsed)
 end
 
-function mod:Kill(_, _, _, _, spellId)
+function mod:Kill(_, _, _, spellId)
 	if spellId == 127524 then -- Transform
 		self:Win()
 	end

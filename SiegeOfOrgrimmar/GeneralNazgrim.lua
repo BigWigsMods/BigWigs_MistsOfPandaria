@@ -220,11 +220,11 @@ function mod:Fixate(args)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unit)
+function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp < 17 then
 		self:Message(-7920, "Neutral", "Info", CL.soon:format(L.extra_adds))
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unit)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 
@@ -272,7 +272,7 @@ do
 		end
 		self:TargetMessage(143716, player, "Urgent", "Alarm")
 	end
-	function mod:HeroicShockwave(unit, _, _, _, spellId)
+	function mod:HeroicShockwave(_, unit, _, spellId)
 		if spellId == 143500 then -- Heroic Shockwave
 			self:GetBossTarget(warnShockwave, 0.2, UnitGUID(unit))
 		end

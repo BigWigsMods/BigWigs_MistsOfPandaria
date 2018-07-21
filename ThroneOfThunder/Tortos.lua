@@ -144,7 +144,7 @@ function mod:SnappingBite(args)
 	self:CDBar(args.spellId, 7)
 end
 
-function mod:SummonBats(_, _, _, _, spellId)
+function mod:SummonBats(_, _, _, spellId)
 	if spellId == 136685 then -- Summon Bats
 		self:Message("bats", "Urgent", self:Tank() and not UnitIsUnit("boss1target", "player") and "Warning", 136686)
 		self:Bar("bats", 46, 136686)
@@ -209,7 +209,7 @@ end
 do
 	local concussion = mod:SpellName(136431)
 	local prev = 0
-	function mod:ShellConcussionCheck(unit)
+	function mod:ShellConcussionCheck(_, unit)
 		local _, _, _, expires = self:UnitDebuff(unit, concussion)
 		if expires and expires ~= prev then
 			local t = GetTime()

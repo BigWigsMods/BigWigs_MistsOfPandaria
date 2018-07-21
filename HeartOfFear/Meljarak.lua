@@ -276,7 +276,7 @@ function mod:ImpalingSpearRemoved(args)
 	end
 end
 
-function mod:PhaseChange(unitId)
+function mod:PhaseChange(event, unitId)
 	if self:MobId(UnitGUID(unitId)) == 62397 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 79 and phase == 0 then -- phase starts at 75
@@ -287,7 +287,7 @@ function mod:PhaseChange(unitId)
 			self:Message("stages", "Positive", "Info", "75% - "..CL["phase"]:format(2), 131830)
 			self:CDBar(121896, 30) -- Whirling Blade (reset cd)
 			self:StopBar(122406) -- Rain of Blades, first after p2 seems random
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1", "boss2", "boss3", "boss4")
+			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4")
 			for i = 1, 5 do
 				local guid = UnitGUID(("boss%d"):format(i))
 				if guid and self:MobId(guid) == 62451 then -- The Sra'thik

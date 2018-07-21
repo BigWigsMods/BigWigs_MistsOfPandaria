@@ -166,7 +166,7 @@ end
 
 -- Wavebinder Kardris
 
-function mod:UNIT_SPELLCAST_START(unit, spellName, _, _, spellId)
+function mod:UNIT_SPELLCAST_START(_, _, _, spellId)
 	if spellId == 143973 then -- Falling Ash
 		-- this is for when the damage happens
 		self:DelayedMessage(143973, 14, "Attention", CL.soon:format(CL.count:format(self:SpellName(143973), ashCounter)), 143973, self:Healer() and "Info")
@@ -226,14 +226,14 @@ end
 do
 	local hpWarn = { 87, 68, 53, 28, 0 } -- Last is 0 to prevent errors, saves on having a hpWarn[hpWarned] existence check being called every time it fires
 	local warnings = { -8125, -8126, -8127, -8120 } -- Poisonmist, Foulstream, Ashflare, Bloodlust.
-	function mod:TotemWarn(unit)
+	function mod:TotemWarn(event, unit)
 		local hp = UnitHealth(unit)/UnitHealthMax(unit) * 100
 		if hp < hpWarn[hpWarned] then
 			local msg = CL.soon:format(self:SpellName(warnings[hpWarned]))
 			hpWarned = hpWarned + 1
 			self:Message(-8124, "Neutral", "Info", msg, false)
 			if hpWarned > 4 then
-				self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1", "boss2")
+				self:UnregisterUnitEvent(event, "boss1", "boss2")
 			end
 		end
 	end

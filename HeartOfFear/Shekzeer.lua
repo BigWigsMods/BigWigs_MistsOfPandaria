@@ -211,7 +211,7 @@ end
 
 do
 	local warned = 0
-	function mod:PoorMansDissonanceTimers(unitId)
+	function mod:PoorMansDissonanceTimers(_, unitId)
 		local power = UnitPower(unitId)
 		if warned == power then return end
 		warned = power
@@ -248,11 +248,11 @@ function mod:UltimateCorruption(args)
 	self:Bar(124849, 10) -- Consuming Terror
 end
 
-function mod:Phase3Warn(unitId)
+function mod:Phase3Warn(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 35 then -- phase starts at 30
 		self:Message("phases", "Positive", "Info", CL["soon"]:format(CL["phase"]:format(3)), L.phases_icon)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 	end
 end
 

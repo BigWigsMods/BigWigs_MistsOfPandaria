@@ -194,7 +194,7 @@ end
 
 -- Kazra'jin
 
-function mod:RecklessCharge(unit, _, _, _, spellId)
+function mod:RecklessCharge(_, unit, _, spellId)
 	if spellId == 137107 and self:UnitBuff(unit, 136442) then
 		self:Bar(137122, 21) -- Show timer when possessed
 	end
@@ -333,7 +333,7 @@ do
 		mod:ScheduleTimer(warnFullPower, 3, guid, percHPToGo)
 	end
 
-	function mod:PossessedHPToGo(unitId)
+	function mod:PossessedHPToGo(event, unitId)
 		if not self:UnitBuff(unitId, 136442) then return end
 		local maxHealth, currHealth = UnitHealthMax(unitId), UnitHealth(unitId)
 		local percHPToGo = 25 - math.floor((posessHPStart - currHealth) / maxHealth * 100)

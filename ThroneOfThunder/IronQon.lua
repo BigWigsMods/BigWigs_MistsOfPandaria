@@ -298,7 +298,7 @@ do
 		prevPower = 0
 		self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "PowerWarn", "boss2")
 	end
-	function mod:PowerWarn(unitId)
+	function mod:PowerWarn(_, unitId)
 		local power = UnitPower(unitId)
 		if power > 64 and prevPower == 0 then
 			prevPower = 65
@@ -324,7 +324,7 @@ end
 
 -- General
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spellName, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 	if spellId == 139172 then -- Whirling Wind
 		self:Message(77333, "Attention")
 		self:Bar(77333, 30)
@@ -374,6 +374,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(unit, spellName, _, _, spellId)
 			self:Bar(-6917, 63, CL["count"]:format(self:SpellName(136146), 1)) -- Fist Smash
 		end
 	elseif spellId == 136146 then -- Fist Smash
+		local spellName = self:SpellName(spellId)
 		self:Message(-6917, "Urgent", "Alarm", ("%s (%d)"):format(spellName, smashCounter))
 		smashCounter = smashCounter + 1
 		self:Bar(-6917, 7.5, CL["cast"]:format(spellName))

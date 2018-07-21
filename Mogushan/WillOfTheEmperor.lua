@@ -200,14 +200,14 @@ do
 	local comboCounter = {boss1 = 0, boss2 = 0}
 	local energizePrev = {boss1 = 0, boss2 = 0}
 
-	function mod:ArcCombo(unitId, spellName, _, _, spellId)
+	function mod:ArcCombo(_, unitId, _, spellId)
 		-- Don't check for target until later so our counter is always correct for each boss, covers target swapping
 		if arcs[spellId] then
 			comboCounter[unitId] = comboCounter[unitId] + 1
 
 			if UnitIsUnit("target", unitId) then
 				local boss = UnitName(unitId)
-				self:Message("arc", "Urgent", nil, ("%s: %s (%d)"):format(boss, spellName, comboCounter[unitId]), arcs[spellId])
+				self:Message("arc", "Urgent", nil, ("%s: %s (%d)"):format(boss, self:SpellName(spellId), comboCounter[unitId]), arcs[spellId])
 			end
 		elseif spellId == 118365 then -- Energize
 			local t = GetTime()

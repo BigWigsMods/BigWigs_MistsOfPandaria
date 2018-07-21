@@ -86,7 +86,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "VitaSensitivity", 138372)
 	-- General
 	self:Yell("Win", L["kill_trigger"])
-	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Boss1Succeeded", "boss1")
+	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1")
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "TankAbilityUpdate", "boss1")
 	self:Log("SPELL_AURA_APPLIED", "Anima", 138331) -- on boss to start/stop timers
@@ -280,22 +280,22 @@ end
 -- General
 --
 
-function mod:Boss1Succeeded(unitId, spellName, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 139040 then
 		self:CDBar("corruptedballs", 16, L["corruptedballs"], 139071)
 		self:Message("corruptedballs", "Important", "Alarm", L["corruptedballs"], 139071)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 43 then
 		self:Message("stages", "Neutral", "Info", CL["soon"]:format(CL["phase"]:format(2)), false)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 	end
 end
 
-function mod:TankAbilityUpdate(unit)
+function mod:TankAbilityUpdate(_, unit)
 	local power = UnitPower(unit)
 	if self:UnitBuff(unit, self:SpellName(138331)) then -- Anima - Murderous Strike
 		if power == 30 then

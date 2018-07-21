@@ -150,7 +150,7 @@ do
 	end
 
 	local prev = 0
-	function mod:UNIT_SPELLCAST_SUCCEEDED(unitId, spellName, _, _, spellId)
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 		if spellId == 124176 then
 			self:Win() -- Gold Active
 		elseif unitId:find("boss", nil, true) then
@@ -181,8 +181,8 @@ do
 				local t = GetTime()
 				if t-prev > 2 then
 					prev = t
-					self:Message("unstable_sha", "Important", "Alert", spellName, 122938)
-					self:Bar("unstable_sha", 18, spellName, 122938)
+					self:Message("unstable_sha", "Important", "Alert", self:SpellName(spellId), 122938)
+					self:Bar("unstable_sha", 18, self:SpellName(spellId), 122938)
 				end
 			elseif spellId == 122775 then -- Nightmares
 				self:Bar(122777, 15)

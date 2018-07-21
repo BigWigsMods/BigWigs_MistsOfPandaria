@@ -209,7 +209,7 @@ do
 	end
 
 	-- Tank warning
-	function mod:CleansingWatersTank(unitId, _, _, _, spellId)
+	function mod:CleansingWatersTank(_, unitId, _, spellId)
 		if spellId == 122851 and self:Tank() and UnitIsUnit(unitId, getKillTarget()) then
 			local bossName = UnitName(unitId)
 			self:Message(117309, "Urgent", "Alert", L["under"]:format(self:SpellName(117309), bossName))
@@ -221,7 +221,6 @@ function mod:CorruptedWaters(args)
 	self:Message(args.spellId, "Attention")
 	self:CDBar(args.spellId, 42)
 end
-
 
 function mod:BossDeaths(args)
 	if args.mobId == 60583 then -- Kaolan

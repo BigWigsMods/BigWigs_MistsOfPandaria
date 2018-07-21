@@ -169,7 +169,7 @@ do
 			mod:PrimaryIcon(-6346, name)
 		end
 	end
-	function mod:TayakCasts(_, spellName, _, _, spellId)
+	function mod:TayakCasts(_, _, _, spellId)
 		if spellId == 122949 then --Unseen Strike
 			self:CDBar(-6346, 53, CL["count"]:format(self:SpellName(122994), strikeCounter+1)) -- Unseen Strike, 53-60
 			self:DelayedMessage(-6346, 48, "Attention", L["unseenstrike_soon"]:format(strikeCounter+1), false, "Alarm")
@@ -192,7 +192,7 @@ do
 	end
 
 	local casts = {}
-	function mod:InstructorUnseenStrike(_, unit, _, _, spellCastGUID, spellId)
+	function mod:InstructorUnseenStrike(_, unit, spellCastGUID, spellId)
 		if spellId == 122949 and not casts[spellCastGUID] and self:MobId(UnitGUID(unit)) == 64340 then
 			self:Sync("Strike", spellCastGUID) -- Instructor Maltik
 		end
@@ -217,14 +217,14 @@ function mod:AssaultCast(args)
 	self:CDBar(args.spellId, 20.4, L["assault_message"])
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 25 and phase == 1 then -- phase starts at 20
 		self:Message(-6350, "Positive", "Long", CL["soon"]:format(CL["phase"]:format(2)))
 		phase = 2
 	elseif hp < 14 and phase == 2 then
 		self:Message(-6350, "Positive", "Long", CL["soon"]:format(L["side_swap"]))
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 	end
 end
 

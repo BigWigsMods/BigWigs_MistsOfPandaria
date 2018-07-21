@@ -18,8 +18,6 @@ local bossUnitPowers = {}
 local massiveCrates = 2
 local stoutCrates = 6
 local prevEnrage = 0
-local GetNumWorldStateUI = GetNumWorldStateUI
-local GetWorldStateUIInfo = GetWorldStateUIInfo
 
 local function checkPlayerSide()
 	return 1 -- XXX fixme
@@ -124,7 +122,7 @@ end
 -- Event Handlers
 --
 
-function mod:UNIT_POWER_FREQUENT(unit, powerType)
+function mod:UNIT_POWER_FREQUENT(_, unit, powerType)
 	if powerType ~= "ALTERNATE" then return end
 
 	local power = UnitPower(unit, 10) -- Enum.PowerType.Alternate = 10

@@ -113,7 +113,7 @@ function mod:Attenuation(args)
 	end
 end
 
-function mod:PreForceAndVerse(_, _, _, _, spellId)
+function mod:PreForceAndVerse(_, _, _, spellId)
 	if spellId == 122933 then -- Clear Throat
 		self:Message("force", "Important", "Long", CL["soon"]:format(L["force_message"]), L.force_icon)
 	end
@@ -126,7 +126,7 @@ function mod:ForceAndVerse(args)
 	self:Flash("force", args.spellId)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if platform == 0 then
 		if hp < 83 then
@@ -140,7 +140,7 @@ function mod:UNIT_HEALTH_FREQUENT(unitId)
 		end
 	elseif platform == 2 and hp < (self:Heroic() and 47 or 43) then
 		self:Message("stages", "Positive", "Info", CL["soon"]:format(CL["phase"]:format(2)), "ability_vehicle_launchplayer")
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", unitId)
+		self:UnregisterUnitEvent(event, unitId)
 	end
 end
 

@@ -171,11 +171,11 @@ function mod:ControlOrb(msg, _, _, _, player)
 	self:Message(137240, "Positive", nil, msg)
 end
 
-function mod:LastPhase(unitId)
+function mod:LastPhase(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 35 then -- phase starts at 30, except if the boss is already there
 		self:Message("adds", "Neutral", "Info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
 

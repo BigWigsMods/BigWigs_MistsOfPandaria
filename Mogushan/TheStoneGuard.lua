@@ -116,16 +116,16 @@ do
 	end
 end
 
-function mod:Petrifications(_, spellName, _, _, spellId)
+function mod:Petrifications(_, _, _, spellId)
 	-- we could be using the same colors as blizzard but they are too "faint" imo
 	if spellId == 115852 then -- cobalt
-		self:Message("petrifications", nil, "Alert", ("|c001E90FF%s|r"):format(spellName), spellId) -- blue
+		self:Message("petrifications", nil, "Alert", ("|c001E90FF%s|r"):format(self:SpellName(spellId)), spellId) -- blue
 	elseif spellId == 116006 then -- jade
-		self:Message("petrifications", nil, "Alert", ("|c00008000%s|r"):format(spellName), spellId) -- green
+		self:Message("petrifications", nil, "Alert", ("|c00008000%s|r"):format(self:SpellName(spellId)), spellId) -- green
 	elseif spellId == 116036 then -- jasper
-		self:Message("petrifications", nil, "Alert", ("|c00FF0000%s|r"):format(spellName), spellId) -- red
+		self:Message("petrifications", nil, "Alert", ("|c00FF0000%s|r"):format(self:SpellName(spellId)), spellId) -- red
 	elseif spellId == 116057 then -- amethyst
-		self:Message("petrifications", nil, "Alert", ("|c00FF44FF%s|r"):format(spellName), spellId) -- purple
+		self:Message("petrifications", nil, "Alert", ("|c00FF44FF%s|r"):format(self:SpellName(spellId)), spellId) -- purple
 	elseif spellId == 129424 then
 		self:Bar(-5772, cobaltTimer)
 	end

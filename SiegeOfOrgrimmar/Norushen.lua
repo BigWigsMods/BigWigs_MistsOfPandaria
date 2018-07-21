@@ -234,11 +234,11 @@ function mod:Fusion(args)
 	self:Message(args.spellId, "Attention", nil, CL.count:format(args.spellName, amount))
 end
 
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 56 and self:MobId(UnitGUID(unitId)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
 		self:Message("stages", "Neutral", "Info", CL.soon:format(CL.phase:format(2)), 146179)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
 

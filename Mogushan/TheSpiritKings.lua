@@ -140,7 +140,7 @@ do
 		prevPower = 0
 		self:Message("cowardice", "Positive", nil, CL["over"]:format(spellReflect), L.cowardice_icon)
 	end
-	function mod:SpellReflectWarn(unitId)
+	function mod:SpellReflectWarn(_, unitId)
 		local id = self:MobId(UnitGUID(unitId))
 		if id == 60708 or id == 61429 then
 			local power = UnitPower(unitId)
@@ -294,7 +294,7 @@ function mod:EngageCheck()
 	end
 end
 
-function mod:UNIT_SPELLCAST_SUCCEEDED(unitId, spellName, _, _, spellId)
+function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 	if spellId == 118205 then -- Inactive Visual
 		local id = self:MobId(UnitGUID(unitId))
 		if (id == 60709 or id == 61423) then -- Qiang
@@ -329,7 +329,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(unitId, spellName, _, _, spellId)
 	end
 end
 
-function mod:BossSwap(unitId)
+function mod:BossSwap(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 38 then -- next boss at 30% (Qiang -> Subetai -> Zian -> Meng)
 		local id = self:MobId(UnitGUID(unitId))
@@ -342,7 +342,7 @@ function mod:BossSwap(unitId)
 		elseif bossWarned == 2 and (id == 60701 or id == 61421) then -- Zian
 			self:Message("bosses", "Positive", "Info", CL["soon"]:format(meng), false)
 			bossWarned = 3
-			self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1", "boss2", "boss3", "boss4")
+			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4")
 		end
 	end
 end

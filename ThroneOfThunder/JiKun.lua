@@ -218,7 +218,7 @@ end
 
 do
 	local draftTimes = {97.7, 94, 100, 104}
-	function mod:UNIT_SPELLCAST_START(_, _, _, _, spellId)
+	function mod:UNIT_SPELLCAST_START(_, _, _, spellId)
 		-- UNIT event due to combat log range issues
 		if spellId == 134380 then -- Quills
 			self:Message(spellId, "Important", "Warning")
@@ -244,7 +244,7 @@ do
 	end
 end
 
-function mod:FeedYoung(_, _, _, _, spellId)
+function mod:FeedYoung(_, _, _, spellId)
 	if spellId == 137528 then -- UNIT event due to combat log range issues
 		self:Message(spellId, "Positive", "Info") -- Positive because it is green!
 		local diff = self:Difficulty()

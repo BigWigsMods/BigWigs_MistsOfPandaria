@@ -170,7 +170,7 @@ end
 -- phase 4
 do
 	local prev, castTime = 0, 0
-	function mod:UNIT_POWER_FREQUENT(unit)
+	function mod:UNIT_POWER_FREQUENT(_, unit)
 		local power = UnitPower(unit)
 		if power == prev then return end
 		prev = power
@@ -429,7 +429,7 @@ function mod:PowerIronStar(args)
 	self:Bar(args.spellId, self:Mythic() and 10 or 15)
 end
 
-function mod:IronStarRolling(_, _, _, _, spellId)
+function mod:IronStarRolling(_, _, _, spellId)
 	if spellId == 144616 then -- Power Iron Star
 		self:Message(spellId, "Important", nil, L.ironstar_rolling)
 		self:Bar("ironstar_impact", 9, 144653) -- Iron Star Impact
@@ -479,7 +479,7 @@ do
 		annihilateCounter = annihilateCounter + 1
 	end
 
-	function mod:UNIT_SPELLCAST_SUCCEEDED(unitId, spellName, _, _, spellId)
+	function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 		if spellId == 145235 then -- throw axe at heart , transition into first intermission
 			if phase == 1 then
 				self:Bar(-8305, 25, CL.intermission, "SPELL_HOLY_PRAYEROFSHADOWPROTECTION")
@@ -546,18 +546,18 @@ do
 			self:Bar("bombardment", 69, CL.count:format(L.bombardment, 1), 147120) -- Bombardment
 			self:RegisterUnitEvent("UNIT_POWER_FREQUENT", nil, "boss1")
 		elseif spellId == 147126 then -- Clump Check
-			self:Bar("clump_check", 3, spellName, spellId)
+			self:Bar("clump_check", 3, spellId)
 		end
 	end
 end
 
 -- General
-function mod:UNIT_HEALTH_FREQUENT(unitId)
+function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	if self:MobId(UnitGUID(unitId)) ~= 71865 then return end
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 16 then -- 10%
 		self:Message("stages", "Neutral", "Info", CL.soon:format(CL.phase:format(phase+1)), false)
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1", "boss2", "boss3")
+		self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")
 	end
 end
 
