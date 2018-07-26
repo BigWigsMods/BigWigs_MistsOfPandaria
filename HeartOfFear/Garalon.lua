@@ -88,18 +88,18 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", not pheromonesOnMe and "Alert", CL["underyou"]:format(args.spellName)) -- even tho we usually use Alarm, Alarm has been used too much in the module
+			self:Message(args.spellId, "blue", not pheromonesOnMe and "Alert", CL["underyou"]:format(args.spellName)) -- even tho we usually use Alarm, Alarm has been used too much in the module
 		end
 	end
 end
 
 function mod:Crush(message, sender, _, _, target)
 	if self:Heroic() and sender ~= target then -- someone running underneath (don't start new bars in heroic)
-		self:Message(122774, "Important", "Alarm", CL["soon"]:format(self:SpellName(122774))) -- Crush
+		self:Message(122774, "red", "Alarm", CL["soon"]:format(self:SpellName(122774))) -- Crush
 		self:Bar(122774, 3.6, CL["cast"]:format(self:SpellName(122774))) -- Crush
 	else
 		crushCounter = crushCounter + 1
-		self:Message(122774, "Important", "Alarm", CL["soon"]:format(CL["count"]:format(self:SpellName(122774), crushCounter))) -- Crush
+		self:Message(122774, "red", "Alarm", CL["soon"]:format(CL["count"]:format(self:SpellName(122774), crushCounter))) -- Crush
 		self:Bar(122774, 3.6, CL["cast"]:format(self:SpellName(122774))) -- Crush
 		if self:Heroic() then
 			self:Bar(122774, 36, CL["count"]:format(self:SpellName(122774), crushCounter+1), 122082) -- Crush
@@ -111,7 +111,7 @@ end
 function mod:Fury(args)
 	if self:MobId(args.destGUID) == 63191 then -- only fire once
 		self:Bar(args.spellId, self:LFR() and 15 or 30, nil, 119622) -- Rage like icon (swipe and fury have the same)
-		self:Message(args.spellId, "Urgent", nil, CL["count"]:format(args.spellName, args.amount or 1), 119622)
+		self:Message(args.spellId, "orange", nil, CL["count"]:format(args.spellName, args.amount or 1), 119622)
 	end
 end
 
@@ -119,29 +119,29 @@ function mod:PheromonesApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
 		pheromonesOnMe = true
-		self:Message(args.spellId, "Personal", "Info", CL["you"]:format(args.spellName))
+		self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
 	elseif self:Healer() then
-		self:TargetMessage(args.spellId, args.destName, "Attention", nil, nil, nil, true)
+		self:TargetMessage(args.spellId, args.destName, "yellow", nil, nil, nil, true)
 	end
 end
 
 function mod:PheromonesRemoved(args)
 	if self:Me(args.destGUID) then
 		pheromonesOnMe = false
-		self:Message(args.spellId, "Important", "Alarm", L["removed"]:format(args.spellName))
+		self:Message(args.spellId, "red", "Alarm", L["removed"]:format(args.spellName))
 	end
 end
 
 function mod:Pungency(args)
 	if args.amount % 2 == 0 and args.amount > ((self:LFR() and 13) or (self:Heroic() and 3) or 7) then
-		self:StackMessage(args.spellId, args.destName, args.amount, "Attention")
+		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 
 function mod:MendLeg(args)
 	legCounter = legCounter + 1
 	if legCounter < 4 then -- don't start a timer if it has all 4 legs
-		self:Message(args.spellId, "Urgent")
+		self:Message(args.spellId, "orange")
 		self:CDBar(args.spellId, 30)
 	else
 		-- all legs grew back, no need to start a bar, :BrokenLeg will start it
@@ -169,13 +169,13 @@ function mod:PrePhase2(event, unitId)
 	if id == 62164 or id == 63191 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 38 then -- phase starts at 33
-			self:Message(-6294, "Positive", "Long", CL["soon"]:format(CL["phase"]:format(2)), false)
+			self:Message(-6294, "green", "Long", CL["soon"]:format(CL["phase"]:format(2)), false)
 			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4", "boss5")
 		end
 	end
 end
 
 function mod:Phase2()
-	self:Message(-6294, "Positive", "Info", "33% - "..CL["phase"]:format(2))
+	self:Message(-6294, "green", "Info", "33% - "..CL["phase"]:format(2))
 end
 

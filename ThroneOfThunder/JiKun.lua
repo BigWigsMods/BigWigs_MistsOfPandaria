@@ -89,7 +89,7 @@ end
 --
 
 function mod:Caw(args)
-	self:Message(args.spellId, "Attention", nil, CL["incoming"]:format(args.spellName))
+	self:Message(args.spellId, "yellow", nil, CL["incoming"]:format(args.spellName))
 	--self:CDBar(args.spellId, 18) -- 18-30s
 end
 
@@ -106,14 +106,14 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
 			text = L["big_add_message"]:format(text)
 		end
-		self:Message("nest", "Attention", "Alert", text, "misc_arrowlup") -- XXX keep this here till all the nest rotations are 100% figured out
+		self:Message("nest", "yellow", "Alert", text, "misc_arrowlup") -- XXX keep this here till all the nest rotations are 100% figured out
 	else
 		local text = CL["count"]:format(L["lower_nest"], nestCounter)
 		-- one message for 10h nests with a guardian
 		if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
 			text = L["big_add_message"]:format(text)
 		end
-		self:Message("nest", "Urgent", "Alert", text, "misc_arrowdown") -- XXX keep this here till all the nest rotations are 100% figured out
+		self:Message("nest", "orange", "Alert", text, "misc_arrowdown") -- XXX keep this here till all the nest rotations are 100% figured out
 	end
 
 	local nextNest = nestCounter + 1
@@ -189,22 +189,22 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		end
 		-- big adds at 2, 6, 12, 16, 23, 30 (another upper add in the 38 set, probably 39)
 		if nestCounter == 2 or nestCounter == 6 or nestCounter == 23 or nestCounter == 30 then
-			self:Message("nest", "Urgent", "Alert", L["big_add_message"]:format(L["lower_nest"]), 134367)
+			self:Message("nest", "orange", "Alert", L["big_add_message"]:format(L["lower_nest"]), 134367)
 		elseif nestCounter == 12 or nestCounter == 16 then
-			self:Message("nest", "Attention", "Alert", L["big_add_message"]:format(L["upper_nest"]), 134367)
+			self:Message("nest", "yellow", "Alert", L["big_add_message"]:format(L["upper_nest"]), 134367)
 		end
 	end
 end
 
 function mod:PrimalNutriment(args)
 	if not self:Me(args.destGUID) then return end
-	self:Message(args.spellId, "Positive")
+	self:Message(args.spellId, "green")
 	self:Bar(args.spellId, 30, CL["you"]:format(args.spellName))
 end
 
 do
 	local function flightMessage(remainingTime)
-		mod:Message(-7360, "Personal", remainingTime < 5 and "Info", L["flight_over"]:format(remainingTime), 133755)
+		mod:Message(-7360, "blue", remainingTime < 5 and "Info", L["flight_over"]:format(remainingTime), 133755)
 	end
 	function mod:Flight(args)
 		if not self:Me(args.destGUID) then return end
@@ -221,7 +221,7 @@ do
 	function mod:UNIT_SPELLCAST_START(_, _, _, spellId)
 		-- UNIT event due to combat log range issues
 		if spellId == 134380 then -- Quills
-			self:Message(spellId, "Important", "Warning")
+			self:Message(spellId, "red", "Warning")
 			self:Flash(spellId)
 			local diff = self:Difficulty()
 			quillCounter = quillCounter + 1
@@ -237,7 +237,7 @@ do
 				end
 			end
 		elseif spellId == 134370 then -- Down Draft
-			self:Message(spellId, "Important", "Long")
+			self:Message(spellId, "red", "Long")
 			draftCounter = draftCounter + 1
 			self:Bar(spellId, draftTimes[draftCounter] or 93)
 		end
@@ -246,7 +246,7 @@ end
 
 function mod:FeedYoung(_, _, _, spellId)
 	if spellId == 137528 then -- UNIT event due to combat log range issues
-		self:Message(spellId, "Positive", "Info") -- Positive because it is green!
+		self:Message(spellId, "green", "Info") -- Positive because it is green!
 		local diff = self:Difficulty()
 		local is25 = diff == 4 or diff == 6
 		self:CDBar(spellId, is25 and 30 or 41)
@@ -254,13 +254,13 @@ function mod:FeedYoung(_, _, _, spellId)
 end
 
 function mod:TalonRake(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "Urgent", "Info")
+	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Info")
 	self:CDBar(args.spellId, 22)
 end
 
 function mod:InfectedTalons(args)
 	if args.amount % 2 == 0 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "Attention")
+		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 

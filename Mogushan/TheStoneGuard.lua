@@ -70,11 +70,11 @@ end
 --
 
 function mod:PowerDown()
-	self:Message(116529, "Urgent", "Info", self:SpellName(116529))
+	self:Message(116529, "orange", "Info", self:SpellName(116529))
 end
 
 function mod:Overload(msg, boss)
-	self:Message("overload", "Important", "Long", msg:format(boss), L.overload_icon)
+	self:Message("overload", "red", "Long", msg:format(boss), L.overload_icon)
 end
 
 do
@@ -88,17 +88,17 @@ do
 			jasperChainsTargets[2] = args.destName
 			if self:Me(args.destGUID) or UnitIsUnit(prevPlayer, "player") then
 				self:Flash(args.spellId)
-				self:Message(args.spellId, "Personal", nil, CL["you"]:format(args.spellName))
+				self:Message(args.spellId, "blue", nil, CL["you"]:format(args.spellName))
 				self:OpenProximity(args.spellId, 10, UnitIsUnit(prevPlayer, "player") and args.destName or prevPlayer, true)
 			else
-				self:TargetMessage(args.spellId, jasperChainsTargets, "Attention")
+				self:TargetMessage(args.spellId, jasperChainsTargets, "yellow")
 			end
 			prevPlayer = nil
 		end
 	end
 	function mod:JasperChainsRemoved(args)
 		if self:Me(args.destGUID) then
-			self:Message(args.spellId, "Personal", nil, CL["over"]:format(args.spellName))
+			self:Message(args.spellId, "blue", nil, CL["over"]:format(args.spellName))
 			self:CloseProximity(args.spellId)
 		end
 	end
@@ -111,7 +111,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Alarm", CL["underyou"]:format(args.spellName))
+			self:Message(args.spellId, "blue", "Alarm", CL["underyou"]:format(args.spellName))
 		end
 	end
 end

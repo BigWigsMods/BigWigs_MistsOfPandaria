@@ -112,7 +112,7 @@ function mod:OnBossEnable()
 end
 
 local function warnTowerAdds()
-	mod:Message("towers", "Attention", nil, L.tower_defender, 85214)
+	mod:Message("towers", "yellow", nil, L.tower_defender, 85214)
 	mod:Bar("towers", 60, L.tower_defender, 85214) -- random orc icon
 end
 
@@ -159,14 +159,14 @@ end
 
 function mod:RAID_BOSS_WHISPER(_, msg)
 	-- RAID_BOSS_WHISPER#Galakras is hit! Nice shot!#Anti-Air Turret#0#true
-	self:Message("stages", "Personal", nil, msg, "achievement_boss_galakras")
+	self:Message("stages", "blue", nil, msg, "achievement_boss_galakras")
 end
 
 --Galakras
 function mod:FlamesOfGalakrondStacking(args)
 	if args.amount > 2 then
 		if self:Me(args.destGUID) or (self:Tank() and self:Tank(args.destName)) then
-			self:StackMessage(147068, args.destName, args.amount, "Attention", nil, 71393, args.spellId) -- 71393 = "Flames"
+			self:StackMessage(147068, args.destName, args.amount, "yellow", nil, 71393, args.spellId) -- 71393 = "Flames"
 		end
 	end
 end
@@ -180,7 +180,7 @@ end
 
 function mod:FlamesOfGalakrondApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "Important", "Warning", 88986, args.spellId) -- 88986 = "Fireball"
+	self:TargetMessage(args.spellId, args.destName, "red", "Warning", 88986, args.spellId) -- 88986 = "Fireball"
 	if self:Me(args.destGUID) then
 		self:OpenProximity(args.spellId, 8)
 		self:Flash(args.spellId)
@@ -190,7 +190,7 @@ end
 function mod:LastPhase(_, unitId, _, spellId)
 	if spellId == 50630 then -- Eject All Passengers
 		self:UnregisterEvent("CHAT_MSG_MONSTER_YELL")
-		self:Message("stages", "Neutral", "Warning", CL.incoming:format(UnitName(unitId)), "ability_mount_drake_proto")
+		self:Message("stages", "cyan", "Warning", CL.incoming:format(UnitName(unitId)), "ability_mount_drake_proto")
 		self:StopBar(L.adds)
 		self:StopBar(L.drakes)
 		self:CancelDelayedMessage(CL.incoming:format(L.drakes))
@@ -205,18 +205,18 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL.underyou:format(args.spellName))
+			self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
 		end
 	end
 end
 
 function mod:CurseOfVenom(args)
-	self:Message(-8443, "Urgent", "Alert")
+	self:Message(-8443, "orange", "Alert")
 end
 
 function mod:CrushersCall(args)
 	self:Bar(args.spellId, 48)
-	self:Message(args.spellId, "Urgent", "Alert")
+	self:Message(args.spellId, "orange", "Alert")
 end
 
 function mod:ShatteringCleave(args)
@@ -224,12 +224,12 @@ function mod:ShatteringCleave(args)
 end
 
 function mod:Demolisher()
-	self:Message("demolisher", "Attention", nil, L.demolisher_message, L.demolisher_icon)
+	self:Message("demolisher", "yellow", nil, L.demolisher_message, L.demolisher_icon)
 end
 
 function mod:SouthTower()
 	self:StopBar(L.south_tower)
-	self:Message("towers", "Neutral", "Long", L.south_tower, L.towers_icon)
+	self:Message("towers", "cyan", "Long", L.south_tower, L.towers_icon)
 	self:Bar("demolisher", 20, L.demolisher_message, L.demolisher_icon)
 
 	if self:Mythic() then
@@ -244,7 +244,7 @@ end
 
 function mod:NorthTower()
 	self:StopBar(L.north_tower)
-	self:Message("towers", "Neutral", "Long", L.north_tower, L.towers_icon)
+	self:Message("towers", "cyan", "Long", L.north_tower, L.towers_icon)
 	self:Bar("demolisher", 20, L.demolisher_message, L.demolisher_icon)
 
 	if self:Mythic() then
@@ -256,11 +256,11 @@ end
 
 -- Foot Soldiers
 function mod:ChainHeal(args)
-	self:Message(146757, "Important", "Warning")
+	self:Message(146757, "red", "Warning")
 end
 
 function mod:HealingTotem(args)
-	self:Message(-8489, "Urgent", "Warning")
+	self:Message(-8489, "orange", "Warning")
 end
 
 do
@@ -270,17 +270,17 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", nil, CL.underyou:format(args.spellName))
+			self:Message(args.spellId, "blue", nil, CL.underyou:format(args.spellName))
 		end
 	end
 end
 
 function mod:Warbanner(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 end
 
 function mod:Fracture(args)
-	self:TargetMessage(146899, args.destName, "Urgent", "Alarm", nil, nil, true)
+	self:TargetMessage(146899, args.destName, "orange", "Alarm", nil, nil, true)
 end
 
 function mod:Adds(_, _, unit, _, _, target)
@@ -290,10 +290,10 @@ function mod:Adds(_, _, unit, _, _, target)
 			self:Bar("drakes", 168, L.drakes, L.drakes_icon)
 			addsCounter = 1
 		elseif UnitIsPlayer(target) then
-			self:Message("adds", "Attention", "Info", CL.incoming:format(L.adds), L.adds_icon)
+			self:Message("adds", "yellow", "Info", CL.incoming:format(L.adds), L.adds_icon)
 			addsCounter = addsCounter + 1
 			if (addsCounter + 1) % 4 == 0 then
-				self:DelayedMessage("drakes", 55, "Attention", CL.incoming:format(L.drakes), L.drakes_icon, "Info")
+				self:DelayedMessage("drakes", 55, "yellow", CL.incoming:format(L.drakes), L.drakes_icon, "Info")
 				self:Bar("adds", 110, L.adds, L.adds_icon)
 			else
 				if addsCounter % 4 == 0 then -- start the drakes timer on the wave after drakes

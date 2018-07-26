@@ -72,13 +72,13 @@ end
 
 -- Mythic
 function mod:SwellingCorruption(args)
-	self:Message(args.spellId, "Attention", "Alert")
+	self:Message(args.spellId, "yellow", "Alert")
 	self:CDBar(args.spellId, 77)
 end
 
 function mod:ShaCorruption(args)
 	if self:Me(args.destGUID) and args.amount > 2 then
-		self:Message(args.spellId, "Personal", "Info", CL.count:format(args.spellName, args.amount))
+		self:Message(args.spellId, "blue", "Info", CL.count:format(args.spellName, args.amount))
 		if args.amount > 5 then
 			self:Flash(args.spellId)
 		end
@@ -89,7 +89,7 @@ end
 do
 	local blastTimers = { 34, 23, 30 } -- 23s cd, reset with swirl it seems
 	function mod:CorrosiveBlast(args)
-		self:Message(args.spellId, "Urgent", "Alarm")
+		self:Message(args.spellId, "orange", "Alarm")
 		self:CDBar(args.spellId, blastTimers[blastCounter] or 23)
 		blastCounter = blastCounter + 1
 	end
@@ -97,7 +97,7 @@ end
 
 function mod:CorrosiveBlastStack(args)
 	if self:Tank() and self:Tank(args.destName) then
-		self:StackMessage(args.spellId, args.destName, args.amount, "Urgent", "Warning")
+		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Warning")
 	end
 end
 
@@ -105,7 +105,7 @@ function mod:Splits()
 	self:StopBar(143309) -- Swirl
 	self:StopBar(143436) -- Corrosive Blast
 	self:StopBar(143574) -- Swelling Corruption
-	self:Message(143020, "Neutral")
+	self:Message(143020, "cyan")
 	-- Reform, 60 seconds is the maximum time he'll stay under when trying to do the "No More Tears" (id:8536) achievement.
 	-- If he was under for 35 seconds, assume we're trying to do the achievement, and show a bar for the remaining 25 seconds.
 	reformScheduler = self:ScheduleTimer("Bar", 35, 143469, 25)
@@ -113,7 +113,7 @@ end
 
 function mod:Reform()
 	blastCounter = 1
-	self:Message(143469, "Neutral", nil, ("%s (%d%%)"):format(self:SpellName(143469), UnitPower("boss1")))
+	self:Message(143469, "cyan", nil, ("%s (%d%%)"):format(self:SpellName(143469), UnitPower("boss1")))
 	self:Bar(143309, 24) -- Swirl 24.1 - 24.9
 	self:Bar(143436, 14) -- Corrosive Blast 13.6 - 15.2
 	if reformScheduler then
@@ -127,7 +127,7 @@ function mod:Reform()
 end
 
 function mod:Swirl(args)
-	self:Message(args.spellId, "Important", "Long")
+	self:Message(args.spellId, "red", "Long")
 	self:Bar(args.spellId, 13, CL.cast:format(args.spellName))
 	self:Bar(args.spellId, 53)
 end
@@ -139,7 +139,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(143295, "Personal", "Info", CL.underyou:format(args.spellName))
+			self:Message(143295, "blue", "Info", CL.underyou:format(args.spellName))
 			self:Flash(143295)
 		end
 	end
@@ -148,7 +148,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL.you:format(args.spellName))
+			self:Message(args.spellId, "blue", "Info", CL.you:format(args.spellName))
 		end
 	end
 end

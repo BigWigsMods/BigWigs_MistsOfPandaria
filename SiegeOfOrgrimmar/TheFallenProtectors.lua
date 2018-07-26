@@ -134,7 +134,7 @@ do
 	local meditativeField = mod:SpellName(143564)
 	local function warnDarkMeditation(spellId)
 		if not mod:UnitDebuff("player", meditativeField) and UnitAffectingCombat("player") then
-			mod:Message(143564, "Personal", "Info", L.no_meditative_field)
+			mod:Message(143564, "blue", "Info", L.no_meditative_field)
 		end
 	end
 
@@ -153,7 +153,7 @@ do
 	end
 
 	function mod:SunIntermission(args)
-		self:Message("intermission", "Important", "Alert", args.spellName, args.spellId)
+		self:Message("intermission", "red", "Alert", args.spellName, args.spellId)
 		if not self:Tank() then
 			darkMeditationTimer = self:ScheduleRepeatingTimer(warnDarkMeditation, 3)
 		end
@@ -170,10 +170,10 @@ function mod:Calamity(args)
 	self:CDBar(args.spellId, 40)
 	self:Bar(args.spellId, 5, CL.cast:format(args.spellName))
 	if self:Mythic() then
-		self:Message(args.spellId, "Attention", nil, ("%s (%d%%)"):format(CL.casting:format(args.spellName), hcCalamityCount))
+		self:Message(args.spellId, "yellow", nil, ("%s (%d%%)"):format(CL.casting:format(args.spellName), hcCalamityCount))
 		hcCalamityCount = hcCalamityCount + 10
 	else
-		self:Message(args.spellId, "Attention", nil, CL.casting:format(args.spellName))
+		self:Message(args.spellId, "yellow", nil, CL.casting:format(args.spellName))
 	end
 end
 
@@ -218,7 +218,7 @@ end
 
 function mod:Bane(args)
 	if self:Dispeller("magic", nil, args.spellId) then
-		self:Message(args.spellId, "Urgent", "Alarm")
+		self:Message(args.spellId, "orange", "Alarm")
 		self:CDBar(args.spellId, 14)
 	end
 end
@@ -230,7 +230,7 @@ function mod:ShaSear(args)
 				self:Say(args.spellId)
 			end
 			self:Flash(args.spellId)
-			self:TargetMessage(args.spellId, args.destName, "Personal", "Warning")
+			self:TargetMessage(args.spellId, args.destName, "blue", "Warning")
 			self:TargetBar(args.spellId, 5, args.destName)
 		end
 		if not self:LFR() then
@@ -244,12 +244,12 @@ end
 function mod:LingeringAnguish(args)
 	-- inform the player with the debuff if stacks are getting high, the values might need adjusting (one warning about every 6 sec atm)
 	if self:UnitDebuff("player", self:SpellName(143840)) and (args.amount > 7 and args.amount % 2 == 0) then -- Mark of Anguish
-		self:StackMessage(143840, args.destName, args.amount, "Personal", "Info", 144176, 144176)
+		self:StackMessage(143840, args.destName, args.amount, "blue", "Info", 144176, 144176)
 	end
 end
 
 function mod:MarkOfAnguish(args)
-	self:TargetMessage(args.spellId, args.destName, "Important", "Alert")
+	self:TargetMessage(args.spellId, args.destName, "red", "Alert")
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -262,7 +262,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL.underyou:format(args.spellName))
+			self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -273,7 +273,7 @@ function mod:Fixate(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "Attention", "Long")
+	self:TargetMessage(args.spellId, args.destName, "yellow", "Long")
 end
 
 do
@@ -283,7 +283,7 @@ do
 		local t = GetTime()
 		if (t-prev) > 10 and msg:find("143330", nil, true) then
 			prev = t
-			self:Message(143330, "Urgent", "Warning")
+			self:Message(143330, "orange", "Warning")
 			self:CDBar(143330, 29)
 		end
 	end
@@ -294,7 +294,7 @@ do
 			for i = 1, 5 do
 				local unit = ("boss%d"):format(i)
 				if UnitGUID(unit) == args.sourceGUID and self:Me(UnitGUID(unit.."target")) then
-					self:Message(143330, "Urgent", "Warning")
+					self:Message(143330, "orange", "Warning")
 					self:CDBar(143330, 29)
 					prev = GetTime()
 				end
@@ -350,10 +350,10 @@ do
 			end
 			self:OpenProximity(-7959, 8, nil, true)
 			-- Emphasized abilities
-			self:TargetMessage("inferno_self", name, "Urgent", "Warning", -7959)
+			self:TargetMessage("inferno_self", name, "orange", "Warning", -7959)
 			self:Bar("inferno_self", 9-elapsed, L.inferno_self_bar, -7959)
 		else
-			self:TargetMessage(-7959, name, "Urgent")
+			self:TargetMessage(-7959, name, "orange")
 			self:TargetBar(-7959, 9-elapsed, name)
 			if not self:Tank() and not self:LFR() then
 				self:OpenProximity(-7959, 8, name, true)
@@ -382,7 +382,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message("defile_you", "Personal", "Info", CL.underyou:format(args.spellName), args.spellId)
+			self:Message("defile_you", "blue", "Info", CL.underyou:format(args.spellName), args.spellId)
 			self:Flash("defile_you", args.spellId)
 		end
 	end
@@ -397,14 +397,14 @@ do
 			if self:Me(guid) then
 				self:Flash(143958)
 			end
-			self:TargetMessage(143958, name, "Personal", "Info")
+			self:TargetMessage(143958, name, "blue", "Info")
 		end
 	end
 	local function printFallback()
 		local t = GetTime()
 		if t-prev > 5 then
 			prev = t
-			mod:Message(143958, "Personal", "Info")
+			mod:Message(143958, "blue", "Info")
 		end
 	end
 	function mod:CorruptionShock(args)
@@ -414,11 +414,11 @@ do
 end
 
 function mod:CorruptionKick(args)
-	self:Message(args.spellId, "Important", "Alarm")
+	self:Message(args.spellId, "red", "Alarm")
 end
 
 function mod:Clash(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, self:Mythic() and 50 or 46)
 end
 
@@ -428,7 +428,7 @@ do
 			self:Flash(143019)
 			self:Say(143019)
 		end
-		self:TargetMessage(143019, name, "Personal", "Info")
+		self:TargetMessage(143019, name, "blue", "Info")
 	end
 	function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 		if spellId == 143019 then -- Corrupted Brew
@@ -438,7 +438,7 @@ do
 		elseif spellId == 143961 then
 			if UnitDetailedThreatSituation("player", unitId) then
 				self:CDBar(-7958, 10)
-				self:Message(-7958, "Urgent", "Alarm")
+				self:Message(-7958, "orange", "Alarm")
 			end
 		elseif spellId == 138175 and self:MobId(UnitGUID(unitId)) == 71481 then -- Despawn Area Triggers
 			self:CloseProximity(-7959)
@@ -462,14 +462,14 @@ function mod:VengefulStrikes(args)
 	-- only warn for the tank targeted by the mob
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
 	if self:Me(UnitGUID(unit.."target")) then -- or self:Healer()
-		self:Message(args.spellId, "Urgent", "Alarm")
+		self:Message(args.spellId, "orange", "Alarm")
 		self:Bar(args.spellId, 4, CL.cast:format(args.spellName))
 		self:CDBar(args.spellId, 22)
 	end
 end
 
 function mod:RookIntermission(args)
-	self:Message("intermission", "Important", "Alert", args.spellName, false)
+	self:Message("intermission", "red", "Alert", args.spellName, false)
 	self:StopBar(143027) -- Clash
 	self:StopBar(144396) -- Vengeful Strikes
 	self:StopBar(143019) -- Corrupted Brew
@@ -495,7 +495,7 @@ end
 
 function mod:Heal(args)
 	self:Bar(args.spellId, 15, CL.cast:format(CL.other:format(self:SpellName(2060), args.sourceName))) -- "Heal"
-	self:Message(args.spellId, "Positive", "Warning", CL.other:format(self:SpellName(37455), args.sourceName)) -- "Healing"
+	self:Message(args.spellId, "green", "Warning", CL.other:format(self:SpellName(37455), args.sourceName)) -- "Healing"
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unitId)
@@ -504,11 +504,11 @@ function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 70 and not intermission[mobId] then -- 66%
 			local boss = UnitName(unitId)
-			self:Message("intermission", "Neutral", "Info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
+			self:Message("intermission", "cyan", "Info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
 			intermission[mobId] = 1
 		elseif hp < 37 and intermission[mobId] == 1 then -- 33%
 			local boss = UnitName(unitId)
-			self:Message("intermission", "Neutral", "Info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
+			self:Message("intermission", "cyan", "Info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
 			intermission[mobId] = 2
 			if intermission[71475] == 2 and intermission[71479] == 2 and intermission[71480] == 2 then
 				self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")

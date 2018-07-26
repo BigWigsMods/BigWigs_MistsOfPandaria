@@ -151,7 +151,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(144498, "Personal", "Info", CL.underyou:format(args.spellName))
+			self:Message(144498, "blue", "Info", CL.underyou:format(args.spellName))
 			self:Flash(144498)
 		end
 	end
@@ -163,7 +163,7 @@ end
 
 function mod:CutterLaserApplied(args)
 	-- way too varied timer 11-21
-	self:TargetMessage(-8190, args.destName, "Important", "Warning")
+	self:TargetMessage(-8190, args.destName, "red", "Warning")
 	self:PrimaryIcon(-8190, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(-8190)
@@ -171,7 +171,7 @@ function mod:CutterLaserApplied(args)
 end
 
 function mod:ShockPulse(args)
-	self:Message(args.spellId, "Attention", "Alert", CL.count:format(args.spellName, shockPulseCounter))
+	self:Message(args.spellId, "yellow", "Alert", CL.count:format(args.spellName, shockPulseCounter))
 	shockPulseCounter = shockPulseCounter + 1
 	if shockPulseCounter < 4 then
 		self:CDBar(args.spellId, 16, CL.count:format(args.spellName, shockPulseCounter))
@@ -180,14 +180,14 @@ end
 
 -- Assault mode
 function mod:IgniteArmor(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "Attention")
+	self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
 	self:CDBar(args.spellId, 9)
 end
 
 do
 	local burnList, scheduled = mod:NewTargetList(), nil
 	local function warnBurn(spellId)
-		mod:TargetMessage(spellId, burnList, "Important")
+		mod:TargetMessage(spellId, burnList, "red")
 		scheduled = nil
 	end
 	function mod:LaserBurn(args)
@@ -205,7 +205,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(-8179, "Personal", "Info", CL.underyou:format(args.spellName))
+			self:Message(-8179, "blue", "Info", CL.underyou:format(args.spellName))
 			self:Flash(-8179)
 		end
 	end
@@ -213,11 +213,11 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 144296 then -- Borer Drill
-		self:Message(-8179, "Attention")
+		self:Message(-8179, "yellow")
 		self:CDBar(-8179, 19)
 	elseif spellId == 144673 then -- Crawler Mine
 		local spellName = self:SpellName(spellId)
-		self:Message(-8183, "Urgent", nil, CL.count:format(spellName, mineCounter))
+		self:Message(-8183, "orange", nil, CL.count:format(spellName, mineCounter))
 		self:Bar(-8183, 18, 144718) -- 48732 = Mine Explosion?
 		mineCounter = mineCounter + 1
 		if phase == 1 then
@@ -230,11 +230,11 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 			self:ScheduleTimer("ResetMarking", 18) -- cast time is 15, we should be safe with 18
 		end
 	elseif spellId == 144492 then -- Explosive Tar
-		self:Message(144498, "Attention")
+		self:Message(144498, "yellow")
 		self:CDBar(144498, 20)
 	elseif spellId == 146359 then -- Regeneration (Assault mode)
 		phase = 1
-		self:Message("stages", "Neutral", "Long", CL.phase:format(phase), false)
+		self:Message("stages", "cyan", "Long", CL.phase:format(phase), false)
 		self:Bar("stages", 120, CL.phase:format(2), 144498) -- maybe should use UNIT_POWER to adjust timer since there seems to be a 6 sec variance
 		if self:Healer() then
 			self:CDBar(144459, 8) -- Laser Burn
@@ -247,7 +247,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 		self:StopBar(CL.phase:format(1)) -- in case it overruns
 	elseif spellId == 146360 then -- Depletion (Siege mode)
 		phase = 2
-		self:Message("stages", "Neutral", "Long", CL.phase:format(phase), false)
+		self:Message("stages", "cyan", "Long", CL.phase:format(phase), false)
 		self:Bar("stages", 64, CL.phase:format(1), 144464) -- maybe should use UNIT_POWER to adjust timer since there seems to be a 6 sec variance
 		self:StopBar(CL.count:format(self:SpellName(144673), mineCounter)) -- Crawler Mine
 		mineCounter = 1
@@ -261,7 +261,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 		self:StopBar(144467) -- Ignite Armor
 		self:StopBar(CL.phase:format(2)) -- in case it overruns
 	elseif spellId == 144356 then -- Ricochet
-		self:Message(-8181, "Attention")
+		self:Message(-8181, "yellow")
 		self:CDBar(-8181, 15) -- 15-20s
 	end
 end

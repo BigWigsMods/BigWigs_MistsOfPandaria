@@ -68,7 +68,7 @@ function mod:OnEngage()
 	self:OpenProximity(142851, 5)
 	self:CDBar(142842, 67.7, CL.count:format(self:SpellName(142842), breathCounter)) -- Breath of Y'Shaarj
 	-- Seismic Slam / Adds
-	self:ScheduleTimer("Message", 4.5, 142851, "Urgent", "Info", CL.incoming:format(self:Mythic() and CL.adds or self:SpellName(142851)))
+	self:ScheduleTimer("Message", 4.5, 142851, "orange", "Info", CL.incoming:format(self:Mythic() and CL.adds or self:SpellName(142851)))
 	self:Bar(142851, 5, self:Mythic() and CL.count:format(CL.adds, slamCounter))
 end
 
@@ -90,7 +90,7 @@ do
 
 	local energyList, scheduled, counter, prev = mod:NewTargetList(), nil, 1, 0
 	local function warnDisplacedEnergy(spellId)
-		mod:TargetMessage(spellId, energyList, "Urgent", "Alert")
+		mod:TargetMessage(spellId, energyList, "orange", "Alert")
 		scheduled = nil
 	end
 	function mod:DisplacedEnergyApplied(args)
@@ -120,21 +120,21 @@ function mod:DisplacedEnergy(args)
 end
 
 function mod:BloodRage(args)
-	self:Message(args.spellId, "Neutral", "Long")
+	self:Message(args.spellId, "cyan", "Long")
 	self:Bar(args.spellId, 22.5)
 	self:StopBar(142851) -- Seismic Slam
 	self:CloseProximity(142851)
 end
 
 function mod:ExpelMiasma() -- Blood Rage over
-	self:Message(142879, "Neutral", "Long", CL.over:format(self:SpellName(142879)))
+	self:Message(142879, "cyan", "Long", CL.over:format(self:SpellName(142879)))
 	self:OpenProximity(142851, 5)
 	self:StopBar(142913) -- Displaced Energy
 	breathCounter, smashCounter, slamCounter = 1, 1, 1
 	self:Bar(142826, 17, CL.count:format(self:SpellName(142826), smashCounter)) -- Arcing Smash
 	self:CDBar(142842, 72.2, CL.count:format(self:SpellName(142842), breathCounter)) -- Breath of Y'Shaarj
 	-- Seismic Slam / Adds
-	self:ScheduleTimer("Message", 9, 142851, "Urgent", "Info", CL.incoming:format(self:Mythic() and CL.adds or self:SpellName(142851)))
+	self:ScheduleTimer("Message", 9, 142851, "orange", "Info", CL.incoming:format(self:Mythic() and CL.adds or self:SpellName(142851)))
 	self:Bar(142851, 10, self:Mythic() and CL.count:format(CL.adds, slamCounter))
 end
 
@@ -142,7 +142,7 @@ end
 
 function mod:FatalStrike(args)
 	if args.amount > 8 and args.amount % 3 == 0 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "Attention")
+		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 
@@ -150,7 +150,7 @@ function mod:BreathOfYShaarj(args)
 	smashCounter, slamCounter = 1, 1
 
 	self:Flash(args.spellId)
-	self:Message(args.spellId, "Important", "Warning", CL.count:format(args.spellName, breathCounter))
+	self:Message(args.spellId, "red", "Warning", CL.count:format(args.spellName, breathCounter))
 	breathCounter = breathCounter + 1
 
 	if breathCounter == 2 then
@@ -158,7 +158,7 @@ function mod:BreathOfYShaarj(args)
 		self:CDBar(args.spellId, 69.8, CL.count:format(args.spellName, breathCounter))
 
 		-- Seismic Slam / Adds
-		self:ScheduleTimer("Message", 6.5, 142851, "Urgent", "Info", CL.incoming:format(self:Mythic() and CL.adds or self:SpellName(142851)))
+		self:ScheduleTimer("Message", 6.5, 142851, "orange", "Info", CL.incoming:format(self:Mythic() and CL.adds or self:SpellName(142851)))
 		self:Bar(142851, 7.5, self:Mythic() and CL.count:format(CL.adds, slamCounter))
 	end
 end
@@ -166,15 +166,15 @@ end
 function mod:SeismicSlam(args)
 	slamCounter = slamCounter + 1
 	if slamCounter > 3 then return end
-	self:ScheduleTimer("Message", 18.5, args.spellId, "Urgent", "Info", CL.incoming:format(self:Mythic() and CL.adds or args.spellName))
+	self:ScheduleTimer("Message", 18.5, args.spellId, "orange", "Info", CL.incoming:format(self:Mythic() and CL.adds or args.spellName))
 	self:Bar(args.spellId, 19.5, self:Mythic() and CL.count:format(CL.adds, slamCounter))
 end
 
 function mod:ArcingSmash(args)
-	self:ScheduleTimer("Message", 4, 142986, "Urgent", "Alarm") -- Imploding Energy, don't wanna use SPELL_DAMAGE, and this seems accurate enough
+	self:ScheduleTimer("Message", 4, 142986, "orange", "Alarm") -- Imploding Energy, don't wanna use SPELL_DAMAGE, and this seems accurate enough
 	self:CDBar(142986, 9, 67792) -- A bar with a text "Implosion" for when the damage actually happens, so people can time immunities. 67792 is just a random spell called "Implosion"
 
-	self:Message(args.spellId, "Attention", nil, CL.count:format(args.spellName, smashCounter))
+	self:Message(args.spellId, "yellow", nil, CL.count:format(args.spellName, smashCounter))
 	smashCounter = smashCounter + 1
 	if smashCounter > 3 then return end
 	self:CDBar(args.spellId, 17, CL.count:format(args.spellName, smashCounter))

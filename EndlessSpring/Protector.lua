@@ -98,7 +98,7 @@ function mod:ShaCorruptionFirst(args)
 
 	if not firstDeath then
 		firstDeath = true
-		self:Message(args.spellId, "Attention", "Info", CL["count"]:format(args.spellName, 1), args.spellId)
+		self:Message(args.spellId, "yellow", "Info", CL["count"]:format(args.spellName, 1), args.spellId)
 	end
 end
 
@@ -112,13 +112,13 @@ function mod:ShaCorruptionSecond(args)
 		self:Bar(117227, 15) -- Corrupted Waters
 	end
 
-	self:Message(args.spellId, "Attention", "Info", CL["count"]:format(args.spellName, 2))
+	self:Message(args.spellId, "yellow", "Info", CL["count"]:format(args.spellName, 2))
 end
 
 --Protector Kaolan
 
 function mod:ExpelCorruption(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 	self:Bar(args.spellId, 38)
 	self:Bar(117986, 12) -- Defiled Ground
 end
@@ -134,7 +134,7 @@ do
 			local t = GetTime()
 			if t-prev > 1 then
 				prev = t
-				self:Message(117986, "Personal", "Info", CL["underyou"]:format(args.spellName))
+				self:Message(117986, "blue", "Info", CL["underyou"]:format(args.spellName))
 				self:Flash(117986)
 			end
 		end
@@ -146,7 +146,7 @@ end
 do
 	local lightningPrisonList, scheduled = mod:NewTargetList(), nil
 	local function warnPrison()
-		mod:TargetMessage(117436, lightningPrisonList, "Important", "Alert")
+		mod:TargetMessage(117436, lightningPrisonList, "red", "Alert")
 		scheduled = nil
 	end
 	function mod:LightningPrisonApplied(args)
@@ -170,7 +170,7 @@ function mod:LightningPrisonRemoved(args)
 end
 
 function mod:LightningStorm(args)
-	self:Message(args.spellId, "Urgent", "Alarm")
+	self:Message(args.spellId, "orange", "Alarm")
 	self:CDBar(args.spellId, bossDead < 3 and 42 or 32)
 	self:Flash(args.spellId)
 end
@@ -179,7 +179,7 @@ end
 
 function mod:CleansingWaters(args)
 	if not self:Tank() then
-		self:Message(args.spellId, "Attention", self:Dispeller("magic", true) and "Alert", CL["soon"]:format(args.spellName))
+		self:Message(args.spellId, "yellow", self:Dispeller("magic", true) and "Alert", CL["soon"]:format(args.spellName))
 	end
 	self:Bar(args.spellId, 6, L["heal"]:format(args.spellName), 55888) -- orb hitting the ground (water orb icon)
 	self:CDBar(args.spellId, bossDead > 0 and 42 or 32)
@@ -204,7 +204,7 @@ do
 	function mod:CleansingWatersDispel(args)
 		local mobId = self:MobId(args.destGUID)
 		if self:Dispeller("magic", true) and (mobId == 60583 or mobId == 60585 or mobId == 60586) and args.destGUID == UnitGUID(getKillTarget()) then
-			self:Message(117309, "Important", "Info", CL["on"]:format(args.spellName, args.destName)) --onboss
+			self:Message(117309, "red", "Info", CL["on"]:format(args.spellName, args.destName)) --onboss
 		end
 	end
 
@@ -212,13 +212,13 @@ do
 	function mod:CleansingWatersTank(_, unitId, _, spellId)
 		if spellId == 122851 and self:Tank() and UnitIsUnit(unitId, getKillTarget()) then
 			local bossName = UnitName(unitId)
-			self:Message(117309, "Urgent", "Alert", L["under"]:format(self:SpellName(117309), bossName))
+			self:Message(117309, "orange", "Alert", L["under"]:format(self:SpellName(117309), bossName))
 		end
 	end
 end
 
 function mod:CorruptedWaters(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 42)
 end
 

@@ -87,7 +87,7 @@ end
 --
 
 function mod:SunbeamSpawn()
-	self:Message(122789, "Positive", nil, L["sunbeam_spawn"])
+	self:Message(122789, "green", nil, L["sunbeam_spawn"])
 	self:Bar(122789, 42)
 end
 
@@ -98,36 +98,36 @@ function mod:EngageCheck()
 		if bigAddCounter < 3 then
 			self:CDBar("embodied_terror", 40, CL["count"]:format(L["embodied_terror"], bigAddCounter+1), L.embodied_terror_icon)
 		end
-		self:Message("embodied_terror", "Attention", nil, CL["count"]:format(L["embodied_terror"], bigAddCounter), L.embodied_terror_icon)
+		self:Message("embodied_terror", "yellow", nil, CL["count"]:format(L["embodied_terror"], bigAddCounter), L.embodied_terror_icon)
 		self:CDBar(123011, 5) -- Terrorize (overwrites the previous bar)
 	end
 end
 
 function mod:Terrorize(args)
-	self:Message(args.spellId, "Important", self:Dispeller("magic") and "Alert")
+	self:Message(args.spellId, "red", self:Dispeller("magic") and "Alert")
 	self:CDBar(args.spellId, 41)
 end
 
 function mod:DreadShadows(args)
 	if self:Me(args.destGUID) and args.amount > (self:Heroic() and 5 or self:LFR() and 13 or 9) and args.amount % 2 == 0 then
-		self:Message(args.spellId, "Personal", "Info", CL["count"]:format(args.spellName, args.amount))
+		self:Message(args.spellId, "blue", "Info", CL["count"]:format(args.spellName, args.amount))
 	end
 end
 
 function mod:Sunbeam(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Positive", nil, CL["removed"]:format(self:SpellName(122768)))
+		self:Message(args.spellId, "green", nil, CL["removed"]:format(self:SpellName(122768)))
 	end
 end
 
 function mod:SunBreath(args)
 	self:Bar(args.spellId, 29)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 end
 
 function mod:ShadowBreath(args)
 	self:CDBar(args.spellId, 25)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 end
 
 do
@@ -135,14 +135,14 @@ do
 		for i=1, 40 do
 			local name, _, _, buffType, _, _, _, _, _, spellId = UnitBuff("boss1", i)
 			if name and buffType == "Magic" then
-				self:Message("phases", "Attention", "Alert", ("%s - %s"):format((self:UnitName("boss1")), name), spellId)
+				self:Message("phases", "yellow", "Alert", ("%s - %s"):format((self:UnitName("boss1")), name), spellId)
 				break
 			end
 		end
 	end
 
 	local function printTarget(self, name, guid) -- Nightmares
-		self:TargetMessage(122777, name, "Important", "Alert")
+		self:TargetMessage(122777, name, "red", "Alert")
 		if self:Me(guid) then
 			self:Flash(122777)
 			self:Say(122777)
@@ -161,7 +161,7 @@ do
 				self:StopBar(122752) -- Shadow Breath
 				self:StopBar(122789) -- Sunbeam
 				self:StopBar(-6550) -- The Dark of Night
-				self:Message("phases", "Positive", nil, -6315, "spell_holy_circleofrenewal") -- The Day
+				self:Message("phases", "green", nil, -6315, "spell_holy_circleofrenewal") -- The Day
 				self:Bar("phases", 121, -6310, 122768) -- The Night
 				self:Bar(122855, 32) -- Sun Breath
 				self:Bar("unstable_sha", 18, 122953, 122938)
@@ -171,7 +171,7 @@ do
 				self:StopBar(122855) -- Sun Breath
 				self:OpenProximity(122777, 8)
 				self:Bar(122777, 15) -- Nightmares
-				self:Message("phases", "Positive", nil, -6310, 122768) -- The Night
+				self:Message("phases", "green", nil, -6310, 122768) -- The Night
 				self:Bar("phases", 121, -6315, "spell_holy_circleofrenewal") -- The Day
 				self:Bar(122752, 10) -- Shadow Breath
 				if self:Dispeller("magic", true) then
@@ -181,7 +181,7 @@ do
 				local t = GetTime()
 				if t-prev > 2 then
 					prev = t
-					self:Message("unstable_sha", "Important", "Alert", self:SpellName(spellId), 122938)
+					self:Message("unstable_sha", "red", "Alert", self:SpellName(spellId), 122938)
 					self:Bar("unstable_sha", 18, self:SpellName(spellId), 122938)
 				end
 			elseif spellId == 122775 then -- Nightmares
@@ -189,11 +189,11 @@ do
 				if self:Difficulty() == 3 or self:Difficulty() == 5 then -- Only 1 nightmare spawns in 10 man modes
 					self:GetBossTarget(printTarget, 0.7, UnitGUID(unitId))
 				else
-					self:Message(122777, "Attention")
+					self:Message(122777, "yellow")
 				end
 			elseif spellId == 123813 then -- The Dark of Night (heroic)
 				self:Bar(-6550, 30, 130013)
-				self:Message(-6550, "Urgent", "Alarm", 130013)
+				self:Message(-6550, "orange", "Alarm", 130013)
 			end
 		end
 	end

@@ -149,14 +149,14 @@ function mod:BossEngage()
 	self:CheckBossStatus()
 	if self:MobId(UnitGUID("boss2")) == 69374 then -- War-God Jalak
 		self:StopBar(-7087)
-		self:Message("adds", "Neutral", "Info", -7087, false) -- War-God Jalak
+		self:Message("adds", "cyan", "Info", -7087, false) -- War-God Jalak
 		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
 		self:Bar(136817, 5) -- Bestial Cry
 	end
 end
 
 function mod:Rampage(args)
-	self:Message(args.spellId, "Important", "Long")
+	self:Message(args.spellId, "red", "Long")
 end
 
 function mod:BestialCry(args)
@@ -164,35 +164,35 @@ function mod:BestialCry(args)
 end
 
 function mod:CrackedShell(args)
-	self:Message(args.spellId, "Positive", nil, args.spellName) -- 10s stun timer, too, maybe?
+	self:Message(args.spellId, "green", nil, args.spellName) -- 10s stun timer, too, maybe?
 end
 
 function mod:ControlOrb(msg, _, _, _, player)
-	self:Message(137240, "Positive", nil, msg)
+	self:Message(137240, "green", nil, msg)
 end
 
 function mod:LastPhase(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 35 then -- phase starts at 30, except if the boss is already there
-		self:Message("adds", "Neutral", "Info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
+		self:Message("adds", "cyan", "Info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
 		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
 
 function mod:DinoForm(args)
 	-- tie it to this event, this is when you can use the orb
-	self:Message(-7092, "Positive", nil, L["orb_message"])
+	self:Message(-7092, "green", nil, L["orb_message"])
 end
 
 function mod:DinoMending(args)
-	self:Message(-7090, "Important", "Long")
+	self:Message(-7090, "red", "Long")
 	self:CDBar(-7090, 8) -- to help interrupters keep track
 end
 
 function mod:DinoMendingInterrupt(args)
 	if args.extraSpellId == 136797 then
 		self:StopBar(-7090)
-		self:Message(-7090, "Positive", nil, CL["interrupted"]:format(self:SpellName(-7090)))
+		self:Message(-7090, "green", nil, CL["interrupted"]:format(self:SpellName(-7090)))
 	end
 end
 
@@ -204,7 +204,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL["underyou"]:format(args.spellName))
+			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -214,7 +214,7 @@ do
 	local hexTargets, scheduled = mod:NewTargetList(), nil
 	local function warnHex()
 		scheduled = nil
-		mod:TargetMessage(-7125, hexTargets, "Important", "Alarm")
+		mod:TargetMessage(-7125, hexTargets, "red", "Alarm")
 	end
 	function mod:Hex(args)
 		if self:Dispeller("curse", nil, -7125) then
@@ -223,7 +223,7 @@ do
 				scheduled = self:ScheduleTimer(warnHex, 0.2)
 			end
 		elseif self:Me(args.destGUID) then
-			self:TargetMessage(-7125, args.destName, "Important", "Alarm")
+			self:TargetMessage(-7125, args.destName, "red", "Alarm")
 		end
 	end
 end
@@ -234,7 +234,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
-			self:Message("chain_lightning", "Personal", "Alert", L["chain_lightning_message"], args.spellId)
+			self:Message("chain_lightning", "blue", "Alert", L["chain_lightning_message"], args.spellId)
 		end
 	end
 end
@@ -245,7 +245,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
-			self:Message("fireball", "Personal", "Alert", L["fireball_message"], args.spellId)
+			self:Message("fireball", "blue", "Alert", L["fireball_message"], args.spellId)
 		end
 	end
 end
@@ -259,14 +259,14 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL["underyou"]:format(args.spellName)) -- not exactly under you
+			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName)) -- not exactly under you
 			self:Flash(args.spellId)
 		end
 	end
 end
 
 function mod:MortalStrike(args)
-	self:TargetMessage(-7120, args.destName, "Urgent")
+	self:TargetMessage(-7120, args.destName, "orange")
 	self:TargetBar(-7120, 8, args.destName)
 end
 
@@ -280,7 +280,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("disease", nil, -7119) then -- don't spam
 			prev = t
-			self:Message(-7119, "Important", "Alarm", args.spellName, args.spellId)
+			self:Message(-7119, "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
@@ -294,7 +294,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL["underyou"]:format(args.spellName))
+			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -306,14 +306,14 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("poison") then -- don't spam
 			prev = t
-			self:Message("venom_bolt_volley", "Important", "Alarm", args.spellName, args.spellId)
+			self:Message("venom_bolt_volley", "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
 
 function mod:VenomBoltVolley(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:Message("venom_bolt_volley", "Personal", "Alert", L["venom_bolt_volley_message"], args.spellId)
+		self:Message("venom_bolt_volley", "blue", "Alert", L["venom_bolt_volley_message"], args.spellId)
 		self:Bar("venom_bolt_volley", 16, L["venom_bolt_volley_bar"], args.spellId)
 	end
 end
@@ -327,7 +327,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "Personal", "Info", CL["underyou"]:format(args.spellName), args.spellId)
+			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName), args.spellId)
 			self:Flash(args.spellId)
 		end
 	end
@@ -339,7 +339,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("magic", nil, -7109) then -- don't spam
 			prev = t
-			self:Message(-7109, "Important", "Alarm", args.spellName, args.spellId)
+			self:Message(-7109, "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
@@ -347,7 +347,7 @@ end
 -- General
 
 function mod:Charge(msg, _, _, _, player)
-	self:TargetMessage(-7080, player, "Attention", "Warning", nil, nil, true)
+	self:TargetMessage(-7080, player, "yellow", "Warning", nil, nil, true)
 	self:CDBar(-7080, 51)
 	if UnitIsUnit("player", player) then
 		self:Flash(-7080)
@@ -356,7 +356,7 @@ function mod:Charge(msg, _, _, _, player)
 end
 
 function mod:Doors(msg)
-	self:DelayedMessage("adds", 5, "Neutral", L["door_opened"], "inv_shield_11")
+	self:DelayedMessage("adds", 5, "cyan", L["door_opened"], "inv_shield_11")
 	doorCounter = doorCounter + 1
 	-- next door
 	if doorCounter < 5 then
@@ -367,36 +367,36 @@ function mod:Doors(msg)
 
 	-- 1st wave jumps down
 	self:Bar("adds", 20, L["balcony_adds"], L.adds_icon)
-	self:DelayedMessage("adds", 20, "Neutral", CL["count"]:format(L["balcony_adds"], 1), L.adds_icon)
+	self:DelayedMessage("adds", 20, "cyan", CL["count"]:format(L["balcony_adds"], 1), L.adds_icon)
 
 	-- 2nd wave jumps down
 	self:ScheduleTimer("Bar", 20, "adds", 19, L["balcony_adds"], L.adds_icon)
-	self:DelayedMessage("adds", 39, "Neutral", CL["count"]:format(L["balcony_adds"], 2), L.adds_icon)
+	self:DelayedMessage("adds", 39, "cyan", CL["count"]:format(L["balcony_adds"], 2), L.adds_icon)
 
 	-- dinomancer jumps down
 	self:Bar(-7086, 58, nil, "ability_hunter_beastwithin") -- Zandalari Dinomancer (Dino Form icon)
-	self:DelayedMessage(-7086, 58, "Neutral", nil, "ability_hunter_beastwithin")
+	self:DelayedMessage(-7086, 58, "cyan", nil, "ability_hunter_beastwithin")
 end
 
 function mod:Swipe(args)
-	self:Message(136741, "Urgent", "Long")
+	self:Message(136741, "orange", "Long")
 	local timer = (args.spellID == 136770) and 11 or 19 -- after charge swipe is ~10 sec, then ~19 till next charge ( 10 H ptr )
 	self:CDBar(136741, self:LFR() and 16 or timer) -- someone needs to verify LFR timer
 end
 
 function mod:Puncture(args)
-	self:StackMessage(-7078, args.destName, args.amount, "Urgent")
+	self:StackMessage(-7078, args.destName, args.amount, "orange")
 	self:CDBar(-7078, 10.9)
 end
 
 function mod:DireCall(args)
-	self:Message(args.spellId, "Urgent")
+	self:Message(args.spellId, "orange")
 	self:Bar(args.spellId, 63)
 end
 
 function mod:DireFixation(args)
 	if self:Me(args.destGUID) then
-		self:Message(-7868, "Personal", "Info", CL["you"]:format(args.spellName))
+		self:Message(-7868, "blue", "Info", CL["you"]:format(args.spellName))
 		self:Flash(-7868)
 	end
 end

@@ -61,12 +61,12 @@ end
 --
 
 function mod:MagmaCrush(args)
-	self:Message(args.spellId, "Urgent", nil, CL["casting"]:format(args.spellName))
+	self:Message(args.spellId, "orange", nil, CL["casting"]:format(args.spellName))
 	self:CDBar(args.spellId, 12)
 end
 
 function mod:PoolOfFire(args)
-	self:Message(args.spellId, "Attention", "Alarm")
+	self:Message(args.spellId, "yellow", "Alarm")
 	self:CDBar(args.spellId, 32)
 end
 
@@ -77,14 +77,14 @@ do
 			local t = GetTime()
 			if t-prev > 4 then
 				prev = t
-				self:Message(144692, "Personal", "Info", CL["underyou"]:format(args.spellName))
+				self:Message(144692, "blue", "Info", CL["underyou"]:format(args.spellName))
 			end
 		end
 	end
 end
 
 function mod:AncientFlame(args)
-	self:Message(args.spellId, "Attention")
+	self:Message(args.spellId, "yellow")
 	self:CDBar(args.spellId, 44)
 end
 
@@ -95,7 +95,7 @@ do
 			local t = GetTime()
 			if t-prev > 4 then
 				prev = t
-				self:Message(144695, "Personal", "Info", CL["you"]:format(args.spellName))
+				self:Message(144695, "blue", "Info", CL["you"]:format(args.spellName))
 			end
 		end
 	end
@@ -116,7 +116,7 @@ do
 			coloredNames[i] = v
 			burningSoulList[i] = nil
 		end
-		mod:TargetMessage(spellId, coloredNames, "Urgent", "Alert", nil, nil, true)
+		mod:TargetMessage(spellId, coloredNames, "orange", "Alert", nil, nil, true)
 		scheduled = nil
 	end
 

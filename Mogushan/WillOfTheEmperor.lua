@@ -134,39 +134,39 @@ end
 --
 
 function mod:Rage()
-	self:Message("rage", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["rage"]), 13), L.rage_icon)
+	self:Message("rage", "yellow", nil, CL["custom_sec"]:format(self:SpellName(L["rage"]), 13), L.rage_icon)
 	self:Bar("rage", 13, L["rage"], L.rage_icon)
-	self:DelayedMessage("rage", 13, "Attention", L["rage"], L.rage_icon)
+	self:DelayedMessage("rage", 13, "yellow", L["rage"], L.rage_icon)
 end
 
 function mod:FocusedAssault(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Message(args.spellId, "Personal", "Info", CL["you"]:format(args.spellName))
+		self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
 	end
 end
 
 function mod:FocusedEnergy(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention", "Info")
+	self:TargetMessage(args.spellId, args.destName, "yellow", "Info")
 end
 
 function mod:Strength()
 	strengthCounter = strengthCounter + 1
-	self:Message("strength", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["strength"]), 8), L.strength_icon)
+	self:Message("strength", "yellow", nil, CL["custom_sec"]:format(self:SpellName(L["strength"]), 8), L.strength_icon)
 	self:Bar("strength", 8, CL["count"]:format(self:SpellName(L["strength"]), strengthCounter), L.strength_icon)
-	self:DelayedMessage("strength", 8, "Attention", CL["count"]:format(self:SpellName(L["strength"]), strengthCounter), L.strength_icon)
+	self:DelayedMessage("strength", 8, "yellow", CL["count"]:format(self:SpellName(L["strength"]), strengthCounter), L.strength_icon)
 end
 
 function mod:Courage()
-	self:Message("courage", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["courage"]), 11), L.courage_icon)
+	self:Message("courage", "yellow", nil, CL["custom_sec"]:format(self:SpellName(L["courage"]), 11), L.courage_icon)
 	self:Bar("courage", 11, L["courage"], L.courage_icon) -- shield like icon
-	self:DelayedMessage("courage", 11, "Attention", L["courage"], L.courage_icon)
+	self:DelayedMessage("courage", 11, "yellow", L["courage"], L.courage_icon)
 end
 
 function mod:Bosses()
-	self:Message("bosses", "Attention", nil, CL["custom_sec"]:format(self:SpellName(L["bosses"]), 13), L.bosses_icon)
+	self:Message("bosses", "yellow", nil, CL["custom_sec"]:format(self:SpellName(L["bosses"]), 13), L.bosses_icon)
 	self:Bar("bosses", 13, L["bosses"], L.bosses_icon)
-	self:DelayedMessage("bosses", 13, "Attention", L["bosses"], L.bosses_icon)
+	self:DelayedMessage("bosses", 13, "yellow", L["bosses"], L.bosses_icon)
 	if not self:Heroic() then
 		self:CDBar(-5670, 123) -- Titan Gas
 	end
@@ -180,12 +180,12 @@ do
 		gasCounter = gasCounter + 1
 		self:ScheduleTimer(fireNext, 30)
 		self:Bar(-5670, 30)
-		self:Message(-5670, "Attention", nil, CL["count"]:format(self:SpellName(-5670), gasCounter))
+		self:Message(-5670, "yellow", nil, CL["count"]:format(self:SpellName(-5670), gasCounter))
 	end
 end
 
 function mod:TitanGasOverdrive()
-	self:Message(-5670, "Important", "Alarm", ("%s (%s)"):format(self:SpellName(-5670), self:SpellName(26662))) --Berserk
+	self:Message(-5670, "red", "Alarm", ("%s (%s)"):format(self:SpellName(-5670), self:SpellName(26662))) --Berserk
 end
 
 do
@@ -207,7 +207,7 @@ do
 
 			if UnitIsUnit("target", unitId) then
 				local boss = UnitName(unitId)
-				self:Message("arc", "Urgent", nil, ("%s: %s (%d)"):format(boss, self:SpellName(spellId), comboCounter[unitId]), arcs[spellId])
+				self:Message("arc", "orange", nil, ("%s: %s (%d)"):format(boss, self:SpellName(spellId), comboCounter[unitId]), arcs[spellId])
 			end
 		elseif spellId == 118365 then -- Energize
 			local t = GetTime()
@@ -218,7 +218,7 @@ do
 				if UnitIsUnit("target", unitId) or self:Healer() then
 					local boss = UnitName(unitId)
 					self:Bar("combo", 20, CL["other"]:format(boss, L["combo"]), spellId)
-					self:DelayedMessage("combo", 17, "Personal", L["combo_message"]:format(boss), L.arc_icon, "Long")
+					self:DelayedMessage("combo", 17, "blue", L["combo_message"]:format(boss), L.arc_icon, "Long")
 				end
 			end
 		end

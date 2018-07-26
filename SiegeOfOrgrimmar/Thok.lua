@@ -110,7 +110,7 @@ end
 function mod:YetCharge(args)
 	self:Bar(args.spellId, 15)
 	if not yetiChargeTimer then
-		yetiChargeTimer = self:ScheduleTimer("Message", 15, args.spellId, "Important", "Warning", CL.soon:format(args.spellName))
+		yetiChargeTimer = self:ScheduleTimer("Message", 15, args.spellId, "red", "Warning", CL.soon:format(args.spellName))
 	end
 end
 
@@ -118,23 +118,23 @@ end
 
 function mod:BloodFrenzy(args)
 	-- this may feel like double message, but knowing exact stack count on phase change can help plan the rest of the fight
-	self:Message(-7981, "Attention", nil, CL.count:format(args.spellName, args.amount))
+	self:Message(-7981, "yellow", nil, CL.count:format(args.spellName, args.amount))
 end
 
 function mod:Enrage(args)
 	if self:Tank() or self:Dispeller("enrage", true, args.spellId) then
-		self:TargetMessage(args.spellId, args.destName, "Urgent", "Alert")
+		self:TargetMessage(args.spellId, args.destName, "orange", "Alert")
 	end
 end
 
 function mod:SkeletonKeyRemoved(args)
-	self:Message(args.spellId, "Positive", "Alert", L.cage_opened)
+	self:Message(args.spellId, "green", "Alert", L.cage_opened)
 	self:StopBar(args.spellId, args.destName)
 	self:Bar(-7981, 13, CL.over:format(self:SpellName(-7981))) -- Blood Frenzy
 end
 
 function mod:SkeletonKey(args)
-	self:TargetMessage(args.spellId, args.destName, "Attention", "Warning")
+	self:TargetMessage(args.spellId, args.destName, "yellow", "Warning")
 	self:TargetBar(args.spellId, 60, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
@@ -156,7 +156,7 @@ do
 	end
 	function mod:BloodFrenzyOver(args)
 		self:OpenProximity("proximity", 10)
-		self:Message(-7981, "Neutral", "Long", CL.over:format(args.spellName))
+		self:Message(-7981, "cyan", "Long", CL.over:format(args.spellName))
 		self:CDBar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
 		self:CDBar(143766, 12, 17086, "ability_hunter_pet_devilsaur") -- Breath. 143766 isn't exactly a combined option but it's one of the breaths.
 		if self:Mythic() then
@@ -169,7 +169,7 @@ function mod:FixateRemoved(args)
 	self:PrimaryIcon(-7980)
 	self:StopBar(-7980, args.destName)
 	if self:Me(args.destGUID) then
-		self:Message(-7980, "Positive", nil, CL.over:format(args.spellName))
+		self:Message(-7980, "green", nil, CL.over:format(args.spellName))
 	end
 end
 
@@ -178,13 +178,13 @@ function mod:FixateApplied(args)
 		self:Say(-7980)
 		self:Flash(-7980)
 	end
-	self:TargetMessage(-7980, args.destName, "Urgent", "Alarm")
+	self:TargetMessage(-7980, args.destName, "orange", "Alarm")
 	self:TargetBar(-7980, 12, args.destName)
 	self:PrimaryIcon(-7980, args.destName)
 end
 
 function mod:BloodFrenzyPhase()
-	self:Message(-7963, "Attention", nil, CL.count:format(self:SpellName(143411), accCount))
+	self:Message(-7963, "yellow", nil, CL.count:format(self:SpellName(143411), accCount))
 	accCount = 0
 	self:StopBar(143428) -- Tail Lash
 	self:StopBar(143426) -- Fearsome Roar
@@ -193,7 +193,7 @@ function mod:BloodFrenzyPhase()
 	self:StopBar(143767) -- Scorching Breath
 	self:StopBar(-7963) -- Deafening Screech
 	self:CloseProximity("proximity")
-	self:Message(-7981, "Neutral", "Long")
+	self:Message(-7981, "cyan", "Long")
 end
 
 -- stage 1
@@ -205,7 +205,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:Message(args.spellId, "Personal", "Info", CL.underyou:format(args.spellName))
+				self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
 			end
 		end
 	end
@@ -215,7 +215,7 @@ do
 	local frozenSolid, scheduled = mod:NewTargetList(), nil
 	local function warnFrozenSolid(spellId)
 		scheduled = nil
-		mod:TargetMessage(spellId, frozenSolid, "Attention")
+		mod:TargetMessage(spellId, frozenSolid, "yellow")
 	end
 	function mod:FrozenSolid(args)
 		frozenSolid[#frozenSolid+1] = args.destName
@@ -237,7 +237,7 @@ do
 			self:Bar(-7963, accTimes[accCount])
 		end
 		if accCount < 6 or accCount % 3 == 0 then
-			self:Message(-7963, "Attention", nil, CL.count:format(args.spellName, accCount))
+			self:Message(-7963, "yellow", nil, CL.count:format(args.spellName, accCount))
 		end
 	end
 end
@@ -251,7 +251,7 @@ function mod:TankDebuffCasts(_, _, _, spellId)
 end
 
 function mod:TankDebuff(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "Attention", not self:Me(args.destGUID) and "Warning")
+	self:StackMessage(args.spellId, args.destName, args.amount, "yellow", not self:Me(args.destGUID) and "Warning")
 end
 
 function mod:YetiDeath(args)

@@ -153,7 +153,7 @@ do
 		return false
 	end
 	local function warnHuddle(spellId)
-		mod:TargetMessage(spellId, huddleList, "Important", "Alert")
+		mod:TargetMessage(spellId, huddleList, "red", "Alert")
 		scheduled = nil
 	end
 	function mod:HuddleInTerrorApplied(args)
@@ -188,12 +188,12 @@ do
 	function mod:Waterspout(args)
 		spoutUsed = true
 		warnNext()
-		self:Message(args.spellId, "Urgent")
+		self:Message(args.spellId, "orange")
 	end
 	function mod:ImplacableStrike(args)
 		strikeUsed = true
 		warnNext()
-		self:Message(args.spellId, "Attention", "Alarm")
+		self:Message(args.spellId, "yellow", "Alarm")
 	end
 	function mod:Emerge(args)
 		huddleUsed, strikeUsed, spoutUsed = nil, nil, nil
@@ -203,13 +203,13 @@ end
 
 function mod:Submerge(args)
 	submergeCounter = submergeCounter + 1
-	self:Message(args.spellId, "Attention", nil, CL["count"]:format(args.spellName, submergeCounter))
+	self:Message(args.spellId, "yellow", nil, CL["count"]:format(args.spellName, submergeCounter))
 	self:Bar(args.spellId, 52, CL["count"]:format(args.spellName, submergeCounter+1))
 end
 
 function mod:FadingLight(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Positive", "Long", L["cooldown_reset"])
+		self:Message(args.spellId, "green", "Long", L["cooldown_reset"])
 	end
 end
 
@@ -220,7 +220,7 @@ do
 		for guid in next, dreadSpawns do
 			dreadSpawnCounter = dreadSpawnCounter + 1
 		end
-		mod:Message(-6107, "Positive", nil, CL["count"]:format(source, dreadSpawnCounter), 128419)
+		mod:Message(-6107, "green", nil, CL["count"]:format(source, dreadSpawnCounter), 128419)
 		scheduled = nil
 	end
 	function mod:DreadSpawnSingleCast(args)
@@ -246,7 +246,7 @@ do
 			local t = GetTime()
 			if t-prev > 1 then
 				prev = t
-				self:Message(-6109, "Personal", "Long", L["throw"])
+				self:Message(-6109, "blue", "Long", L["throw"])
 				self:Flash(-6109)
 			end
 		end
@@ -258,14 +258,14 @@ function mod:ChampionOfTheLight(args)
 		championOnMe = true
 		self:Flash(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "Positive", "Long", L["ball"])
+	self:TargetMessage(args.spellId, args.destName, "green", "Long", L["ball"])
 	self:CloseProximity(args.spellId)
 end
 
 do
 	local function checkForDead(player)
 		if UnitIsDead(player) then
-			mod:Message(120669, "Important", nil, L["ball_dropped"])
+			mod:Message(120669, "red", nil, L["ball_dropped"])
 		end
 	end
 	function mod:ChampionOfTheLightRemoved(args)
@@ -278,7 +278,7 @@ do
 end
 
 function mod:NakedAndAfraid(args)
-	self:TargetMessage(args.spellId, args.destName, "Urgent", "Info", nil, nil, true)
+	self:TargetMessage(args.spellId, args.destName, "orange", "Info", nil, nil, true)
 	self:Bar(args.spellId, 31)
 end
 
@@ -295,7 +295,7 @@ function mod:Transitions(_, _, _, spellId)
 		self:Berserk(900, phase == 2)
 		if phase == 2 then
 			-- Phase 2 - Berserk in 15 min!
-			self:Message("berserk", "Attention", nil, CL["phase"]:format(2).." - "..CL["custom_min"]:format(self:SpellName(spellId), 15), 26662)
+			self:Message("berserk", "yellow", nil, CL["phase"]:format(2).." - "..CL["custom_min"]:format(self:SpellName(spellId), 15), 26662)
 			-- start Submerge timer using the current power and the new regen rate
 			local left = 1 - (UnitPower("boss1") / UnitPowerMax("boss1")) * 52
 			self:Bar(120455, left, CL["count"]:format(self:SpellName(120455), 1))
@@ -305,7 +305,7 @@ end
 
 function mod:WaterspoutApplied(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "Personal", "Info", CL["underyou"]:format(args.spellName))
+		self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 		self:Flash(args.spellId)
 	end
 end
@@ -319,7 +319,7 @@ do
 		if player and ((not UnitDetailedThreatSituation("boss1target", "boss1") and not mod:Tank("boss1target")) or fired > 13) then
 			-- If we've done 14 (0.7s) checks and still not passing the threat check, it's probably being cast on the tank
 			if UnitIsUnit("boss1target", "player") then
-				mod:Message(119519, "Urgent", "Alarm", CL["you"]:format(eerieSkull))
+				mod:Message(119519, "orange", "Alarm", CL["you"]:format(eerieSkull))
 				mod:Say(119519, eerieSkull)
 				mod:Flash(119519)
 			end
@@ -346,14 +346,14 @@ function mod:Thrash(args)
 	thrashNext = 2
 	if phase == 2 then
 		thrashCounter = thrashCounter + 1
-		self:Message(-6699, "Urgent", nil, CL["count"]:format(args.spellName, thrashCounter))
+		self:Message(-6699, "orange", nil, CL["count"]:format(args.spellName, thrashCounter))
 		if thrashCounter == 3 then
 			self:Bar(-6700, 10) -- Dread Thrash
 		else
 			self:Bar(-6699, 10, CL["count"]:format(args.spellName, thrashCounter + 1))
 		end
 	elseif atSha then
-		self:Message(-6699, "Important")
+		self:Message(-6699, "red")
 		self:Bar(-6699, 10)
 	end
 end
@@ -361,7 +361,7 @@ end
 function mod:DreadThrash(args)
 	thrashCounter = 0
 	thrashNext = 5
-	self:Message(-6700, "Important", "Alarm")
+	self:Message(-6700, "red", "Alarm")
 	self:Bar(-6699, 10, CL["count"]:format(self:SpellName(131996), thrashCounter + 1)) -- Thrash
 end
 
@@ -377,9 +377,9 @@ do
 			thrashNext = nil
 		elseif self:Me(args.destGUID) then --just the current tank
 			if swingCounter > 0 then -- normal swing
-				self:Message("swing", "Positive", nil, CL["count"]:format(L["swing"], swingCounter), 5547) -- ability_thunderbolt / Swing / icon 132325
+				self:Message("swing", "green", nil, CL["count"]:format(L["swing"], swingCounter), 5547) -- ability_thunderbolt / Swing / icon 132325
 			elseif swingCounter == 0 then -- last extra swing
-				self:Message("swing", "Positive", nil, CL["other"]:format(CL["count"]:format(L["swing"], thrashSwing), self:SpellName(131996)), 158176) -- "Swing (4): Thrash" / ability_ghoulfrenzy / Thrash / icon 132152
+				self:Message("swing", "green", nil, CL["other"]:format(CL["count"]:format(L["swing"], thrashSwing), self:SpellName(131996)), 158176) -- "Swing (4): Thrash" / ability_ghoulfrenzy / Thrash / icon 132152
 			end
 		end
 	end
@@ -389,7 +389,7 @@ function mod:DeathBlossom(args)
 	if not atSha then
 		self:Flash(args.spellId)
 		self:Bar(args.spellId, 2.25, CL["cast"]:format(args.spellName)) -- so it can be emphasized for countdown
-		self:Message(args.spellId, "Important", "Alert")
+		self:Message(args.spellId, "red", "Alert")
 	end
 end
 
@@ -400,13 +400,13 @@ function mod:Fearless(args)
 		atSha = true
 		self:CancelDelayedMessage(CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
 		self:Bar(args.spellId, 30)
-		self:DelayedMessage(args.spellId, 22, "Attention", L["fading_soon"]:format(args.spellName))
+		self:DelayedMessage(args.spellId, 22, "yellow", L["fading_soon"]:format(args.spellName))
 
 		-- resume Breath of Fear bar/message
 		local left = nextFear - GetTime()
 		self:Bar(119414, left)
 		if left > 10 then
-			self:DelayedMessage(119414, left-8, "Attention", CL["soon"]:format(self:SpellName(119414)), false, "Long")
+			self:DelayedMessage(119414, left-8, "yellow", CL["soon"]:format(self:SpellName(119414)), false, "Long")
 		end
 	end
 end
@@ -419,7 +419,7 @@ function mod:BreathOfFear(args)
 	nextFear = GetTime() + 33.3
 	if atSha then -- Don't care about Sha while at a shrine and you have Fearless when you come back
 		self:Bar(args.spellId, 33.3)
-		self:DelayedMessage(args.spellId, 25, "Attention", CL["soon"]:format(args.spellName), false, "Long")
+		self:DelayedMessage(args.spellId, 25, "yellow", CL["soon"]:format(args.spellName), false, "Long")
 	end
 end
 
@@ -438,7 +438,7 @@ end
 do
 	local cackleTargets, scheduled = mod:NewTargetList(), nil
 	local function warnCackle(spellId)
-		mod:TargetMessage(spellId, cackleTargets, "Urgent")
+		mod:TargetMessage(spellId, cackleTargets, "orange")
 		scheduled = nil
 	end
 	function mod:OminousCackleApplied(args)
@@ -461,7 +461,7 @@ function mod:BlossomPreWarn(event, unitId)
 	if mobId == 61046 or mobId == 61038 or mobId == 61042 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 30 then
-			self:Message(119888, "Attention", nil, CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
+			self:Message(119888, "yellow", nil, CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
 			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end
