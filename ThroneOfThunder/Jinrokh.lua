@@ -61,7 +61,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "FocusedLightningRemoved", 137422)
 	self:Log("SPELL_CAST_START", "FocusedLightning", 137399) -- SUCCESS has destName, but this is so much earlier, and "boss1target" should be reliable for it
 	self:Log("SPELL_CAST_SUCCESS", "StaticBurst", 137162)
-	self:Log("SPELL_DAMAGE", "StaticWoundConduction", 138375)
+	self:Log("SPELL_DAMAGE", "StaticWoundConduction", 138375) -- XXX doesn't exist anymore
 	self:Log("SPELL_PERIODIC_DAMAGE", "ElectrifiedWaters", 138006)
 	self:Log("SPELL_PERIODIC_MISSED", "ElectrifiedWaters", 138006)
 
