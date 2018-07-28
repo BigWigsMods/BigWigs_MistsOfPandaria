@@ -154,7 +154,7 @@ end
 -- Dam'ren
 
 function mod:Freeze(args)
-	local _, _, duration = self:UnitDebuff(args.destName, args.spellName)
+	local _, _, duration = self:UnitDebuff(args.destName, args.spellId)
 	self:Bar(args.spellId, duration, CL["incoming"]:format(args.spellName)) -- so people can use personal cooldowns for when the damage happens
 end
 
