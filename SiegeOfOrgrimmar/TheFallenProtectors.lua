@@ -94,6 +94,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Fixate", 143292)
 	self:Log("SPELL_DAMAGE", "NoxiousPoisonDamage", 144367)
 	self:Log("SPELL_AURA_APPLIED", "MarkOfAnguish", 143840)
+	self:Log("SPELL_AURA_REMOVED", "MarkOfAnguishRemoved", 143840)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "LingeringAnguish", 144176)
 	-- Rook Stonetoe
 	self:Log("SPELL_AURA_APPLIED", "RookIntermission", 143955) -- Misery, Sorrow, and Gloom
@@ -133,7 +134,7 @@ end
 do
 	local meditativeField = mod:SpellName(143564)
 	local function warnDarkMeditation(spellId)
-		if not mod:UnitDebuff("player", meditativeField) and UnitAffectingCombat("player") then
+		if not mod:UnitDebuff("player", meditativeField, 143564) and UnitAffectingCombat("player") then
 			mod:Message(143564, "blue", "Info", L.no_meditative_field)
 		end
 	end
@@ -241,17 +242,26 @@ end
 
 -- He Softfoot
 
-function mod:LingeringAnguish(args)
-	-- inform the player with the debuff if stacks are getting high, the values might need adjusting (one warning about every 6 sec atm)
-	if self:UnitDebuff("player", self:SpellName(143840)) and (args.amount > 7 and args.amount % 2 == 0) then -- Mark of Anguish
-		self:StackMessage(143840, args.destName, args.amount, "blue", "Info", 144176, 144176)
+do
+	local anguishOnMe = false
+	function mod:LingeringAnguish(args)
+		-- inform the player with the debuff if stacks are getting high, the values might need adjusting (one warning about every 6 sec atm)
+		if anguishOnMe and (args.amount > 7 and args.amount % 2 == 0) then -- Mark of Anguish
+			self:StackMessage(143840, args.destName, args.amount, "blue", "Info", 144176, 144176)
+		end
 	end
-end
 
-function mod:MarkOfAnguish(args)
-	self:TargetMessage(args.spellId, args.destName, "red", "Alert")
-	if self:Me(args.destGUID) then
-		self:Flash(args.spellId)
+	function mod:MarkOfAnguish(args)
+		self:TargetMessage(args.spellId, args.destName, "red", "Alert")
+		if self:Me(args.destGUID) then
+			anguishOnMe = true
+			self:Flash(args.spellId)
+		end
+	end
+	function mod:MarkOfAnguishRemoved(args)
+		if self:Me(args.destGUID) then
+			anguishOnMe = false
+		end
 	end
 end
 
@@ -323,6 +333,7 @@ end
 
 do
 	local timeLeft = 8
+	local prev = 0
 	local function infernoCountdown(self)
 		timeLeft = timeLeft - 1
 		if timeLeft < 6 then
@@ -338,7 +349,8 @@ do
 		if infernoTimer then self:CancelTimer(infernoTimer) end
 		infernoTimer = self:ScheduleRepeatingTimer(infernoCountdown, 1, self)
 	end
-	local function checkTarget(self, name, guid, elapsed)
+	local function checkTarget(self, name, guid)
+		local t = GetTime() - prev
 		infernoTarget = name
 		self:CloseProximity("proximity")
 		self:PrimaryIcon(-7959, name)
@@ -346,21 +358,22 @@ do
 			self:Flash(-7959)
 			self:Say(-7959)
 			if not self:LFR() then -- Don't spam in LFR
-				self:ScheduleTimer(startTimer, 1-elapsed, self)
+				self:ScheduleTimer(startTimer, 1-t, self)
 			end
 			self:OpenProximity(-7959, 8, nil, true)
 			-- Emphasized abilities
 			self:TargetMessage("inferno_self", name, "orange", "Warning", -7959)
-			self:Bar("inferno_self", 9-elapsed, L.inferno_self_bar, -7959)
+			self:Bar("inferno_self", 9-t, L.inferno_self_bar, -7959)
 		else
 			self:TargetMessage(-7959, name, "orange")
-			self:TargetBar(-7959, 9-elapsed, name)
+			self:TargetBar(-7959, 9-t, name)
 			if not self:Tank() and not self:LFR() then
 				self:OpenProximity(-7959, 8, name, true)
 			end
 		end
 	end
 	function mod:InfernoStrike(args)
+		prev = GetTime()
 		if infernoTarget then
 			self:StopBar(-7959, infernoTarget)
 			self:StopBar(L.inferno_self_bar)
