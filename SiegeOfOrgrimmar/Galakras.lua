@@ -144,8 +144,7 @@ function mod:OnEngage()
 
 	if self.db.profile.custom_off_shaman_marker then
 		prevMarkedMob = nil
-		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", "UNIT_TARGET")
-		self:RegisterEvent("UNIT_TARGET")
+		self:RegisterTargetEvents("ShamanMarker")
 	end
 end
 
@@ -305,8 +304,7 @@ function mod:Adds(_, _, unit, _, _, target)
 	end
 end
 
-function mod:UNIT_TARGET(event, firedUnit)
-	local unit = firedUnit and firedUnit.."target" or "mouseover"
+function mod:ShamanMarker(_, unit)
 	local guid = UnitGUID(unit)
 	if guid and guid ~= prevMarkedMob and self:MobId(guid) == 72958 then
 		prevMarkedMob = guid
