@@ -3,7 +3,7 @@ BigWigs:AddColors("Sha of Anger", {
 	[119488] = "red",
 	[119610] = "blue",
 	[119622] = "blue",
-	[119626] = {"yellow","blue","orange"},
+	[119626] = {"blue","orange","yellow"},
 })
 
 BigWigs:AddColors("Salyis's Warband", {
@@ -15,7 +15,7 @@ BigWigs:AddColors("Salyis's Warband", {
 BigWigs:AddColors("Nalak", {
 	[136338] = "red",
 	[136339] = "blue",
-	[136340] = {"yellow","blue"},
+	[136340] = {"blue","yellow"},
 })
 
 BigWigs:AddColors("Oondasta", {
@@ -27,6 +27,6 @@ BigWigs:AddColors("Oondasta", {
 BigWigs:AddColors("Ordos", {
 	[144688] = "orange",
 	[144689] = {"blue","orange"},
-	[144692] = {"yellow","blue"},
-	[144695] = {"yellow","blue"},
+	[144692] = {"blue","yellow"},
+	[144695] = {"blue","yellow"},
 })
