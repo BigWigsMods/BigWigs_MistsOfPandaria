@@ -109,7 +109,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Overcharged", 136295)
 	self:Log("SPELL_CAST_SUCCESS", "DiffusionChain", 135991)
 	self:Log("SPELL_DAMAGE", "DiffusionChainDamage", 135991) -- add spawn
-	self:Log("SPELL_MISS", "DiffusionChainDamage", 135991) -- add spawn
+	self:Log("SPELL_MISSED", "DiffusionChainDamage", 135991) -- add spawn
 	self:Log("SPELL_AURA_REMOVED", "DiffusionChainRemoved", 135681)
 	self:Log("SPELL_AURA_APPLIED", "DiffusionChainApplied", 135681)
 	self:Log("SPELL_AURA_REMOVED", "StaticShockRemoved", 135695)

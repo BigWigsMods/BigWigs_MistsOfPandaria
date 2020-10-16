@@ -50,7 +50,7 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		"worm", {138333, "TANK_HEALER"}, {138288, "FLASH", "ICON", "PROXIMITY"},
-		138339, {138334, "TANK_HEALER"}, {138297, "FLASH", "ICON"}, "unstablevitajumptarget", {138372, "FLASH"},
+		138339, {138334, "TANK_HEALER"}, {138297, "FLASH", "ICON"}, {"unstablevitajumptarget", "ICON"}, {138372, "FLASH"},
 		"corruptedballs",
 		"balls", "stages", "berserk",
 		-- XXX 139040 fix desc last phase balls

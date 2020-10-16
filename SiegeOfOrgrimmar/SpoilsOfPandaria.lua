@@ -50,7 +50,7 @@ function mod:GetOptions()
 	return {
 		{146815, "FLASH"},
 		145288, {145461, "TANK"}, {142947, "TANK"}, 142694, -- Mogu crate
-		{145987, "PROXIMITY", "FLASH"}, 145747, {145692, "TANK"}, 145715, {145786, "DISPEL"},-- Mantid crate
+		{145987, "PROXIMITY", "FLASH"}, {145747, "FLASH"}, {145692, "TANK"}, {145715, "FLASH"}, {145786, "DISPEL"},-- Mantid crate
 		{146217, "FLASH"}, 146222, 146257, -- Crate of Panderan Relics
 		"proximity", {"crates", "TANK"}, {"warmup", "COUNTDOWN"}, "berserk",
 	}, {
@@ -270,7 +270,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then -- don't spam
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+			self:Message(145715, "blue", "Info", CL.underyou:format(args.spellName))
 		end
 	end
 end
@@ -281,7 +281,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then -- don't spam
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+			self:Message(145747, "blue", "Info", CL.underyou:format(args.spellName))
 		end
 	end
 end

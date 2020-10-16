@@ -380,7 +380,7 @@ end
 
 function mod:Swipe(args)
 	self:Message(136741, "orange", "Long")
-	local timer = (args.spellID == 136770) and 11 or 19 -- after charge swipe is ~10 sec, then ~19 till next charge ( 10 H ptr )
+	local timer = (args.spellId == 136770) and 11 or 19 -- after charge swipe is ~10 sec, then ~19 till next charge ( 10 H ptr )
 	self:CDBar(136741, self:LFR() and 16 or timer) -- someone needs to verify LFR timer
 end
 
