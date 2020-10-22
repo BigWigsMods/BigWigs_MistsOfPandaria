@@ -6,7 +6,7 @@ if L then
 	L.heal = "%s cura"
 end
 
-L = BigWigs:NewBossLocale("Tsulong", "esES") or BigWigs:NewBossLocale("Protector of the Endless", "esMX")
+L = BigWigs:NewBossLocale("Tsulong", "esES") or BigWigs:NewBossLocale("Tsulong", "esMX")
 if L then
 	L.engage_yell = "¡No debéis estar aquí! He de proteger el agua... ¡Si no puedo expulsaros, os mataré!"
 	L.kill_yell = "Gracias, forasteros. Me habéis liberado."
@@ -17,7 +17,7 @@ if L then
 	L.sunbeam_spawn = "¡Nuevo Rayo de Sol!"
 end
 
-L = BigWigs:NewBossLocale("Lei Shi", "esES") or BigWigs:NewBossLocale("Protector of the Endless", "esMX")
+L = BigWigs:NewBossLocale("Lei Shi", "esES") or BigWigs:NewBossLocale("Lei Shi", "esMX")
 if L then
 	L.hp_to_go = "%d%% para acabar"
 
@@ -28,7 +28,7 @@ if L then
 	L.custom_off_addmarker_desc = "Marca los Protectores animados durante el Proteger de Lei Shi, requiere ayudante o líder.\n|cFFFF0000Solo 1 persona en la raid debería tener activada esta opción para evitar conflictos con las marcas.|r\n|cFFADFF2FCONSEJO: Si la raid te ha elegido para activarla, mover el ratón rápidamente encima de todos los Protectores es la forma más rápida de marcarlos.|r"
 end
 
-L = BigWigs:NewBossLocale("Sha of Fear", "esES") or BigWigs:NewBossLocale("Protector of the Endless", "esMX")
+L = BigWigs:NewBossLocale("Sha of Fear", "esES") or BigWigs:NewBossLocale("Sha of Fear", "esMX")
 if L then
 	L.fading_soon = "%s se disipa pronto"
 
