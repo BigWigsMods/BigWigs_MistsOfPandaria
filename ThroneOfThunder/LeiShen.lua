@@ -509,7 +509,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 		self:Bar(135150, 30)
 	elseif spellId == 139006 or spellId == 139007 or spellId == 139008 or spellId == 139009 then -- active quadrant
 		if self:Heroic() and phase == 3 then
-			self:Message("stages", "yellow", nil, spellName, 136913) -- probably shouldn't be linked to stages, but dunno anything better -- overwhelming power icon
+			self:Message("stages", "yellow", nil, self:SpellName(spellId), 136913) -- probably shouldn't be linked to stages, but dunno anything better -- overwhelming power icon
 		end
 	end
 end
