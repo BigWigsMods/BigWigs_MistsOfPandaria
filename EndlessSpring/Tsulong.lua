@@ -131,16 +131,6 @@ function mod:ShadowBreath(args)
 end
 
 do
-	local function checkForHoTs(self) -- well any magic actually not just HoTs
-		for i=1, 40 do
-			local name, _, _, buffType, _, _, _, _, _, spellId = UnitBuff("boss1", i)
-			if name and buffType == "Magic" then
-				self:Message("phases", "yellow", "Alert", ("%s - %s"):format((self:UnitName("boss1")), name), spellId)
-				break
-			end
-		end
-	end
-
 	local function printTarget(self, name, guid) -- Nightmares
 		self:TargetMessage(122777, name, "red", "Alert")
 		if self:Me(guid) then
@@ -175,7 +165,10 @@ do
 				self:Bar("phases", 121, -6315, "spell_holy_circleofrenewal") -- The Day
 				self:Bar(122752, 10) -- Shadow Breath
 				if self:Dispeller("magic", true) then
-					checkForHoTs(self)
+					local name = self:UnitBuff("boss1", nil, "Magic") -- well any magic actually not just HoTs
+					if name then
+						self:Message("phases", "yellow", "Alert", L.buff_boss:format(name), false)
+					end
 				end
 			elseif spellId == 122953 then -- Summon Unstable Sha
 				local t = GetTime()
