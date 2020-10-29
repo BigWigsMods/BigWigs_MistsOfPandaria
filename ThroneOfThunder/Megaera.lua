@@ -200,7 +200,7 @@ do
 		end
 	end
 	function mod:UNIT_AURA(_, unit)
-		local _, _, _, expires = self:UnitDebuff(unit, iceTorrent)
+		local _, _, _, expires = self:UnitDebuff(unit, iceTorrent, 139857)
 		if expires and not torrentList[expires] then
 			local duration = expires - GetTime() -- EJ says 8, spell tooltip says 11
 			local player = self:UnitName(unit)
