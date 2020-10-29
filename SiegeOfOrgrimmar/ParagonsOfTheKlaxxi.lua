@@ -639,7 +639,7 @@ do
 				redPlayers[#redPlayers+1] = mod:UnitName(unit)
 			end
 		end
-		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533)) or mod:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
+		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533), 142533) or mod:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
 		if myDebuff then
 			mod:OpenProximity(-8034, 10, matches[myDebuff][mod:Mythic() and "proximityH" or "proximityN"])
 		end
