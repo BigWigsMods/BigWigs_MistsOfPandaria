@@ -104,7 +104,7 @@ function mod:IonizationRemoved(args)
 	end
 	if #ionized == 0 then
 		self:CloseProximity(args.spellId)
-		if self:UnitDebuff("player", self:SpellName(137422)) then -- Focused Lightning
+		if self:UnitDebuff("player", self:SpellName(137422), 137422) then -- Focused Lightning
 			self:OpenProximity(-7741, 8) -- reopen it if we have lightning chasing us too
 		end
 	elseif not openedForMe then
@@ -177,7 +177,7 @@ function mod:FocusedLightningRemoved(args)
 	self:PrimaryIcon(-7741)
 	if self:Me(args.destGUID) then
 		self:CloseProximity(-7741)
-		if self:UnitDebuff("player", self:SpellName(138732)) then -- Ionization
+		if self:UnitDebuff("player", self:SpellName(138732), 138732) then -- Ionization
 			self:OpenProximity(138732, 8)
 		end
 	end
