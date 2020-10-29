@@ -303,7 +303,7 @@ end
 -- General
 
 function mod:ShadowedSoul(args)
-	if self:Me(args.destGUID) and self:UnitDebuff("player", self:SpellName(137641)) and args.amount > 9 then -- Soul Fragment on, aka gaining more stacks, 10 stacks = 20% extra damage taken
+	if self:Me(args.destGUID) and self:UnitDebuff("player", self:SpellName(137641), 137641) and args.amount > 9 then -- Soul Fragment on, aka gaining more stacks, 10 stacks = 20% extra damage taken
 		self:Message(args.spellId, "blue", "Info", CL["count"]:format(args.spellName, args.amount))
 	end
 end
@@ -370,7 +370,7 @@ do
 		for i=1,5 do
 			local boss = ("boss%d"):format(i)
 			if UnitGUID(boss) == args.destGUID then
-				local _, stack = self:UnitBuff(boss, self:SpellName(136467))
+				local _, stack = self:UnitBuff(boss, self:SpellName(136467), 136467) -- Lingering Presence
 				lingeringCount = stack or 0
 				posessHPStart = UnitHealth(boss)
 				if self.db.profile.custom_on_markpossessed then
