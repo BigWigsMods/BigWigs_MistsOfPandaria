@@ -83,7 +83,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "BeastOfNightmares", 137375)
 
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Phase2", "boss1", "boss2")
-	self:Yell("Phase3", L["last_phase_yell_trigger"])
+	self:BossYell("Phase3", L["last_phase_yell_trigger"])
 
 	self:RegisterMessage("BigWigs_BossComm")
 

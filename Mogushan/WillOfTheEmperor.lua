@@ -98,7 +98,7 @@ function mod:OnBossEnable()
 	self:Emote("Engage", L["heroic_start_trigger"], L["normal_start_trigger"])
 
 	-- Rage
-	self:Yell("Rage", L["rage_trigger"])
+	self:BossYell("Rage", L["rage_trigger"])
 	self:Log("SPELL_AURA_APPLIED", "FocusedAssault", 116525)
 
 	-- Strength

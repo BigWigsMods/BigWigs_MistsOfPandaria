@@ -30,7 +30,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:Yell("Engage", L.engage_yell)
+	self:BossYell("Engage", L.engage_yell)
 
 	self:Emote("CannonBarrage", "121600")
 	self:Emote("Stomp", "121787")

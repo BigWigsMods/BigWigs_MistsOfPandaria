@@ -55,7 +55,7 @@ function mod:OnBossEnable()
 		self:OpenAltPower("altpower", 147800, "AZ", true) -- Corruption
 	end
 
-	self:Yell("Warmup", L.warmup_trigger)
+	self:BossYell("Warmup", L.warmup_trigger)
 	-- Look Within
 	self:Log("SPELL_CAST_START", "TitanicSmash", 144628)
 	self:Log("SPELL_CAST_START", "HurlCorruption", 144649)

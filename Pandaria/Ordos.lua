@@ -34,7 +34,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:Yell("Engage", L.engage_yell)
+	self:BossYell("Engage", L.engage_yell)
 
 	self:Log("SPELL_CAST_START", "MagmaCrush", 144688)
 	self:Log("SPELL_AURA_APPLIED", "BurningSoul", 144689)

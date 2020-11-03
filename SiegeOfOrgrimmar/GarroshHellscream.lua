@@ -104,7 +104,7 @@ function mod:OnBossEnable()
 	self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_STOP", "IronStarRolling", "boss1", "boss2", "boss3")
 
 	-- Phase 4
-	self:Yell("Phase3End", L.phase_3_end_trigger)
+	self:BossYell("Phase3End", L.phase_3_end_trigger)
 	self:Emote("ClumpFailIronStarSpawn", "147047")
 	self:Log("SPELL_CAST_START", "ManifestRage", 147011)
 	self:Log("SPELL_AURA_APPLIED", "IronStarFixateApplied", 147665)
@@ -130,7 +130,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_START", "AddMarkedMob", 144584) -- Chain Lightning
 	self:Log("SPELL_CAST_START", "ChainHeal", 144583)
 	self:Log("SPELL_CAST_SUCCESS", "PowerIronStar", 144616)
-	self:Yell("Farseer", L.farseer_trigger)
+	self:BossYell("Farseer", L.farseer_trigger)
 	self:Emote("SiegeEngineer", "144616")
 	self:Log("SPELL_CAST_SUCCESS", "Desecrate", 144748, 144749)
 

@@ -99,7 +99,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "SetToBlowApplied", 145987)
 	self:Log("SPELL_AURA_REMOVED", "SetToBlowRemoved", 145987)
 
-	self:Yell("Warmup", L.start_trigger)
+	self:BossYell("Warmup", L.start_trigger)
 end
 
 function mod:Warmup()

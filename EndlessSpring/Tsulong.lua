@@ -69,7 +69,7 @@ function mod:OnBossEnable()
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "target", "boss1", "boss2", "boss3")
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "EngageCheck")
 
-	self:Yell("Win", L["kill_yell"])
+	self:BossYell("Win", L["kill_yell"])
 	self:Death("EmbodiedTerrorDeath", 62969)
 end
 

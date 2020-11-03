@@ -95,10 +95,10 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "LightningFistsReversalOnBoss", 115730)
 
 	-- needed so we can have bars up for abilities used straight after phase switches
-	self:Yell("LightningPhase", L["phase_lightning_trigger"])
-	self:Yell("FlamePhase", L["phase_flame_trigger"])
-	self:Yell("ArcanePhase", L["phase_arcane_trigger"])
-	self:Yell("ShadowPhase", L["phase_shadow_trigger"]) -- heroic only
+	self:BossYell("LightningPhase", L["phase_lightning_trigger"])
+	self:BossYell("FlamePhase", L["phase_flame_trigger"])
+	self:BossYell("ArcanePhase", L["phase_arcane_trigger"])
+	self:BossYell("ShadowPhase", L["phase_shadow_trigger"]) -- heroic only
 
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 

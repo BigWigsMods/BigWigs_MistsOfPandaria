@@ -85,7 +85,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "UnstableVitaRemoved", 138297, 138308) -- initial cast, jumps
 	self:Log("SPELL_AURA_APPLIED", "VitaSensitivity", 138372)
 	-- General
-	self:Yell("Win", L["kill_trigger"])
+	self:BossYell("Win", L["kill_trigger"])
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1")
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "TankAbilityUpdate", "boss1")
