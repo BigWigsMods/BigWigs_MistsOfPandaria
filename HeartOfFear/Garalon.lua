@@ -121,7 +121,7 @@ function mod:PheromonesApplied(args)
 		pheromonesOnMe = true
 		self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
 	elseif self:Healer() then
-		self:TargetMessage(args.spellId, args.destName, "yellow", nil, nil, nil, true)
+		self:TargetMessageOld(args.spellId, args.destName, "yellow", nil, nil, nil, true)
 	end
 end
 

@@ -155,7 +155,7 @@ function mod:ThunderingThrowSafe()
 end
 
 function mod:ThunderingThrow(_, _, _, _, target)
-	self:TargetMessage(137175, target, "red", "Warning")
+	self:TargetMessageOld(137175, target, "red", "Warning")
 	self:SecondaryIcon(137175, target)
 	if not UnitIsUnit(target, "player") then -- no point opening proximity for the thrown tank
 		self:CloseProximity(-7741) -- close this before opening another ( in case it was open )
@@ -188,7 +188,7 @@ end
 
 do
 	local function printTarget(self, player, guid)
-		self:TargetMessage(-7741, player, "green", "Alarm")
+		self:TargetMessageOld(-7741, player, "green", "Alarm")
 		self:PrimaryIcon(-7741, player)
 		if self:Me(guid) then
 			self:Say(-7741)
@@ -220,7 +220,7 @@ do
 end
 
 function mod:StaticWound(args)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alert", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert", nil, nil, true)
 end
 
 

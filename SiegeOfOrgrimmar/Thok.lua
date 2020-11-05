@@ -123,7 +123,7 @@ end
 
 function mod:Enrage(args)
 	if self:Tank() or self:Dispeller("enrage", true, args.spellId) then
-		self:TargetMessage(args.spellId, args.destName, "orange", "Alert")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert")
 	end
 end
 
@@ -134,7 +134,7 @@ function mod:SkeletonKeyRemoved(args)
 end
 
 function mod:SkeletonKey(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Warning")
 	self:TargetBar(args.spellId, 60, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
@@ -178,7 +178,7 @@ function mod:FixateApplied(args)
 		self:Say(-7980)
 		self:Flash(-7980)
 	end
-	self:TargetMessage(-7980, args.destName, "orange", "Alarm")
+	self:TargetMessageOld(-7980, args.destName, "orange", "Alarm")
 	self:TargetBar(-7980, 12, args.destName)
 	self:PrimaryIcon(-7980, args.destName)
 end
@@ -215,7 +215,7 @@ do
 	local frozenSolid, scheduled = mod:NewTargetList(), nil
 	local function warnFrozenSolid(spellId)
 		scheduled = nil
-		mod:TargetMessage(spellId, frozenSolid, "yellow")
+		mod:TargetMessageOld(spellId, frozenSolid, "yellow")
 	end
 	function mod:FrozenSolid(args)
 		frozenSolid[#frozenSolid+1] = args.destName

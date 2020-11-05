@@ -148,7 +148,7 @@ end
 
 function mod:VolatilePathogen(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alarm", nil, nil, self:Healer() and true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm", nil, nil, self:Healer() and true)
 	self:CDBar(args.spellId, 30)
 	if self:Healer() then
 		self:TargetBar(args.spellId, 10, args.destName)

@@ -160,7 +160,7 @@ function mod:HuntersMark(args)
 	if self:Me(args.destGUID) then
 		self:Flash(-7947)
 	end
-	self:TargetMessage(-7947, args.destName, "yellow", "Alarm")
+	self:TargetMessageOld(-7947, args.destName, "yellow", "Alarm")
 end
 
 function mod:Execute(args)
@@ -207,14 +207,14 @@ function mod:EarthShield(args)
 	if UnitExists(target) then
 		self:SecondaryIcon(args.spellId, target) -- try to mark earth shield target, not really trying too hard tho
 	end
-	self:TargetMessage(args.spellId, args.destName, "green", offensiveDispeller and "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "green", offensiveDispeller and "Warning")
 	if offensiveDispeller then
 		self:Flash(args.spellId) -- for pulse (best would be pulse only no flash :S)
 	end
 end
 
 function mod:Fixate(args)
-	self:TargetMessage(-7933, args.destName, "yellow", "Info")
+	self:TargetMessageOld(-7933, args.destName, "yellow", "Info")
 	if self:Me(args.destGUID) then
 		self:Flash(-7933)
 	end
@@ -258,7 +258,7 @@ function mod:Ravager(args)
 		self:Flash(args.spellId)
 		self:Say(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alarm")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
 end
 
 function mod:Banner(args)
@@ -270,7 +270,7 @@ do
 		if self:Me(guid) then
 			self:Flash(143716)
 		end
-		self:TargetMessage(143716, player, "orange", "Alarm")
+		self:TargetMessageOld(143716, player, "orange", "Alarm")
 	end
 	function mod:HeroicShockwave(_, unit, _, spellId)
 		if spellId == 143500 then -- Heroic Shockwave
@@ -322,7 +322,7 @@ do
 	end
 	function mod:BoneCrackerApplied(args)
 		if self:Me(args.destGUID) then
-			self:TargetMessage(args.spellId, args.destName, "blue", "Info") -- so you know to be extra careful since your max hp is halved
+			self:TargetMessageOld(args.spellId, args.destName, "blue", "Info") -- so you know to be extra careful since your max hp is halved
 		end
 		if self.db.profile.custom_off_bonecracker_marks then
 			markBonecrackers(args.destName)

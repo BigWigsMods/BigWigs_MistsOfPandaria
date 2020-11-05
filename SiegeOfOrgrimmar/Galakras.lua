@@ -179,7 +179,7 @@ end
 
 function mod:FlamesOfGalakrondApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "red", "Warning", 88986, args.spellId) -- 88986 = "Fireball"
+	self:TargetMessageOld(args.spellId, args.destName, "red", "Warning", 88986, args.spellId) -- 88986 = "Fireball"
 	if self:Me(args.destGUID) then
 		self:OpenProximity(args.spellId, 8)
 		self:Flash(args.spellId)
@@ -279,7 +279,7 @@ function mod:Warbanner(args)
 end
 
 function mod:Fracture(args)
-	self:TargetMessage(146899, args.destName, "orange", "Alarm", nil, nil, true)
+	self:TargetMessageOld(146899, args.destName, "orange", "Alarm", nil, nil, true)
 end
 
 function mod:Adds(_, _, unit, _, _, target)

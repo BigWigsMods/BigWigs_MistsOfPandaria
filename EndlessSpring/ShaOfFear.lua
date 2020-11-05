@@ -153,7 +153,7 @@ do
 		return false
 	end
 	local function warnHuddle(spellId)
-		mod:TargetMessage(spellId, huddleList, "red", "Alert")
+		mod:TargetMessageOld(spellId, huddleList, "red", "Alert")
 		scheduled = nil
 	end
 	function mod:HuddleInTerrorApplied(args)
@@ -258,7 +258,7 @@ function mod:ChampionOfTheLight(args)
 		championOnMe = true
 		self:Flash(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "green", "Long", L["ball"])
+	self:TargetMessageOld(args.spellId, args.destName, "green", "Long", L["ball"])
 	self:CloseProximity(args.spellId)
 end
 
@@ -278,7 +278,7 @@ do
 end
 
 function mod:NakedAndAfraid(args)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Info", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Info", nil, nil, true)
 	self:Bar(args.spellId, 31)
 end
 
@@ -438,7 +438,7 @@ end
 do
 	local cackleTargets, scheduled = mod:NewTargetList(), nil
 	local function warnCackle(spellId)
-		mod:TargetMessage(spellId, cackleTargets, "orange")
+		mod:TargetMessageOld(spellId, cackleTargets, "orange")
 		scheduled = nil
 	end
 	function mod:OminousCackleApplied(args)

@@ -80,7 +80,7 @@ end
 do
 	local function warnStorms(spellId)
 		scheduled = nil
-		mod:TargetMessage(spellId, debuffTargets, "orange", "Alert")
+		mod:TargetMessageOld(spellId, debuffTargets, "orange", "Alert")
 	end
 	function mod:Storms(args)
 		debuffTargets[#debuffTargets+1] = args.destName

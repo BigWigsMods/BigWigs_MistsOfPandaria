@@ -166,7 +166,7 @@ end
 --
 
 function mod:Suppression(args)
-	self:TargetMessage(args.spellId, args.destName, "orange")
+	self:TargetMessageOld(args.spellId, args.destName, "orange")
 end
 
 function mod:NetherTear(args)
@@ -209,7 +209,7 @@ do
 				self:Flash(139866)
 				self:Say(139866)
 			end
-			self:TargetMessage(139866, player, "orange", "Info")
+			self:TargetMessageOld(139866, player, "orange", "Info")
 			self:PrimaryIcon(139866, player)
 			self:ScheduleTimer(torrentOver, duration + 1, expires)
 			torrentList[expires] = true
@@ -242,7 +242,7 @@ end
 
 function mod:CindersApplied(args)
 	self:SecondaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "red", "Alert", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert", nil, nil, true)
 	self:TargetBar(args.spellId, 30, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)

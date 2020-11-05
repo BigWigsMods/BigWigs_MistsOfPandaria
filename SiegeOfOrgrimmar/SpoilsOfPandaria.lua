@@ -260,7 +260,7 @@ end
 
 function mod:WarcallerEnrage(args)
 	if checkPlayerSide() > 0 then
-		self:TargetMessage(args.spellId, args.destName, "orange", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
 	end
 end
 

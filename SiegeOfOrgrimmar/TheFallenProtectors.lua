@@ -231,7 +231,7 @@ function mod:ShaSear(args)
 				self:Say(args.spellId)
 			end
 			self:Flash(args.spellId)
-			self:TargetMessage(args.spellId, args.destName, "blue", "Warning")
+			self:TargetMessageOld(args.spellId, args.destName, "blue", "Warning")
 			self:TargetBar(args.spellId, 5, args.destName)
 		end
 		if not self:LFR() then
@@ -252,7 +252,7 @@ do
 	end
 
 	function mod:MarkOfAnguish(args)
-		self:TargetMessage(args.spellId, args.destName, "red", "Alert")
+		self:TargetMessageOld(args.spellId, args.destName, "red", "Alert")
 		if self:Me(args.destGUID) then
 			anguishOnMe = true
 			self:Flash(args.spellId)
@@ -283,7 +283,7 @@ function mod:Fixate(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Long")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Long")
 end
 
 do
@@ -362,10 +362,10 @@ do
 			end
 			self:OpenProximity(-7959, 8, nil, true)
 			-- Emphasized abilities
-			self:TargetMessage("inferno_self", name, "orange", "Warning", -7959)
+			self:TargetMessageOld("inferno_self", name, "orange", "Warning", -7959)
 			self:Bar("inferno_self", 9-t, L.inferno_self_bar, -7959)
 		else
-			self:TargetMessage(-7959, name, "orange")
+			self:TargetMessageOld(-7959, name, "orange")
 			self:TargetBar(-7959, 9-t, name)
 			if not self:Tank() and not self:LFR() then
 				self:OpenProximity(-7959, 8, name, true)
@@ -410,7 +410,7 @@ do
 			if self:Me(guid) then
 				self:Flash(143958)
 			end
-			self:TargetMessage(143958, name, "blue", "Info")
+			self:TargetMessageOld(143958, name, "blue", "Info")
 		end
 	end
 	local function printFallback()
@@ -441,7 +441,7 @@ do
 			self:Flash(143019)
 			self:Say(143019)
 		end
-		self:TargetMessage(143019, name, "blue", "Info")
+		self:TargetMessageOld(143019, name, "blue", "Info")
 	end
 	function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 		if spellId == 143019 then -- Corrupted Brew

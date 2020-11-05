@@ -344,7 +344,7 @@ do
 		sawbladeTarget = guid
 		self:PrimaryIcon(-8195, target)
 		if not self:Me(guid) then -- we warn for ourself from the BOSS_WHISPER
-			self:TargetMessage(-8195, target, "green", "Info")
+			self:TargetMessageOld(-8195, target, "green", "Info")
 		end
 	end
 	function mod:Sawblade(args)
@@ -362,7 +362,7 @@ end
 
 function mod:Drillstorm(args)
 	if args.sourceGUID ~= args.destGUID then -- Not the NPC
-		self:TargetMessage(args.spellId, args.destName, "yellow", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alarm")
 		self:TargetBar(args.spellId, 15, args.destName)
 		self:PrimaryIcon(args.spellId, args.destName)
 		if self:Me(args.destGUID) then

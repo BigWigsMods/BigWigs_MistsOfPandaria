@@ -180,7 +180,7 @@ end
 do
 	local pinnedTargets, scheduled = mod:NewTargetList(), nil
 	local function warnPinned(spellName)
-		mod:TargetMessage(118122, pinnedTargets, "red", "Alarm", spellName)
+		mod:TargetMessageOld(118122, pinnedTargets, "red", "Alarm", spellName)
 		scheduled = nil
 	end
 	function mod:PinnedDown(args)

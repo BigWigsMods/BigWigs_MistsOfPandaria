@@ -136,7 +136,7 @@ end
 
 function mod:Shroud(args)
 	if not self:LFR() then
-		self:TargetMessage(args.spellId, args.destName, "orange", nil, L["shroud_message"])
+		self:TargetMessageOld(args.spellId, args.destName, "orange", nil, L["shroud_message"])
 	end
 end
 
@@ -222,7 +222,7 @@ end
 do
 	local wildfire = mod:SpellName(116793)
 	function mod:WildfireSparkApplied(args)
-		self:TargetMessage(args.spellId, args.destName, "orange", "Alert", wildfire)
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert", wildfire)
 		self:PrimaryIcon(args.spellId, args.destName)
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
@@ -272,7 +272,7 @@ do
 			mod:SecondaryIcon(spellId, resonanceMarkers[2])
 			resonanceTargets[2] = resonanceMarkers[2]
 		end
-		mod:TargetMessage(spellId, resonanceTargets, "orange", "Alert", resonance)
+		mod:TargetMessageOld(spellId, resonanceTargets, "orange", "Alert", resonance)
 		wipe(resonanceMarkers)
 	end
 	function mod:ArcaneResonanceApplied(args)

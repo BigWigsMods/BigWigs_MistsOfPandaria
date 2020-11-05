@@ -96,7 +96,7 @@ function mod:HeartOfFearRemoved(args)
 end
 
 function mod:HeartOfFearApplied(args)
-	self:TargetMessage(args.spellId, args.destName, "red", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "red", "Info")
 	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
@@ -130,7 +130,7 @@ function mod:ConsumingTerror(args)
 end
 
 function mod:CryOfTerror(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Long")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Long")
 	self:PrimaryIcon(args.spellId, args.destName)
 	self:Bar(args.spellId, 25)
 	if self:Me(args.destGUID) then
@@ -163,7 +163,7 @@ end
 do
 	local visionsList, scheduled = mod:NewTargetList(), nil
 	local function warnVisions(spellId)
-		mod:TargetMessage(spellId, visionsList, "red", "Alarm", L["visions_message"])
+		mod:TargetMessageOld(spellId, visionsList, "red", "Alarm", L["visions_message"])
 		scheduled = nil
 	end
 	function mod:Visions(args)
@@ -180,7 +180,7 @@ do
 end
 
 function mod:Fixate(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Info")
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 		self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))

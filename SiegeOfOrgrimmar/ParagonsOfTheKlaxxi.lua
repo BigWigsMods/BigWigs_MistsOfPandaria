@@ -232,7 +232,7 @@ end
 
 function mod:Aim(args)
 	self:SecondaryIcon(-8073, args.destName)
-	self:TargetMessage(-8073, args.destName, "red", "Warning", CL.count:format(args.spellName, aimCounter), args.spellId, true)
+	self:TargetMessageOld(-8073, args.destName, "red", "Warning", CL.count:format(args.spellName, aimCounter), args.spellId, true)
 	self:TargetBar(-8073, 5, args.destName)
 	if not self:Tank() then
 		self:Flash(-8073)
@@ -303,7 +303,7 @@ do
 	end
 	local scheduled, mutated = nil, mod:NewTargetList()
 	local function announceMutationTargets(spellId)
-		mod:TargetMessage(spellId, mutated, "red", "Warning")
+		mod:TargetMessageOld(spellId, mutated, "red", "Warning")
 		scheduled = nil
 	end
 	function mod:FaultyMutationApplied(args)
@@ -580,7 +580,7 @@ end
 --Korven the Prime
 do
 	local function printTarget(self, name)
-		self:TargetMessage(143974, name, "orange", "Alarm", nil, nil, true)
+		self:TargetMessageOld(143974, name, "orange", "Alarm", nil, nil, true)
 	end
 	function mod:ShieldBash(args)
 		self:Bar(args.spellId, 17)
@@ -592,13 +592,13 @@ function mod:EncaseInEmber(args)
 	if self:UnitDebuff("player", self:SpellName(148650)) then
 		self:Flash(148650) -- Strong Legs
 	end
-	self:TargetMessage(args.spellId, args.destName, "red", self:Damager() and "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "red", self:Damager() and "Warning")
 	self:CDBar(args.spellId, self:Mythic() and 30 or 25)
 end
 
 --Kaz'tik the Manipulator
 function mod:Mesmerize(args)
-	self:TargetMessage(args.spellId, args.destName, "red", self:Damager() and "Warning", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "red", self:Damager() and "Warning", nil, nil, true)
 	self:CDBar(args.spellId, 18) -- 18-40 probably should figure out what delays it or where does it restart
 end
 
@@ -700,9 +700,9 @@ do
 		if UnitIsUnit("player", target) then
 			mod:Flash(-8008)
 			mod:Say(-8008)
-			mod:TargetMessage(-8008, name, "orange", "Alarm")
+			mod:TargetMessageOld(-8008, name, "orange", "Alarm")
 		else
-			mod:TargetMessage(-8008, name, "orange")
+			mod:TargetMessageOld(-8008, name, "orange")
 		end
 		mod:StopDeathFromAboveScan()
 	end
@@ -740,7 +740,7 @@ end
 
 function mod:Gouge(args)
 	-- timer varies way too much, no point for a bar 22-62
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alarm", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm", nil, nil, true)
 end
 
 function mod:ExposedVeins(args)

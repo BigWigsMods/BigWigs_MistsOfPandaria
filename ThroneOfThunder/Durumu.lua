@@ -216,7 +216,7 @@ end
 
 function mod:LifeDrainStunApplied(args)
 	self:PrimaryIcon(133798, args.destName)
-	self:TargetMessage(133798, args.destName, "red", "Alert", nil, nil, true)
+	self:TargetMessageOld(133798, args.destName, "red", "Alert", nil, nil, true)
 end
 
 function mod:LifeDrainStunRemoved(args)
@@ -239,7 +239,7 @@ do
 				local name = mod:UnitName(unit)
 				if spellId == 139202 then
 					if blueController ~= name then
-						mod:TargetMessage(-6891, name, "cyan", "Warning", L["blue_beam"], spellId, true)
+						mod:TargetMessageOld(-6891, name, "cyan", "Warning", L["blue_beam"], spellId, true)
 						mark(unit, 6)
 						blueController = name
 						if UnitIsUnit(unit, "player") then
@@ -248,7 +248,7 @@ do
 					end
 				elseif spellId == 139204 then
 					if redController ~= name then
-						mod:TargetMessage(-6891, name, "cyan", "Warning", L["red_beam"], spellId, true)
+						mod:TargetMessageOld(-6891, name, "cyan", "Warning", L["red_beam"], spellId, true)
 						mark(unit, 7)
 						redController = name
 						if UnitIsUnit(unit, "player") then
@@ -311,7 +311,7 @@ function mod:ForceOfWill(args)
 		self:Flash(-6905)
 		self:Say(-6905)
 	end
-	self:TargetMessage(-6905, args.destName, "yellow", "Long")
+	self:TargetMessageOld(-6905, args.destName, "yellow", "Long")
 	self:CDBar(-6905, 20)
 end
 
@@ -319,7 +319,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, _, _, _, target)
 	if msg:find("133795") then -- Life Drain (gets target faster than CLEU)
 		local name = self:UnitName(target)
 		self:PrimaryIcon(133798, name)
-		self:TargetMessage("initial_life_drain", name, "orange", "Long", 133798, nil, true)
+		self:TargetMessageOld("initial_life_drain", name, "orange", "Long", 133798, nil, true)
 		self:Flash("initial_life_drain", 133798)
 
 	elseif msg:find(L["red_spawn_trigger"]) then

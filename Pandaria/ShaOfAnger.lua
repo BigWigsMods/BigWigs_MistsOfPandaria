@@ -85,7 +85,7 @@ end
 do
 	local aggressiveTargets, scheduled = mod:NewTargetList(), nil
 	local function warnAggressiveBehavior(spellId)
-		mod:TargetMessage(spellId, aggressiveTargets, "orange")
+		mod:TargetMessageOld(spellId, aggressiveTargets, "orange")
 		scheduled = nil
 	end
 	function mod:AggressiveBehavior(args)

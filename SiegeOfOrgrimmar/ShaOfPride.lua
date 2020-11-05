@@ -150,7 +150,7 @@ do
 
 	local banishmentList, scheduled = mod:NewTargetList(), nil
 	local function warnBanishment(spellId)
-		mod:TargetMessage(spellId, banishmentList, "yellow")
+		mod:TargetMessageOld(spellId, banishmentList, "yellow")
 		scheduled = nil
 	end
 	function mod:Banishment(args)
@@ -206,7 +206,7 @@ end
 do
 	local prisoned, scheduled = mod:NewTargetList(), nil
 	local function warnImprison()
-		mod:TargetMessage(144563, prisoned, "cyan")
+		mod:TargetMessageOld(144563, prisoned, "cyan")
 		scheduled = nil
 	end
 	function mod:ImprisonApplied(args)
@@ -231,7 +231,7 @@ function mod:WoundedPride(args)
 	if notOnMe then
 		self:Flash(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "red", notOnMe and "Warning", nil, nil, true) -- play sound for the other tanks
+	self:TargetMessageOld(args.spellId, args.destName, "red", notOnMe and "Warning", nil, nil, true) -- play sound for the other tanks
 	self:CDBar(args.spellId, 30)
 end
 
@@ -265,7 +265,7 @@ end
 do
 	local mindcontrolled, scheduled = mod:NewTargetList(), nil
 	local function warnOvercome()
-		mod:TargetMessage(-8270, mindcontrolled, "yellow")
+		mod:TargetMessageOld(-8270, mindcontrolled, "yellow")
 		scheduled = nil
 	end
 	function mod:SwellingPrideSuccess(args)

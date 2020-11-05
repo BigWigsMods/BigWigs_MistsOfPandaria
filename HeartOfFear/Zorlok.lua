@@ -83,7 +83,7 @@ end
 do
 	local convertList, scheduled = mod:NewTargetList(), nil
 	local function warnConvert(spellId)
-		mod:TargetMessage(spellId, convertList, "yellow")
+		mod:TargetMessageOld(spellId, convertList, "yellow")
 		scheduled = nil
 	end
 	function mod:Convert(args)
@@ -145,7 +145,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 end
 
 function mod:Exhale(args)
-	self:TargetMessage(args.spellId, args.destName, "red")
+	self:TargetMessageOld(args.spellId, args.destName, "red")
 	self:TargetBar(args.spellId, 6, args.destName)
 	self:PrimaryIcon(args.spellId, args.destName)
 end

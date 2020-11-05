@@ -116,7 +116,7 @@ do
 			coloredNames[i] = v
 			burningSoulList[i] = nil
 		end
-		mod:TargetMessage(spellId, coloredNames, "orange", "Alert", nil, nil, true)
+		mod:TargetMessageOld(spellId, coloredNames, "orange", "Alert", nil, nil, true)
 		scheduled = nil
 	end
 

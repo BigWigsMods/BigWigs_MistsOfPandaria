@@ -123,7 +123,7 @@ end
 
 function mod:ParasiticGrowth(args)
 	self:Bar(args.spellId, 50)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Long", L["parasite"])
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Long", L["parasite"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -159,14 +159,14 @@ end
 
 function mod:ReshapeLife(args)
 	if phase < 2 then
-		self:TargetMessage(args.spellId, args.destName, "orange", "Alarm", CL["count"]:format(args.spellName, reshapeLifeCounter))
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm", CL["count"]:format(args.spellName, reshapeLifeCounter))
 		reshapeLifeCounter = reshapeLifeCounter + 1
 		self:Bar(args.spellId, 50, CL["count"]:format(args.spellName, reshapeLifeCounter))
 	elseif phase < 3 then
-		self:TargetMessage(args.spellId, args.destName, "orange", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
 		self:Bar(args.spellId, 50)
 	else
-		self:TargetMessage(args.spellId, args.destName, "orange", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
 	end
 
 	if self:Me(args.destGUID) then
@@ -226,7 +226,7 @@ do
 			self:Flash("explosion_casting_by_other", args.spellId)
 			self:TargetBar("explosion_by_other", 13, args.sourceName, explosion, args.spellId) -- cooldown
 			self:Bar("explosion_casting_by_other", 2.5, CL["cast"]:format(CL["other"]:format(args.sourceName:gsub("%-.+", "*"), explosion)), args.spellId)
-			self:TargetMessage("explosion_casting_by_other", args.sourceName, "red", "Alert", explosion, args.spellId, true) -- associate the message with the casting toggle option
+			self:TargetMessageOld("explosion_casting_by_other", args.sourceName, "red", "Alert", explosion, args.spellId, true) -- associate the message with the casting toggle option
 		end
 	end
 end
@@ -333,7 +333,7 @@ function mod:Fling(args)
 		self:Bar(122413, 6, L["fling_message"], 68659)
 	end
 	self:CDBar(122413, 28) --Fling
-	self:TargetMessage(122413, args.destName, "orange", "Alarm") --Fling
+	self:TargetMessageOld(122413, args.destName, "orange", "Alarm") --Fling
 end
 
 function mod:MassiveStomp(args)
@@ -356,7 +356,7 @@ function mod:MonsterDies()
 end
 
 function mod:AmberGlobule(args)
-	self:TargetMessage(-6548, args.destName, "red", "Alert")
+	self:TargetMessageOld(-6548, args.destName, "red", "Alert")
 	if self:Me(args.destGUID) then
 		self:Flash(-6548)
 		self:Say(-6548)

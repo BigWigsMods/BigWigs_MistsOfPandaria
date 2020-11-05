@@ -147,7 +147,7 @@ function mod:FocusedAssault(args)
 end
 
 function mod:FocusedEnergy(args)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Info")
 end
 
 function mod:Strength()

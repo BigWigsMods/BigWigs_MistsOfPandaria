@@ -137,7 +137,7 @@ do
 			if not korthikStrikeWarned[player] then
 				korthikStrikeWarned[player] = true
 				self:ScheduleTimer(allowKorthikStrike, 10, player)
-				self:TargetMessage(122409, player, "orange", "Alarm")
+				self:TargetMessageOld(122409, player, "orange", "Alarm")
 				self:CDBar(122409, firstKorthikStrikeDone and 50 or 30) -- 2nd one ~30, then cooldown 50 sec
 				firstKorthikStrikeDone = true
 			end
@@ -154,7 +154,7 @@ end
 do
 	local prisonList, scheduled = mod:NewTargetList(), nil
 	local function warnPrison(spellId)
-		mod:TargetMessage(spellId, prisonList, "red", "Info")
+		mod:TargetMessageOld(spellId, prisonList, "red", "Info")
 		scheduled = nil
 	end
 	function mod:AmberPrison(args)
@@ -225,7 +225,7 @@ function mod:WindBomb(args)
 		self:Flash(131830)
 		self:Say(131830)
 	end
-	self:TargetMessage(131830, args.sourceName, "orange", "Alarm")
+	self:TargetMessageOld(131830, args.sourceName, "orange", "Alarm")
 end
 
 function mod:Recklessness(args)

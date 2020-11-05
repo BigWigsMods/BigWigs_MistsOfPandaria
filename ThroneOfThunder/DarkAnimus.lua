@@ -130,7 +130,7 @@ end
 
 function mod:AnimaFontApplied(args)
 	-- cooldown seems to be 20-30ish
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alarm")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
 	self:TargetBar(args.spellId, 30, args.destName)
 end
 
@@ -253,7 +253,7 @@ do
 			self:TargetBar(args.spellId, 12, args.destName)
 			self:Flash(args.spellId)
 		elseif self:Dispeller("magic", nil, 138609) then
-			self:TargetMessage(args.spellId, args.destName, "red", "Alarm", nil, nil, true)
+			self:TargetMessageOld(args.spellId, args.destName, "red", "Alarm", nil, nil, true)
 			self:TargetBar(args.spellId, 12, args.destName)
 		end
 

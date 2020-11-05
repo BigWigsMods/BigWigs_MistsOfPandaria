@@ -90,7 +90,7 @@ do
 
 	local energyList, scheduled, counter, prev = mod:NewTargetList(), nil, 1, 0
 	local function warnDisplacedEnergy(spellId)
-		mod:TargetMessage(spellId, energyList, "orange", "Alert")
+		mod:TargetMessageOld(spellId, energyList, "orange", "Alert")
 		scheduled = nil
 	end
 	function mod:DisplacedEnergyApplied(args)

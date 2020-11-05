@@ -114,7 +114,7 @@ do
 		if initialTarget and UnitIsUnit("boss1target", initialTarget) then return end
 
 		local name = mod:UnitName("boss1target")
-		mod:TargetMessage(134926, name, "orange", "Alarm", nil, nil, true)
+		mod:TargetMessageOld(134926, name, "orange", "Alarm", nil, nil, true)
 		mod:SecondaryIcon(134926, name)
 		if UnitIsUnit("player", "boss1target") then
 			mod:Flash(134926)
@@ -231,7 +231,7 @@ end
 
 function mod:LightningStormApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "orange") -- no point for sound since the guy stunned can't do anything
+	self:TargetMessageOld(args.spellId, args.destName, "orange") -- no point for sound since the guy stunned can't do anything
 	self:Bar(args.spellId, 20)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId)

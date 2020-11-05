@@ -168,7 +168,7 @@ function mod:UnstableAnimaApplied(args)
 		self:OpenProximity(args.spellId, 8, args.destName, true)
 	end
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "yellow")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow")
 	animaCounter = animaCounter + 1
 	self:Bar(args.spellId, 15, CL["count"]:format(args.spellName, animaCounter))
 end
@@ -253,7 +253,7 @@ do
 		else
 			self:TargetBar(138297, 5, args.destName)
 		end
-		self:TargetMessage(138297, args.destName, "blue", "Info")
+		self:TargetMessageOld(138297, args.destName, "blue", "Info")
 		self:PrimaryIcon(138297, args.destName)
 
 		last = nil
@@ -272,7 +272,7 @@ do
 end
 
 function mod:FatalStrike(args)
-	self:TargetMessage(args.spellId, args.destName, "cyan")
+	self:TargetMessageOld(args.spellId, args.destName, "cyan")
 	self:CDBar(args.spellId, 10)
 end
 

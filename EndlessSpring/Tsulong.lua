@@ -132,7 +132,7 @@ end
 
 do
 	local function printTarget(self, name, guid) -- Nightmares
-		self:TargetMessage(122777, name, "red", "Alert")
+		self:TargetMessageOld(122777, name, "red", "Alert")
 		if self:Me(guid) then
 			self:Flash(122777)
 			self:Say(122777)

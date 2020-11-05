@@ -124,7 +124,7 @@ end
 do
 	local scheduled, lookWithinList = nil, mod:NewTargetList()
 	local function warnLookWithinRemoved()
-		mod:TargetMessage(-8220, lookWithinList, "cyan", nil, CL.over:format(mod:SpellName(-8220)))
+		mod:TargetMessageOld(-8220, lookWithinList, "cyan", nil, CL.over:format(mod:SpellName(-8220)))
 		scheduled = nil
 	end
 	function mod:LookWithinRemoved(args)
@@ -152,7 +152,7 @@ function mod:LookWithinApplied(args)
 		self:Bar(-8220, 60, nil, args.spellId)
 	elseif args.spellId == 144851 and self:Tank() then -- Test of Confidence (TANK) mainly for the other tank
 		if self:LFR() then -- message for LFR since it happens automatically
-			self:TargetMessage(-8220, args.destName, "cyan", "Warning", args.spellId)
+			self:TargetMessageOld(-8220, args.destName, "cyan", "Warning", args.spellId)
 		end
 		self:TargetBar(-8220, 60, args.destName, nil, args.spellId)
 	end

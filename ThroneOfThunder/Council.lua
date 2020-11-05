@@ -116,7 +116,7 @@ end
 -- High Priestess Mar'li
 
 function mod:MarkedSoul(args)
-	self:TargetMessage(137350, args.destName, "orange", "Alert", fixated)
+	self:TargetMessageOld(137350, args.destName, "orange", "Alert", fixated)
 	self:TargetBar(137350, 20, args.destName, fixated)
 	if self:Me(args.destGUID) then
 		self:Flash(137350)
@@ -170,7 +170,7 @@ do
 			self:Flash(136857)
 			self:Message(136857, "blue", "Info")
 		elseif self:Dispeller("magic", nil, 136857) or (mastersCall and GetSpellCooldown(mastersCall) == 0) then -- Master's Call works on it, too
-			self:TargetMessage(136857, args.destName, "yellow", nil, nil, nil, true)
+			self:TargetMessageOld(136857, args.destName, "yellow", nil, nil, nil, true)
 		end
 	end
 end
@@ -243,7 +243,7 @@ do
 
 	function mod:FrostbiteApplied(args)
 		-- We only use Icon on Biting cold, so people know that if someone has icon over their head, you need to stay away
-		self:TargetMessage(136990, args.destName, "green", "Info")
+		self:TargetMessageOld(136990, args.destName, "green", "Info")
 		self:Bar(136990, 45)
 		frostBiteStart = GetTime()
 		if self:Heroic() then
@@ -263,7 +263,7 @@ do
 end
 
 function mod:BitingColdApplied(args)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alert")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert")
 	self:Bar(args.spellId, 45)
 	self:SecondaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then

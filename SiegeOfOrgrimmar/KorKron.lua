@@ -138,7 +138,7 @@ do
 			self:Say(-8132)
 			self:Flash(-8132)
 		end
-		self:TargetMessage(-8132, name, "green", "Alarm")
+		self:TargetMessageOld(-8132, name, "green", "Alarm")
 	end
 	function mod:FoulStream(args)
 		self:CDBar(-8132, 32)
@@ -182,7 +182,7 @@ function mod:FoulGeyser(args) -- Blobs
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
-	self:TargetMessage(args.spellId, args.destName, "red", "Alert", L.blobs)
+	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert", L.blobs)
 end
 
 function mod:FoulGeyserRemoved(args)
@@ -209,7 +209,7 @@ do
 		if self:Me(guid) then
 			self:Say(144005)
 		end
-		self:TargetMessage(144005, name, "orange", "Alert")
+		self:TargetMessageOld(144005, name, "orange", "Alert")
 	end
 	function mod:ToxicStorm(args)
 		self:Bar(args.spellId, 32)

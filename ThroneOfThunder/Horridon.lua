@@ -214,7 +214,7 @@ do
 	local hexTargets, scheduled = mod:NewTargetList(), nil
 	local function warnHex()
 		scheduled = nil
-		mod:TargetMessage(-7125, hexTargets, "red", "Alarm")
+		mod:TargetMessageOld(-7125, hexTargets, "red", "Alarm")
 	end
 	function mod:Hex(args)
 		if self:Dispeller("curse", nil, -7125) then
@@ -223,7 +223,7 @@ do
 				scheduled = self:ScheduleTimer(warnHex, 0.2)
 			end
 		elseif self:Me(args.destGUID) then
-			self:TargetMessage(-7125, args.destName, "red", "Alarm")
+			self:TargetMessageOld(-7125, args.destName, "red", "Alarm")
 		end
 	end
 end
@@ -266,7 +266,7 @@ do
 end
 
 function mod:MortalStrike(args)
-	self:TargetMessage(-7120, args.destName, "orange")
+	self:TargetMessageOld(-7120, args.destName, "orange")
 	self:TargetBar(-7120, 8, args.destName)
 end
 
@@ -347,7 +347,7 @@ end
 -- General
 
 function mod:Charge(msg, _, _, _, player)
-	self:TargetMessage(-7080, player, "yellow", "Warning", nil, nil, true)
+	self:TargetMessageOld(-7080, player, "yellow", "Warning", nil, nil, true)
 	self:CDBar(-7080, 51)
 	if UnitIsUnit("player", player) then
 		self:Flash(-7080)

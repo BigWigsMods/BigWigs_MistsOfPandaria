@@ -91,7 +91,7 @@ do
 				self:Message(args.spellId, "blue", nil, CL["you"]:format(args.spellName))
 				self:OpenProximity(args.spellId, 10, UnitIsUnit(prevPlayer, "player") and args.destName or prevPlayer, true)
 			else
-				self:TargetMessage(args.spellId, jasperChainsTargets, "yellow")
+				self:TargetMessageOld(args.spellId, jasperChainsTargets, "yellow")
 			end
 			prevPlayer = nil
 		end

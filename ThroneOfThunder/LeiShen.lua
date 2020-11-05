@@ -249,7 +249,7 @@ end
 do
 	local helmOfCommandList, scheduled = mod:NewTargetList(), nil
 	local function warnHelmOfCommand(spellId)
-		mod:TargetMessage(spellId, helmOfCommandList, "orange", "Alert")
+		mod:TargetMessageOld(spellId, helmOfCommandList, "orange", "Alert")
 		scheduled = nil
 	end
 	function mod:HelmOfCommand(args)
@@ -481,7 +481,7 @@ end
 
 function mod:Decapitate(args)
 	self:CDBar(args.spellId, 50)
-	self:TargetMessage(args.spellId, args.destName, "blue", "Warning", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "blue", "Warning", nil, nil, true)
 	if self:Tank() then
 		self:Flash(args.spellId)
 	end
@@ -524,7 +524,7 @@ do
 			mod:Bar(spellId, 40)
 		end
 
-		mod:TargetMessage(spellId, overchargedList, "orange", "Alarm", nil, nil, true)
+		mod:TargetMessageOld(spellId, overchargedList, "orange", "Alarm", nil, nil, true)
 		if not overchargedOnMe then
 			mod:Bar(spellId, 6, L["overcharge_bar"])
 		end
@@ -565,7 +565,7 @@ do
 	local function warnDiffusionAdds()
 		local intermission = not UnitExists("boss1") -- poor mans intermission check
 		if #diffusionList > 0 then
-			mod:TargetMessage(135991, diffusionList, "red", intermission and "Warning", L["diffusion_add"], nil, true)
+			mod:TargetMessageOld(135991, diffusionList, "red", intermission and "Warning", L["diffusion_add"], nil, true)
 		else -- no one in range
 			mod:Message(135991, "red", intermission and "Warning")
 		end
@@ -638,7 +638,7 @@ do
 			if phase == 1 or not mod:Heroic() then stopConduitAbilityBars() end
 			mod:Bar(135695, 40)
 		end
-		mod:TargetMessage(spellId, coloredNames, "green", "Info", nil, nil, true) -- green because everyone should be friendly and hug the person with it
+		mod:TargetMessageOld(spellId, coloredNames, "green", "Info", nil, nil, true) -- green because everyone should be friendly and hug the person with it
 		if not staticShockOnMe and not mod:Heroic() then
 			mod:Bar(spellId, 8, L["static_shock_bar"])
 		end

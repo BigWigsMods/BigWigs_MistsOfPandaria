@@ -160,10 +160,10 @@ do
 				mod:OpenProximity(-6346, 5, name, true)
 			end
 			if not notBoss then
-				mod:TargetMessage(-6346, name, "orange", "Alert", CL["count"]:format(strike, strikeCounter))
+				mod:TargetMessageOld(-6346, name, "orange", "Alert", CL["count"]:format(strike, strikeCounter))
 				strikeCounter = strikeCounter + 1
 			else
-				mod:TargetMessage(-6346, name, "orange", "Alert")
+				mod:TargetMessageOld(-6346, name, "orange", "Alert")
 			end
 			mod:TargetBar(-6346, 5.6, name)
 			mod:PrimaryIcon(-6346, name)

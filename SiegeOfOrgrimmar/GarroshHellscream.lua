@@ -231,7 +231,7 @@ end
 
 function mod:MaliceApplied(args)
 	self:SecondaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "orange", "Alarm")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
 	self:TargetBar(args.spellId, 14, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
@@ -247,7 +247,7 @@ end
 
 function mod:IronStarFixateApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessage(args.spellId, args.destName, "yellow", "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Warning")
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -448,7 +448,7 @@ do
 		end
 		-- this is so people know they'll take extra damage
 		if #hopeList > 0 then
-			mod:TargetMessage(144945, hopeList, "yellow", "Warning", CL.count:format(mod:SpellName(29125), #hopeList), 149004) -- maybe add it's own option key? 29125 spell called "Hopeless"
+			mod:TargetMessageOld(144945, hopeList, "yellow", "Warning", CL.count:format(mod:SpellName(29125), #hopeList), 149004) -- maybe add it's own option key? 29125 spell called "Hopeless"
 		else
 			mod:Message(144945, "yellow", nil, CL.count:format(mod:SpellName(29125), 0), 149004)
 		end
@@ -569,7 +569,7 @@ do
 			self:Flash(144758)
 			self:Say(144758)
 		end
-		self:TargetMessage(144758, name, "orange", "Alarm")
+		self:TargetMessageOld(144758, name, "orange", "Alarm")
 	end
 
 	function mod:Desecrate(args)

@@ -163,7 +163,7 @@ end
 
 function mod:CutterLaserApplied(args)
 	-- way too varied timer 11-21
-	self:TargetMessage(-8190, args.destName, "red", "Warning")
+	self:TargetMessageOld(-8190, args.destName, "red", "Warning")
 	self:PrimaryIcon(-8190, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(-8190)
@@ -187,7 +187,7 @@ end
 do
 	local burnList, scheduled = mod:NewTargetList(), nil
 	local function warnBurn(spellId)
-		mod:TargetMessage(spellId, burnList, "red")
+		mod:TargetMessageOld(spellId, burnList, "red")
 		scheduled = nil
 	end
 	function mod:LaserBurn(args)

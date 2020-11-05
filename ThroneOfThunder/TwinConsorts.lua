@@ -264,7 +264,7 @@ function mod:CosmicBarrage()
 end
 
 function mod:BeastOfNightmares(args)
-	self:TargetMessage(-7634, args.destName, "yellow", "Info", nil, nil, true)
+	self:TargetMessageOld(-7634, args.destName, "yellow", "Info", nil, nil, true)
 	self:Bar(-7634, 51)
 end
 
