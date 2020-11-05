@@ -106,7 +106,7 @@ do
 				if guid == UnitGUID(unit) then
 					voodooDollList[#voodooDollList+1] = self:UnitName(unit)
 					if #voodooDollList == 1 then
-						self:ScheduleTimer("TargetMessage", 0.3, 122151, voodooDollList, "red")
+						self:ScheduleTimer("TargetMessageOld", 0.3, 122151, voodooDollList, "red")
 						self:ScheduleTimer(wipe, 0.3, voodooList)
 					end
 					break
