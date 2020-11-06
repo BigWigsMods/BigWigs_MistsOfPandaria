@@ -97,7 +97,7 @@ function mod:IonizationRemoved(args)
 	if self:Me(args.destGUID) then
 		openedForMe = nil
 		self:StopBar(CL["you"]:format(args.spellName))
-		self:Message(args.spellId, "green", "Info", CL["removed"]:format(args.spellName))
+		self:MessageOld(args.spellId, "green", "Info", CL["removed"]:format(args.spellName))
 	end
 	for k, v in next, ionized do
 		if v == args.destName then
@@ -130,7 +130,7 @@ end
 
 function mod:Ionization(args)
 	self:CDBar(-7741, 13) -- Focused Lightning
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 	self:Bar(args.spellId, 92)
 end
 
@@ -139,7 +139,7 @@ function mod:LightningStormDuration(args)
 end
 
 function mod:LightningStorm(args)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 	self:Bar(args.spellId, 93, L["storm_short"])
 	self:Bar(-7741, self:Heroic() and 20 or 26) -- Focused Lightning
 	self:Bar(137162, 20) -- Static Burst
@@ -170,7 +170,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(139467, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(139467, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(139467)
 		end
 	end
@@ -202,7 +202,7 @@ do
 end
 
 function mod:StaticBurst(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 	self:CDBar(args.spellId, 23)
 end
 
@@ -213,7 +213,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", L["in_water"])
+			self:MessageOld(args.spellId, "blue", "Info", L["in_water"])
 			self:Flash(args.spellId)
 		end
 	end
@@ -231,7 +231,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end

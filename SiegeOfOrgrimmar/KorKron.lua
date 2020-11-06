@@ -85,12 +85,12 @@ end
 
 function mod:IronTomb(args)
 	self:Bar(args.spellId, 31)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 end
 
 do
 	local function ironPrisonOverSoon(spellId, spellName)
-		mod:Message(spellId, "yellow", "Warning", CL.soon:format(CL.removed:format(spellName)))
+		mod:MessageOld(spellId, "yellow", "Warning", CL.soon:format(CL.removed:format(spellName)))
 		mod:Flash(spellId)
 	end
 	function mod:IronPrison(args)
@@ -160,7 +160,7 @@ function mod:FroststormStrike(args)
 end
 
 function mod:AshenWall(args)
-	self:Message(args.spellId, "cyan")
+	self:MessageOld(args.spellId, "cyan")
 	self:Bar(args.spellId, 32.2)
 end
 
@@ -198,7 +198,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(144005, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(144005, "blue", "Info", CL.underyou:format(args.spellName))
 			self:Flash(144005)
 		end
 	end
@@ -220,7 +220,7 @@ end
 -- General
 
 function mod:Bloodlust(args)
-	self:Message(args.spellId, "cyan", "Info")
+	self:MessageOld(args.spellId, "cyan", "Info")
 end
 
 do
@@ -231,7 +231,7 @@ do
 		if hp < hpWarn[hpWarned] then
 			local msg = CL.soon:format(self:SpellName(warnings[hpWarned]))
 			hpWarned = hpWarned + 1
-			self:Message(-8124, "cyan", "Info", msg, false)
+			self:MessageOld(-8124, "cyan", "Info", msg, false)
 			if hpWarned > 4 then
 				self:UnregisterUnitEvent(event, "boss1", "boss2")
 			end

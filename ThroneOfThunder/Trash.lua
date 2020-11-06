@@ -102,7 +102,7 @@ end
 
 function mod:HorrifyingRoar(args)
 	self:Bar(args.spellId, 26.6) -- Either 29 or 26.6, which is picked may or may not be random
-	self:Message(args.spellId, "yellow", "Long", CL["casting"]:format(args.spellName))
+	self:MessageOld(args.spellId, "yellow", "Long", CL["casting"]:format(args.spellName))
 end
 
 function mod:ConductiveShield(args)
@@ -114,7 +114,7 @@ function mod:ConductiveShield(args)
 		self:Bar(args.spellId, 20.5)
 	end
 	self:Bar(args.spellId, 10, CL["other"]:format(self:SpellName(133249), args.destName)) -- "Shielded"
-	self:Message(args.spellId, "yellow", nil, CL["other"]:format(args.spellName, args.destName))
+	self:MessageOld(args.spellId, "yellow", nil, CL["other"]:format(args.spellName, args.destName))
 end
 
 do
@@ -133,7 +133,7 @@ do
 				elseif msg == "MonaraSN" then
 					local spellId = 139899
 					local name = self:SpellName(spellId)
-					self:Message(spellId, "orange", "Long", CL["incoming"]:format(name))
+					self:MessageOld(spellId, "orange", "Long", CL["incoming"]:format(name))
 					self:Bar(spellId, 3, CL["cast"]:format(name))
 					self:Bar(spellId, 14.4)
 					self:Flash(spellId)

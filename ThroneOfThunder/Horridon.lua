@@ -149,14 +149,14 @@ function mod:BossEngage()
 	self:CheckBossStatus()
 	if self:MobId(UnitGUID("boss2")) == 69374 then -- War-God Jalak
 		self:StopBar(-7087)
-		self:Message("adds", "cyan", "Info", -7087, false) -- War-God Jalak
+		self:MessageOld("adds", "cyan", "Info", -7087, false) -- War-God Jalak
 		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
 		self:Bar(136817, 5) -- Bestial Cry
 	end
 end
 
 function mod:Rampage(args)
-	self:Message(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "Long")
 end
 
 function mod:BestialCry(args)
@@ -164,35 +164,35 @@ function mod:BestialCry(args)
 end
 
 function mod:CrackedShell(args)
-	self:Message(args.spellId, "green", nil, args.spellName) -- 10s stun timer, too, maybe?
+	self:MessageOld(args.spellId, "green", nil, args.spellName) -- 10s stun timer, too, maybe?
 end
 
 function mod:ControlOrb(msg, _, _, _, player)
-	self:Message(137240, "green", nil, msg)
+	self:MessageOld(137240, "green", nil, msg)
 end
 
 function mod:LastPhase(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 35 then -- phase starts at 30, except if the boss is already there
-		self:Message("adds", "cyan", "Info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
+		self:MessageOld("adds", "cyan", "Info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
 		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
 
 function mod:DinoForm(args)
 	-- tie it to this event, this is when you can use the orb
-	self:Message(-7092, "green", nil, L["orb_message"])
+	self:MessageOld(-7092, "green", nil, L["orb_message"])
 end
 
 function mod:DinoMending(args)
-	self:Message(-7090, "red", "Long")
+	self:MessageOld(-7090, "red", "Long")
 	self:CDBar(-7090, 8) -- to help interrupters keep track
 end
 
 function mod:DinoMendingInterrupt(args)
 	if args.extraSpellId == 136797 then
 		self:StopBar(-7090)
-		self:Message(-7090, "green", nil, CL["interrupted"]:format(self:SpellName(-7090)))
+		self:MessageOld(-7090, "green", nil, CL["interrupted"]:format(self:SpellName(-7090)))
 	end
 end
 
@@ -204,7 +204,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -234,7 +234,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
-			self:Message("chain_lightning", "blue", "Alert", L["chain_lightning_message"], args.spellId)
+			self:MessageOld("chain_lightning", "blue", "Alert", L["chain_lightning_message"], args.spellId)
 		end
 	end
 end
@@ -245,7 +245,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
-			self:Message("fireball", "blue", "Alert", L["fireball_message"], args.spellId)
+			self:MessageOld("fireball", "blue", "Alert", L["fireball_message"], args.spellId)
 		end
 	end
 end
@@ -259,7 +259,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName)) -- not exactly under you
+			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName)) -- not exactly under you
 			self:Flash(args.spellId)
 		end
 	end
@@ -280,7 +280,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("disease", nil, -7119) then -- don't spam
 			prev = t
-			self:Message(-7119, "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld(-7119, "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
@@ -294,7 +294,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -306,14 +306,14 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("poison") then -- don't spam
 			prev = t
-			self:Message("venom_bolt_volley", "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld("venom_bolt_volley", "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
 
 function mod:VenomBoltVolley(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:Message("venom_bolt_volley", "blue", "Alert", L["venom_bolt_volley_message"], args.spellId)
+		self:MessageOld("venom_bolt_volley", "blue", "Alert", L["venom_bolt_volley_message"], args.spellId)
 		self:Bar("venom_bolt_volley", 16, L["venom_bolt_volley_bar"], args.spellId)
 	end
 end
@@ -327,7 +327,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName), args.spellId)
+			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName), args.spellId)
 			self:Flash(args.spellId)
 		end
 	end
@@ -339,7 +339,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("magic", nil, -7109) then -- don't spam
 			prev = t
-			self:Message(-7109, "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld(-7109, "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
@@ -379,7 +379,7 @@ function mod:Doors(msg)
 end
 
 function mod:Swipe(args)
-	self:Message(136741, "orange", "Long")
+	self:MessageOld(136741, "orange", "Long")
 	local timer = (args.spellId == 136770) and 11 or 19 -- after charge swipe is ~10 sec, then ~19 till next charge ( 10 H ptr )
 	self:CDBar(136741, self:LFR() and 16 or timer) -- someone needs to verify LFR timer
 end
@@ -390,13 +390,13 @@ function mod:Puncture(args)
 end
 
 function mod:DireCall(args)
-	self:Message(args.spellId, "orange")
+	self:MessageOld(args.spellId, "orange")
 	self:Bar(args.spellId, 63)
 end
 
 function mod:DireFixation(args)
 	if self:Me(args.destGUID) then
-		self:Message(-7868, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(-7868, "blue", "Info", CL["you"]:format(args.spellName))
 		self:Flash(-7868)
 	end
 end

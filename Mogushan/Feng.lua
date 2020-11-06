@@ -123,13 +123,13 @@ end
 function mod:LightningFistsReversalOnBoss(args)
 	if not self:LFR() then
 		self:StopBar(CL["other"]:format(args.sourceName, args.spellName))
-		self:Message(115911, "orange", "Info", CL["onboss"]:format(args.spellName), args.spellId)
+		self:MessageOld(115911, "orange", "Info", CL["onboss"]:format(args.spellName), args.spellId)
 	end
 end
 
 function mod:LightningFistsReversal(args)
 	if not self:LFR() then
-		self:Message(115911, "orange", nil, L["shroud_can_interrupt"]:format(args.destName, self:SpellName(116018)), args.spellId)
+		self:MessageOld(115911, "orange", nil, L["shroud_can_interrupt"]:format(args.destName, self:SpellName(116018)), args.spellId)
 		self:Bar(115911, 20, CL["other"]:format(args.destName, args.spellName), args.spellId)
 	end
 end
@@ -141,7 +141,7 @@ function mod:Shroud(args)
 end
 
 function mod:NullificationBarrier(args)
-	self:Message(args.spellId, "orange", "Info", L["barrier_message"])
+	self:MessageOld(args.spellId, "orange", "Info", L["barrier_message"])
 	self:Bar(args.spellId, 6, L["barrier_message"])
 	if not self:LFR() then
 		self:Bar(args.spellId, 55, L["barrier_cooldown"])
@@ -165,7 +165,7 @@ function mod:PhaseChange(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	--a 5% warning is like forever away from the actual transition (especially in LFR, lol)
 	if (hp < 68 and not p2) or (hp < 35) then --66/33
-		self:Message("stages", "green", "Info", L["phase_message"], false)
+		self:MessageOld("stages", "green", "Info", L["phase_message"], false)
 		if not p2 then
 			p2 = true
 		else
@@ -178,7 +178,7 @@ function mod:PhaseChangeHC(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	--a 5% warning is like forever away from the actual transition (especially in LFR, lol)
 	if (hp < 77 and not p2) or (hp < 52 and not p3) or (hp < 27) then --75/50/25
-		self:Message("stages", "green", "Info", L["phase_message"], false)
+		self:MessageOld("stages", "green", "Info", L["phase_message"], false)
 		if not p2 then
 			p2 = true
 		elseif not p3 then
@@ -194,18 +194,18 @@ end
 --
 
 function mod:LightningPhase()
-	self:Message("stages", "green", nil, L["phase_lightning"], 116363)
+	self:MessageOld("stages", "green", nil, L["phase_lightning"], 116363)
 	self:CDBar(116018, 18, CL["count"]:format(self:SpellName(116018), counter)) -- Epicenter
 	self:CDBar(116157, 12) -- Lightning Fists
 end
 
 function mod:LightningFists(args)
-	self:Message(116157, "orange")
+	self:MessageOld(116157, "orange")
 	self:CDBar(116157, 13)
 end
 
 function mod:Epicenter(args)
-	self:Message(args.spellId, "red", "Alarm", CL["count"]:format(args.spellName, counter))
+	self:MessageOld(args.spellId, "red", "Alarm", CL["count"]:format(args.spellName, counter))
 	counter = counter + 1
 	self:CDBar(args.spellId, 30, CL["count"]:format(args.spellName, counter))
 end
@@ -215,7 +215,7 @@ end
 --
 
 function mod:FlamePhase()
-	self:Message("stages", "green", nil, L["phase_flame"], 116363)
+	self:MessageOld("stages", "green", nil, L["phase_flame"], 116363)
 	self:CDBar(116711, 35, CL["count"]:format(self:SpellName(116711), counter)) -- Draw Flame
 end
 
@@ -241,14 +241,14 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(116784, "blue", "Info", CL["underyou"]:format(wildfire))
+			self:MessageOld(116784, "blue", "Info", CL["underyou"]:format(wildfire))
 			self:Flash(116784)
 		end
 	end
 end
 
 function mod:DrawFlame(args)
-	self:Message(args.spellId, "red", "Alarm", CL["count"]:format(args.spellName, counter))
+	self:MessageOld(args.spellId, "red", "Alarm", CL["count"]:format(args.spellName, counter))
 	counter = counter + 1
 	self:CDBar(args.spellId, 35, CL["count"]:format(args.spellName, counter))
 end
@@ -258,7 +258,7 @@ end
 --
 
 function mod:ArcanePhase()
-	self:Message("stages", "green", nil, L["phase_arcane"], 116363)
+	self:MessageOld("stages", "green", nil, L["phase_arcane"], 116363)
 	self:DelayedMessage(116364, 10, "yellow", CL["soon"]:format(self:SpellName(116364))) -- Arcane Velocity
 end
 
@@ -295,7 +295,7 @@ do
 end
 
 function mod:ArcaneVelocity(args)
-	self:Message(args.spellId, "red", "Alarm", CL["count"]:format(args.spellName, counter))
+	self:MessageOld(args.spellId, "red", "Alarm", CL["count"]:format(args.spellName, counter))
 	counter = counter + 1
 	self:CDBar(args.spellId, 28, CL["count"]:format(args.spellName, counter))
 	self:DelayedMessage(args.spellId, 25.5, "yellow", CL["soon"]:format(CL["count"]:format(args.spellName, counter)))
@@ -312,7 +312,7 @@ end
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 117203 then -- Siphoning Shield
 		local spellName = self:SpellName(spellId)
-		self:Message(118071, "red", "Alarm", CL["count"]:format(spellName, counter))
+		self:MessageOld(118071, "red", "Alarm", CL["count"]:format(spellName, counter))
 		counter = counter + 1
 		self:CDBar(118071, 35, CL["count"]:format(spellName, counter))
 	elseif spellId == 122410 then -- Throw Mainhand (end of phase)

@@ -180,7 +180,7 @@ do
 
 	function mod:Overcharge(args)
 		local mobId = self:MobId(args.destGUID)
-		self:Message(-8408, "red", nil, CL.other:format(args.spellName, itemNames[mobId]), false)
+		self:MessageOld(-8408, "red", nil, CL.other:format(args.spellName, itemNames[mobId]), false)
 		if self.db.profile.custom_off_mine_marker and mobId == 71790 then -- mines
 			wipe(markableMobs)
 			wipe(marksUsed)
@@ -205,12 +205,12 @@ do
 				items[#items+1] = itemNames[mobId]
 			end
 		end
-		mod:Message(-8202, "cyan", nil, L.assembly_line_items:format(count, table.concat(items, " - ")), false)
+		mod:MessageOld(-8202, "cyan", nil, L.assembly_line_items:format(count, table.concat(items, " - ")), false)
 		wipe(items)
 	end
 	function mod:AssemblyLine()
 		self:ScheduleTimer(beltItems, 13, assemblyLineCounter)
-		self:Message(-8202, "cyan", "Warning", L.assembly_line_message:format(assemblyLineCounter), "Inv_crate_03")
+		self:MessageOld(-8202, "cyan", "Warning", L.assembly_line_message:format(assemblyLineCounter), "Inv_crate_03")
 		assemblyLineCounter = assemblyLineCounter + 1
 		self:Bar(-8202, 40, CL.count:format(self:SpellName(-8202), assemblyLineCounter), "Inv_crate_03")
 	end
@@ -222,7 +222,7 @@ do
 		local t = GetTime()
 		if t-prev > 5 then
 			prev = t
-			self:Message(-8212, "orange", nil, -8212, 77976) -- mine like icon
+			self:MessageOld(-8212, "orange", nil, -8212, 77976) -- mine like icon
 		end
 	end
 end
@@ -233,30 +233,30 @@ do
 		local t = GetTime()
 		if t-prev > 15 then
 			prev = t
-			self:Message(args.spellId, "red", "Long")
+			self:MessageOld(args.spellId, "red", "Long")
 		end
 	end
 end
 
 function mod:Superheated(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
 	end
 end
 
 function mod:RAID_BOSS_WHISPER(_, msg, sender)
 	if msg:find("Ability_Siege_Engineer_Superheated", nil, true) then -- laser fixate
 		-- might wanna do syncing to get range message working
-		self:Message(-8208, "blue", "Info", L.laser_on_you, 144040)
+		self:MessageOld(-8208, "blue", "Info", L.laser_on_you, 144040)
 		self:Flash(-8208)
 		self:Say(-8208, 143444) -- 143444 = "Laser"
 	elseif msg:find("Ability_Siege_Engineer_Detonate", nil, true) then -- mine fixate
-		self:Message(-8212, "blue", "Info", CL.you:format(sender))
+		self:MessageOld(-8212, "blue", "Info", CL.you:format(sender))
 		self:Flash(-8212)
 	elseif msg:find("143266", nil, true) then -- Sawblade
 		-- this is faster than target scanning, hence why we do it
 		sawbladeTarget = UnitGUID("player")
-		self:Message(-8195, "green", "Info", CL.you:format(self:SpellName(143266)))
+		self:MessageOld(-8195, "green", "Info", CL.you:format(self:SpellName(143266)))
 		self:PrimaryIcon(-8195, "player")
 		self:Flash(-8195)
 		self:Say(-8195)
@@ -264,11 +264,11 @@ function mod:RAID_BOSS_WHISPER(_, msg, sender)
 end
 
 function mod:ShockwaveMissile()
-	self:Message(143639, "orange")
+	self:MessageOld(143639, "orange")
 end
 
 function mod:ShockwaveMissileOver(args)
-	self:Message(args.spellId, "orange", nil, CL.over:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", nil, CL.over:format(args.spellName))
 end
 
 function mod:PatternRecognitionApplied(args)
@@ -279,14 +279,14 @@ end
 
 function mod:PatternRecognitionRemoved(args)
 	if self:Me(args.destGUID) then
-		self:Message(-8207, "green", nil, CL.over:format(args.spellName))
+		self:MessageOld(-8207, "green", nil, CL.over:format(args.spellName))
 	end
 end
 
 -- Automated Shredders
 
 function mod:ShredderEngage()
-	self:Message(-8199, "yellow", self:Tank() and "Long", nil, "INV_MISC_ARMORKIT_27")
+	self:MessageOld(-8199, "yellow", self:Tank() and "Long", nil, "INV_MISC_ARMORKIT_27")
 	self:Bar(-8199, 60, nil, "INV_MISC_ARMORKIT_27")
 	self:Bar(144208, 16) -- Death from Above
 	overloadCounter = 1
@@ -294,17 +294,17 @@ function mod:ShredderEngage()
 end
 
 function mod:DeathFromAboveApplied(args)
-	self:Message(144208, "yellow", "Alert")
+	self:MessageOld(144208, "yellow", "Alert")
 end
 
 function mod:DeathFromAbove(args)
-	self:Message(args.spellId, "yellow", nil, CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "yellow", nil, CL.casting:format(args.spellName))
 	self:Bar(args.spellId, 41)
 end
 
 function mod:Overload(args)
 	local amount = args.amount or 1
-	self:Message(args.spellId, "orange", nil, CL.count:format(args.spellName, amount))
+	self:MessageOld(args.spellId, "orange", nil, CL.count:format(args.spellName, amount))
 	overloadCounter = amount + 1
 	self:Bar(args.spellId, 11, CL.count:format(args.spellName, overloadCounter))
 end
@@ -327,12 +327,12 @@ function mod:ElectrostaticChargeApplied(args)
 end
 
 function mod:ProtectiveFrenzy(args)
-	self:Message(args.spellId, "yellow", "Long")
+	self:MessageOld(args.spellId, "yellow", "Long")
 	for i=1, 5 do
 		local boss = "boss"..i
 		if UnitExists(boss) and UnitIsDead(boss) then
 			local mobId = self:MobId(UnitGUID(boss))
-			self:Message(-8202, "green", nil, CL.other:format(L.disabled, itemNames[mobId]), false)
+			self:MessageOld(-8202, "green", nil, CL.other:format(L.disabled, itemNames[mobId]), false)
 		end
 	end
 end

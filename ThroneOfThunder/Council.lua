@@ -140,19 +140,19 @@ function mod:BlessedLoaSpirit(args)
 			end
 		end
 	end
-	self:Message(args.spellId, "yellow", nil, CL["other"]:format(fixated, UnitName(lowest) or "???"))
+	self:MessageOld(args.spellId, "yellow", nil, CL["other"]:format(fixated, UnitName(lowest) or "???"))
 	self:Bar(args.spellId, 20, CL["other"]:format(fixated, args.spellName))
 end
 
 function mod:BlessedGift(args)
 	if not self:LFR() then
-		self:Message("priestess_adds", "red", "Alarm", L["priestess_heal"]:format(args.destName), args.spellId)
+		self:MessageOld("priestess_adds", "red", "Alarm", L["priestess_heal"]:format(args.destName), args.spellId)
 	end
 	self:StopBar(CL["other"]:format(fixated, self:SpellName(137203)))
 end
 
 function mod:PriestessAdds(args)
-	self:Message("priestess_adds", "red", "Alarm", args.spellId)
+	self:MessageOld("priestess_adds", "red", "Alarm", args.spellId)
 	self:CDBar("priestess_adds", 33, L["priestess_adds_message"], L.priestess_adds_icon)
 end
 
@@ -160,7 +160,7 @@ end
 
 function mod:Sandstorm(args)
 	self:Bar(args.spellId, 38)
-	self:Message(args.spellId, "orange", "Alert")
+	self:MessageOld(args.spellId, "orange", "Alert")
 end
 
 do
@@ -168,7 +168,7 @@ do
 	function mod:Entrapped(args)
 		if self:Me(args.destGUID) then
 			self:Flash(136857)
-			self:Message(136857, "blue", "Info")
+			self:MessageOld(136857, "blue", "Info")
 		elseif self:Dispeller("magic", nil, 136857) or (mastersCall and GetSpellCooldown(mastersCall) == 0) then -- Master's Call works on it, too
 			self:TargetMessageOld(136857, args.destName, "yellow", nil, nil, nil, true)
 		end
@@ -177,7 +177,7 @@ end
 
 function mod:Ensnared(args)
 	if self:Me(args.destGUID) then
-		self:Message(136878, "yellow", nil, CL["count"]:format(args.spellName, args.amount or 1))
+		self:MessageOld(136878, "yellow", nil, CL["count"]:format(args.spellName, args.amount or 1))
 	end
 end
 
@@ -187,7 +187,7 @@ end
 
 function mod:QuicksandApplied(args)
 	if self:Me(args.destGUID) then
-		self:Message(-7062, "blue", "Info", CL["underyou"]:format(args.spellName))
+		self:MessageOld(-7062, "blue", "Info", CL["underyou"]:format(args.spellName))
 		self:Flash(-7062)
 	end
 end
@@ -207,7 +207,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(137122, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(137122, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(137122)
 		end
 	end
@@ -235,7 +235,7 @@ do
 		end
 		if unit == "player" and not hasChilledToTheBone and self:UnitDebuff(unit, chilledToTheBone) then
 			hasChilledToTheBone = true
-			self:Message(137085, "blue", "Info") -- run away little girl!
+			self:MessageOld(137085, "blue", "Info") -- run away little girl!
 			self:Flash(137085)
 			self:ScheduleTimer(reset, 15, true) -- minimum of 16s before you can get it again
 		end
@@ -286,7 +286,7 @@ end
 
 -- Tank alerts so you know when you should be watching for stacks (if you're not avoiding hits, it can stack really fast)
 function mod:FrigidAssaultStart(args)
-	self:Message(-7054, "yellow", "Warning", args.spellName)
+	self:MessageOld(-7054, "yellow", "Warning", args.spellName)
 	self:Bar(-7054, 30)
 end
 
@@ -297,14 +297,14 @@ function mod:FrigidAssault(args)
 end
 
 function mod:FrigidAssaultStun(args)
-	self:Message(-7054, "red", "Warning", L["assault_stun"])
+	self:MessageOld(-7054, "red", "Warning", L["assault_stun"])
 end
 
 -- General
 
 function mod:ShadowedSoul(args)
 	if self:Me(args.destGUID) and self:UnitDebuff("player", self:SpellName(137641), 137641) and args.amount > 9 then -- Soul Fragment on, aka gaining more stacks, 10 stacks = 20% extra damage taken
-		self:Message(args.spellId, "blue", "Info", CL["count"]:format(args.spellName, args.amount))
+		self:MessageOld(args.spellId, "blue", "Info", CL["count"]:format(args.spellName, args.amount))
 	end
 end
 
@@ -328,7 +328,7 @@ do
 		if percHPToGo < 1 then return end
 
 		if percHPToGo < lastPercHPToGo then
-			mod:Message(136442, "red", "Alert", L["hp_to_go_fullpower"]:format(percHPToGo))
+			mod:MessageOld(136442, "red", "Alert", L["hp_to_go_fullpower"]:format(percHPToGo))
 		end
 		mod:ScheduleTimer(warnFullPower, 3, guid, percHPToGo)
 	end
@@ -342,22 +342,22 @@ do
 		local power = UnitPower(unitId)
 		if power > 32 and prevPower == 0 then
 			prevPower = 33
-			self:Message(136442, "yellow", nil, L["hp_to_go_power"]:format(percHPToGo, power))
+			self:MessageOld(136442, "yellow", nil, L["hp_to_go_power"]:format(percHPToGo, power))
 		elseif power > 49 and prevPower == 33 then
 			prevPower = 50
-			self:Message(136442, "yellow", nil, L["hp_to_go_power"]:format(percHPToGo, power))
+			self:MessageOld(136442, "yellow", nil, L["hp_to_go_power"]:format(percHPToGo, power))
 		elseif power > 69 and prevPower == 50 then
 			prevPower = 70
-			self:Message(136442, "orange", nil, L["hp_to_go_power"]:format(percHPToGo, power))
+			self:MessageOld(136442, "orange", nil, L["hp_to_go_power"]:format(percHPToGo, power))
 		elseif power > 79 and prevPower == 70 then
 			prevPower = 80
-			self:Message(136442, "red", nil, L["hp_to_go_power"]:format(percHPToGo, power))
+			self:MessageOld(136442, "red", nil, L["hp_to_go_power"]:format(percHPToGo, power))
 		elseif power > 89 and prevPower == 80 then
 			prevPower = 90
-			self:Message(136442, "red", nil, L["hp_to_go_power"]:format(percHPToGo, power))
+			self:MessageOld(136442, "red", nil, L["hp_to_go_power"]:format(percHPToGo, power))
 		elseif power > 99 and prevPower == 90 then
 			prevPower = 100
-			self:Message(136442, "red", "Alert", L["hp_to_go_fullpower"]:format(percHPToGo))
+			self:MessageOld(136442, "red", "Alert", L["hp_to_go_fullpower"]:format(percHPToGo))
 			self:ScheduleTimer(warnFullPower, 3, UnitGUID(unitId), percHPToGo)
 		end
 	end
@@ -383,7 +383,7 @@ do
 		local baseTime = self:Difficulty() == 3 and 76 or 66 -- 66 (76 in 10m) seconds till full power without any lingering presences stacks
 		local regenMultiplier = self:Heroic() and 15 or self:LFR() and 5 or 10
 		local duration = baseTime * (100 - lingeringCount * regenMultiplier) / 100
-		self:Message(args.spellId, "cyan", "Long", CL["other"]:format(args.spellName, args.destName))
+		self:MessageOld(args.spellId, "cyan", "Long", CL["other"]:format(args.spellName, args.destName))
 		self:Bar(args.spellId, duration, L["full_power"])
 
 		local mobId = self:MobId(args.destGUID)

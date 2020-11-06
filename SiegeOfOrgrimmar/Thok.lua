@@ -110,7 +110,7 @@ end
 function mod:YetCharge(args)
 	self:Bar(args.spellId, 15)
 	if not yetiChargeTimer then
-		yetiChargeTimer = self:ScheduleTimer("Message", 15, args.spellId, "red", "Warning", CL.soon:format(args.spellName))
+		yetiChargeTimer = self:ScheduleTimer("MessageOld", 15, args.spellId, "red", "Warning", CL.soon:format(args.spellName))
 	end
 end
 
@@ -118,7 +118,7 @@ end
 
 function mod:BloodFrenzy(args)
 	-- this may feel like double message, but knowing exact stack count on phase change can help plan the rest of the fight
-	self:Message(-7981, "yellow", nil, CL.count:format(args.spellName, args.amount))
+	self:MessageOld(-7981, "yellow", nil, CL.count:format(args.spellName, args.amount))
 end
 
 function mod:Enrage(args)
@@ -128,7 +128,7 @@ function mod:Enrage(args)
 end
 
 function mod:SkeletonKeyRemoved(args)
-	self:Message(args.spellId, "green", "Alert", L.cage_opened)
+	self:MessageOld(args.spellId, "green", "Alert", L.cage_opened)
 	self:StopBar(args.spellId, args.destName)
 	self:Bar(-7981, 13, CL.over:format(self:SpellName(-7981))) -- Blood Frenzy
 end
@@ -156,7 +156,7 @@ do
 	end
 	function mod:BloodFrenzyOver(args)
 		self:OpenProximity("proximity", 10)
-		self:Message(-7981, "cyan", "Long", CL.over:format(args.spellName))
+		self:MessageOld(-7981, "cyan", "Long", CL.over:format(args.spellName))
 		self:CDBar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
 		self:CDBar(143766, 12, 17086, "ability_hunter_pet_devilsaur") -- Breath. 143766 isn't exactly a combined option but it's one of the breaths.
 		if self:Mythic() then
@@ -169,7 +169,7 @@ function mod:FixateRemoved(args)
 	self:PrimaryIcon(-7980)
 	self:StopBar(-7980, args.destName)
 	if self:Me(args.destGUID) then
-		self:Message(-7980, "green", nil, CL.over:format(args.spellName))
+		self:MessageOld(-7980, "green", nil, CL.over:format(args.spellName))
 	end
 end
 
@@ -184,7 +184,7 @@ function mod:FixateApplied(args)
 end
 
 function mod:BloodFrenzyPhase()
-	self:Message(-7963, "yellow", nil, CL.count:format(self:SpellName(143411), accCount))
+	self:MessageOld(-7963, "yellow", nil, CL.count:format(self:SpellName(143411), accCount))
 	accCount = 0
 	self:StopBar(143428) -- Tail Lash
 	self:StopBar(143426) -- Fearsome Roar
@@ -193,7 +193,7 @@ function mod:BloodFrenzyPhase()
 	self:StopBar(143767) -- Scorching Breath
 	self:StopBar(-7963) -- Deafening Screech
 	self:CloseProximity("proximity")
-	self:Message(-7981, "cyan", "Long")
+	self:MessageOld(-7981, "cyan", "Long")
 end
 
 -- stage 1
@@ -205,7 +205,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:Message(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
 			end
 		end
 	end
@@ -237,7 +237,7 @@ do
 			self:Bar(-7963, accTimes[accCount])
 		end
 		if accCount < 6 or accCount % 3 == 0 then
-			self:Message(-7963, "yellow", nil, CL.count:format(args.spellName, accCount))
+			self:MessageOld(-7963, "yellow", nil, CL.count:format(args.spellName, accCount))
 		end
 	end
 end

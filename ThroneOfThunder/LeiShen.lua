@@ -281,17 +281,17 @@ end
 
 do
 	local function whipSoon(spellId, spellName)
-		mod:Message(spellId, "red", "Warning", CL["soon"]:format(CL["count"]:format(spellName, whipCounter)))
+		mod:MessageOld(spellId, "red", "Warning", CL["soon"]:format(CL["count"]:format(spellName, whipCounter)))
 		mod:Flash(spellId)
 	end
 	function mod:LightningWhip(args)
 		if phase == 3 then
-			self:Message(args.spellId, "orange", "Alert", CL["count"]:format(args.spellName, whipCounter))
+			self:MessageOld(args.spellId, "orange", "Alert", CL["count"]:format(args.spellName, whipCounter))
 			whipCounter = whipCounter + 1
 			self:Bar(args.spellId, 30.3, CL["count"]:format(args.spellName, whipCounter))
 			self:ScheduleTimer(whipSoon, 27, args.spellId, args.spellName)
 		else
-			self:Message(args.spellId, "orange", "Alert")
+			self:MessageOld(args.spellId, "orange", "Alert")
 			self:Bar(args.spellId, 45.1)
 		end
 	end
@@ -304,7 +304,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(136850, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(136850, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(136850)
 		end
 	end
@@ -313,7 +313,7 @@ end
 do
 	local prev = 0
 	local function warnBallsSoon(spellId)
-		mod:Message(spellId, "yellow", nil, CL["soon"]:format(mod:SpellName(136620)))
+		mod:MessageOld(spellId, "yellow", nil, CL["soon"]:format(mod:SpellName(136620)))
 		activeProximityAbilities[3] = true
 		updateProximity()
 		ballLightningTimer = nil
@@ -329,14 +329,14 @@ do
 			end
 			ballLightningTimer = self:ScheduleTimer(warnBallsSoon, 41, args.spellId)-- reopen it when new balls are about to come
 			self:Bar(args.spellId, 46, 136620)
-			self:Message(args.spellId, "yellow", nil, 136620)
+			self:MessageOld(args.spellId, "yellow", nil, 136620)
 		end
 	end
 end
 
 function mod:FusionSlash(args)
 	self:CDBar(args.spellId, 42)
-	self:Message(args.spellId, "red", "Warning")
+	self:MessageOld(args.spellId, "red", "Warning")
 end
 
 ----------------------------------------
@@ -344,7 +344,7 @@ end
 --
 
 local function warnDiffusionChainSoon(intermission)
-	mod:Message(135991, "red", intermission or not mod:Tank() and "Warning", CL["soon"]:format(mod:SpellName(135991)))
+	mod:MessageOld(135991, "red", intermission or not mod:Tank() and "Warning", CL["soon"]:format(mod:SpellName(135991)))
 	activeProximityAbilities[2] = true
 	updateProximity()
 end
@@ -392,7 +392,7 @@ function mod:IntermissionEnd(msg)
 	end
 	self:Bar(136543, (phase == 2) and 14 or 41, 136620) -- Ball Lightning
 
-	self:Message("stages", "cyan", "Info", CL["phase"]:format(phase), false)
+	self:MessageOld("stages", "cyan", "Info", CL["phase"]:format(phase), false)
 end
 
 function mod:IntermissionStart(args)
@@ -435,17 +435,17 @@ function mod:IntermissionStart(args)
 		self:Bar(139011, 14) -- Helm of Command
 	end
 	self:Bar("stages", 47, CL.intermission, args.spellId)
-	self:Message("stages", "cyan", "Info", CL.intermission, false)
+	self:MessageOld("stages", "cyan", "Info", CL.intermission, false)
 	self:DelayedMessage("stages", 40, "green", L["last_inermission_ability"])
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if phase == 1 and hp < 68 then
-		self:Message("stages", "cyan", "Info", CL["soon"]:format(CL.intermission), false)
+		self:MessageOld("stages", "cyan", "Info", CL["soon"]:format(CL.intermission), false)
 		phase = 2
 	elseif phase == 2 and hp < 33 then
-		self:Message("stages", "cyan", "Info", CL["soon"]:format(CL.intermission), false)
+		self:MessageOld("stages", "cyan", "Info", CL["soon"]:format(CL.intermission), false)
 		self:UnregisterUnitEvent(event, unitId)
 		phase = 3
 	end
@@ -462,7 +462,7 @@ do
 		local t = GetTime()
 		if t-prev > 1 then
 			prev = t
-			self:Message(135150, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(135150, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(135150)
 		end
 	end
@@ -470,12 +470,12 @@ end
 
 function mod:Thunderstruck(args)
 	if phase == 3 then
-		self:Message(args.spellId, "yellow", "Alert", CL["count"]:format(args.spellName, thunderstruckCounter))
+		self:MessageOld(args.spellId, "yellow", "Alert", CL["count"]:format(args.spellName, thunderstruckCounter))
 		thunderstruckCounter = thunderstruckCounter + 1
 		self:Bar(args.spellId, 30, CL["count"]:format(args.spellName, thunderstruckCounter))
 	else
 		self:CDBar(args.spellId, 46)
-		self:Message(args.spellId, "yellow", "Alert")
+		self:MessageOld(args.spellId, "yellow", "Alert")
 	end
 end
 
@@ -500,16 +500,16 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 			if phase == 1 or not self:Heroic() then stopConduitAbilityBars() end
 			self:Bar(136366, 40)
 		end
-		self:Message(136366, "red", "Long")
+		self:MessageOld(136366, "red", "Long")
 	elseif spellId == 136869 then -- Violent Gale Winds
-		self:Message(136889, "red", "Long")
+		self:MessageOld(136889, "red", "Long")
 		self:Bar(136889, 30)
 	elseif spellId == 135143 then -- Crashung Thunder
-		self:Message(135150, "yellow")
+		self:MessageOld(135150, "yellow")
 		self:Bar(135150, 30)
 	elseif spellId == 139006 or spellId == 139007 or spellId == 139008 or spellId == 139009 then -- active quadrant
 		if self:Heroic() and phase == 3 then
-			self:Message("stages", "yellow", nil, self:SpellName(spellId), 136913) -- probably shouldn't be linked to stages, but dunno anything better -- overwhelming power icon
+			self:MessageOld("stages", "yellow", nil, self:SpellName(spellId), 136913) -- probably shouldn't be linked to stages, but dunno anything better -- overwhelming power icon
 		end
 	end
 end
@@ -529,7 +529,7 @@ do
 			mod:Bar(spellId, 6, L["overcharge_bar"])
 		end
 		if not tooCloseForOvercharged then
-			mod:Message(spellId, "green", nil, L["safe_from_stun"], false)
+			mod:MessageOld(spellId, "green", nil, L["safe_from_stun"], false)
 		end
 		tooCloseForOvercharged = nil
 		overchargedOnMe = nil
@@ -567,7 +567,7 @@ do
 		if #diffusionList > 0 then
 			mod:TargetMessageOld(135991, diffusionList, "red", intermission and "Warning", L["diffusion_add"], nil, true)
 		else -- no one in range
-			mod:Message(135991, "red", intermission and "Warning")
+			mod:MessageOld(135991, "red", intermission and "Warning")
 		end
 		if intermission then
 			mod:Bar(135991, 25)

@@ -50,12 +50,12 @@ end
 --
 
 function mod:CannonBarrage()
-	self:Message(121600, "orange", nil, CL["incoming"]:format(self:SpellName(121600)))
+	self:MessageOld(121600, "orange", nil, CL["incoming"]:format(self:SpellName(121600)))
 	self:Bar(121600, 60)
 end
 
 function mod:Stomp()
-	self:Message(121787, "red", "Alarm", CL["incoming"]:format(self:SpellName(121787)))
+	self:MessageOld(121787, "red", "Alarm", CL["incoming"]:format(self:SpellName(121787)))
 	self:Bar(121787, 60)
 	self:DelayedMessage(-6200, 10, "yellow", CL["adds"], 121747) -- Salyin Warmonger
 end

@@ -70,11 +70,11 @@ end
 --
 
 function mod:PowerDown()
-	self:Message(116529, "orange", "Info", self:SpellName(116529))
+	self:MessageOld(116529, "orange", "Info", self:SpellName(116529))
 end
 
 function mod:Overload(msg, boss)
-	self:Message("overload", "red", "Long", msg:format(boss), L.overload_icon)
+	self:MessageOld("overload", "red", "Long", msg:format(boss), L.overload_icon)
 end
 
 do
@@ -88,7 +88,7 @@ do
 			jasperChainsTargets[2] = args.destName
 			if self:Me(args.destGUID) or UnitIsUnit(prevPlayer, "player") then
 				self:Flash(args.spellId)
-				self:Message(args.spellId, "blue", nil, CL["you"]:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", nil, CL["you"]:format(args.spellName))
 				self:OpenProximity(args.spellId, 10, UnitIsUnit(prevPlayer, "player") and args.destName or prevPlayer, true)
 			else
 				self:TargetMessageOld(args.spellId, jasperChainsTargets, "yellow")
@@ -98,7 +98,7 @@ do
 	end
 	function mod:JasperChainsRemoved(args)
 		if self:Me(args.destGUID) then
-			self:Message(args.spellId, "blue", nil, CL["over"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", nil, CL["over"]:format(args.spellName))
 			self:CloseProximity(args.spellId)
 		end
 	end
@@ -111,7 +111,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Alarm", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Alarm", CL["underyou"]:format(args.spellName))
 		end
 	end
 end
@@ -119,13 +119,13 @@ end
 function mod:Petrifications(_, _, _, spellId)
 	-- we could be using the same colors as blizzard but they are too "faint" imo
 	if spellId == 115852 then -- cobalt
-		self:Message("petrifications", nil, "Alert", ("|c001E90FF%s|r"):format(self:SpellName(spellId)), spellId) -- blue
+		self:MessageOld("petrifications", nil, "Alert", ("|c001E90FF%s|r"):format(self:SpellName(spellId)), spellId) -- blue
 	elseif spellId == 116006 then -- jade
-		self:Message("petrifications", nil, "Alert", ("|c00008000%s|r"):format(self:SpellName(spellId)), spellId) -- green
+		self:MessageOld("petrifications", nil, "Alert", ("|c00008000%s|r"):format(self:SpellName(spellId)), spellId) -- green
 	elseif spellId == 116036 then -- jasper
-		self:Message("petrifications", nil, "Alert", ("|c00FF0000%s|r"):format(self:SpellName(spellId)), spellId) -- red
+		self:MessageOld("petrifications", nil, "Alert", ("|c00FF0000%s|r"):format(self:SpellName(spellId)), spellId) -- red
 	elseif spellId == 116057 then -- amethyst
-		self:Message("petrifications", nil, "Alert", ("|c00FF44FF%s|r"):format(self:SpellName(spellId)), spellId) -- purple
+		self:MessageOld("petrifications", nil, "Alert", ("|c00FF44FF%s|r"):format(self:SpellName(spellId)), spellId) -- purple
 	elseif spellId == 129424 then
 		self:Bar(-5772, cobaltTimer)
 	end

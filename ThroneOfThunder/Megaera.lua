@@ -81,7 +81,7 @@ function mod:OnEngage()
 	breathCounter = 0
 	headCounter = 0
 	self:Bar("breaths", 5, L["breaths"], L.breaths_icon)
-	self:Message("breaths", "yellow", nil, CL["custom_start_s"]:format(self.displayName, L["breaths"], 5), false)
+	self:MessageOld("breaths", "yellow", nil, CL["custom_start_s"]:format(self.displayName, L["breaths"], 5), false)
 end
 
 --------------------------------------------------------------------------------
@@ -109,7 +109,7 @@ do
 		if t-prev > 6 then
 			prev = t
 			breathCounter = breathCounter + 1
-			self:Message("breaths", "yellow", nil, CL["count"]:format(L["breaths"], breathCounter), L.breaths_icon) -- neutral breath icon
+			self:MessageOld("breaths", "yellow", nil, CL["count"]:format(L["breaths"], breathCounter), L.breaths_icon) -- neutral breath icon
 			self:Bar("breaths", 16.5, L["breaths"], L.breaths_icon)
 		end
 	end
@@ -122,7 +122,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message("breaths", "blue", "Info", CL["you"]:format(args.spellName), args.spellId)
+			self:MessageOld("breaths", "blue", "Info", CL["you"]:format(args.spellName), args.spellId)
 			self:Flash("breaths", args.spellId)
 		end
 	end
@@ -130,7 +130,7 @@ end
 
 do
 	local function rampageOver(self, spellId, spellName)
-		self:Message(spellId, "green", nil, CL["over"]:format(spellName))
+		self:MessageOld(spellId, "green", nil, CL["over"]:format(spellName))
 		if frostOrFireDead and not self:LFR() then
 			self:OpenProximity("proximity", 5)
 		end
@@ -141,7 +141,7 @@ do
 			self:UnregisterEvent("UNIT_AURA")
 			self:Bar("breaths", 30, L["breaths"], L.breaths_icon)
 			local spellName = self:SpellName(spellId)
-			self:Message(spellId, "red", "Long", CL["count"]:format(spellName, headCounter))
+			self:MessageOld(spellId, "red", "Long", CL["count"]:format(spellName, headCounter))
 			self:Bar(spellId, 20, CL["count"]:format(spellName, headCounter))
 			self:ScheduleTimer(rampageOver, 20, self, spellId, spellName)
 			breathCounter = 0
@@ -157,7 +157,7 @@ function mod:Deaths(args)
 	headCounter = headCounter + 1
 	self:CloseProximity("proximity")
 	self:StopBar(L["breaths"])
-	self:Message(139458, "yellow", nil, CL["soon"]:format(CL["count"]:format(self:SpellName(139458), headCounter))) -- Rampage
+	self:MessageOld(139458, "yellow", nil, CL["soon"]:format(CL["count"]:format(self:SpellName(139458), headCounter))) -- Rampage
 	self:Bar(139458, 5, CL["incoming"]:format(self:SpellName(139458)))
 end
 
@@ -170,7 +170,7 @@ function mod:Suppression(args)
 end
 
 function mod:NetherTear(args)
-	self:Message(args.spellId, "orange", "Alarm", L["arcane_adds"])
+	self:MessageOld(args.spellId, "orange", "Alarm", L["arcane_adds"])
 	self:Bar(args.spellId, 6, CL["cast"]:format(L["arcane_adds"])) -- this is to help so you know when all the adds have spawned
 end
 
@@ -185,7 +185,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -234,7 +234,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(139822, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(139822, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(139822)
 		end
 	end

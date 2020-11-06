@@ -102,7 +102,7 @@ function mod:EngageCheck()
 	self:CheckBossStatus()
 	if hiding then
 		hiding = nil
-		self:Message(123244, "yellow", nil, CL["over"]:format(self:SpellName(123244))) -- Hide
+		self:MessageOld(123244, "yellow", nil, CL["over"]:format(self:SpellName(123244))) -- Hide
 		self:CDBar("special", 32, L["special"], L.special_icon)
 		nextSpecial = GetTime() + 32
 	end
@@ -150,7 +150,7 @@ end
 
 function mod:Hide(args)
 	hiding = true
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 
 do
@@ -158,7 +158,7 @@ do
 	function mod:GetAwayApplied(args)
 		if UnitHealthMax("boss1") > 0 then
 			getAwayStartHP = UnitHealth("boss1") / UnitHealthMax("boss1") * 100
-			self:Message(args.spellId, "red", "Alarm")
+			self:MessageOld(args.spellId, "red", "Alarm")
 		end
 	end
 	function mod:GetAwayRemoved()
@@ -172,7 +172,7 @@ do
 	function mod:HealthCheck(_, unitId)
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < nextProtectWarning then
-			self:Message(123250, "green", nil, CL["soon"]:format(self:SpellName(123250))) -- Protect
+			self:MessageOld(123250, "green", nil, CL["soon"]:format(self:SpellName(123250))) -- Protect
 			nextProtectWarning = hp - 20
 			if nextProtectWarning < 20 then
 				nextProtectWarning = 0
@@ -185,7 +185,7 @@ do
 				local hpToGo = math.ceil(4 - (getAwayStartHP - hp))
 				if lastHpToGo ~= hpToGo and hpToGo > 0 then
 					lastHpToGo = hpToGo
-					self:Message(123461, "green", nil, L["hp_to_go"]:format(hpToGo))
+					self:MessageOld(123461, "green", nil, L["hp_to_go"]:format(hpToGo))
 				end
 			end
 		end
@@ -193,7 +193,7 @@ do
 end
 
 function mod:Protect(args)
-	self:Message(args.spellId, "red", "Alarm")
+	self:MessageOld(args.spellId, "red", "Alarm")
 	self:StopBar(L["special"]) --stop the bar since it's pretty likely the cd will expire during protect
 end
 
@@ -202,7 +202,7 @@ function mod:ProtectRemoved()
 	if left > 4 then -- restart the bar if there are more than a few seconds left on the special's cd
 		self:CDBar("special", left, L["special"], L.special_icon)
 	else
-		self:Message("special", "yellow", nil, CL["soon"]:format(L["special"]), L.special_icon)
+		self:MessageOld("special", "yellow", nil, CL["soon"]:format(L["special"]), L.special_icon)
 	end
 	-- marking
 	wipe(markableMobs)

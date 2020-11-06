@@ -107,7 +107,7 @@ end
 function mod:Dispatch(args)
 	local diff = self:Difficulty()
 	self:CDBar(124077, (diff == 3 or diff == 5) and 22 or 12)
-	self:Message(args.spellId, "orange", "Long")
+	self:MessageOld(args.spellId, "orange", "Long")
 	if UnitGUID("target") == args.sourceGUID or UnitGUID("focus") == args.sourceGUID then
 		self:Flash(args.spellId)
 	end
@@ -124,7 +124,7 @@ function mod:DreadScreech(args)
 end
 
 function mod:ConsumingTerror(args)
-	self:Message(args.spellId, "red", "Alert")
+	self:MessageOld(args.spellId, "red", "Alert")
 	self:CDBar(args.spellId, 31)
 	self:Flash(args.spellId)
 end
@@ -150,7 +150,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:Message(124862, "yellow", "Alert", L["visions_dispel"], args.spellId)
+				self:MessageOld(124862, "yellow", "Alert", L["visions_dispel"], args.spellId)
 			end
 		end
 	end
@@ -183,7 +183,7 @@ function mod:Fixate(args)
 	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Info")
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
 		self:TargetBar(args.spellId, 20, args.destName)
 	end
 end
@@ -196,16 +196,16 @@ end
 
 function mod:Resin(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
 	end
 end
 
 function mod:AmberTrap(args)
 	local buffStack = args.amount or 1
 	if buffStack < 5 then
-		self:Message(125826, "yellow", nil, CL["count"]:format(args.spellName, buffStack)) --Sticky Resin (124748)
+		self:MessageOld(125826, "yellow", nil, CL["count"]:format(args.spellName, buffStack)) --Sticky Resin (124748)
 	else
-		self:Message(125826, "yellow") --Amber Trap
+		self:MessageOld(125826, "yellow") --Amber Trap
 	end
 end
 
@@ -223,9 +223,9 @@ do
 			self:StopBar(124077)
 		elseif power == 130 then
 			self:Bar(-6325, 65)
-			self:Message(-6325, "yellow")
+			self:MessageOld(-6325, "yellow")
 		elseif power == 65 then
-			self:Message(-6325, "yellow")
+			self:MessageOld(-6325, "yellow")
 		elseif power == 2 then
 			self:CloseProximity()
 			self:Bar("phases", 158, CL["phase"]:format(1), L.phases_icon)
@@ -241,7 +241,7 @@ function mod:Eyes(args)
 end
 
 function mod:UltimateCorruption(args)
-	self:Message("phases", "green", "Info", "30% - "..CL["phase"]:format(3), args.spellId)
+	self:MessageOld("phases", "green", "Info", "30% - "..CL["phase"]:format(3), args.spellId)
 	self:StopBar(CL["phase"]:format(2))
 	self:StopBar(123627) -- Dissonance Field
 	self:CloseProximity()
@@ -251,7 +251,7 @@ end
 function mod:Phase3Warn(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 35 then -- phase starts at 30
-		self:Message("phases", "green", "Info", CL["soon"]:format(CL["phase"]:format(3)), L.phases_icon)
+		self:MessageOld("phases", "green", "Info", CL["soon"]:format(CL["phase"]:format(3)), L.phases_icon)
 		self:UnregisterUnitEvent(event, unitId)
 	end
 end

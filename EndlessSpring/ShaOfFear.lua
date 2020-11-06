@@ -188,12 +188,12 @@ do
 	function mod:Waterspout(args)
 		spoutUsed = true
 		warnNext()
-		self:Message(args.spellId, "orange")
+		self:MessageOld(args.spellId, "orange")
 	end
 	function mod:ImplacableStrike(args)
 		strikeUsed = true
 		warnNext()
-		self:Message(args.spellId, "yellow", "Alarm")
+		self:MessageOld(args.spellId, "yellow", "Alarm")
 	end
 	function mod:Emerge(args)
 		huddleUsed, strikeUsed, spoutUsed = nil, nil, nil
@@ -203,13 +203,13 @@ end
 
 function mod:Submerge(args)
 	submergeCounter = submergeCounter + 1
-	self:Message(args.spellId, "yellow", nil, CL["count"]:format(args.spellName, submergeCounter))
+	self:MessageOld(args.spellId, "yellow", nil, CL["count"]:format(args.spellName, submergeCounter))
 	self:Bar(args.spellId, 52, CL["count"]:format(args.spellName, submergeCounter+1))
 end
 
 function mod:FadingLight(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "green", "Long", L["cooldown_reset"])
+		self:MessageOld(args.spellId, "green", "Long", L["cooldown_reset"])
 	end
 end
 
@@ -220,7 +220,7 @@ do
 		for guid in next, dreadSpawns do
 			dreadSpawnCounter = dreadSpawnCounter + 1
 		end
-		mod:Message(-6107, "green", nil, CL["count"]:format(source, dreadSpawnCounter), 128419)
+		mod:MessageOld(-6107, "green", nil, CL["count"]:format(source, dreadSpawnCounter), 128419)
 		scheduled = nil
 	end
 	function mod:DreadSpawnSingleCast(args)
@@ -246,7 +246,7 @@ do
 			local t = GetTime()
 			if t-prev > 1 then
 				prev = t
-				self:Message(-6109, "blue", "Long", L["throw"])
+				self:MessageOld(-6109, "blue", "Long", L["throw"])
 				self:Flash(-6109)
 			end
 		end
@@ -265,7 +265,7 @@ end
 do
 	local function checkForDead(player)
 		if UnitIsDead(player) then
-			mod:Message(120669, "red", nil, L["ball_dropped"])
+			mod:MessageOld(120669, "red", nil, L["ball_dropped"])
 		end
 	end
 	function mod:ChampionOfTheLightRemoved(args)
@@ -295,7 +295,7 @@ function mod:Transitions(_, _, _, spellId)
 		self:Berserk(900, phase == 2)
 		if phase == 2 then
 			-- Phase 2 - Berserk in 15 min!
-			self:Message("berserk", "yellow", nil, CL["phase"]:format(2).." - "..CL["custom_min"]:format(self:SpellName(spellId), 15), 26662)
+			self:MessageOld("berserk", "yellow", nil, CL["phase"]:format(2).." - "..CL["custom_min"]:format(self:SpellName(spellId), 15), 26662)
 			-- start Submerge timer using the current power and the new regen rate
 			local left = 1 - (UnitPower("boss1") / UnitPowerMax("boss1")) * 52
 			self:Bar(120455, left, CL["count"]:format(self:SpellName(120455), 1))
@@ -305,7 +305,7 @@ end
 
 function mod:WaterspoutApplied(args)
 	if self:Me(args.destGUID) then
-		self:Message(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
 		self:Flash(args.spellId)
 	end
 end
@@ -319,7 +319,7 @@ do
 		if player and ((not UnitDetailedThreatSituation("boss1target", "boss1") and not mod:Tank("boss1target")) or fired > 13) then
 			-- If we've done 14 (0.7s) checks and still not passing the threat check, it's probably being cast on the tank
 			if UnitIsUnit("boss1target", "player") then
-				mod:Message(119519, "orange", "Alarm", CL["you"]:format(eerieSkull))
+				mod:MessageOld(119519, "orange", "Alarm", CL["you"]:format(eerieSkull))
 				mod:Say(119519, eerieSkull)
 				mod:Flash(119519)
 			end
@@ -346,14 +346,14 @@ function mod:Thrash(args)
 	thrashNext = 2
 	if phase == 2 then
 		thrashCounter = thrashCounter + 1
-		self:Message(-6699, "orange", nil, CL["count"]:format(args.spellName, thrashCounter))
+		self:MessageOld(-6699, "orange", nil, CL["count"]:format(args.spellName, thrashCounter))
 		if thrashCounter == 3 then
 			self:Bar(-6700, 10) -- Dread Thrash
 		else
 			self:Bar(-6699, 10, CL["count"]:format(args.spellName, thrashCounter + 1))
 		end
 	elseif atSha then
-		self:Message(-6699, "red")
+		self:MessageOld(-6699, "red")
 		self:Bar(-6699, 10)
 	end
 end
@@ -361,7 +361,7 @@ end
 function mod:DreadThrash(args)
 	thrashCounter = 0
 	thrashNext = 5
-	self:Message(-6700, "red", "Alarm")
+	self:MessageOld(-6700, "red", "Alarm")
 	self:Bar(-6699, 10, CL["count"]:format(self:SpellName(131996), thrashCounter + 1)) -- Thrash
 end
 
@@ -377,9 +377,9 @@ do
 			thrashNext = nil
 		elseif self:Me(args.destGUID) then --just the current tank
 			if swingCounter > 0 then -- normal swing
-				self:Message("swing", "green", nil, CL["count"]:format(L["swing"], swingCounter), 5547) -- ability_thunderbolt / Swing / icon 132325
+				self:MessageOld("swing", "green", nil, CL["count"]:format(L["swing"], swingCounter), 5547) -- ability_thunderbolt / Swing / icon 132325
 			elseif swingCounter == 0 then -- last extra swing
-				self:Message("swing", "green", nil, CL["other"]:format(CL["count"]:format(L["swing"], thrashSwing), self:SpellName(131996)), 158176) -- "Swing (4): Thrash" / ability_ghoulfrenzy / Thrash / icon 132152
+				self:MessageOld("swing", "green", nil, CL["other"]:format(CL["count"]:format(L["swing"], thrashSwing), self:SpellName(131996)), 158176) -- "Swing (4): Thrash" / ability_ghoulfrenzy / Thrash / icon 132152
 			end
 		end
 	end
@@ -389,7 +389,7 @@ function mod:DeathBlossom(args)
 	if not atSha then
 		self:Flash(args.spellId)
 		self:Bar(args.spellId, 2.25, CL["cast"]:format(args.spellName)) -- so it can be emphasized for countdown
-		self:Message(args.spellId, "red", "Alert")
+		self:MessageOld(args.spellId, "red", "Alert")
 	end
 end
 
@@ -461,7 +461,7 @@ function mod:BlossomPreWarn(event, unitId)
 	if mobId == 61046 or mobId == 61038 or mobId == 61042 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 30 then
-			self:Message(119888, "yellow", nil, CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
+			self:MessageOld(119888, "yellow", nil, CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
 			self:UnregisterUnitEvent(event, "target", "focus")
 		end
 	end

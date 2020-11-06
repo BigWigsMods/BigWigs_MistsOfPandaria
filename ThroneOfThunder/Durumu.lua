@@ -149,7 +149,7 @@ do
 	function mod:DarkParasiteApplied(args)
 		self:CDBar(args.spellId, 60)
 		if self:Me(args.destGUID) then
-			self:Message(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 		if self.db.profile.custom_off_parasite_marks then
@@ -185,7 +185,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(-6889, "orange")
+			self:MessageOld(-6889, "orange")
 			self:Bar(-6889, 95)
 		end
 	end
@@ -198,7 +198,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(140502, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(140502, "blue", "Info", CL["underyou"]:format(args.spellName))
 		end
 	end
 end
@@ -283,7 +283,7 @@ function mod:YellowBeam(args)
 	self:ScheduleTimer(mark, 10, yellowController, 0)
 	mark(yellowController, 1)
 	if self:Me(args.destGUID) then
-		self:Message(-6891, "blue", "Warning", CL["you"]:format(L["yellow_beam"]), args.spellId)
+		self:MessageOld(-6891, "blue", "Warning", CL["you"]:format(L["yellow_beam"]), args.spellId)
 		self:Flash(-6891)
 	end
 end
@@ -292,7 +292,7 @@ function mod:BlueBeam(args)
 	blueController = args.destName
 	mark(blueController, 6)
 	if self:Me(args.destGUID) then
-		self:Message(-6891, "blue", "Warning", CL["you"]:format(L["blue_beam"]), args.spellId)
+		self:MessageOld(-6891, "blue", "Warning", CL["you"]:format(L["blue_beam"]), args.spellId)
 		self:Flash(-6891)
 	end
 end
@@ -301,7 +301,7 @@ function mod:RedBeam(args)
 	redController = args.destName
 	mark(redController, 7)
 	if self:Me(args.destGUID) then
-		self:Message(-6891, "blue", "Warning", CL["you"]:format(L["red_beam"]), args.spellId)
+		self:MessageOld(-6891, "blue", "Warning", CL["you"]:format(L["red_beam"]), args.spellId)
 		self:Flash(-6891)
 	end
 end
@@ -323,17 +323,17 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, _, _, _, target)
 		self:Flash("initial_life_drain", 133798)
 
 	elseif msg:find(L["red_spawn_trigger"]) then
-		self:Message("adds", "orange", nil, L["red_add"], 134123)
+		self:MessageOld("adds", "orange", nil, L["red_add"], 134123)
 		if UnitIsUnit("player", redController) or self:Damager() then
 			self:PlaySound("adds", "Warning")
 		end
 	elseif msg:find(L["blue_spawn_trigger"]) then
-		self:Message("adds", "yellow", nil, L["blue_add"], 134122)
+		self:MessageOld("adds", "yellow", nil, L["blue_add"], 134122)
 		if UnitIsUnit("player", blueController) or self:Damager() then
 			self:PlaySound("adds", "Warning")
 		end
 	elseif msg:find(L["yellow_spawn_trigger"]) then
-		self:Message("adds", "yellow", nil, L["yellow_add"], 134124)
+		self:MessageOld("adds", "yellow", nil, L["yellow_add"], 134124)
 
 	elseif msg:find("134169") then -- Disintegration Beam
 		lifeDrainCasts = 0
@@ -342,7 +342,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, _, _, _, target)
 		self:CDBar(-6905, 78) -- Force of Will
 		self:Bar(-6882, 54, CL["cast"]:format(L["death_beam"]))
 		self:Bar(-6882, self:LFR() and 241 or 191, L["death_beam"])
-		self:Message(-6882, "yellow", nil, L["death_beam"])
+		self:MessageOld(-6882, "yellow", nil, L["death_beam"])
 	end
 end
 
@@ -353,7 +353,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(134626, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(134626, "blue", "Info", CL["underyou"]:format(args.spellName))
 			self:Flash(134626)
 		end
 	end
@@ -381,7 +381,7 @@ function mod:LingeringGazeApplied(args)
 	self:CDBar(args.spellId, 25)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Message(args.spellId, "orange", "Alarm", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "orange", "Alarm", CL["you"]:format(args.spellName))
 		self:OpenProximity(args.spellId, 15)
 		openedForMe = true
 	else
@@ -408,13 +408,13 @@ end
 function mod:Deaths(args)
 	if args.mobId == 69050 then -- Red
 		deadAdds = deadAdds + 1
-		self:Message("adds", "green", nil, CL["mob_killed"]:format(L["red_add"], deadAdds, 3), 136154)
+		self:MessageOld("adds", "green", nil, CL["mob_killed"]:format(L["red_add"], deadAdds, 3), 136154)
 	elseif self:LFR() then
 		deadAdds = deadAdds + 1
 		if args.mobId == 69052 then -- Blue
-			self:Message("adds", "green", nil, CL["mob_killed"]:format(L["blue_add"], deadAdds, 3), 136177)
+			self:MessageOld("adds", "green", nil, CL["mob_killed"]:format(L["blue_add"], deadAdds, 3), 136177)
 		elseif args.mobId == 69051 then -- Yellow
-			self:Message("adds", "green", nil, CL["mob_killed"]:format(L["yellow_add"], deadAdds, 3), 136175)
+			self:MessageOld("adds", "green", nil, CL["mob_killed"]:format(L["yellow_add"], deadAdds, 3), 136175)
 		end
 	end
 	if deadAdds == 3 then

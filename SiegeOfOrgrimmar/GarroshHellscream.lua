@@ -190,7 +190,7 @@ do
 end
 
 function mod:ManifestRage(args)
-	self:Message("manifest_rage", "red", "Warning", 147011, 147011)
+	self:MessageOld("manifest_rage", "red", "Warning", 147011, 147011)
 end
 
 function mod:Phase3End()
@@ -205,7 +205,7 @@ function mod:Phase3End()
 end
 
 function mod:ClumpFailIronStarSpawn()
-	self:Message("clump_check", "red", "Long", L.clump_check_warning, 147126)
+	self:MessageOld("clump_check", "red", "Long", L.clump_check_warning, 147126)
 	self:Flash("clump_check", 147126)
 end
 
@@ -213,7 +213,7 @@ do
 	local prev = 0
 	function mod:MaliciousBlastApplied(args)
 		if self:Me(args.destGUID) then
-			self:Message(args.spellId, "blue", "Alert", CL.you:format(CL.count:format(args.spellName, args.amount or 1)))
+			self:MessageOld(args.spellId, "blue", "Alert", CL.you:format(CL.count:format(args.spellName, args.amount or 1)))
 			self:Bar(args.spellId, 2) -- Next tick
 		end
 
@@ -256,7 +256,7 @@ end
 do
 	local bombardmentTimers = { 55, 40, 40, 25, 25, 15 }
 	function mod:Bombardment(args)
-		self:Message("bombardment", "yellow", nil, CL.count:format(L.bombardment, bombardmentCounter), args.spellId)
+		self:MessageOld("bombardment", "yellow", nil, CL.count:format(L.bombardment, bombardmentCounter), args.spellId)
 		self:Bar("bombardment", bombardmentTimers[bombardmentCounter] or 15, CL.count:format(L.bombardment, bombardmentCounter+1), args.spellId)
 		bombardmentCounter = bombardmentCounter + 1
 		self:Bar("bombardment", 13, CL.casting:format(args.spellName), args.spellId)
@@ -277,7 +277,7 @@ function mod:GrippingDespair(args)
 end
 
 function mod:MindControl(args)
-	self:Message(145065, "orange", "Alert", 67229, 145065) -- 67229 = "Mind Control"
+	self:MessageOld(145065, "orange", "Alert", 67229, 145065) -- 67229 = "Mind Control"
 	if phase == 3 then
 		self:Bar(145065, (mcCounter == 1) and 35 or 42, 67229, 145065) -- 67229 = "Mind Control"
 	elseif mcCounter < 3 then -- Only enough time for 3 in phase 2 between each intermission
@@ -288,14 +288,14 @@ end
 
 -- Phase 1
 function mod:Warsong(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 	self:Bar(args.spellId, 42)
 end
 
 do
 	local waveTimers = { 43, 45 }
 	function mod:NewWave()
-		self:Message(-8292, "yellow", nil, nil, 144582)
+		self:MessageOld(-8292, "yellow", nil, nil, 144582)
 		self:Bar(-8292, waveTimers[waveCounter] or 40, nil, 144582)
 		waveTimer = self:ScheduleTimer("NewWave", waveTimers[waveCounter] or 40)
 		waveCounter = waveCounter + 1
@@ -358,7 +358,7 @@ do
 	end
 	function mod:WhirlingCorruption(args)
 		self:Flash(144985)
-		self:Message(144985, "red", "Long", CL.count:format(args.spellName, whirlingCounter))
+		self:MessageOld(144985, "red", "Long", CL.count:format(args.spellName, whirlingCounter))
 		whirlingCounter = whirlingCounter + 1
 		if phase == 2 then
 			if whirlingCounter < 4 then -- Only enough time for 3 in phase 2 between each intermission
@@ -395,7 +395,7 @@ end
 
 function mod:ChainHeal(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:Message("chain_heal", "blue", "Alert", L.chain_heal_message, args.spellId)
+		self:MessageOld("chain_heal", "blue", "Alert", L.chain_heal_message, args.spellId)
 	end
 end
 
@@ -403,7 +403,7 @@ do
 	local farseerTimers = { 50, 50, 40 } -- XXX need more data
 	-- cat Transcriptor.lua | sed "s/\t//g" | cut -d ' ' -f 2-300 | grep -E "(YELL].*Farseers)|(DED.*144489)|(DED.*144866)"
 	function mod:Farseer()
-		self:Message(-8294, "orange", self:Damager() and "Alert", nil, 144584)
+		self:MessageOld(-8294, "orange", self:Damager() and "Alert", nil, 144584)
 		self:Bar(-8294, farseerTimers[farseerCounter] or 40, nil, 144584) -- chain lightning icon cuz that is some shaman spell
 		farseerCounter = farseerCounter + 1
 	end
@@ -412,7 +412,7 @@ end
 do
 	local dead = 0
 	function mod:SiegeEngineer()
-		self:Message(-8298, "yellow", nil, nil, 144616)
+		self:MessageOld(-8298, "yellow", nil, nil, 144616)
 		self:Bar(-8298, engineerCounter == 1 and 45 or 40, nil, 144616)
 		engineerCounter = engineerCounter + 1
 		dead = 0
@@ -431,7 +431,7 @@ end
 
 function mod:IronStarRolling(_, _, _, spellId)
 	if spellId == 144616 then -- Power Iron Star
-		self:Message(spellId, "red", nil, L.ironstar_rolling)
+		self:MessageOld(spellId, "red", nil, L.ironstar_rolling)
 		self:Bar("ironstar_impact", 9, 144653) -- Iron Star Impact
 	end
 end
@@ -450,7 +450,7 @@ do
 		if #hopeList > 0 then
 			mod:TargetMessageOld(144945, hopeList, "yellow", "Warning", CL.count:format(mod:SpellName(29125), #hopeList), 149004) -- maybe add it's own option key? 29125 spell called "Hopeless"
 		else
-			mod:Message(144945, "yellow", nil, CL.count:format(mod:SpellName(29125), 0), 149004)
+			mod:MessageOld(144945, "yellow", nil, CL.count:format(mod:SpellName(29125), 0), 149004)
 		end
 		hopeTimer = nil
 	end
@@ -461,7 +461,7 @@ do
 	end
 	function mod:YShaarjsProtection(args)
 		if self:MobId(args.destGUID) == 71865 then
-			self:Message(args.spellId, "green", "Long", CL.over:format(args.spellName))
+			self:MessageOld(args.spellId, "green", "Long", CL.over:format(args.spellName))
 			if not self:LFR() then
 				hopeTimer = self:ScheduleTimer(announceHopeless, 6)
 			end
@@ -475,7 +475,7 @@ do
 
 	local annihilateCounter = 1
 	function mod:Annihilate(args)
-		self:Message(args.spellId, "yellow", nil, CL.casting:format(CL.count:format(args.spellName, annihilateCounter)))
+		self:MessageOld(args.spellId, "yellow", nil, CL.casting:format(CL.count:format(args.spellName, annihilateCounter)))
 		annihilateCounter = annihilateCounter + 1
 	end
 
@@ -496,7 +496,7 @@ do
 			self:StopBar(144758) -- Desecrate
 			self:StopBar(67229) -- Mind Control
 			self:StopBar(CL.count:format(self:SpellName(144985), whirlingCounter)) -- Whirling Corruption
-			self:Message(-8305, "cyan", nil, CL.intermission, "SPELL_HOLY_PRAYEROFSHADOWPROTECTION")
+			self:MessageOld(-8305, "cyan", nil, CL.intermission, "SPELL_HOLY_PRAYEROFSHADOWPROTECTION")
 			self:Bar(-8305, 210, CL.intermission, "SPELL_HOLY_PRAYEROFSHADOWPROTECTION")
 			self:Bar(-8305, 62, CL.over:format(CL.intermission), "SPELL_HOLY_PRAYEROFSHADOWPROTECTION")
 			whirlingCounter = 1
@@ -528,7 +528,7 @@ do
 			phase = 3
 			mcCounter = 1
 			desecrateCounter = 1
-			self:Message("stages", "cyan", nil, CL.phase:format(phase), false)
+			self:MessageOld("stages", "cyan", nil, CL.phase:format(phase), false)
 			self:StopBar(CL.intermission)
 			self:Bar(144985, 45, CL.count:format(self:SpellName(144985), whirlingCounter)) -- Whirling Corruption
 			if not self:Solo() then
@@ -537,7 +537,7 @@ do
 			self:CDBar(144758, 20) -- Desecrate
 		elseif spellId == 146984 then -- phase 4 Enter Realm of Garrosh
 			phase = 4
-			self:Message("stages", "cyan", nil, CL.phase:format(phase), false)
+			self:MessageOld("stages", "cyan", nil, CL.phase:format(phase), false)
 			self:StopBar(CL.intermission)
 			self:StopBar(CL.count:format(self:SpellName(144985), whirlingCounter)) -- Whirling Corruption
 			self:StopBar(144758) -- Desecrate
@@ -556,7 +556,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	if self:MobId(UnitGUID(unitId)) ~= 71865 then return end
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 16 then -- 10%
-		self:Message("stages", "cyan", "Info", CL.soon:format(CL.phase:format(phase+1)), false)
+		self:MessageOld("stages", "cyan", "Info", CL.soon:format(CL.phase:format(phase+1)), false)
 		self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")
 	end
 end

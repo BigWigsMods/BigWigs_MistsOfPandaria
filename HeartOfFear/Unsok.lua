@@ -144,14 +144,14 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:Message(123020, "blue", "Alarm", CL["underyou"]:format(args.spellName))
+			self:MessageOld(123020, "blue", "Alarm", CL["underyou"]:format(args.spellName))
 		end
 	end
 end
 
 function mod:AmberScalpel()
 	self:Bar(121995, 50)
-	self:Message(121995, "yellow")
+	self:MessageOld(121995, "yellow")
 end
 
 --------------
@@ -204,7 +204,7 @@ do
 	local last = 0
 	local function warningSpam(spellName)
 		if UnitCastingInfo("player") == spellName then
-			mod:Message("explosion_casting_by_you", "blue", "Info", L["you_are_casting"], 122398)
+			mod:MessageOld("explosion_casting_by_you", "blue", "Info", L["you_are_casting"], 122398)
 			mod:ScheduleTimer(warningSpam, 0.5, spellName)
 		end
 	end
@@ -254,7 +254,7 @@ do
 				local willpower = UnitPower(unitId, 10) -- Enum.PowerType.Alternate = 10
 				if willpower < 20 and willpower > 0 then
 					prev = t
-					self:Message("willpower", "blue", nil, L["willpower_message"]:format(willpower), 124824)
+					self:MessageOld("willpower", "blue", nil, L["willpower_message"]:format(willpower), 124824)
 				end
 			end
 		end
@@ -265,7 +265,7 @@ function mod:MonstrosityInc(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 75 then -- phase starts at 70
 		self:UnregisterUnitEvent(event, unitId)
-		self:Message("stages", "green", "Long", CL["soon"]:format(self:SpellName(-6254)), false) -- Monstrosity
+		self:MessageOld("stages", "green", "Long", CL["soon"]:format(self:SpellName(-6254)), false) -- Monstrosity
 	end
 end
 
@@ -277,7 +277,7 @@ do
 			local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 			if hp < 21 then
 				prev = t
-				self:Message(123060, "blue", nil, L["break_free_message"]:format(hp))
+				self:MessageOld(123060, "blue", nil, L["break_free_message"]:format(hp))
 			end
 		end
 	end
@@ -288,7 +288,7 @@ end
 
 function mod:AmberCarapace(args)
 	phase = 2
-	self:Message("stages", "yellow", nil, CL["other"]:format(CL["phase"]:format(2), self:SpellName(-6254)), "spell_nature_shamanrage") -- Monstrosity
+	self:MessageOld("stages", "yellow", nil, CL["other"]:format(CL["phase"]:format(2), self:SpellName(-6254)), "spell_nature_shamanrage") -- Monstrosity
 	self:DelayedMessage("explosion_by_other", 35, "yellow", CL["custom_sec"]:format(explosion, 20), 122402)
 	self:DelayedMessage("explosion_by_other", 40, "yellow", CL["custom_sec"]:format(explosion, 15), 122402)
 	self:DelayedMessage("explosion_by_other", 45, "yellow", CL["custom_sec"]:format(explosion, 10), 122402)
@@ -302,7 +302,7 @@ end
 do
 	local function warningSpam(spellName)
 		if UnitCastingInfo("boss1") == spellName or UnitCastingInfo("boss2") == spellName then
-			mod:Message("explosion_casting_by_other", "red", "Alert", L["monstrosity_is_casting"], 122398)
+			mod:MessageOld("explosion_casting_by_other", "red", "Alert", L["monstrosity_is_casting"], 122398)
 			mod:ScheduleTimer(warningSpam, 0.5, spellName)
 		end
 	end
@@ -337,7 +337,7 @@ function mod:Fling(args)
 end
 
 function mod:MassiveStomp(args)
-	self:Message(args.spellId, "orange", "Alarm")
+	self:MessageOld(args.spellId, "orange", "Alarm")
 	self:CDBar(args.spellId, 18)
 end
 
@@ -352,7 +352,7 @@ function mod:MonsterDies()
 	self:CancelDelayedMessage(CL["custom_sec"]:format(explosion, 5))
 	phase = 3
 	self:StopBar(("%s: (%d)%s"):format(L["monstrosity_short"], monsterDestabilizeStacks, self:SpellName(123059)))
-	self:Message("stages", "yellow", nil, CL["phase"]:format(3), 122556) -- Concentrated Mutation
+	self:MessageOld("stages", "yellow", nil, CL["phase"]:format(3), 122556) -- Concentrated Mutation
 end
 
 function mod:AmberGlobule(args)

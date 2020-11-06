@@ -100,24 +100,24 @@ end
 -- Look Within
 -- TANK
 function mod:TitanicSmash(args)
-	self:Message(args.spellId, "yellow", "Info")
+	self:MessageOld(args.spellId, "yellow", "Info")
 	self:CDBar(args.spellId, 15)
 end
 
 function mod:HurlCorruption(args)
-	self:Message(args.spellId, "orange", "Warning")
+	self:MessageOld(args.spellId, "orange", "Warning")
 	self:Bar(args.spellId, 20)
 end
 
 -- HEALER
 function mod:LingeringCorruption(args)
-	self:Message(args.spellId, "orange", "Warning")
+	self:MessageOld(args.spellId, "orange", "Warning")
 	self:Bar(args.spellId, 15)
 end
 
 -- DPS
 function mod:TearReality(args)
-	self:Message(args.spellId, "yellow", "Info")
+	self:MessageOld(args.spellId, "yellow", "Info")
 	self:CDBar(args.spellId, 8) -- any point for this?
 end
 
@@ -177,9 +177,9 @@ do
 			bigAddKills[guid] = true
 			bigAddSpawnCounter = bigAddSpawnCounter + 1
 			if self:LFR() then
-				self:Message("big_adds", "orange", nil, CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
+				self:MessageOld("big_adds", "orange", nil, CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
 			else
-				self:Message("big_adds", "orange", "Alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
+				self:MessageOld("big_adds", "orange", "Alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
 				self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
 			end
 		elseif msg == "OutsideBigAddDeath" and not bigAddKills[guid] then
@@ -188,23 +188,23 @@ do
 			if bigAddKillCounter > bigAddSpawnCounter then
 				bigAddSpawnCounter = bigAddKillCounter -- Compensate for no boss mod players (LFR) :[
 			end
-			self:Message("big_adds", "yellow", "Alert", L.big_add_killed:format(bigAddKillCounter), 147082) -- this could probably live wouthout sound but this way people know for sure that they need to check if it is their turn to soak
+			self:MessageOld("big_adds", "yellow", "Alert", L.big_add_killed:format(bigAddKillCounter), 147082) -- this could probably live wouthout sound but this way people know for sure that they need to check if it is their turn to soak
 		elseif times[msg] then
 			local t = GetTime()
 			if t-times[msg] > 5 then
 				times[msg] = t
 				if msg == "BlindHatred" then
-					self:Message(145226, "red", "Long")
+					self:MessageOld(145226, "red", "Long")
 					self:Bar(145226, 60)
 				elseif msg == "Phase2" then
-					self:Message("stages", "cyan", "Warning", CL.phase:format(2), 146179)
+					self:MessageOld("stages", "cyan", "Warning", CL.phase:format(2), 146179)
 					self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
 				elseif msg == "Phase2BigAddSpawn" then
 					bigAddSpawnCounter = bigAddSpawnCounter + 1
 					if self:LFR() then
-						self:Message("big_adds", "orange", nil, ("%d%% - "):format(percent) .. CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
+						self:MessageOld("big_adds", "orange", nil, ("%d%% - "):format(percent) .. CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
 					else
-						self:Message("big_adds", "orange", "Alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
+						self:MessageOld("big_adds", "orange", "Alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
 						self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
 					end
 					percent = percent - 10
@@ -231,13 +231,13 @@ end
 -- Amalgam of Corruption
 function mod:Fusion(args)
 	local amount = args.amount or 1
-	self:Message(args.spellId, "yellow", nil, CL.count:format(args.spellName, amount))
+	self:MessageOld(args.spellId, "yellow", nil, CL.count:format(args.spellName, amount))
 end
 
 function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 56 and self:MobId(UnitGUID(unitId)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
-		self:Message("stages", "cyan", "Info", CL.soon:format(CL.phase:format(2)), 146179)
+		self:MessageOld("stages", "cyan", "Info", CL.soon:format(CL.phase:format(2)), 146179)
 		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
@@ -247,7 +247,7 @@ function mod:BlindHatred()
 end
 
 function mod:UnleashedAnger(args)
-	self:Message(-8218, "yellow")
+	self:MessageOld(-8218, "yellow")
 	self:CDBar(-8218, 10)
 end
 

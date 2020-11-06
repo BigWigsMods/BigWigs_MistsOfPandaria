@@ -119,7 +119,7 @@ do
 end
 
 function mod:BladeTempest(args)
-	self:Message(args.spellId, "red", "Alarm")
+	self:MessageOld(args.spellId, "red", "Alarm")
 	self:Bar(args.spellId, 60)
 	self:Flash(args.spellId)
 end
@@ -180,7 +180,7 @@ do
 		elseif spellId == 122839 then --Tempest Slash
 			self:CDBar(122842, self:LFR() and 20.5 or 15.6)
 		elseif spellId == 123814 then --Storm Unleashed (Phase 2)
-			self:Message(-6350, "green", "Long", "20% - "..CL["phase"]:format(2))
+			self:MessageOld(-6350, "green", "Long", "20% - "..CL["phase"]:format(2))
 			self:StopBar(125310) --Blade Tempest
 			self:StopBar(L["assault_message"])
 			self:StopBar(122839) --Tempest Slash
@@ -220,10 +220,10 @@ end
 function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 25 and phase == 1 then -- phase starts at 20
-		self:Message(-6350, "green", "Long", CL["soon"]:format(CL["phase"]:format(2)))
+		self:MessageOld(-6350, "green", "Long", CL["soon"]:format(CL["phase"]:format(2)))
 		phase = 2
 	elseif hp < 14 and phase == 2 then
-		self:Message(-6350, "green", "Long", CL["soon"]:format(L["side_swap"]))
+		self:MessageOld(-6350, "green", "Long", CL["soon"]:format(L["side_swap"]))
 		self:UnregisterUnitEvent(event, unitId)
 	end
 end

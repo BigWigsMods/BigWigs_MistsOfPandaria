@@ -61,12 +61,12 @@ end
 --
 
 function mod:MagmaCrush(args)
-	self:Message(args.spellId, "orange", nil, CL["casting"]:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", nil, CL["casting"]:format(args.spellName))
 	self:CDBar(args.spellId, 12)
 end
 
 function mod:PoolOfFire(args)
-	self:Message(args.spellId, "yellow", "Alarm")
+	self:MessageOld(args.spellId, "yellow", "Alarm")
 	self:CDBar(args.spellId, 32)
 end
 
@@ -77,14 +77,14 @@ do
 			local t = GetTime()
 			if t-prev > 4 then
 				prev = t
-				self:Message(144692, "blue", "Info", CL["underyou"]:format(args.spellName))
+				self:MessageOld(144692, "blue", "Info", CL["underyou"]:format(args.spellName))
 			end
 		end
 	end
 end
 
 function mod:AncientFlame(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 	self:CDBar(args.spellId, 44)
 end
 
@@ -95,7 +95,7 @@ do
 			local t = GetTime()
 			if t-prev > 4 then
 				prev = t
-				self:Message(144695, "blue", "Info", CL["you"]:format(args.spellName))
+				self:MessageOld(144695, "blue", "Info", CL["you"]:format(args.spellName))
 			end
 		end
 	end

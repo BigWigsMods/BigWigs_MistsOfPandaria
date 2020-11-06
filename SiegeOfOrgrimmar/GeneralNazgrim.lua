@@ -164,7 +164,7 @@ function mod:HuntersMark(args)
 end
 
 function mod:Execute(args)
-	self:Message(args.spellId, "red", "Warning", CL.casting:format(args.spellName))
+	self:MessageOld(args.spellId, "red", "Warning", CL.casting:format(args.spellName))
 	self:CDBar(args.spellId, 18) -- varies a bit due to ability casts
 	if UnitIsUnit("player", "boss1target") then -- poor mans target check
 		self:Flash(args.spellId)
@@ -174,7 +174,7 @@ end
 -- Adds
 function mod:ArcaneShock(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:Message("arcane_shock", "blue", "Alert", L.arcane_shock_message, args.spellId)
+		self:MessageOld("arcane_shock", "blue", "Alert", L.arcane_shock_message, args.spellId)
 	end
 end
 
@@ -184,18 +184,18 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("magic", nil, args.spellId) then -- don't spam
 			prev = t
-			self:Message(args.spellId, "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld(args.spellId, "red", "Alarm", args.spellName, args.spellId)
 		end
 	end
 end
 
 function mod:HealingTideTotem(args)
-	self:Message(args.spellId, "yellow")
+	self:MessageOld(args.spellId, "yellow")
 end
 
 function mod:ChainHeal(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:Message("chain_heal", "blue", "Alert", L.chain_heal_message, args.spellId)
+		self:MessageOld("chain_heal", "blue", "Alert", L.chain_heal_message, args.spellId)
 	end
 end
 
@@ -223,21 +223,21 @@ end
 function mod:UNIT_HEALTH_FREQUENT(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp < 17 then
-		self:Message(-7920, "cyan", "Info", CL.soon:format(L.extra_adds))
+		self:MessageOld(-7920, "cyan", "Info", CL.soon:format(L.extra_adds))
 		self:UnregisterUnitEvent(event, unit)
 	end
 end
 
 function mod:ExtraAdds()
-	self:Message(-7920, "cyan", "Long", "10% - ".. L.extra_adds)
+	self:MessageOld(-7920, "cyan", "Long", "10% - ".. L.extra_adds)
 end
 
 function mod:Adds()
 	local mobs = self:Mythic() and addsMythic[addWaveCounter] or addsNormal[addWaveCounter]
 	if addWaveCounter == 10 then
-		self:Message(-7920, "cyan", "Long", L.add_wave:format(L.final_wave, addWaveCounter, mobs))
+		self:MessageOld(-7920, "cyan", "Long", L.add_wave:format(L.final_wave, addWaveCounter, mobs))
 	else
-		self:Message(-7920, "cyan", "Long", L.add_wave:format(CL.adds, addWaveCounter, mobs))
+		self:MessageOld(-7920, "cyan", "Long", L.add_wave:format(CL.adds, addWaveCounter, mobs))
 	end
 
 	addWaveCounter = addWaveCounter + 1
@@ -250,7 +250,7 @@ end
 
 function mod:WarSong(args)
 	self:Bar(args.spellId, 3, CL.cast:format(args.spellName))
-	self:Message(args.spellId, "red", "Warning")
+	self:MessageOld(args.spellId, "red", "Warning")
 end
 
 function mod:Ravager(args)
@@ -262,7 +262,7 @@ function mod:Ravager(args)
 end
 
 function mod:Banner(args)
-	self:Message(143536, "yellow", "Alert")
+	self:MessageOld(143536, "yellow", "Alert")
 end
 
 do
@@ -284,7 +284,7 @@ function mod:CoolingOff(args)
 end
 
 function mod:Stances(args)
-	self:Message(-7915, "green", args.spellId == 143593 and "Alert", args.spellName, args.spellId) -- Play sound if he switches to defensive -- this might conflich with War Song
+	self:MessageOld(-7915, "green", args.spellId == 143593 and "Alert", args.spellName, args.spellId) -- Play sound if he switches to defensive -- this might conflich with War Song
 	local nextStance
 	if args.spellId == 143589 then -- battle
 		nextStance = 143594 -- berserker
@@ -331,7 +331,7 @@ do
 end
 
 function mod:BoneCracker(args)
-	self:Message(args.spellId, "orange")
+	self:MessageOld(args.spellId, "orange")
 	self:Bar(args.spellId, 32)
 end
 
