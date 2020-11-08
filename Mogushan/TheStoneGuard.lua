@@ -70,11 +70,11 @@ end
 --
 
 function mod:PowerDown()
-	self:MessageOld(116529, "orange", "Info", self:SpellName(116529))
+	self:MessageOld(116529, "orange", "info", self:SpellName(116529))
 end
 
 function mod:Overload(msg, boss)
-	self:MessageOld("overload", "red", "Long", msg:format(boss), L.overload_icon)
+	self:MessageOld("overload", "red", "long", msg:format(boss), L.overload_icon)
 end
 
 do
@@ -111,7 +111,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Alarm", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "alarm", CL["underyou"]:format(args.spellName))
 		end
 	end
 end
@@ -119,13 +119,13 @@ end
 function mod:Petrifications(_, _, _, spellId)
 	-- we could be using the same colors as blizzard but they are too "faint" imo
 	if spellId == 115852 then -- cobalt
-		self:MessageOld("petrifications", nil, "Alert", ("|c001E90FF%s|r"):format(self:SpellName(spellId)), spellId) -- blue
+		self:MessageOld("petrifications", nil, "alert", ("|c001E90FF%s|r"):format(self:SpellName(spellId)), spellId) -- blue
 	elseif spellId == 116006 then -- jade
-		self:MessageOld("petrifications", nil, "Alert", ("|c00008000%s|r"):format(self:SpellName(spellId)), spellId) -- green
+		self:MessageOld("petrifications", nil, "alert", ("|c00008000%s|r"):format(self:SpellName(spellId)), spellId) -- green
 	elseif spellId == 116036 then -- jasper
-		self:MessageOld("petrifications", nil, "Alert", ("|c00FF0000%s|r"):format(self:SpellName(spellId)), spellId) -- red
+		self:MessageOld("petrifications", nil, "alert", ("|c00FF0000%s|r"):format(self:SpellName(spellId)), spellId) -- red
 	elseif spellId == 116057 then -- amethyst
-		self:MessageOld("petrifications", nil, "Alert", ("|c00FF44FF%s|r"):format(self:SpellName(spellId)), spellId) -- purple
+		self:MessageOld("petrifications", nil, "alert", ("|c00FF44FF%s|r"):format(self:SpellName(spellId)), spellId) -- purple
 	elseif spellId == 129424 then
 		self:Bar(-5772, cobaltTimer)
 	end

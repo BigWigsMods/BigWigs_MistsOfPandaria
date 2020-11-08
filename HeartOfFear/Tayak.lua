@@ -119,7 +119,7 @@ do
 end
 
 function mod:BladeTempest(args)
-	self:MessageOld(args.spellId, "red", "Alarm")
+	self:MessageOld(args.spellId, "red", "alarm")
 	self:Bar(args.spellId, 60)
 	self:Flash(args.spellId)
 end
@@ -160,10 +160,10 @@ do
 				mod:OpenProximity(-6346, 5, name, true)
 			end
 			if not notBoss then
-				mod:TargetMessageOld(-6346, name, "orange", "Alert", CL["count"]:format(strike, strikeCounter))
+				mod:TargetMessageOld(-6346, name, "orange", "alert", CL["count"]:format(strike, strikeCounter))
 				strikeCounter = strikeCounter + 1
 			else
-				mod:TargetMessageOld(-6346, name, "orange", "Alert")
+				mod:TargetMessageOld(-6346, name, "orange", "alert")
 			end
 			mod:TargetBar(-6346, 5.6, name)
 			mod:PrimaryIcon(-6346, name)
@@ -172,7 +172,7 @@ do
 	function mod:TayakCasts(_, _, _, spellId)
 		if spellId == 122949 then --Unseen Strike
 			self:CDBar(-6346, 53, CL["count"]:format(self:SpellName(122994), strikeCounter+1)) -- Unseen Strike, 53-60
-			self:DelayedMessage(-6346, 48, "yellow", L["unseenstrike_soon"]:format(strikeCounter+1), false, "Alarm")
+			self:DelayedMessage(-6346, 48, "yellow", L["unseenstrike_soon"]:format(strikeCounter+1), false, "alarm")
 			if not timer then
 				timer = self:ScheduleRepeatingTimer(warnStrike, 0.05) -- ~1s faster than boss emote
 			end
@@ -180,7 +180,7 @@ do
 		elseif spellId == 122839 then --Tempest Slash
 			self:CDBar(122842, self:LFR() and 20.5 or 15.6)
 		elseif spellId == 123814 then --Storm Unleashed (Phase 2)
-			self:MessageOld(-6350, "green", "Long", "20% - "..CL["phase"]:format(2))
+			self:MessageOld(-6350, "green", "long", "20% - "..CL["phase"]:format(2))
 			self:StopBar(125310) --Blade Tempest
 			self:StopBar(L["assault_message"])
 			self:StopBar(122839) --Tempest Slash
@@ -209,7 +209,7 @@ do
 end
 
 function mod:Assault(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Info", L["assault_message"])
+	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info", L["assault_message"])
 end
 
 function mod:AssaultCast(args)
@@ -220,10 +220,10 @@ end
 function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 25 and phase == 1 then -- phase starts at 20
-		self:MessageOld(-6350, "green", "Long", CL["soon"]:format(CL["phase"]:format(2)))
+		self:MessageOld(-6350, "green", "long", CL["soon"]:format(CL["phase"]:format(2)))
 		phase = 2
 	elseif hp < 14 and phase == 2 then
-		self:MessageOld(-6350, "green", "Long", CL["soon"]:format(L["side_swap"]))
+		self:MessageOld(-6350, "green", "long", CL["soon"]:format(L["side_swap"]))
 		self:UnregisterUnitEvent(event, unitId)
 	end
 end

@@ -210,7 +210,7 @@ do
 	end
 	function mod:AssemblyLine()
 		self:ScheduleTimer(beltItems, 13, assemblyLineCounter)
-		self:MessageOld(-8202, "cyan", "Warning", L.assembly_line_message:format(assemblyLineCounter), "Inv_crate_03")
+		self:MessageOld(-8202, "cyan", "warning", L.assembly_line_message:format(assemblyLineCounter), "Inv_crate_03")
 		assemblyLineCounter = assemblyLineCounter + 1
 		self:Bar(-8202, 40, CL.count:format(self:SpellName(-8202), assemblyLineCounter), "Inv_crate_03")
 	end
@@ -233,30 +233,30 @@ do
 		local t = GetTime()
 		if t-prev > 15 then
 			prev = t
-			self:MessageOld(args.spellId, "red", "Long")
+			self:MessageOld(args.spellId, "red", "long")
 		end
 	end
 end
 
 function mod:Superheated(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "info", CL.underyou:format(args.spellName))
 	end
 end
 
 function mod:RAID_BOSS_WHISPER(_, msg, sender)
 	if msg:find("Ability_Siege_Engineer_Superheated", nil, true) then -- laser fixate
 		-- might wanna do syncing to get range message working
-		self:MessageOld(-8208, "blue", "Info", L.laser_on_you, 144040)
+		self:MessageOld(-8208, "blue", "info", L.laser_on_you, 144040)
 		self:Flash(-8208)
 		self:Say(-8208, 143444) -- 143444 = "Laser"
 	elseif msg:find("Ability_Siege_Engineer_Detonate", nil, true) then -- mine fixate
-		self:MessageOld(-8212, "blue", "Info", CL.you:format(sender))
+		self:MessageOld(-8212, "blue", "info", CL.you:format(sender))
 		self:Flash(-8212)
 	elseif msg:find("143266", nil, true) then -- Sawblade
 		-- this is faster than target scanning, hence why we do it
 		sawbladeTarget = UnitGUID("player")
-		self:MessageOld(-8195, "green", "Info", CL.you:format(self:SpellName(143266)))
+		self:MessageOld(-8195, "green", "info", CL.you:format(self:SpellName(143266)))
 		self:PrimaryIcon(-8195, "player")
 		self:Flash(-8195)
 		self:Say(-8195)
@@ -286,7 +286,7 @@ end
 -- Automated Shredders
 
 function mod:ShredderEngage()
-	self:MessageOld(-8199, "yellow", self:Tank() and "Long", nil, "INV_MISC_ARMORKIT_27")
+	self:MessageOld(-8199, "yellow", self:Tank() and "long", nil, "INV_MISC_ARMORKIT_27")
 	self:Bar(-8199, 60, nil, "INV_MISC_ARMORKIT_27")
 	self:Bar(144208, 16) -- Death from Above
 	overloadCounter = 1
@@ -294,7 +294,7 @@ function mod:ShredderEngage()
 end
 
 function mod:DeathFromAboveApplied(args)
-	self:MessageOld(144208, "yellow", "Alert")
+	self:MessageOld(144208, "yellow", "alert")
 end
 
 function mod:DeathFromAbove(args)
@@ -322,12 +322,12 @@ end
 
 function mod:ElectrostaticChargeApplied(args)
 	if UnitIsPlayer(args.destName) then -- Shows up for pets, etc.
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow", "Info")
+		self:StackMessage(args.spellId, args.destName, args.amount, "yellow", "info")
 	end
 end
 
 function mod:ProtectiveFrenzy(args)
-	self:MessageOld(args.spellId, "yellow", "Long")
+	self:MessageOld(args.spellId, "yellow", "long")
 	for i=1, 5 do
 		local boss = "boss"..i
 		if UnitExists(boss) and UnitIsDead(boss) then
@@ -344,7 +344,7 @@ do
 		sawbladeTarget = guid
 		self:PrimaryIcon(-8195, target)
 		if not self:Me(guid) then -- we warn for ourself from the BOSS_WHISPER
-			self:TargetMessageOld(-8195, target, "green", "Info")
+			self:TargetMessageOld(-8195, target, "green", "info")
 		end
 	end
 	function mod:Sawblade(args)
@@ -362,7 +362,7 @@ end
 
 function mod:Drillstorm(args)
 	if args.sourceGUID ~= args.destGUID then -- Not the NPC
-		self:TargetMessageOld(args.spellId, args.destName, "yellow", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "yellow", "alarm")
 		self:TargetBar(args.spellId, 15, args.destName)
 		self:PrimaryIcon(args.spellId, args.destName)
 		if self:Me(args.destGUID) then

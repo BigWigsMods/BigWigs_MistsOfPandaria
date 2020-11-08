@@ -106,14 +106,14 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
 			text = L["big_add_message"]:format(text)
 		end
-		self:MessageOld("nest", "yellow", "Alert", text, "misc_arrowlup") -- XXX keep this here till all the nest rotations are 100% figured out
+		self:MessageOld("nest", "yellow", "alert", text, "misc_arrowlup") -- XXX keep this here till all the nest rotations are 100% figured out
 	else
 		local text = CL["count"]:format(L["lower_nest"], nestCounter)
 		-- one message for 10h nests with a guardian
 		if diff == 5 and (nestCounter == 2 or nestCounter == 4 or nestCounter == 8 or nestCounter == 12) then
 			text = L["big_add_message"]:format(text)
 		end
-		self:MessageOld("nest", "orange", "Alert", text, "misc_arrowdown") -- XXX keep this here till all the nest rotations are 100% figured out
+		self:MessageOld("nest", "orange", "alert", text, "misc_arrowdown") -- XXX keep this here till all the nest rotations are 100% figured out
 	end
 
 	local nextNest = nestCounter + 1
@@ -189,9 +189,9 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		end
 		-- big adds at 2, 6, 12, 16, 23, 30 (another upper add in the 38 set, probably 39)
 		if nestCounter == 2 or nestCounter == 6 or nestCounter == 23 or nestCounter == 30 then
-			self:MessageOld("nest", "orange", "Alert", L["big_add_message"]:format(L["lower_nest"]), 134367)
+			self:MessageOld("nest", "orange", "alert", L["big_add_message"]:format(L["lower_nest"]), 134367)
 		elseif nestCounter == 12 or nestCounter == 16 then
-			self:MessageOld("nest", "yellow", "Alert", L["big_add_message"]:format(L["upper_nest"]), 134367)
+			self:MessageOld("nest", "yellow", "alert", L["big_add_message"]:format(L["upper_nest"]), 134367)
 		end
 	end
 end
@@ -204,7 +204,7 @@ end
 
 do
 	local function flightMessage(remainingTime)
-		mod:MessageOld(-7360, "blue", remainingTime < 5 and "Info", L["flight_over"]:format(remainingTime), 133755)
+		mod:MessageOld(-7360, "blue", remainingTime < 5 and "info", L["flight_over"]:format(remainingTime), 133755)
 	end
 	function mod:Flight(args)
 		if not self:Me(args.destGUID) then return end
@@ -221,7 +221,7 @@ do
 	function mod:UNIT_SPELLCAST_START(_, _, _, spellId)
 		-- UNIT event due to combat log range issues
 		if spellId == 134380 then -- Quills
-			self:MessageOld(spellId, "red", "Warning")
+			self:MessageOld(spellId, "red", "warning")
 			self:Flash(spellId)
 			local diff = self:Difficulty()
 			quillCounter = quillCounter + 1
@@ -237,7 +237,7 @@ do
 				end
 			end
 		elseif spellId == 134370 then -- Down Draft
-			self:MessageOld(spellId, "red", "Long")
+			self:MessageOld(spellId, "red", "long")
 			draftCounter = draftCounter + 1
 			self:Bar(spellId, draftTimes[draftCounter] or 93)
 		end
@@ -246,7 +246,7 @@ end
 
 function mod:FeedYoung(_, _, _, spellId)
 	if spellId == 137528 then -- UNIT event due to combat log range issues
-		self:MessageOld(spellId, "green", "Info") -- Positive because it is green!
+		self:MessageOld(spellId, "green", "info") -- Positive because it is green!
 		local diff = self:Difficulty()
 		local is25 = diff == 4 or diff == 6
 		self:CDBar(spellId, is25 and 30 or 41)
@@ -254,7 +254,7 @@ function mod:FeedYoung(_, _, _, spellId)
 end
 
 function mod:TalonRake(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Info")
+	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info")
 	self:CDBar(args.spellId, 22)
 end
 

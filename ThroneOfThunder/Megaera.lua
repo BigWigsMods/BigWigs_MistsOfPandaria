@@ -122,7 +122,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld("breaths", "blue", "Info", CL["you"]:format(args.spellName), args.spellId)
+			self:MessageOld("breaths", "blue", "info", CL["you"]:format(args.spellName), args.spellId)
 			self:Flash("breaths", args.spellId)
 		end
 	end
@@ -141,7 +141,7 @@ do
 			self:UnregisterEvent("UNIT_AURA")
 			self:Bar("breaths", 30, L["breaths"], L.breaths_icon)
 			local spellName = self:SpellName(spellId)
-			self:MessageOld(spellId, "red", "Long", CL["count"]:format(spellName, headCounter))
+			self:MessageOld(spellId, "red", "long", CL["count"]:format(spellName, headCounter))
 			self:Bar(spellId, 20, CL["count"]:format(spellName, headCounter))
 			self:ScheduleTimer(rampageOver, 20, self, spellId, spellName)
 			breathCounter = 0
@@ -170,7 +170,7 @@ function mod:Suppression(args)
 end
 
 function mod:NetherTear(args)
-	self:MessageOld(args.spellId, "orange", "Alarm", L["arcane_adds"])
+	self:MessageOld(args.spellId, "orange", "alarm", L["arcane_adds"])
 	self:Bar(args.spellId, 6, CL["cast"]:format(L["arcane_adds"])) -- this is to help so you know when all the adds have spawned
 end
 
@@ -185,7 +185,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -209,7 +209,7 @@ do
 				self:Flash(139866)
 				self:Say(139866)
 			end
-			self:TargetMessageOld(139866, player, "orange", "Info")
+			self:TargetMessageOld(139866, player, "orange", "info")
 			self:PrimaryIcon(139866, player)
 			self:ScheduleTimer(torrentOver, duration + 1, expires)
 			torrentList[expires] = true
@@ -219,7 +219,7 @@ end
 
 function mod:ArcticFreeze(args)
 	if args.amount > 3 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Warning")
+		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "warning")
 	end
 end
 
@@ -234,7 +234,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(139822, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(139822, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(139822)
 		end
 	end
@@ -242,7 +242,7 @@ end
 
 function mod:CindersApplied(args)
 	self:SecondaryIcon(args.spellId, args.destName)
-	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "red", "alert", nil, nil, true)
 	self:TargetBar(args.spellId, 30, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)

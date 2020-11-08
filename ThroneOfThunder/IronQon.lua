@@ -114,7 +114,7 @@ do
 		if initialTarget and UnitIsUnit("boss1target", initialTarget) then return end
 
 		local name = mod:UnitName("boss1target")
-		mod:TargetMessageOld(134926, name, "orange", "Alarm", nil, nil, true)
+		mod:TargetMessageOld(134926, name, "orange", "alarm", nil, nil, true)
 		mod:SecondaryIcon(134926, name)
 		if UnitIsUnit("player", "boss1target") then
 			mod:Flash(134926)
@@ -142,7 +142,7 @@ do
 	function mod:ThrowSpear(args)
 		if phase == 4 then return end -- don't warn in last phase
 		if spearTimer then -- didn't find a target
-			self:MessageOld(args.spellId, "orange", "Alarm")
+			self:MessageOld(args.spellId, "orange", "alarm")
 		end
 		self:StopSpearScan()
 		self:CDBar(args.spellId, 33)
@@ -165,7 +165,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -220,7 +220,7 @@ do
 
 	function mod:ArcingLightningApplied(args)
 		if self:Me(args.destGUID) then
-			self:MessageOld(args.spellId, "blue", "Alert", CL["you"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "alert", CL["you"]:format(args.spellName))
 			self:TargetBar(args.spellId, 30, args.destName)
 		end
 		if not scheduled then
@@ -249,7 +249,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -271,7 +271,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -282,7 +282,7 @@ do
 	function mod:Scorched(args)
 		if self:Me(args.destGUID) then
 			local amount = args.amount or 1
-			self:MessageOld(-6871, "red", amount > 1 and "Warning", CL["count"]:format(args.spellName, amount))
+			self:MessageOld(-6871, "red", amount > 1 and "warning", CL["count"]:format(args.spellName, amount))
 		end
 		local t = GetTime()
 		if t-prev > 1 then
@@ -308,10 +308,10 @@ do
 			self:MessageOld("molten_energy", "orange", nil, ("%s (%d%%)"):format(L["molten_energy"], power), L.molten_energy_icon)
 		elseif power > 84 and prevPower == 75 then
 			prevPower = 85
-			self:MessageOld("molten_energy", "red", "Long", ("%s (%d%%)"):format(L["molten_energy"], power), L.molten_energy_icon)
+			self:MessageOld("molten_energy", "red", "long", ("%s (%d%%)"):format(L["molten_energy"], power), L.molten_energy_icon)
 		elseif power > 94 and prevPower == 85 then
 			prevPower = 95
-			self:MessageOld("molten_energy", "red", "Long", ("%s (%d%%)"):format(L["molten_energy"], power), L.molten_energy_icon)
+			self:MessageOld("molten_energy", "red", "long", ("%s (%d%%)"):format(L["molten_energy"], power), L.molten_energy_icon)
 		end
 	end
 end
@@ -375,7 +375,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 		end
 	elseif spellId == 136146 then -- Fist Smash
 		local spellName = self:SpellName(spellId)
-		self:MessageOld(-6917, "orange", "Alarm", ("%s (%d)"):format(spellName, smashCounter))
+		self:MessageOld(-6917, "orange", "alarm", ("%s (%d)"):format(spellName, smashCounter))
 		smashCounter = smashCounter + 1
 		self:Bar(-6917, 7.5, CL["cast"]:format(spellName))
 		if self:Heroic() then
@@ -388,7 +388,7 @@ end
 
 function mod:Impale(args)
 	local amount = args.amount or 1
-	self:StackMessage(args.spellId, args.destName, amount, "green", amount > 1 and "Warning")
+	self:StackMessage(args.spellId, args.destName, amount, "green", amount > 1 and "warning")
 	self:CDBar(args.spellId, 20)
 end
 

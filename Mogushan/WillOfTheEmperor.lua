@@ -142,12 +142,12 @@ end
 function mod:FocusedAssault(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:MessageOld(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "info", CL["you"]:format(args.spellName))
 	end
 end
 
 function mod:FocusedEnergy(args)
-	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Info")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "info")
 end
 
 function mod:Strength()
@@ -185,7 +185,7 @@ do
 end
 
 function mod:TitanGasOverdrive()
-	self:MessageOld(-5670, "red", "Alarm", ("%s (%s)"):format(self:SpellName(-5670), self:SpellName(26662))) --Berserk
+	self:MessageOld(-5670, "red", "alarm", ("%s (%s)"):format(self:SpellName(-5670), self:SpellName(26662))) --Berserk
 end
 
 do
@@ -218,7 +218,7 @@ do
 				if UnitIsUnit("target", unitId) or self:Healer() then
 					local boss = UnitName(unitId)
 					self:Bar("combo", 20, CL["other"]:format(boss, L["combo"]), spellId)
-					self:DelayedMessage("combo", 17, "blue", L["combo_message"]:format(boss), L.arc_icon, "Long")
+					self:DelayedMessage("combo", 17, "blue", L["combo_message"]:format(boss), L.arc_icon, "long")
 				end
 			end
 		end

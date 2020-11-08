@@ -144,7 +144,7 @@ end
 function mod:Spray(args)
 	local amount = args.amount or 1
 	if UnitIsPlayer(args.destName) and amount > (self:LFR() and 11 or 5) and amount % 2 == 0 then
-		self:StackMessage(args.spellId, args.destName, amount, "orange", "Info")
+		self:StackMessage(args.spellId, args.destName, amount, "orange", "info")
 	end
 end
 
@@ -158,7 +158,7 @@ do
 	function mod:GetAwayApplied(args)
 		if UnitHealthMax("boss1") > 0 then
 			getAwayStartHP = UnitHealth("boss1") / UnitHealthMax("boss1") * 100
-			self:MessageOld(args.spellId, "red", "Alarm")
+			self:MessageOld(args.spellId, "red", "alarm")
 		end
 	end
 	function mod:GetAwayRemoved()
@@ -193,7 +193,7 @@ do
 end
 
 function mod:Protect(args)
-	self:MessageOld(args.spellId, "red", "Alarm")
+	self:MessageOld(args.spellId, "red", "alarm")
 	self:StopBar(L["special"]) --stop the bar since it's pretty likely the cd will expire during protect
 end
 

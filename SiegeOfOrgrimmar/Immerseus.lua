@@ -72,13 +72,13 @@ end
 
 -- Mythic
 function mod:SwellingCorruption(args)
-	self:MessageOld(args.spellId, "yellow", "Alert")
+	self:MessageOld(args.spellId, "yellow", "alert")
 	self:CDBar(args.spellId, 77)
 end
 
 function mod:ShaCorruption(args)
 	if self:Me(args.destGUID) and args.amount > 2 then
-		self:MessageOld(args.spellId, "blue", "Info", CL.count:format(args.spellName, args.amount))
+		self:MessageOld(args.spellId, "blue", "info", CL.count:format(args.spellName, args.amount))
 		if args.amount > 5 then
 			self:Flash(args.spellId)
 		end
@@ -89,7 +89,7 @@ end
 do
 	local blastTimers = { 34, 23, 30 } -- 23s cd, reset with swirl it seems
 	function mod:CorrosiveBlast(args)
-		self:MessageOld(args.spellId, "orange", "Alarm")
+		self:MessageOld(args.spellId, "orange", "alarm")
 		self:CDBar(args.spellId, blastTimers[blastCounter] or 23)
 		blastCounter = blastCounter + 1
 	end
@@ -97,7 +97,7 @@ end
 
 function mod:CorrosiveBlastStack(args)
 	if self:Tank() and self:Tank(args.destName) then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "Warning")
+		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "warning")
 	end
 end
 
@@ -127,7 +127,7 @@ function mod:Reform()
 end
 
 function mod:Swirl(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 	self:Bar(args.spellId, 13, CL.cast:format(args.spellName))
 	self:Bar(args.spellId, 53)
 end
@@ -139,7 +139,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(143295, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(143295, "blue", "info", CL.underyou:format(args.spellName))
 			self:Flash(143295)
 		end
 	end
@@ -148,7 +148,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL.you:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL.you:format(args.spellName))
 		end
 	end
 end

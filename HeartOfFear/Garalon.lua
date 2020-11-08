@@ -88,18 +88,18 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", not pheromonesOnMe and "Alert", CL["underyou"]:format(args.spellName)) -- even tho we usually use Alarm, Alarm has been used too much in the module
+			self:MessageOld(args.spellId, "blue", not pheromonesOnMe and "alert", CL["underyou"]:format(args.spellName)) -- even tho we usually use Alarm, Alarm has been used too much in the module
 		end
 	end
 end
 
 function mod:Crush(message, sender, _, _, target)
 	if self:Heroic() and sender ~= target then -- someone running underneath (don't start new bars in heroic)
-		self:MessageOld(122774, "red", "Alarm", CL["soon"]:format(self:SpellName(122774))) -- Crush
+		self:MessageOld(122774, "red", "alarm", CL["soon"]:format(self:SpellName(122774))) -- Crush
 		self:Bar(122774, 3.6, CL["cast"]:format(self:SpellName(122774))) -- Crush
 	else
 		crushCounter = crushCounter + 1
-		self:MessageOld(122774, "red", "Alarm", CL["soon"]:format(CL["count"]:format(self:SpellName(122774), crushCounter))) -- Crush
+		self:MessageOld(122774, "red", "alarm", CL["soon"]:format(CL["count"]:format(self:SpellName(122774), crushCounter))) -- Crush
 		self:Bar(122774, 3.6, CL["cast"]:format(self:SpellName(122774))) -- Crush
 		if self:Heroic() then
 			self:Bar(122774, 36, CL["count"]:format(self:SpellName(122774), crushCounter+1), 122082) -- Crush
@@ -119,7 +119,7 @@ function mod:PheromonesApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
 		pheromonesOnMe = true
-		self:MessageOld(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "info", CL["you"]:format(args.spellName))
 	elseif self:Healer() then
 		self:TargetMessageOld(args.spellId, args.destName, "yellow", nil, nil, nil, true)
 	end
@@ -128,7 +128,7 @@ end
 function mod:PheromonesRemoved(args)
 	if self:Me(args.destGUID) then
 		pheromonesOnMe = false
-		self:MessageOld(args.spellId, "red", "Alarm", L["removed"]:format(args.spellName))
+		self:MessageOld(args.spellId, "red", "alarm", L["removed"]:format(args.spellName))
 	end
 end
 
@@ -169,13 +169,13 @@ function mod:PrePhase2(event, unitId)
 	if id == 62164 or id == 63191 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 38 then -- phase starts at 33
-			self:MessageOld(-6294, "green", "Long", CL["soon"]:format(CL["phase"]:format(2)), false)
+			self:MessageOld(-6294, "green", "long", CL["soon"]:format(CL["phase"]:format(2)), false)
 			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4", "boss5")
 		end
 	end
 end
 
 function mod:Phase2()
-	self:MessageOld(-6294, "green", "Info", "33% - "..CL["phase"]:format(2))
+	self:MessageOld(-6294, "green", "info", "33% - "..CL["phase"]:format(2))
 end
 

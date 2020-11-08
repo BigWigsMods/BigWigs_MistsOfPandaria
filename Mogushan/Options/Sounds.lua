@@ -1,53 +1,53 @@
 
 BigWigs:AddSounds("The Stone Guard", {
-	[116529] = "Info",
-	[130774] = "Alarm",
-	["overload"] = "Long",
-	["petrifications"] = "Alert",
+	[116529] = "info",
+	[130774] = "alarm",
+	["overload"] = "long",
+	["petrifications"] = "alert",
 })
 
 BigWigs:AddSounds("Feng the Accursed", {
-	[115817] = "Info",
-	[115911] = "Info",
-	[116018] = "Alarm",
-	[116364] = "Alarm",
-	[116417] = "Alert",
-	[116711] = "Alarm",
-	[116784] = {"Alert","Info"},
-	[118071] = "Alarm",
-	["stages"] = "Info",
-	["tank"] = "Info",
+	[115817] = "info",
+	[115911] = "info",
+	[116018] = "alarm",
+	[116364] = "alarm",
+	[116417] = "alert",
+	[116711] = "alarm",
+	[116784] = {"alert","info"},
+	[118071] = "alarm",
+	["stages"] = "info",
+	["tank"] = "info",
 })
 
 BigWigs:AddSounds("Gara'jal the Spiritbinder", {
-	[-5759] = {"Info","Long"},
-	[116272] = "Alarm",
+	[-5759] = {"info","long"},
+	[116272] = "alarm",
 })
 
 BigWigs:AddSounds("The Spirit Kings", {
-	[117697] = {"Alert","Info"},
-	[117708] = "Alarm",
-	[117837] = "Alert",
-	[117910] = "Long",
-	[117961] = {"Alert","Info"},
-	[118047] = "Alarm",
-	[118122] = "Alarm",
-	[118162] = "Alert",
-	[118303] = "Info",
-	[119521] = "Alarm",
-	["bosses"] = "Info",
+	[117697] = {"alert","info"},
+	[117708] = "alarm",
+	[117837] = "alert",
+	[117910] = "long",
+	[117961] = {"alert","info"},
+	[118047] = "alarm",
+	[118122] = "alarm",
+	[118162] = "alert",
+	[118303] = "info",
+	[119521] = "alarm",
+	["bosses"] = "info",
 })
 
 BigWigs:AddSounds("Elegon", {
-	[-6186] = "Alert",
-	[117878] = "Info",
-	["floor"] = "Alarm",
-	["stages"] = "Info",
+	[-6186] = "alert",
+	[117878] = "info",
+	["floor"] = "alarm",
+	["stages"] = "info",
 })
 
 BigWigs:AddSounds("Will of the Emperor", {
-	[-5670] = "Alarm",
-	[116525] = "Info",
-	[116829] = "Info",
-	["combo"] = "Long",
+	[-5670] = "alarm",
+	[116525] = "info",
+	[116829] = "info",
+	["combo"] = "long",
 })

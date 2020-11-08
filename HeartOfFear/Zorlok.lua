@@ -99,9 +99,9 @@ function mod:Attenuation(args)
 	if UnitCastingInfo("boss1") == self:SpellName(122713) then danceTracker = false end -- boss can't be casting Attenuation when it's casting Force and Verve
 	local target = danceTracker and L["zorlok"] or L["echo"]
 	if args.spellId == 122497 or args.spellId == 122479 or args.spellId == 123722 then -- right
-		self:MessageOld("attenuation", "orange", "Alarm", L["attenuation_message"]:format(target, L["right"]), "misc_arrowright")
+		self:MessageOld("attenuation", "orange", "alarm", L["attenuation_message"]:format(target, L["right"]), "misc_arrowright")
 	elseif args.spellId == 122496 or args.spellId == 122474 or args.spellId == 123721 then -- left
-		self:MessageOld("attenuation", "yellow", "Alert", L["attenuation_message"]:format(target, L["left"]), "misc_arrowleft")
+		self:MessageOld("attenuation", "yellow", "alert", L["attenuation_message"]:format(target, L["left"]), "misc_arrowleft")
 	end
 	self:Bar("attenuation", 14, L["attenuation_bar"], args.spellId)
 	self:Flash("attenuation", args.spellId)
@@ -115,7 +115,7 @@ end
 
 function mod:PreForceAndVerse(_, _, _, spellId)
 	if spellId == 122933 then -- Clear Throat
-		self:MessageOld("force", "red", "Long", CL["soon"]:format(L["force_message"]), L.force_icon)
+		self:MessageOld("force", "red", "long", CL["soon"]:format(L["force_message"]), L.force_icon)
 	end
 end
 
@@ -130,16 +130,16 @@ function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if platform == 0 then
 		if hp < 83 then
-			self:MessageOld("stages", "green", "Info", CL["soon"]:format(L["platform_message"]), "ability_vehicle_launchplayer")
+			self:MessageOld("stages", "green", "info", CL["soon"]:format(L["platform_message"]), "ability_vehicle_launchplayer")
 			platform = 1
 		end
 	elseif platform == 1 then
 		if hp < 63 then
-			self:MessageOld("stages", "green", "Info", CL["soon"]:format(L["platform_message"]), "ability_vehicle_launchplayer")
+			self:MessageOld("stages", "green", "info", CL["soon"]:format(L["platform_message"]), "ability_vehicle_launchplayer")
 			platform = 2
 		end
 	elseif platform == 2 and hp < (self:Heroic() and 47 or 43) then
-		self:MessageOld("stages", "green", "Info", CL["soon"]:format(CL["phase"]:format(2)), "ability_vehicle_launchplayer")
+		self:MessageOld("stages", "green", "info", CL["soon"]:format(CL["phase"]:format(2)), "ability_vehicle_launchplayer")
 		self:UnregisterUnitEvent(event, unitId)
 	end
 end
@@ -158,7 +158,7 @@ function mod:PlatformSwap()
 	if platform == 2 then
 		danceTracker = false
 	end
-	self:MessageOld("stages", "green", "Info", L["platform_message"], "ability_vehicle_launchplayer")
+	self:MessageOld("stages", "green", "info", L["platform_message"], "ability_vehicle_launchplayer")
 end
 
 function mod:Phase2()
@@ -166,6 +166,6 @@ function mod:Phase2()
 	forceCount = 0
 	platform = 3
 	danceTracker = true
-	self:MessageOld("stages", "green", "Info", CL["phase"]:format(2), "ability_vehicle_launchplayer")
+	self:MessageOld("stages", "green", "info", CL["phase"]:format(2), "ability_vehicle_launchplayer")
 end
 

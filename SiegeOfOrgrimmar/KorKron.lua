@@ -85,12 +85,12 @@ end
 
 function mod:IronTomb(args)
 	self:Bar(args.spellId, 31)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 end
 
 do
 	local function ironPrisonOverSoon(spellId, spellName)
-		mod:MessageOld(spellId, "yellow", "Warning", CL.soon:format(CL.removed:format(spellName)))
+		mod:MessageOld(spellId, "yellow", "warning", CL.soon:format(CL.removed:format(spellName)))
 		mod:Flash(spellId)
 	end
 	function mod:IronPrison(args)
@@ -138,7 +138,7 @@ do
 			self:Say(-8132)
 			self:Flash(-8132)
 		end
-		self:TargetMessageOld(-8132, name, "green", "Alarm")
+		self:TargetMessageOld(-8132, name, "green", "alarm")
 	end
 	function mod:FoulStream(args)
 		self:CDBar(-8132, 32)
@@ -149,7 +149,7 @@ end
 function mod:FroststormStrike(args)
 	local amount = args.amount or 1
 	if amount == 2 or amount > 3 then
-		self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 4 and "Warning")
+		self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 4 and "warning")
 		self:Bar(args.spellId, 6)
 	else -- if tanking Haromm
 		local boss = self:GetUnitIdByGUID(args.sourceGUID)
@@ -169,7 +169,7 @@ end
 function mod:UNIT_SPELLCAST_START(_, _, _, spellId)
 	if spellId == 143973 then -- Falling Ash
 		-- this is for when the damage happens
-		self:DelayedMessage(143973, 14, "yellow", CL.soon:format(CL.count:format(self:SpellName(143973), ashCounter)), 143973, self:Healer() and "Info")
+		self:DelayedMessage(143973, 14, "yellow", CL.soon:format(CL.count:format(self:SpellName(143973), ashCounter)), 143973, self:Healer() and "info")
 		self:Bar(143973, 17, CL.count:format(self:SpellName(143973), ashCounter))
 		ashCounter = ashCounter + 1
 	end
@@ -182,7 +182,7 @@ function mod:FoulGeyser(args) -- Blobs
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "red", "Alert", L.blobs)
+	self:TargetMessageOld(args.spellId, args.destName, "red", "alert", L.blobs)
 end
 
 function mod:FoulGeyserRemoved(args)
@@ -198,7 +198,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(144005, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(144005, "blue", "info", CL.underyou:format(args.spellName))
 			self:Flash(144005)
 		end
 	end
@@ -209,7 +209,7 @@ do
 		if self:Me(guid) then
 			self:Say(144005)
 		end
-		self:TargetMessageOld(144005, name, "orange", "Alert")
+		self:TargetMessageOld(144005, name, "orange", "alert")
 	end
 	function mod:ToxicStorm(args)
 		self:Bar(args.spellId, 32)
@@ -220,7 +220,7 @@ end
 -- General
 
 function mod:Bloodlust(args)
-	self:MessageOld(args.spellId, "cyan", "Info")
+	self:MessageOld(args.spellId, "cyan", "info")
 end
 
 do
@@ -231,7 +231,7 @@ do
 		if hp < hpWarn[hpWarned] then
 			local msg = CL.soon:format(self:SpellName(warnings[hpWarned]))
 			hpWarned = hpWarned + 1
-			self:MessageOld(-8124, "cyan", "Info", msg, false)
+			self:MessageOld(-8124, "cyan", "info", msg, false)
 			if hpWarned > 4 then
 				self:UnregisterUnitEvent(event, "boss1", "boss2")
 			end

@@ -52,7 +52,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then -- throttle so the timer can catch it sooner
 				prev = t
-				self:MessageOld(119610, "blue", "Info", CL["underyou"]:format(bitterThoughts))
+				self:MessageOld(119610, "blue", "info", CL["underyou"]:format(bitterThoughts))
 				self:Flash(119610)
 			end
 		end
@@ -65,13 +65,13 @@ do
 		if self:Me(args.destGUID) then
 			self:OpenProximity(args.spellId, 5)
 			self:Flash(args.spellId)
-			self:MessageOld(args.spellId, "blue", "Alert", CL["you"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "alert", CL["you"]:format(args.spellName))
 			self:Bar(args.spellId, 6, CL["you"]:format(args.spellName))
 		else
 			local t = GetTime()
 			if t-prev > 6 then
 				prev = t
-				self:MessageOld(119626, "yellow", "Alarm", CL["soon"]:format(self:SpellName(119626))) -- Aggressive Behavior
+				self:MessageOld(119626, "yellow", "alarm", CL["soon"]:format(self:SpellName(119626))) -- Aggressive Behavior
 			end
 		end
 	end

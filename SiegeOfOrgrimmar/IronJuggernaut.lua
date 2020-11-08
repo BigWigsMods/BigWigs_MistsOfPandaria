@@ -151,7 +151,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(144498, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(144498, "blue", "info", CL.underyou:format(args.spellName))
 			self:Flash(144498)
 		end
 	end
@@ -163,7 +163,7 @@ end
 
 function mod:CutterLaserApplied(args)
 	-- way too varied timer 11-21
-	self:TargetMessageOld(-8190, args.destName, "red", "Warning")
+	self:TargetMessageOld(-8190, args.destName, "red", "warning")
 	self:PrimaryIcon(-8190, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(-8190)
@@ -171,7 +171,7 @@ function mod:CutterLaserApplied(args)
 end
 
 function mod:ShockPulse(args)
-	self:MessageOld(args.spellId, "yellow", "Alert", CL.count:format(args.spellName, shockPulseCounter))
+	self:MessageOld(args.spellId, "yellow", "alert", CL.count:format(args.spellName, shockPulseCounter))
 	shockPulseCounter = shockPulseCounter + 1
 	if shockPulseCounter < 4 then
 		self:CDBar(args.spellId, 16, CL.count:format(args.spellName, shockPulseCounter))
@@ -205,7 +205,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(-8179, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(-8179, "blue", "info", CL.underyou:format(args.spellName))
 			self:Flash(-8179)
 		end
 	end
@@ -234,7 +234,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 		self:CDBar(144498, 20)
 	elseif spellId == 146359 then -- Regeneration (Assault mode)
 		phase = 1
-		self:MessageOld("stages", "cyan", "Long", CL.phase:format(phase), false)
+		self:MessageOld("stages", "cyan", "long", CL.phase:format(phase), false)
 		self:Bar("stages", 120, CL.phase:format(2), 144498) -- maybe should use UNIT_POWER to adjust timer since there seems to be a 6 sec variance
 		if self:Healer() then
 			self:CDBar(144459, 8) -- Laser Burn
@@ -247,7 +247,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 		self:StopBar(CL.phase:format(1)) -- in case it overruns
 	elseif spellId == 146360 then -- Depletion (Siege mode)
 		phase = 2
-		self:MessageOld("stages", "cyan", "Long", CL.phase:format(phase), false)
+		self:MessageOld("stages", "cyan", "long", CL.phase:format(phase), false)
 		self:Bar("stages", 64, CL.phase:format(1), 144464) -- maybe should use UNIT_POWER to adjust timer since there seems to be a 6 sec variance
 		self:StopBar(CL.count:format(self:SpellName(144673), mineCounter)) -- Crawler Mine
 		mineCounter = 1

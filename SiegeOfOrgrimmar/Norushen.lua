@@ -100,24 +100,24 @@ end
 -- Look Within
 -- TANK
 function mod:TitanicSmash(args)
-	self:MessageOld(args.spellId, "yellow", "Info")
+	self:MessageOld(args.spellId, "yellow", "info")
 	self:CDBar(args.spellId, 15)
 end
 
 function mod:HurlCorruption(args)
-	self:MessageOld(args.spellId, "orange", "Warning")
+	self:MessageOld(args.spellId, "orange", "warning")
 	self:Bar(args.spellId, 20)
 end
 
 -- HEALER
 function mod:LingeringCorruption(args)
-	self:MessageOld(args.spellId, "orange", "Warning")
+	self:MessageOld(args.spellId, "orange", "warning")
 	self:Bar(args.spellId, 15)
 end
 
 -- DPS
 function mod:TearReality(args)
-	self:MessageOld(args.spellId, "yellow", "Info")
+	self:MessageOld(args.spellId, "yellow", "info")
 	self:CDBar(args.spellId, 8) -- any point for this?
 end
 
@@ -152,7 +152,7 @@ function mod:LookWithinApplied(args)
 		self:Bar(-8220, 60, nil, args.spellId)
 	elseif args.spellId == 144851 and self:Tank() then -- Test of Confidence (TANK) mainly for the other tank
 		if self:LFR() then -- message for LFR since it happens automatically
-			self:TargetMessageOld(-8220, args.destName, "cyan", "Warning", args.spellId)
+			self:TargetMessageOld(-8220, args.destName, "cyan", "warning", args.spellId)
 		end
 		self:TargetBar(-8220, 60, args.destName, nil, args.spellId)
 	end
@@ -179,7 +179,7 @@ do
 			if self:LFR() then
 				self:MessageOld("big_adds", "orange", nil, CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
 			else
-				self:MessageOld("big_adds", "orange", "Alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
+				self:MessageOld("big_adds", "orange", "alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
 				self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
 			end
 		elseif msg == "OutsideBigAddDeath" and not bigAddKills[guid] then
@@ -188,23 +188,23 @@ do
 			if bigAddKillCounter > bigAddSpawnCounter then
 				bigAddSpawnCounter = bigAddKillCounter -- Compensate for no boss mod players (LFR) :[
 			end
-			self:MessageOld("big_adds", "yellow", "Alert", L.big_add_killed:format(bigAddKillCounter), 147082) -- this could probably live wouthout sound but this way people know for sure that they need to check if it is their turn to soak
+			self:MessageOld("big_adds", "yellow", "alert", L.big_add_killed:format(bigAddKillCounter), 147082) -- this could probably live wouthout sound but this way people know for sure that they need to check if it is their turn to soak
 		elseif times[msg] then
 			local t = GetTime()
 			if t-times[msg] > 5 then
 				times[msg] = t
 				if msg == "BlindHatred" then
-					self:MessageOld(145226, "red", "Long")
+					self:MessageOld(145226, "red", "long")
 					self:Bar(145226, 60)
 				elseif msg == "Phase2" then
-					self:MessageOld("stages", "cyan", "Warning", CL.phase:format(2), 146179)
+					self:MessageOld("stages", "cyan", "warning", CL.phase:format(2), 146179)
 					self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
 				elseif msg == "Phase2BigAddSpawn" then
 					bigAddSpawnCounter = bigAddSpawnCounter + 1
 					if self:LFR() then
 						self:MessageOld("big_adds", "orange", nil, ("%d%% - "):format(percent) .. CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
 					else
-						self:MessageOld("big_adds", "orange", "Alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
+						self:MessageOld("big_adds", "orange", "alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
 						self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
 					end
 					percent = percent - 10
@@ -237,7 +237,7 @@ end
 function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 56 and self:MobId(UnitGUID(unitId)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
-		self:MessageOld("stages", "cyan", "Info", CL.soon:format(CL.phase:format(2)), 146179)
+		self:MessageOld("stages", "cyan", "info", CL.soon:format(CL.phase:format(2)), 146179)
 		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
@@ -253,7 +253,7 @@ end
 
 function mod:SelfDoubt(args)
 	local amount = args.amount or 1
-	self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 2 and "Info")
+	self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 2 and "info")
 	self:CDBar(args.spellId, 16)
 end
 

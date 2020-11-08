@@ -80,7 +80,7 @@ end
 do
 	local function warnStorms(spellId)
 		scheduled = nil
-		mod:TargetMessageOld(spellId, debuffTargets, "orange", "Alert")
+		mod:TargetMessageOld(spellId, debuffTargets, "orange", "alert")
 	end
 	function mod:Storms(args)
 		debuffTargets[#debuffTargets+1] = args.destName
@@ -102,13 +102,13 @@ end
 
 function mod:HorrifyingRoar(args)
 	self:Bar(args.spellId, 26.6) -- Either 29 or 26.6, which is picked may or may not be random
-	self:MessageOld(args.spellId, "yellow", "Long", CL["casting"]:format(args.spellName))
+	self:MessageOld(args.spellId, "yellow", "long", CL["casting"]:format(args.spellName))
 end
 
 function mod:ConductiveShield(args)
 	if UnitGUID("target") == args.destGUID then
 		self:Flash(args.spellId)
-		self:PlaySound(args.spellId, "Info")
+		self:PlaySound(args.spellId, "info")
 	end
 	if self:MobId(args.destGUID) == 69821 then -- Thunder Lord cooldown
 		self:Bar(args.spellId, 20.5)
@@ -133,7 +133,7 @@ do
 				elseif msg == "MonaraSN" then
 					local spellId = 139899
 					local name = self:SpellName(spellId)
-					self:MessageOld(spellId, "orange", "Long", CL["incoming"]:format(name))
+					self:MessageOld(spellId, "orange", "long", CL["incoming"]:format(name))
 					self:Bar(spellId, 3, CL["cast"]:format(name))
 					self:Bar(spellId, 14.4)
 					self:Flash(spellId)

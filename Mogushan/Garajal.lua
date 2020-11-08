@@ -124,7 +124,7 @@ do
 					shadowCounter = shadowCounter + 1
 					self:Bar(-6698, 8.3, L["shadowy_message"]:format(shadowCounter), 117222)
 				elseif msg == "Frenzy" then
-					self:MessageOld(-5759, "green", "Long", CL["other"]:format(CL["phase"]:format(2), self:SpellName(-5759)))
+					self:MessageOld(-5759, "green", "long", CL["other"]:format(CL["phase"]:format(2), self:SpellName(-5759)))
 					if not self:LFR() then
 						self:StopBar(L["totem_message"]:format(totemCounter))
 						self:StopBar(L["banish_message"])
@@ -132,7 +132,7 @@ do
 					self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
 				elseif msg == "Banish" then
 					self:Bar(116272, self:Heroic() and 70 or 65, L["banish_message"])
-					self:MessageOld(116272, "orange", self:Tank() and "Alarm" or nil, L["banish_message"])
+					self:MessageOld(116272, "orange", self:Tank() and "alarm" or nil, L["banish_message"])
 				end
 			end
 		end
@@ -181,7 +181,7 @@ end
 function mod:FrenzyCheck(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 25 then -- phase starts at 20
-		self:MessageOld(-5759, "green", "Info", CL["soon"]:format(self:SpellName(-5759)))
+		self:MessageOld(-5759, "green", "info", CL["soon"]:format(self:SpellName(-5759)))
 		self:UnregisterUnitEvent(event, unitId)
 	end
 end

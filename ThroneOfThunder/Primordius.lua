@@ -97,7 +97,7 @@ do
 			totalN = totalN + (count or 0)
 		end
 
-		mod:MessageOld(-6960, "blue", (totalP > 3 or totalN > 0) and "Info", L["mutations"]:format(totalP, totalN), 136184)
+		mod:MessageOld(-6960, "blue", (totalP > 3 or totalN > 0) and "info", L["mutations"]:format(totalP, totalN), 136184)
 		if totalP == 5 then
 			mod:Flash(-6960, 136184)
 		end
@@ -113,13 +113,13 @@ end
 function mod:FullyMutatedRemoved(args)
 	if self:Me(args.destGUID) then
 		self:StopBar(args.spellId)
-		self:MessageOld(-7830, "blue", "Info", CL["over"]:format(args.spellName), args.spellId)
+		self:MessageOld(-7830, "blue", "info", CL["over"]:format(args.spellName), args.spellId)
 	end
 end
 
 function mod:FullyMutatedApplied(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(-7830, "blue", "Info", CL["you"]:format(args.spellName), args.spellId)
+		self:MessageOld(-7830, "blue", "info", CL["you"]:format(args.spellName), args.spellId)
 		self:Bar(-7830, 120, args.spellId)
 	end
 end
@@ -148,7 +148,7 @@ end
 
 function mod:VolatilePathogen(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm", nil, nil, self:Healer() and true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm", nil, nil, self:Healer() and true)
 	self:CDBar(args.spellId, 30)
 	if self:Healer() then
 		self:TargetBar(args.spellId, 10, args.destName)
@@ -157,15 +157,15 @@ end
 
 function mod:PathogenGlandsRemoved(args)
 	self:StopBar(136228)
-	self:MessageOld(136228, "green", "Alert", CL["over"]:format(self:SpellName(136228)))
+	self:MessageOld(136228, "green", "alert", CL["over"]:format(self:SpellName(136228)))
 end
 
 function mod:PathogenGlands(args)
-	self:MessageOld(136228, "red", "Long", CL["incoming"]:format(self:SpellName(136228)))
+	self:MessageOld(136228, "red", "long", CL["incoming"]:format(self:SpellName(136228)))
 end
 
 function mod:AcidicSpinesRemoved(args)
-	self:MessageOld(args.spellId, "green", "Alert", CL["over"]:format(args.spellName))
+	self:MessageOld(args.spellId, "green", "alert", CL["over"]:format(args.spellName))
 	self:CloseProximity(args.spellId)
 	if self:UnitBuff("boss1", self:SpellName(136246)) then -- Erupting Pustules
 		self:OpenProximity(136246, 2)
@@ -174,7 +174,7 @@ end
 
 function mod:AcidicSpinesApplied(args)
 	self:OpenProximity(args.spellId, 5)
-	self:MessageOld(args.spellId, "red", "Long") --, L["acidic_spines"]
+	self:MessageOld(args.spellId, "red", "long") --, L["acidic_spines"]
 end
 
 function mod:CausticGas(args)
@@ -190,7 +190,7 @@ end
 function mod:MalformedBlood(args)
 	-- 9s cooldown (6s with Metabolic Boost)
 	if args.amount % 2 == 0 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow", args.amount > 5 and "Warning")
+		self:StackMessage(args.spellId, args.destName, args.amount, "yellow", args.amount > 5 and "warning")
 	end
 end
 

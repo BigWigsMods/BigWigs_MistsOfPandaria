@@ -179,7 +179,7 @@ end
 
 function mod:FlamesOfGalakrondApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessageOld(args.spellId, args.destName, "red", "Warning", 88986, args.spellId) -- 88986 = "Fireball"
+	self:TargetMessageOld(args.spellId, args.destName, "red", "warning", 88986, args.spellId) -- 88986 = "Fireball"
 	if self:Me(args.destGUID) then
 		self:OpenProximity(args.spellId, 8)
 		self:Flash(args.spellId)
@@ -189,7 +189,7 @@ end
 function mod:LastPhase(_, unitId, _, spellId)
 	if spellId == 50630 then -- Eject All Passengers
 		self:UnregisterEvent("CHAT_MSG_MONSTER_YELL")
-		self:MessageOld("stages", "cyan", "Warning", CL.incoming:format(UnitName(unitId)), "ability_mount_drake_proto")
+		self:MessageOld("stages", "cyan", "warning", CL.incoming:format(UnitName(unitId)), "ability_mount_drake_proto")
 		self:StopBar(L.adds)
 		self:StopBar(L.drakes)
 		self:CancelDelayedMessage(CL.incoming:format(L.drakes))
@@ -204,18 +204,18 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL.underyou:format(args.spellName))
 		end
 	end
 end
 
 function mod:CurseOfVenom(args)
-	self:MessageOld(-8443, "orange", "Alert")
+	self:MessageOld(-8443, "orange", "alert")
 end
 
 function mod:CrushersCall(args)
 	self:Bar(args.spellId, 48)
-	self:MessageOld(args.spellId, "orange", "Alert")
+	self:MessageOld(args.spellId, "orange", "alert")
 end
 
 function mod:ShatteringCleave(args)
@@ -228,7 +228,7 @@ end
 
 function mod:SouthTower()
 	self:StopBar(L.south_tower)
-	self:MessageOld("towers", "cyan", "Long", L.south_tower, L.towers_icon)
+	self:MessageOld("towers", "cyan", "long", L.south_tower, L.towers_icon)
 	self:Bar("demolisher", 20, L.demolisher_message, L.demolisher_icon)
 
 	if self:Mythic() then
@@ -243,7 +243,7 @@ end
 
 function mod:NorthTower()
 	self:StopBar(L.north_tower)
-	self:MessageOld("towers", "cyan", "Long", L.north_tower, L.towers_icon)
+	self:MessageOld("towers", "cyan", "long", L.north_tower, L.towers_icon)
 	self:Bar("demolisher", 20, L.demolisher_message, L.demolisher_icon)
 
 	if self:Mythic() then
@@ -255,11 +255,11 @@ end
 
 -- Foot Soldiers
 function mod:ChainHeal(args)
-	self:MessageOld(146757, "red", "Warning")
+	self:MessageOld(146757, "red", "warning")
 end
 
 function mod:HealingTotem(args)
-	self:MessageOld(-8489, "orange", "Warning")
+	self:MessageOld(-8489, "orange", "warning")
 end
 
 do
@@ -279,7 +279,7 @@ function mod:Warbanner(args)
 end
 
 function mod:Fracture(args)
-	self:TargetMessageOld(146899, args.destName, "orange", "Alarm", nil, nil, true)
+	self:TargetMessageOld(146899, args.destName, "orange", "alarm", nil, nil, true)
 end
 
 function mod:Adds(_, _, unit, _, _, target)
@@ -289,10 +289,10 @@ function mod:Adds(_, _, unit, _, _, target)
 			self:Bar("drakes", 168, L.drakes, L.drakes_icon)
 			addsCounter = 1
 		elseif UnitIsPlayer(target) then
-			self:MessageOld("adds", "yellow", "Info", CL.incoming:format(L.adds), L.adds_icon)
+			self:MessageOld("adds", "yellow", "info", CL.incoming:format(L.adds), L.adds_icon)
 			addsCounter = addsCounter + 1
 			if (addsCounter + 1) % 4 == 0 then
-				self:DelayedMessage("drakes", 55, "yellow", CL.incoming:format(L.drakes), L.drakes_icon, "Info")
+				self:DelayedMessage("drakes", 55, "yellow", CL.incoming:format(L.drakes), L.drakes_icon, "info")
 				self:Bar("adds", 110, L.adds, L.adds_icon)
 			else
 				if addsCounter % 4 == 0 then -- start the drakes timer on the wave after drakes

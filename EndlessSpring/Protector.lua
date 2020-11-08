@@ -98,7 +98,7 @@ function mod:ShaCorruptionFirst(args)
 
 	if not firstDeath then
 		firstDeath = true
-		self:MessageOld(args.spellId, "yellow", "Info", CL["count"]:format(args.spellName, 1), args.spellId)
+		self:MessageOld(args.spellId, "yellow", "info", CL["count"]:format(args.spellName, 1), args.spellId)
 	end
 end
 
@@ -112,7 +112,7 @@ function mod:ShaCorruptionSecond(args)
 		self:Bar(117227, 15) -- Corrupted Waters
 	end
 
-	self:MessageOld(args.spellId, "yellow", "Info", CL["count"]:format(args.spellName, 2))
+	self:MessageOld(args.spellId, "yellow", "info", CL["count"]:format(args.spellName, 2))
 end
 
 --Protector Kaolan
@@ -134,7 +134,7 @@ do
 			local t = GetTime()
 			if t-prev > 1 then
 				prev = t
-				self:MessageOld(117986, "blue", "Info", CL["underyou"]:format(args.spellName))
+				self:MessageOld(117986, "blue", "info", CL["underyou"]:format(args.spellName))
 				self:Flash(117986)
 			end
 		end
@@ -146,7 +146,7 @@ end
 do
 	local lightningPrisonList, scheduled = mod:NewTargetList(), nil
 	local function warnPrison()
-		mod:TargetMessageOld(117436, lightningPrisonList, "red", "Alert")
+		mod:TargetMessageOld(117436, lightningPrisonList, "red", "alert")
 		scheduled = nil
 	end
 	function mod:LightningPrisonApplied(args)
@@ -170,7 +170,7 @@ function mod:LightningPrisonRemoved(args)
 end
 
 function mod:LightningStorm(args)
-	self:MessageOld(args.spellId, "orange", "Alarm")
+	self:MessageOld(args.spellId, "orange", "alarm")
 	self:CDBar(args.spellId, bossDead < 3 and 42 or 32)
 	self:Flash(args.spellId)
 end
@@ -179,7 +179,7 @@ end
 
 function mod:CleansingWaters(args)
 	if not self:Tank() then
-		self:MessageOld(args.spellId, "yellow", self:Dispeller("magic", true) and "Alert", CL["soon"]:format(args.spellName))
+		self:MessageOld(args.spellId, "yellow", self:Dispeller("magic", true) and "alert", CL["soon"]:format(args.spellName))
 	end
 	self:Bar(args.spellId, 6, L["heal"]:format(args.spellName), 55888) -- orb hitting the ground (water orb icon)
 	self:CDBar(args.spellId, bossDead > 0 and 42 or 32)
@@ -204,7 +204,7 @@ do
 	function mod:CleansingWatersDispel(args)
 		local mobId = self:MobId(args.destGUID)
 		if self:Dispeller("magic", true) and (mobId == 60583 or mobId == 60585 or mobId == 60586) and args.destGUID == UnitGUID(getKillTarget()) then
-			self:MessageOld(117309, "red", "Info", CL["on"]:format(args.spellName, args.destName)) --onboss
+			self:MessageOld(117309, "red", "info", CL["on"]:format(args.spellName, args.destName)) --onboss
 		end
 	end
 
@@ -212,7 +212,7 @@ do
 	function mod:CleansingWatersTank(_, unitId, _, spellId)
 		if spellId == 122851 and self:Tank() and UnitIsUnit(unitId, getKillTarget()) then
 			local bossName = UnitName(unitId)
-			self:MessageOld(117309, "orange", "Alert", L["under"]:format(self:SpellName(117309), bossName))
+			self:MessageOld(117309, "orange", "alert", L["under"]:format(self:SpellName(117309), bossName))
 		end
 	end
 end

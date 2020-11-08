@@ -149,14 +149,14 @@ function mod:BossEngage()
 	self:CheckBossStatus()
 	if self:MobId(UnitGUID("boss2")) == 69374 then -- War-God Jalak
 		self:StopBar(-7087)
-		self:MessageOld("adds", "cyan", "Info", -7087, false) -- War-God Jalak
+		self:MessageOld("adds", "cyan", "info", -7087, false) -- War-God Jalak
 		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
 		self:Bar(136817, 5) -- Bestial Cry
 	end
 end
 
 function mod:Rampage(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 end
 
 function mod:BestialCry(args)
@@ -174,7 +174,7 @@ end
 function mod:LastPhase(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 35 then -- phase starts at 30, except if the boss is already there
-		self:MessageOld("adds", "cyan", "Info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
+		self:MessageOld("adds", "cyan", "info", CL["soon"]:format(self:SpellName(-7087)), "achievement_boss_trollgore") -- War-God Jalak
 		self:UnregisterUnitEvent(event, "boss1")
 	end
 end
@@ -185,7 +185,7 @@ function mod:DinoForm(args)
 end
 
 function mod:DinoMending(args)
-	self:MessageOld(-7090, "red", "Long")
+	self:MessageOld(-7090, "red", "long")
 	self:CDBar(-7090, 8) -- to help interrupters keep track
 end
 
@@ -204,7 +204,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -214,7 +214,7 @@ do
 	local hexTargets, scheduled = mod:NewTargetList(), nil
 	local function warnHex()
 		scheduled = nil
-		mod:TargetMessageOld(-7125, hexTargets, "red", "Alarm")
+		mod:TargetMessageOld(-7125, hexTargets, "red", "alarm")
 	end
 	function mod:Hex(args)
 		if self:Dispeller("curse", nil, -7125) then
@@ -223,7 +223,7 @@ do
 				scheduled = self:ScheduleTimer(warnHex, 0.2)
 			end
 		elseif self:Me(args.destGUID) then
-			self:TargetMessageOld(-7125, args.destName, "red", "Alarm")
+			self:TargetMessageOld(-7125, args.destName, "red", "alarm")
 		end
 	end
 end
@@ -234,7 +234,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
-			self:MessageOld("chain_lightning", "blue", "Alert", L["chain_lightning_message"], args.spellId)
+			self:MessageOld("chain_lightning", "blue", "alert", L["chain_lightning_message"], args.spellId)
 		end
 	end
 end
@@ -245,7 +245,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
-			self:MessageOld("fireball", "blue", "Alert", L["fireball_message"], args.spellId)
+			self:MessageOld("fireball", "blue", "alert", L["fireball_message"], args.spellId)
 		end
 	end
 end
@@ -259,7 +259,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName)) -- not exactly under you
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName)) -- not exactly under you
 			self:Flash(args.spellId)
 		end
 	end
@@ -280,7 +280,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("disease", nil, -7119) then -- don't spam
 			prev = t
-			self:MessageOld(-7119, "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld(-7119, "red", "alarm", args.spellName, args.spellId)
 		end
 	end
 end
@@ -294,7 +294,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -306,14 +306,14 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("poison") then -- don't spam
 			prev = t
-			self:MessageOld("venom_bolt_volley", "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld("venom_bolt_volley", "red", "alarm", args.spellName, args.spellId)
 		end
 	end
 end
 
 function mod:VenomBoltVolley(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:MessageOld("venom_bolt_volley", "blue", "Alert", L["venom_bolt_volley_message"], args.spellId)
+		self:MessageOld("venom_bolt_volley", "blue", "alert", L["venom_bolt_volley_message"], args.spellId)
 		self:Bar("venom_bolt_volley", 16, L["venom_bolt_volley_bar"], args.spellId)
 	end
 end
@@ -327,7 +327,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName), args.spellId)
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName), args.spellId)
 			self:Flash(args.spellId)
 		end
 	end
@@ -339,7 +339,7 @@ do
 		local t = GetTime()
 		if t-prev > 3 and self:Dispeller("magic", nil, -7109) then -- don't spam
 			prev = t
-			self:MessageOld(-7109, "red", "Alarm", args.spellName, args.spellId)
+			self:MessageOld(-7109, "red", "alarm", args.spellName, args.spellId)
 		end
 	end
 end
@@ -347,7 +347,7 @@ end
 -- General
 
 function mod:Charge(msg, _, _, _, player)
-	self:TargetMessageOld(-7080, player, "yellow", "Warning", nil, nil, true)
+	self:TargetMessageOld(-7080, player, "yellow", "warning", nil, nil, true)
 	self:CDBar(-7080, 51)
 	if UnitIsUnit("player", player) then
 		self:Flash(-7080)
@@ -379,7 +379,7 @@ function mod:Doors(msg)
 end
 
 function mod:Swipe(args)
-	self:MessageOld(136741, "orange", "Long")
+	self:MessageOld(136741, "orange", "long")
 	local timer = (args.spellId == 136770) and 11 or 19 -- after charge swipe is ~10 sec, then ~19 till next charge ( 10 H ptr )
 	self:CDBar(136741, self:LFR() and 16 or timer) -- someone needs to verify LFR timer
 end
@@ -396,7 +396,7 @@ end
 
 function mod:DireFixation(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(-7868, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(-7868, "blue", "info", CL["you"]:format(args.spellName))
 		self:Flash(-7868)
 	end
 end

@@ -61,7 +61,7 @@ end
 --
 
 function mod:ArcNova(args)
-	self:MessageOld(args.spellId, "red", "Alarm")
+	self:MessageOld(args.spellId, "red", "alarm")
 	self:Bar(args.spellId, 3, CL["cast"]:format(args.spellName))
 	self:CDBar("ability", 10, L["ability"], L.ability_icon)
 end
@@ -69,7 +69,7 @@ end
 function mod:LightningTether(args)
 	self:CDBar("ability", 10, L["ability"], L.ability_icon)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "Alert", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "alert", CL["you"]:format(args.spellName))
 		self:Bar(args.spellId, 15, CL["you"]:format(args.spellName))
 		self:Flash(args.spellId)
 	end
@@ -93,7 +93,7 @@ do
 			stormcloudTargets[#stormcloudTargets+1] = args.destName
 		end
 		if self:Me(args.destGUID) then
-			self:MessageOld(args.spellId, "blue", "Alert", CL["you"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "alert", CL["you"]:format(args.spellName))
 			self:Say(args.spellId)
 			self:OpenProximity(args.spellId, 10)
 			openedForMe = true
@@ -127,7 +127,7 @@ do
 		if self:Me(args.destGUID) then
 			local t = GetTime()
 			if t-prev > 2 and not self:UnitDebuff("player", args.spellName) then
-				self:MessageOld(136340, "blue", "Info", CL["underyou"]:format(args.spellName))
+				self:MessageOld(136340, "blue", "info", CL["underyou"]:format(args.spellName))
 				prev = t
 			end
 		end

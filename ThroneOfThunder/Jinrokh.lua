@@ -97,7 +97,7 @@ function mod:IonizationRemoved(args)
 	if self:Me(args.destGUID) then
 		openedForMe = nil
 		self:StopBar(CL["you"]:format(args.spellName))
-		self:MessageOld(args.spellId, "green", "Info", CL["removed"]:format(args.spellName))
+		self:MessageOld(args.spellId, "green", "info", CL["removed"]:format(args.spellName))
 	end
 	for k, v in next, ionized do
 		if v == args.destName then
@@ -130,7 +130,7 @@ end
 
 function mod:Ionization(args)
 	self:CDBar(-7741, 13) -- Focused Lightning
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 	self:Bar(args.spellId, 92)
 end
 
@@ -139,7 +139,7 @@ function mod:LightningStormDuration(args)
 end
 
 function mod:LightningStorm(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 	self:Bar(args.spellId, 93, L["storm_short"])
 	self:Bar(-7741, self:Heroic() and 20 or 26) -- Focused Lightning
 	self:Bar(137162, 20) -- Static Burst
@@ -155,7 +155,7 @@ function mod:ThunderingThrowSafe()
 end
 
 function mod:ThunderingThrow(_, _, _, _, target)
-	self:TargetMessageOld(137175, target, "red", "Warning")
+	self:TargetMessageOld(137175, target, "red", "warning")
 	self:SecondaryIcon(137175, target)
 	if not UnitIsUnit(target, "player") then -- no point opening proximity for the thrown tank
 		self:CloseProximity(-7741) -- close this before opening another ( in case it was open )
@@ -170,7 +170,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(139467, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(139467, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(139467)
 		end
 	end
@@ -188,7 +188,7 @@ end
 
 do
 	local function printTarget(self, player, guid)
-		self:TargetMessageOld(-7741, player, "green", "Alarm")
+		self:TargetMessageOld(-7741, player, "green", "alarm")
 		self:PrimaryIcon(-7741, player)
 		if self:Me(guid) then
 			self:Say(-7741)
@@ -213,14 +213,14 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", L["in_water"])
+			self:MessageOld(args.spellId, "blue", "info", L["in_water"])
 			self:Flash(args.spellId)
 		end
 	end
 end
 
 function mod:StaticWound(args)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "alert", nil, nil, true)
 end
 
 
@@ -231,7 +231,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end

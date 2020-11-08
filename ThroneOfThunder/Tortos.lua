@@ -124,13 +124,13 @@ function mod:CrystalShell(spellName)
 		mod:CancelTimer(crystalTimer)
 		crystalTimer = nil
 	else
-		mod:MessageOld(137633, "blue", "Info", L["no_crystal_shell"])
+		mod:MessageOld(137633, "blue", "info", L["no_crystal_shell"])
 	end
 end
 
 function mod:CrystalShellRemoved(args)
 	if not self:Me(args.destGUID) or not self.isEngaged then return end
-	self:MessageOld(args.spellId, "blue", "Alarm", CL["removed"]:format(args.spellName))
+	self:MessageOld(args.spellId, "blue", "alarm", CL["removed"]:format(args.spellName))
 	if not self:Tank() then
 		self:Flash(args.spellId)
 		crystalTimer = self:ScheduleRepeatingTimer("CrystalShell", 3, args.spellName)
@@ -139,32 +139,32 @@ end
 
 function mod:SnappingBite(args)
 	if self:Me(UnitGUID("boss1target")) then
-		self:MessageOld(args.spellId, "yellow", self:Heroic() and "Warning")
+		self:MessageOld(args.spellId, "yellow", self:Heroic() and "warning")
 	end
 	self:CDBar(args.spellId, 7)
 end
 
 function mod:SummonBats(_, _, _, spellId)
 	if spellId == 136685 then -- Summon Bats
-		self:MessageOld("bats", "orange", self:Tank() and not UnitIsUnit("boss1target", "player") and "Warning", 136686)
+		self:MessageOld("bats", "orange", self:Tank() and not UnitIsUnit("boss1target", "player") and "warning", 136686)
 		self:Bar("bats", 46, 136686)
 	end
 end
 
 function mod:QuakeStomp(args)
 	quakeCounter = quakeCounter + 1
-	self:MessageOld(args.spellId, "red", "Alert", CL["count"]:format(args.spellName, quakeCounter))
+	self:MessageOld(args.spellId, "red", "alert", CL["count"]:format(args.spellName, quakeCounter))
 	self:CDBar(args.spellId, 47, CL["count"]:format(args.spellName, quakeCounter+1))
 end
 
 function mod:FuriousStoneBreath(args)
-	self:MessageOld(args.spellId, "red", "Long")
+	self:MessageOld(args.spellId, "red", "long")
 	self:CDBar(args.spellId, 46) -- 45.8-48.2
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "BreathUpdate", "boss1") -- First is generally fine, register after
 end
 
 function mod:GrowingFury(args)
-	self:MessageOld(args.spellId, "red", "Alarm")
+	self:MessageOld(args.spellId, "red", "alarm")
 end
 
 do
@@ -214,7 +214,7 @@ do
 		if expires and expires ~= prev then
 			local t = GetTime()
 			if prev < t then -- buff fell off
-				self:MessageOld(-7134, "green", "Info")
+				self:MessageOld(-7134, "green", "info")
 			end
 			local duration = expires-t
 			self:Bar(-7134, duration)

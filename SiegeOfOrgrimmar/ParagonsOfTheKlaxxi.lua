@@ -226,13 +226,13 @@ end
 --Hisek the Swarmkeeper
 function mod:RapidFire(args)
 	self:Flash(args.spellId)
-	self:MessageOld(args.spellId, "orange", "Long", L.dance:format(args.spellName))
+	self:MessageOld(args.spellId, "orange", "long", L.dance:format(args.spellName))
 	self:CDBar(args.spellId, 47)
 end
 
 function mod:Aim(args)
 	self:SecondaryIcon(-8073, args.destName)
-	self:TargetMessageOld(-8073, args.destName, "red", "Warning", CL.count:format(args.spellName, aimCounter), args.spellId, true)
+	self:TargetMessageOld(-8073, args.destName, "red", "warning", CL.count:format(args.spellName, aimCounter), args.spellId, true)
 	self:TargetBar(-8073, 5, args.destName)
 	if not self:Tank() then
 		self:Flash(-8073)
@@ -256,7 +256,7 @@ do
 			parasiteCounter = parasiteCounter - 1
 			parasites[args.destGUID] = true
 			if self:Me(args.sourceGUID) then
-				self:MessageOld(143339, "green", "Info", L.you_ate:format(parasiteCounter))
+				self:MessageOld(143339, "green", "info", L.you_ate:format(parasiteCounter))
 				youAte = true
 			else
 				parasiteEater[1] = args.sourceName
@@ -277,7 +277,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t																										   -- injection
-			self:MessageOld(args.spellId, "yellow", (self:Healer() or (self:Tank() and self:UnitDebuff("player", self:SpellName(143339)))) and "Alert", CL.count:format(self:SpellName(-8068), mutateCastCounter))
+			self:MessageOld(args.spellId, "yellow", (self:Healer() or (self:Tank() and self:UnitDebuff("player", self:SpellName(143339)))) and "alert", CL.count:format(self:SpellName(-8068), mutateCastCounter))
 			mutateCastCounter = mutateCastCounter + 1
 			-- this text has "Amber Scorpion" in it's name, so it is more obvious
 			self:Bar(args.spellId, 32, CL.count:format(args.spellName, mutateCastCounter))
@@ -293,7 +293,7 @@ do
 			faultyMutationTimer = nil
 			return
 		end
-		mod:MessageOld(spellId, "red", "Warning", L.prey_message)
+		mod:MessageOld(spellId, "red", "warning", L.prey_message)
 	end
 	function mod:FaultyMutationRemoved(args)
 		if not self:Me(args.destGUID) then return end
@@ -303,7 +303,7 @@ do
 	end
 	local scheduled, mutated = nil, mod:NewTargetList()
 	local function announceMutationTargets(spellId)
-		mod:TargetMessageOld(spellId, mutated, "red", "Warning")
+		mod:TargetMessageOld(spellId, mutated, "red", "warning")
 		scheduled = nil
 	end
 	function mod:FaultyMutationApplied(args)
@@ -377,7 +377,7 @@ do
 	function mod:ParasiteFixate(args)
 		if self:Me(args.destGUID) then
 			self:Flash(-8065)
-			self:MessageOld(-8065, "blue", "Info", CL.you:format(self:SpellName(-8065)))
+			self:MessageOld(-8065, "blue", "info", CL.you:format(self:SpellName(-8065)))
 		end
 		if self.db.profile.custom_off_parasite_marks then
 			if not markableMobs[args.sourceGUID] then
@@ -391,7 +391,7 @@ do
 	function mod:Injection(args)
 		local amount = args.amount or 1
 		if self:Me(args.destGUID) and amount == 1 then
-			self:MessageOld(args.spellId, "orange", "Warning", CL.you:format(args.spellName))
+			self:MessageOld(args.spellId, "orange", "warning", CL.you:format(args.spellName))
 		end
 		injectionBar, injectionTarget = CL.count:format(args.spellName, amount), args.destName
 		self:StopBar(CL.count:format(args.spellName, amount-1), args.destName)
@@ -409,7 +409,7 @@ end
 
 --Skeer the Bloodseeker
 function mod:Bloodletting(args)
-	self:MessageOld(args.spellId, "red", self:Damager() and "Warning")
+	self:MessageOld(args.spellId, "red", self:Damager() and "warning")
 	self:CDBar(args.spellId, 37)
 end
 
@@ -421,7 +421,7 @@ do
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
 			self:Flash(args.spellId)
-			self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL.underyou:format(args.spellName))
 		end
 	end
 end
@@ -446,7 +446,7 @@ do
 		if not UnitDetailedThreatSituation(target, boss) and lastWhirlTarget ~= mod:UnitName(target) then
 			lastWhirlTarget = mod:UnitName(target)
 			if UnitIsUnit("player", target) then
-				mod:MessageOld(143701, "blue", "Info", CL.you:format(mod:SpellName(143701)))
+				mod:MessageOld(143701, "blue", "info", CL.you:format(mod:SpellName(143701)))
 				mod:Flash(143701)
 				mod:Say(143701)
 			end
@@ -536,7 +536,7 @@ local function iyyokukSelected()
 	local shape, color, number = parseDebuff("player")
 	if shape and (shape == results.shape or color == results.color or number == results.number) then
 		mod:Flash(-8055)
-		mod:MessageOld(-8055, "blue", "Info", L.edge_message)
+		mod:MessageOld(-8055, "blue", "info", L.edge_message)
 		mod:Bar(-8055, 9, mod:SpellName(142809), 142809) -- Fiery Edge
 		mod:Say(-8055, mod:SpellName(142809))
 	end
@@ -580,7 +580,7 @@ end
 --Korven the Prime
 do
 	local function printTarget(self, name)
-		self:TargetMessageOld(143974, name, "orange", "Alarm", nil, nil, true)
+		self:TargetMessageOld(143974, name, "orange", "alarm", nil, nil, true)
 	end
 	function mod:ShieldBash(args)
 		self:Bar(args.spellId, 17)
@@ -592,13 +592,13 @@ function mod:EncaseInEmber(args)
 	if self:UnitDebuff("player", self:SpellName(148650)) then
 		self:Flash(148650) -- Strong Legs
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "red", self:Damager() and "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "red", self:Damager() and "warning")
 	self:CDBar(args.spellId, self:Mythic() and 30 or 25)
 end
 
 --Kaz'tik the Manipulator
 function mod:Mesmerize(args)
-	self:TargetMessageOld(args.spellId, args.destName, "red", self:Damager() and "Warning", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "red", self:Damager() and "warning", nil, nil, true)
 	self:CDBar(args.spellId, 18) -- 18-40 probably should figure out what delays it or where does it restart
 end
 
@@ -609,7 +609,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL.underyou:format(args.spellName))
 		end
 	end
 end
@@ -620,7 +620,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 and self:Me(args.destGUID) then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL.underyou:format(args.spellName))
 		end
 	end
 end
@@ -648,7 +648,7 @@ do
 	function mod:Catalysts(args)
 		self:CDBar(-8034, 25, -8036, -8034) -- Choose Catalyst
 		local myDebuff = self:UnitDebuff("player", mod:SpellName(142532)) or self:UnitDebuff("player", mod:SpellName(142533)) or self:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
-		self:MessageOld(-8034, "cyan", "Alert", (myDebuff and matches[myDebuff][args.spellId]) and L.catalyst_match:format(matches[myDebuff][args.spellId]) or args.spellName, args.spellId)
+		self:MessageOld(-8034, "cyan", "alert", (myDebuff and matches[myDebuff][args.spellId]) and L.catalyst_match:format(matches[myDebuff][args.spellId]) or args.spellName, args.spellId)
 		self:CancelTimer(catalystProximityHandler) -- stop our previous timer it should have happened by now, but first one is tricky, so be safe and just stop it, 2nd one will be accurate
 		catalystProximityHandler = self:ScheduleTimer(handleCatalystProximity, 20)
 	end
@@ -682,7 +682,7 @@ function mod:ToxicInjectionsApplied(args)
 		elseif args.spellId == 142534 then -- yellow
 			message = yellowToxin
 		end
-		self:MessageOld(-8034, "blue", "Long", CL.you:format(message))
+		self:MessageOld(-8034, "blue", "long", CL.you:format(message))
 	end
 end
 
@@ -700,7 +700,7 @@ do
 		if UnitIsUnit("player", target) then
 			mod:Flash(-8008)
 			mod:Say(-8008)
-			mod:TargetMessageOld(-8008, name, "orange", "Alarm")
+			mod:TargetMessageOld(-8008, name, "orange", "alarm")
 		else
 			mod:TargetMessageOld(-8008, name, "orange")
 		end
@@ -733,14 +733,14 @@ do
 			self:StopDeathFromAboveScan()
 			deathFromAboveStartTimer = self:ScheduleTimer("StartDeathFromAboveScan", 13)
 		end
-		self:MessageOld(args.spellId, "orange", "Long", CL.incoming:format(args.spellName))
+		self:MessageOld(args.spellId, "orange", "long", CL.incoming:format(args.spellName))
 		self:CDBar(args.spellId, 33) -- 33-49
 	end
 end
 
 function mod:Gouge(args)
 	-- timer varies way too much, no point for a bar 22-62
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm", nil, nil, true)
 end
 
 function mod:ExposedVeins(args)

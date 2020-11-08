@@ -92,7 +92,7 @@ function mod:FloorRemoved(_, _, _, spellId)
 	-- Trigger Phase A when the spark hits the conduit
 	if spellId == 118189 then
 		self:Bar("floor", 6, L["floor"], L.floor_icon)
-		self:MessageOld("floor", "blue", "Alarm", L["floor_message"], L.floor_icon)
+		self:MessageOld("floor", "blue", "alarm", L["floor_message"], L.floor_icon)
 		self:Flash("floor", L.floor_icon)
 	end
 end
@@ -141,7 +141,7 @@ do
 			if t-prev > 1 then --getting like 30 messages a second was *glasses* a bit much
 				prev = t
 				self:Flash(117878)
-				self:MessageOld(117878, "blue", "Info", L["overcharged_total_annihilation"]:format(stack)) -- Does need the sound spam too!
+				self:MessageOld(117878, "blue", "info", L["overcharged_total_annihilation"]:format(stack)) -- Does need the sound spam too!
 			end
 		end
 	end
@@ -149,7 +149,7 @@ end
 
 function mod:TotalAnnihilation(args)
 	annihilateCounter = annihilateCounter + 1
-	self:MessageOld(-6186, "red", "Alert", CL["count"]:format(args.spellName, annihilateCounter))
+	self:MessageOld(-6186, "red", "alert", CL["count"]:format(args.spellName, annihilateCounter))
 	self:Bar(-6186, 4, CL["cast"]:format(args.spellName))
 end
 
@@ -172,11 +172,11 @@ end
 function mod:PhaseWarn(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 88 and phaseCount == 0 then -- phase starts at 85
-		self:MessageOld("stages", "green", "Info", CL["soon"]:format(CL["phase"]:format(2)), false)
+		self:MessageOld("stages", "green", "info", CL["soon"]:format(CL["phase"]:format(2)), false)
 		phaseCount = 1
 		self:UnregisterUnitEvent(event, unitId)
 	elseif hp < 53 and phaseCount == 1 then
-		self:MessageOld("stages", "green", "Info", CL["soon"]:format(CL["phase"]:format(2)), false)
+		self:MessageOld("stages", "green", "info", CL["soon"]:format(CL["phase"]:format(2)), false)
 		phaseCount = 2
 		self:UnregisterUnitEvent(event, unitId)
 	end

@@ -104,13 +104,13 @@ function mod:EngageCheck()
 end
 
 function mod:Terrorize(args)
-	self:MessageOld(args.spellId, "red", self:Dispeller("magic") and "Alert")
+	self:MessageOld(args.spellId, "red", self:Dispeller("magic") and "alert")
 	self:CDBar(args.spellId, 41)
 end
 
 function mod:DreadShadows(args)
 	if self:Me(args.destGUID) and args.amount > (self:Heroic() and 5 or self:LFR() and 13 or 9) and args.amount % 2 == 0 then
-		self:MessageOld(args.spellId, "blue", "Info", CL["count"]:format(args.spellName, args.amount))
+		self:MessageOld(args.spellId, "blue", "info", CL["count"]:format(args.spellName, args.amount))
 	end
 end
 
@@ -132,7 +132,7 @@ end
 
 do
 	local function printTarget(self, name, guid) -- Nightmares
-		self:TargetMessageOld(122777, name, "red", "Alert")
+		self:TargetMessageOld(122777, name, "red", "alert")
 		if self:Me(guid) then
 			self:Flash(122777)
 			self:Say(122777)
@@ -167,14 +167,14 @@ do
 				if self:Dispeller("magic", true) then
 					local name = self:UnitBuff("boss1", nil, "Magic") -- well any magic actually not just HoTs
 					if name then
-						self:MessageOld("phases", "yellow", "Alert", L.buff_boss:format(name), false)
+						self:MessageOld("phases", "yellow", "alert", L.buff_boss:format(name), false)
 					end
 				end
 			elseif spellId == 122953 then -- Summon Unstable Sha
 				local t = GetTime()
 				if t-prev > 2 then
 					prev = t
-					self:MessageOld("unstable_sha", "red", "Alert", self:SpellName(spellId), 122938)
+					self:MessageOld("unstable_sha", "red", "alert", self:SpellName(spellId), 122938)
 					self:Bar("unstable_sha", 18, self:SpellName(spellId), 122938)
 				end
 			elseif spellId == 122775 then -- Nightmares
@@ -186,7 +186,7 @@ do
 				end
 			elseif spellId == 123813 then -- The Dark of Night (heroic)
 				self:Bar(-6550, 30, 130013)
-				self:MessageOld(-6550, "orange", "Alarm", 130013)
+				self:MessageOld(-6550, "orange", "alarm", 130013)
 			end
 		end
 	end

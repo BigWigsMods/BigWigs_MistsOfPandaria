@@ -110,7 +110,7 @@ end
 function mod:YetCharge(args)
 	self:Bar(args.spellId, 15)
 	if not yetiChargeTimer then
-		yetiChargeTimer = self:ScheduleTimer("MessageOld", 15, args.spellId, "red", "Warning", CL.soon:format(args.spellName))
+		yetiChargeTimer = self:ScheduleTimer("MessageOld", 15, args.spellId, "red", "warning", CL.soon:format(args.spellName))
 	end
 end
 
@@ -123,18 +123,18 @@ end
 
 function mod:Enrage(args)
 	if self:Tank() or self:Dispeller("enrage", true, args.spellId) then
-		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alert")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "alert")
 	end
 end
 
 function mod:SkeletonKeyRemoved(args)
-	self:MessageOld(args.spellId, "green", "Alert", L.cage_opened)
+	self:MessageOld(args.spellId, "green", "alert", L.cage_opened)
 	self:StopBar(args.spellId, args.destName)
 	self:Bar(-7981, 13, CL.over:format(self:SpellName(-7981))) -- Blood Frenzy
 end
 
 function mod:SkeletonKey(args)
-	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "warning")
 	self:TargetBar(args.spellId, 60, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
@@ -156,7 +156,7 @@ do
 	end
 	function mod:BloodFrenzyOver(args)
 		self:OpenProximity("proximity", 10)
-		self:MessageOld(-7981, "cyan", "Long", CL.over:format(args.spellName))
+		self:MessageOld(-7981, "cyan", "long", CL.over:format(args.spellName))
 		self:CDBar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
 		self:CDBar(143766, 12, 17086, "ability_hunter_pet_devilsaur") -- Breath. 143766 isn't exactly a combined option but it's one of the breaths.
 		if self:Mythic() then
@@ -178,7 +178,7 @@ function mod:FixateApplied(args)
 		self:Say(-7980)
 		self:Flash(-7980)
 	end
-	self:TargetMessageOld(-7980, args.destName, "orange", "Alarm")
+	self:TargetMessageOld(-7980, args.destName, "orange", "alarm")
 	self:TargetBar(-7980, 12, args.destName)
 	self:PrimaryIcon(-7980, args.destName)
 end
@@ -193,7 +193,7 @@ function mod:BloodFrenzyPhase()
 	self:StopBar(143767) -- Scorching Breath
 	self:StopBar(-7963) -- Deafening Screech
 	self:CloseProximity("proximity")
-	self:MessageOld(-7981, "cyan", "Long")
+	self:MessageOld(-7981, "cyan", "long")
 end
 
 -- stage 1
@@ -205,7 +205,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				self:MessageOld(args.spellId, "blue", "Info", CL.underyou:format(args.spellName))
+				self:MessageOld(args.spellId, "blue", "info", CL.underyou:format(args.spellName))
 			end
 		end
 	end
@@ -251,7 +251,7 @@ function mod:TankDebuffCasts(_, _, _, spellId)
 end
 
 function mod:TankDebuff(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "yellow", not self:Me(args.destGUID) and "Warning")
+	self:StackMessage(args.spellId, args.destName, args.amount, "yellow", not self:Me(args.destGUID) and "warning")
 end
 
 function mod:YetiDeath(args)

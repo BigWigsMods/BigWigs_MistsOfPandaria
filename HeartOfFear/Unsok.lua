@@ -123,7 +123,7 @@ end
 
 function mod:ParasiticGrowth(args)
 	self:Bar(args.spellId, 50)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Long", L["parasite"])
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "long", L["parasite"])
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -144,7 +144,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(123020, "blue", "Alarm", CL["underyou"]:format(args.spellName))
+			self:MessageOld(123020, "blue", "alarm", CL["underyou"]:format(args.spellName))
 		end
 	end
 end
@@ -159,14 +159,14 @@ end
 
 function mod:ReshapeLife(args)
 	if phase < 2 then
-		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm", CL["count"]:format(args.spellName, reshapeLifeCounter))
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm", CL["count"]:format(args.spellName, reshapeLifeCounter))
 		reshapeLifeCounter = reshapeLifeCounter + 1
 		self:Bar(args.spellId, 50, CL["count"]:format(args.spellName, reshapeLifeCounter))
 	elseif phase < 3 then
-		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm")
 		self:Bar(args.spellId, 50)
 	else
-		self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
+		self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm")
 	end
 
 	if self:Me(args.destGUID) then
@@ -204,7 +204,7 @@ do
 	local last = 0
 	local function warningSpam(spellName)
 		if UnitCastingInfo("player") == spellName then
-			mod:MessageOld("explosion_casting_by_you", "blue", "Info", L["you_are_casting"], 122398)
+			mod:MessageOld("explosion_casting_by_you", "blue", "info", L["you_are_casting"], 122398)
 			mod:ScheduleTimer(warningSpam, 0.5, spellName)
 		end
 	end
@@ -226,7 +226,7 @@ do
 			self:Flash("explosion_casting_by_other", args.spellId)
 			self:TargetBar("explosion_by_other", 13, args.sourceName, explosion, args.spellId) -- cooldown
 			self:Bar("explosion_casting_by_other", 2.5, CL["cast"]:format(CL["other"]:format(args.sourceName:gsub("%-.+", "*"), explosion)), args.spellId)
-			self:TargetMessageOld("explosion_casting_by_other", args.sourceName, "red", "Alert", explosion, args.spellId, true) -- associate the message with the casting toggle option
+			self:TargetMessageOld("explosion_casting_by_other", args.sourceName, "red", "alert", explosion, args.spellId, true) -- associate the message with the casting toggle option
 		end
 	end
 end
@@ -265,7 +265,7 @@ function mod:MonstrosityInc(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 75 then -- phase starts at 70
 		self:UnregisterUnitEvent(event, unitId)
-		self:MessageOld("stages", "green", "Long", CL["soon"]:format(self:SpellName(-6254)), false) -- Monstrosity
+		self:MessageOld("stages", "green", "long", CL["soon"]:format(self:SpellName(-6254)), false) -- Monstrosity
 	end
 end
 
@@ -302,7 +302,7 @@ end
 do
 	local function warningSpam(spellName)
 		if UnitCastingInfo("boss1") == spellName or UnitCastingInfo("boss2") == spellName then
-			mod:MessageOld("explosion_casting_by_other", "red", "Alert", L["monstrosity_is_casting"], 122398)
+			mod:MessageOld("explosion_casting_by_other", "red", "alert", L["monstrosity_is_casting"], 122398)
 			mod:ScheduleTimer(warningSpam, 0.5, spellName)
 		end
 	end
@@ -333,11 +333,11 @@ function mod:Fling(args)
 		self:Bar(122413, 6, L["fling_message"], 68659)
 	end
 	self:CDBar(122413, 28) --Fling
-	self:TargetMessageOld(122413, args.destName, "orange", "Alarm") --Fling
+	self:TargetMessageOld(122413, args.destName, "orange", "alarm") --Fling
 end
 
 function mod:MassiveStomp(args)
-	self:MessageOld(args.spellId, "orange", "Alarm")
+	self:MessageOld(args.spellId, "orange", "alarm")
 	self:CDBar(args.spellId, 18)
 end
 
@@ -356,7 +356,7 @@ function mod:MonsterDies()
 end
 
 function mod:AmberGlobule(args)
-	self:TargetMessageOld(-6548, args.destName, "red", "Alert")
+	self:TargetMessageOld(-6548, args.destName, "red", "alert")
 	if self:Me(args.destGUID) then
 		self:Flash(-6548)
 		self:Say(-6548)

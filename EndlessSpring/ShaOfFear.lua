@@ -153,7 +153,7 @@ do
 		return false
 	end
 	local function warnHuddle(spellId)
-		mod:TargetMessageOld(spellId, huddleList, "red", "Alert")
+		mod:TargetMessageOld(spellId, huddleList, "red", "alert")
 		scheduled = nil
 	end
 	function mod:HuddleInTerrorApplied(args)
@@ -193,7 +193,7 @@ do
 	function mod:ImplacableStrike(args)
 		strikeUsed = true
 		warnNext()
-		self:MessageOld(args.spellId, "yellow", "Alarm")
+		self:MessageOld(args.spellId, "yellow", "alarm")
 	end
 	function mod:Emerge(args)
 		huddleUsed, strikeUsed, spoutUsed = nil, nil, nil
@@ -209,7 +209,7 @@ end
 
 function mod:FadingLight(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "green", "Long", L["cooldown_reset"])
+		self:MessageOld(args.spellId, "green", "long", L["cooldown_reset"])
 	end
 end
 
@@ -246,7 +246,7 @@ do
 			local t = GetTime()
 			if t-prev > 1 then
 				prev = t
-				self:MessageOld(-6109, "blue", "Long", L["throw"])
+				self:MessageOld(-6109, "blue", "long", L["throw"])
 				self:Flash(-6109)
 			end
 		end
@@ -258,7 +258,7 @@ function mod:ChampionOfTheLight(args)
 		championOnMe = true
 		self:Flash(args.spellId)
 	end
-	self:TargetMessageOld(args.spellId, args.destName, "green", "Long", L["ball"])
+	self:TargetMessageOld(args.spellId, args.destName, "green", "long", L["ball"])
 	self:CloseProximity(args.spellId)
 end
 
@@ -278,7 +278,7 @@ do
 end
 
 function mod:NakedAndAfraid(args)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Info", nil, nil, true)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "info", nil, nil, true)
 	self:Bar(args.spellId, 31)
 end
 
@@ -305,7 +305,7 @@ end
 
 function mod:WaterspoutApplied(args)
 	if self:Me(args.destGUID) then
-		self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 		self:Flash(args.spellId)
 	end
 end
@@ -319,7 +319,7 @@ do
 		if player and ((not UnitDetailedThreatSituation("boss1target", "boss1") and not mod:Tank("boss1target")) or fired > 13) then
 			-- If we've done 14 (0.7s) checks and still not passing the threat check, it's probably being cast on the tank
 			if UnitIsUnit("boss1target", "player") then
-				mod:MessageOld(119519, "orange", "Alarm", CL["you"]:format(eerieSkull))
+				mod:MessageOld(119519, "orange", "alarm", CL["you"]:format(eerieSkull))
 				mod:Say(119519, eerieSkull)
 				mod:Flash(119519)
 			end
@@ -361,7 +361,7 @@ end
 function mod:DreadThrash(args)
 	thrashCounter = 0
 	thrashNext = 5
-	self:MessageOld(-6700, "red", "Alarm")
+	self:MessageOld(-6700, "red", "alarm")
 	self:Bar(-6699, 10, CL["count"]:format(self:SpellName(131996), thrashCounter + 1)) -- Thrash
 end
 
@@ -389,7 +389,7 @@ function mod:DeathBlossom(args)
 	if not atSha then
 		self:Flash(args.spellId)
 		self:Bar(args.spellId, 2.25, CL["cast"]:format(args.spellName)) -- so it can be emphasized for countdown
-		self:MessageOld(args.spellId, "red", "Alert")
+		self:MessageOld(args.spellId, "red", "alert")
 	end
 end
 
@@ -406,7 +406,7 @@ function mod:Fearless(args)
 		local left = nextFear - GetTime()
 		self:Bar(119414, left)
 		if left > 10 then
-			self:DelayedMessage(119414, left-8, "yellow", CL["soon"]:format(self:SpellName(119414)), false, "Long")
+			self:DelayedMessage(119414, left-8, "yellow", CL["soon"]:format(self:SpellName(119414)), false, "long")
 		end
 	end
 end
@@ -419,7 +419,7 @@ function mod:BreathOfFear(args)
 	nextFear = GetTime() + 33.3
 	if atSha then -- Don't care about Sha while at a shrine and you have Fearless when you come back
 		self:Bar(args.spellId, 33.3)
-		self:DelayedMessage(args.spellId, 25, "yellow", CL["soon"]:format(args.spellName), false, "Long")
+		self:DelayedMessage(args.spellId, 25, "yellow", CL["soon"]:format(args.spellName), false, "long")
 	end
 end
 

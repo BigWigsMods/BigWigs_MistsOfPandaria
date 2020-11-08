@@ -190,7 +190,7 @@ do
 end
 
 function mod:ManifestRage(args)
-	self:MessageOld("manifest_rage", "red", "Warning", 147011, 147011)
+	self:MessageOld("manifest_rage", "red", "warning", 147011, 147011)
 end
 
 function mod:Phase3End()
@@ -205,7 +205,7 @@ function mod:Phase3End()
 end
 
 function mod:ClumpFailIronStarSpawn()
-	self:MessageOld("clump_check", "red", "Long", L.clump_check_warning, 147126)
+	self:MessageOld("clump_check", "red", "long", L.clump_check_warning, 147126)
 	self:Flash("clump_check", 147126)
 end
 
@@ -213,7 +213,7 @@ do
 	local prev = 0
 	function mod:MaliciousBlastApplied(args)
 		if self:Me(args.destGUID) then
-			self:MessageOld(args.spellId, "blue", "Alert", CL.you:format(CL.count:format(args.spellName, args.amount or 1)))
+			self:MessageOld(args.spellId, "blue", "alert", CL.you:format(CL.count:format(args.spellName, args.amount or 1)))
 			self:Bar(args.spellId, 2) -- Next tick
 		end
 
@@ -231,7 +231,7 @@ end
 
 function mod:MaliceApplied(args)
 	self:SecondaryIcon(args.spellId, args.destName)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "Alarm")
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm")
 	self:TargetBar(args.spellId, 14, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
@@ -247,7 +247,7 @@ end
 
 function mod:IronStarFixateApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
-	self:TargetMessageOld(args.spellId, args.destName, "yellow", "Warning")
+	self:TargetMessageOld(args.spellId, args.destName, "yellow", "warning")
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
 	end
@@ -270,14 +270,14 @@ end
 function mod:GrippingDespair(args)
 	local amount = args.amount or 1
 	-- force Gripping Despair text to keep it short
-	self:StackMessage(145183, args.destName, amount, "yellow", amount > 2 and not self:Me(args.destGUID) and "Warning")
+	self:StackMessage(145183, args.destName, amount, "yellow", amount > 2 and not self:Me(args.destGUID) and "warning")
 	if args.spellId == 145195 then -- Empowered (Explosive Despair)
 		self:TargetBar(-8325, 10, args.destName)
 	end
 end
 
 function mod:MindControl(args)
-	self:MessageOld(145065, "orange", "Alert", 67229, 145065) -- 67229 = "Mind Control"
+	self:MessageOld(145065, "orange", "alert", 67229, 145065) -- 67229 = "Mind Control"
 	if phase == 3 then
 		self:Bar(145065, (mcCounter == 1) and 35 or 42, 67229, 145065) -- 67229 = "Mind Control"
 	elseif mcCounter < 3 then -- Only enough time for 3 in phase 2 between each intermission
@@ -358,7 +358,7 @@ do
 	end
 	function mod:WhirlingCorruption(args)
 		self:Flash(144985)
-		self:MessageOld(144985, "red", "Long", CL.count:format(args.spellName, whirlingCounter))
+		self:MessageOld(144985, "red", "long", CL.count:format(args.spellName, whirlingCounter))
 		whirlingCounter = whirlingCounter + 1
 		if phase == 2 then
 			if whirlingCounter < 4 then -- Only enough time for 3 in phase 2 between each intermission
@@ -395,7 +395,7 @@ end
 
 function mod:ChainHeal(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:MessageOld("chain_heal", "blue", "Alert", L.chain_heal_message, args.spellId)
+		self:MessageOld("chain_heal", "blue", "alert", L.chain_heal_message, args.spellId)
 	end
 end
 
@@ -403,7 +403,7 @@ do
 	local farseerTimers = { 50, 50, 40 } -- XXX need more data
 	-- cat Transcriptor.lua | sed "s/\t//g" | cut -d ' ' -f 2-300 | grep -E "(YELL].*Farseers)|(DED.*144489)|(DED.*144866)"
 	function mod:Farseer()
-		self:MessageOld(-8294, "orange", self:Damager() and "Alert", nil, 144584)
+		self:MessageOld(-8294, "orange", self:Damager() and "alert", nil, 144584)
 		self:Bar(-8294, farseerTimers[farseerCounter] or 40, nil, 144584) -- chain lightning icon cuz that is some shaman spell
 		farseerCounter = farseerCounter + 1
 	end
@@ -448,7 +448,7 @@ do
 		end
 		-- this is so people know they'll take extra damage
 		if #hopeList > 0 then
-			mod:TargetMessageOld(144945, hopeList, "yellow", "Warning", CL.count:format(mod:SpellName(29125), #hopeList), 149004) -- maybe add it's own option key? 29125 spell called "Hopeless"
+			mod:TargetMessageOld(144945, hopeList, "yellow", "warning", CL.count:format(mod:SpellName(29125), #hopeList), 149004) -- maybe add it's own option key? 29125 spell called "Hopeless"
 		else
 			mod:MessageOld(144945, "yellow", nil, CL.count:format(mod:SpellName(29125), 0), 149004)
 		end
@@ -461,7 +461,7 @@ do
 	end
 	function mod:YShaarjsProtection(args)
 		if self:MobId(args.destGUID) == 71865 then
-			self:MessageOld(args.spellId, "green", "Long", CL.over:format(args.spellName))
+			self:MessageOld(args.spellId, "green", "long", CL.over:format(args.spellName))
 			if not self:LFR() then
 				hopeTimer = self:ScheduleTimer(announceHopeless, 6)
 			end
@@ -516,7 +516,7 @@ do
 				-- warn for empowered abilities
 				local power = UnitPower("boss1")
 				while power >= warnPower do -- can he hit 100 energy before p3? that would be some shenanigans
-					self:DelayedMessage("stages", 2, "yellow", L.empowered_message:format(abilities[warnPower]), false, "Info")
+					self:DelayedMessage("stages", 2, "yellow", L.empowered_message:format(abilities[warnPower]), false, "info")
 					warnPower = warnPower + 25
 				end
 			else -- first time, don't start timers yet
@@ -556,7 +556,7 @@ function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 	if self:MobId(UnitGUID(unitId)) ~= 71865 then return end
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 16 then -- 10%
-		self:MessageOld("stages", "cyan", "Info", CL.soon:format(CL.phase:format(phase+1)), false)
+		self:MessageOld("stages", "cyan", "info", CL.soon:format(CL.phase:format(phase+1)), false)
 		self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")
 	end
 end
@@ -569,7 +569,7 @@ do
 			self:Flash(144758)
 			self:Say(144758)
 		end
-		self:TargetMessageOld(144758, name, "orange", "Alarm")
+		self:TargetMessageOld(144758, name, "orange", "alarm")
 	end
 
 	function mod:Desecrate(args)

@@ -121,7 +121,7 @@ end
 
 function mod:WhirlingBladeDamage(args)
 	if not self:LFR() and self:Me(args.destGUID) then
-		self:MessageOld(121896, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(121896, "blue", "info", CL["you"]:format(args.spellName))
 		self:Flash(121896) -- we flash on cast too, but some more can't hurt
 	end
 end
@@ -137,7 +137,7 @@ do
 			if not korthikStrikeWarned[player] then
 				korthikStrikeWarned[player] = true
 				self:ScheduleTimer(allowKorthikStrike, 10, player)
-				self:TargetMessageOld(122409, player, "orange", "Alarm")
+				self:TargetMessageOld(122409, player, "orange", "alarm")
 				self:CDBar(122409, firstKorthikStrikeDone and 50 or 30) -- 2nd one ~30, then cooldown 50 sec
 				firstKorthikStrikeDone = true
 			end
@@ -154,7 +154,7 @@ end
 do
 	local prisonList, scheduled = mod:NewTargetList(), nil
 	local function warnPrison(spellId)
-		mod:TargetMessageOld(spellId, prisonList, "red", "Info")
+		mod:TargetMessageOld(spellId, prisonList, "red", "info")
 		scheduled = nil
 	end
 	function mod:AmberPrison(args)
@@ -188,7 +188,7 @@ function mod:AmberPrisonRemoved(args)
 end
 
 function mod:RainOfBlades(args)
-	self:MessageOld(args.spellId, "red", "Alert")
+	self:MessageOld(args.spellId, "red", "alert")
 	self:CDBar(args.spellId, phase == 2 and 48 or 60)
 end
 
@@ -199,7 +199,7 @@ do
 		if t-prev > 2 then
 			prev = t
 			if self:Dispeller("magic", true, args.spellId) then
-				self:MessageOld(args.spellId, "yellow", "Alert")
+				self:MessageOld(args.spellId, "yellow", "alert")
 			end
 		end
 	end
@@ -207,13 +207,13 @@ end
 
 function mod:Mending(args)
 	if UnitGUID("focus") == args.sourceGUID then
-		self:MessageOld("mending", "blue", "Alert", L["mending_warning"], args.spellId)
+		self:MessageOld("mending", "blue", "alert", L["mending_warning"], args.spellId)
 		self:Bar("mending", 37, L["mending_bar"], args.spellId)
 	end
 end
 
 function mod:WhirlingBlade(args)
-	self:MessageOld(args.spellId, "orange", "Alarm")
+	self:MessageOld(args.spellId, "orange", "alarm")
 	self:CDBar(args.spellId, phase == 2 and 30 or 45)
 	if not self:LFR() then
 		self:Flash(args.spellId)
@@ -225,7 +225,7 @@ function mod:WindBomb(args)
 		self:Flash(131830)
 		self:Say(131830)
 	end
-	self:TargetMessageOld(131830, args.sourceName, "orange", "Alarm")
+	self:TargetMessageOld(131830, args.sourceName, "orange", "alarm")
 end
 
 function mod:Recklessness(args)
@@ -238,7 +238,7 @@ function mod:RecklessnessHeroic(args)
 end
 
 function mod:RecklessnessHeroicRemoved(args)
-	self:MessageOld("recklessness", "yellow", "Info", CL["over"]:format(args.spellName), args.spellId)
+	self:MessageOld("recklessness", "yellow", "info", CL["over"]:format(args.spellName), args.spellId)
 end
 
 do
@@ -248,7 +248,7 @@ do
 		local t = GetTime()
 		if t-prev > 2 then
 			prev = t
-			self:MessageOld(args.spellId, "blue", "Info", CL["underyou"]:format(args.spellName))
+			self:MessageOld(args.spellId, "blue", "info", CL["underyou"]:format(args.spellName))
 			self:Flash(args.spellId)
 		end
 	end
@@ -258,7 +258,7 @@ function mod:Resin(args)
 	if self:Me(args.destGUID) then
 		self:Say(args.spellId)
 		self:Flash(args.spellId)
-		self:MessageOld(args.spellId, "blue", "Info", CL["you"]:format(args.spellName))
+		self:MessageOld(args.spellId, "blue", "info", CL["you"]:format(args.spellName))
 	end
 end
 
@@ -271,7 +271,7 @@ end
 function mod:ImpalingSpearRemoved(args)
 	if self:Me(args.sourceGUID) then
 		self:StopBar(args.spellName)
-		self:MessageOld(args.spellId, "blue", "Info", L["spear_removed"])
+		self:MessageOld(args.spellId, "blue", "info", L["spear_removed"])
 		self:Flash(args.spellId)
 	end
 end
@@ -284,7 +284,7 @@ function mod:PhaseChange(event, unitId)
 			phase = 1
 		elseif hp < 75.1 and phase ~= 2 then
 			phase = 2
-			self:MessageOld("stages", "green", "Info", "75% - "..CL["phase"]:format(2), 131830)
+			self:MessageOld("stages", "green", "info", "75% - "..CL["phase"]:format(2), 131830)
 			self:CDBar(121896, 30) -- Whirling Blade (reset cd)
 			self:StopBar(122406) -- Rain of Blades, first after p2 seems random
 			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4")
