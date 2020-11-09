@@ -9,4 +9,4 @@ A collection of BigWigs modules from the **Mists of Pandaria** era, including:
 * Pandaria World Bosses: Sha of Anger, Salyis's Warband, Nalak, Oondasta, Ordos
 
 ## Download
-https://mods.curse.com/addons/wow/bigwigs_mistsofpandaria
+<https://www.curseforge.com/wow/addons/bigwigs_mistsofpandaria>
