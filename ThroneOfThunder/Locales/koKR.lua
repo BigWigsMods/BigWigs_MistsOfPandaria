@@ -4,8 +4,6 @@ if L then
 	L.storm_duration = "번개 폭풍 지속시간"
 	L.storm_duration_desc = "번개 폭풍 시전 지속시간을 분리된 바로 경고합니다."
 	L.storm_short = "폭풍"
-
-	L.in_water = "당신은 물안에 있습니다!"
 end
 
 L = BigWigs:NewBossLocale("Horridon", "koKR")

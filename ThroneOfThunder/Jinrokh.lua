@@ -27,8 +27,6 @@ if L then
 	L.storm_duration_desc = "A separate bar warning for the duration of the Lightning Storm cast."
 	L.storm_duration_icon = 137313
 	L.storm_short = "Storm"
-
-	L.in_water = "You are in water!"
 end
 L = mod:GetLocale()
 
@@ -40,7 +38,7 @@ function mod:GetOptions()
 	return {
 		{138732, "PROXIMITY"},
 		137313, "storm_duration",
-		{137162, "TANK"}, {138375, "TANK", "FLASH"}, {138349, "TANK"},
+		{137162, "TANK"}, {138349, "TANK"},
 		{137175, "PROXIMITY", "ICON"}, {139467, "FLASH"}, {-7741, "PROXIMITY", "ICON", "SAY"}, {138006, "FLASH"}, "berserk",
 	}, {
 		[138732] = "heroic",
@@ -62,7 +60,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "FocusedLightningRemoved", 137422)
 	self:Log("SPELL_CAST_START", "FocusedLightning", 137399) -- SUCCESS has destName, but this is so much earlier, and "boss1target" should be reliable for it
 	self:Log("SPELL_CAST_SUCCESS", "StaticBurst", 137162)
-	self:Log("SPELL_DAMAGE", "StaticWoundConduction", 138375) -- XXX doesn't exist anymore
 	self:Log("SPELL_AURA_APPLIED", "ElectrifiedWaters", 138006)
 	self:Log("SPELL_MISSED", "ElectrifiedWaters", 138006)
 	self:Log("SPELL_PERIODIC_DAMAGE", "ElectrifiedWaters", 138006)
@@ -204,19 +201,6 @@ end
 function mod:StaticBurst(args)
 	self:MessageOld(args.spellId, "yellow")
 	self:CDBar(args.spellId, 23)
-end
-
-do
-	local prev = 0
-	function mod:StaticWoundConduction(args)
-		if not self:Me(args.sourceGUID) then return end
-		local t = GetTime()
-		if t-prev > 2 then
-			prev = t
-			self:MessageOld(args.spellId, "blue", "info", L["in_water"])
-			self:Flash(args.spellId)
-		end
-	end
 end
 
 function mod:StaticWound(args)

@@ -4,8 +4,6 @@ if L then
 	L.storm_duration = "Durée de Tempête de foudre"
 	L.storm_duration_desc = "Une barre d'alerte à part pour la durée d'incantation de Tempête de foudre."
 	L.storm_short = "Tempête"
-
-	L.in_water = "Vous êtes dans l'eau !"
 end
 
 L = BigWigs:NewBossLocale("Horridon", "frFR")

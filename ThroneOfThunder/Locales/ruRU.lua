@@ -4,8 +4,6 @@ if L then
 	L.storm_duration = "Длительность Грозы"
 	L.storm_duration_desc = "Отдельная полоса предупреждения для длительности чтения Грозы."
 	L.storm_short = "Гроза"
-
-	L.in_water = "Вы в воде!"
 end
 
 L = BigWigs:NewBossLocale("Horridon", "ruRU")

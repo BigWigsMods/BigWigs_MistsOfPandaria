@@ -4,8 +4,6 @@ if L then
 	L.storm_duration = "闪电风暴持续"
 	L.storm_duration_desc = "当闪电风暴施放时显示分离持续警报条。"
 	L.storm_short = "闪电风暴"
-
-	L.in_water = ">你< 水中！"
 end
 
 L = BigWigs:NewBossLocale("Horridon", "zhCN")

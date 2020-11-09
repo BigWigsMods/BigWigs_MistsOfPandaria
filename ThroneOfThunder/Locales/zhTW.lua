@@ -4,8 +4,6 @@ if L then
 	L.storm_duration = "閃電風暴持續時間"
 	L.storm_duration_desc = "為閃電風暴的持續時間顯示單獨的計時條。"
 	L.storm_short = "閃電風暴"
-
-	L.in_water = ">你<在水中！"
 end
 
 L = BigWigs:NewBossLocale("Horridon", "zhTW")
