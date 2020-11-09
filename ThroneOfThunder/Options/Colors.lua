@@ -6,7 +6,6 @@ BigWigs:AddColors("Jin'rokh the Breaker", {
 	[137313] = "red",
 	[138006] = "blue",
 	[138349] = {"blue","orange"},
-	[138375] = "blue",
 	[138732] = {"green","red"},
 	[139467] = "blue",
 })

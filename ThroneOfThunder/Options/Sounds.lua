@@ -5,7 +5,6 @@ BigWigs:AddSounds("Jin'rokh the Breaker", {
 	[137313] = "long",
 	[138006] = "info",
 	[138349] = "alert",
-	[138375] = "info",
 	[138732] = {"info","long"},
 	[139467] = "info",
 })
