@@ -167,7 +167,7 @@ do
 				if self:Dispeller("magic", true) then
 					local name = self:UnitBuff("boss1", nil, "Magic") -- well any magic actually not just HoTs
 					if name then
-						self:MessageOld("phases", "yellow", "alert", L.buff_boss:format(name), false)
+						self:MessageOld("phases", "yellow", "alert", CL.buff_boss:format(name), false)
 					end
 				end
 			elseif spellId == 122953 then -- Summon Unstable Sha
