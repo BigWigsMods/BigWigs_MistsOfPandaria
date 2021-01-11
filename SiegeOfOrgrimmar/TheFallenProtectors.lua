@@ -517,11 +517,11 @@ function mod:UNIT_HEALTH_FREQUENT(event, unitId)
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 70 and not intermission[mobId] then -- 66%
 			local boss = UnitName(unitId)
-			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
+			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(self:SpellName(L.intermission), boss)), false)
 			intermission[mobId] = 1
 		elseif hp < 37 and intermission[mobId] == 1 then -- 33%
 			local boss = UnitName(unitId)
-			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(L.intermission, boss)), false)
+			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(self:SpellName(L.intermission), boss)), false)
 			intermission[mobId] = 2
 			if intermission[71475] == 2 and intermission[71479] == 2 and intermission[71480] == 2 then
 				self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")
