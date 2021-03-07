@@ -53,7 +53,7 @@ end
 function mod:OnEngage()
 	self:CDBar("ability", 10, L["ability"], L.ability_icon)
 	openedForMe = nil
-	wipe(stormcloudTargets)
+	stormcloudTargets = {}
 end
 
 --------------------------------------------------------------------------------

@@ -131,7 +131,7 @@ function mod:BlessedLoaSpirit(args)
 	local lowest, lowestHP = "", 1
 	for i=1,5 do
 		local boss = ("boss%d"):format(i)
-		local mobId = self:MobId(UnitGUID(boss))
+		local mobId = self:MobId(self:UnitGUID(boss))
 		if mobId == 69134 or mobId == 69078 or mobId == 69131 then -- Kazra'jin, Sandcrawler, Frost King
 			local hp = UnitHealth(boss) / UnitHealthMax(boss)
 			if hp > 0 and hp < lowestHP then
@@ -140,7 +140,7 @@ function mod:BlessedLoaSpirit(args)
 			end
 		end
 	end
-	self:MessageOld(args.spellId, "yellow", nil, CL["other"]:format(fixated, UnitName(lowest) or "???"))
+	self:MessageOld(args.spellId, "yellow", nil, CL["other"]:format(fixated, self:UnitName(lowest) or "???"))
 	self:Bar(args.spellId, 20, CL["other"]:format(fixated, args.spellName))
 end
 
@@ -316,7 +316,7 @@ do
 		local unitId
 		for i=1,5 do
 			local boss = ("boss%d"):format(i)
-			if UnitGUID(boss) == guid then
+			if mod:UnitGUID(boss) == guid then
 				unitId = boss
 				break
 			end
@@ -358,7 +358,7 @@ do
 		elseif power > 99 and prevPower == 90 then
 			prevPower = 100
 			self:MessageOld(136442, "red", "alert", L["hp_to_go_fullpower"]:format(percHPToGo))
-			self:ScheduleTimer(warnFullPower, 3, UnitGUID(unitId), percHPToGo)
+			self:ScheduleTimer(warnFullPower, 3, self:UnitGUID(unitId), percHPToGo)
 		end
 	end
 
@@ -369,12 +369,12 @@ do
 		local lingeringCount = 0
 		for i=1,5 do
 			local boss = ("boss%d"):format(i)
-			if UnitGUID(boss) == args.destGUID then
+			if self:UnitGUID(boss) == args.destGUID then
 				local _, stack = self:UnitBuff(boss, self:SpellName(136467), 136467) -- Lingering Presence
 				lingeringCount = stack or 0
 				posessHPStart = UnitHealth(boss)
 				if self.db.profile.custom_on_markpossessed then
-					SetRaidTarget(boss, 8)
+					self:CustomIcon(false, boss, 8)
 				end
 				break
 			end
@@ -401,8 +401,8 @@ do
 		if self.db.profile.custom_on_markpossessed then
 			for i=1,5 do
 				local boss = ("boss%d"):format(i)
-				if UnitGUID(boss) == args.destGUID then
-					SetRaidTarget(boss, 0) -- clear the icon because posses have travel time, so people know when something is no longer possessed
+				if self:UnitGUID(boss) == args.destGUID then
+					self:CustomIcon(false, boss) -- clear the icon because posses have travel time, so people know when something is no longer possessed
 				end
 			end
 		end

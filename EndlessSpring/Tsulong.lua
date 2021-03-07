@@ -93,7 +93,7 @@ end
 
 function mod:EngageCheck()
 	self:CheckBossStatus()
-	if UnitExists("boss2") and self:MobId(UnitGUID("boss2")) == 62969 then
+	if UnitExists("boss2") and self:MobId(self:UnitGUID("boss2")) == 62969 then
 		bigAddCounter = bigAddCounter + 1
 		if bigAddCounter < 3 then
 			self:CDBar("embodied_terror", 40, CL["count"]:format(L["embodied_terror"], bigAddCounter+1), L.embodied_terror_icon)
@@ -180,7 +180,7 @@ do
 			elseif spellId == 122775 then -- Nightmares
 				self:Bar(122777, 15)
 				if self:Difficulty() == 3 or self:Difficulty() == 5 then -- Only 1 nightmare spawns in 10 man modes
-					self:GetBossTarget(printTarget, 0.7, UnitGUID(unitId))
+					self:GetBossTarget(printTarget, 0.7, self:UnitGUID(unitId))
 				else
 					self:MessageOld(122777, "yellow")
 				end

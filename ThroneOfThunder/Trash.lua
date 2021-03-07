@@ -57,7 +57,7 @@ end
 
 function mod:OnBossEnable()
 	scheduled = nil
-	wipe(debuffTargets)
+	debuffTargets = mod:NewTargetList()
 
 	self:Log("SPELL_AURA_APPLIED", "Storms", 139322, 139900) -- Storm Energy, Stormcloud
 	self:Log("SPELL_AURA_REMOVED", "StormsRemoved", 139322, 139900)
@@ -106,7 +106,7 @@ function mod:HorrifyingRoar(args)
 end
 
 function mod:ConductiveShield(args)
-	if UnitGUID("target") == args.destGUID then
+	if self:UnitGUID("target") == args.destGUID then
 		self:Flash(args.spellId)
 		self:PlaySound(args.spellId, "info")
 	end

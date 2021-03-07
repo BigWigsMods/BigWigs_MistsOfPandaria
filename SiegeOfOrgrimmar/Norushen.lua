@@ -72,7 +72,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "SelfDoubt", 146124)
 	self:Log("SPELL_CAST_SUCCESS", "UnleashCorruption", 145769) -- Spawns big adds in phase 2
 	self:Log("SPELL_AURA_APPLIED", "Phase2", 146179) -- Phase 2, "Frayed"
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 
 	self:RegisterMessage("BigWigs_BossComm")
 	self:RegisterMessage("DBM_AddonMessage") -- Catch DBM users killing big adds
@@ -198,7 +198,7 @@ do
 					self:Bar(145226, 60)
 				elseif msg == "Phase2" then
 					self:MessageOld("stages", "cyan", "warning", CL.phase:format(2), 146179)
-					self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+					self:UnregisterUnitEvent("UNIT_HEALTH", "boss1")
 				elseif msg == "Phase2BigAddSpawn" then
 					bigAddSpawnCounter = bigAddSpawnCounter + 1
 					if self:LFR() then
@@ -234,9 +234,9 @@ function mod:Fusion(args)
 	self:MessageOld(args.spellId, "yellow", nil, CL.count:format(args.spellName, amount))
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
+function mod:UNIT_HEALTH(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
-	if hp < 56 and self:MobId(UnitGUID(unitId)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
+	if hp < 56 and self:MobId(self:UnitGUID(unitId)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
 		self:MessageOld("stages", "cyan", "info", CL.soon:format(CL.phase:format(2)), 146179)
 		self:UnregisterUnitEvent(event, "boss1")
 	end

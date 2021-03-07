@@ -189,7 +189,7 @@ end
 function mod:LastPhase(_, unitId, _, spellId)
 	if spellId == 50630 then -- Eject All Passengers
 		self:UnregisterEvent("CHAT_MSG_MONSTER_YELL")
-		self:MessageOld("stages", "cyan", "warning", CL.incoming:format(UnitName(unitId)), "ability_mount_drake_proto")
+		self:MessageOld("stages", "cyan", "warning", CL.incoming:format(self:UnitName(unitId)), "ability_mount_drake_proto")
 		self:StopBar(L.adds)
 		self:StopBar(L.drakes)
 		self:CancelDelayedMessage(CL.incoming:format(L.drakes))
@@ -305,10 +305,10 @@ function mod:Adds(_, _, unit, _, _, target)
 end
 
 function mod:ShamanMarker(_, unit)
-	local guid = UnitGUID(unit)
+	local guid = self:UnitGUID(unit)
 	if guid and guid ~= prevMarkedMob and self:MobId(guid) == 72958 then
 		prevMarkedMob = guid
-		SetRaidTarget(unit, 8)
+		self:CustomIcon(false, unit, 8)
 	end
 end
 

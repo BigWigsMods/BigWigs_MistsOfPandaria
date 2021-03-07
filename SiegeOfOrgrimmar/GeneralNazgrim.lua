@@ -139,14 +139,14 @@ end
 
 function mod:OnEngage()
 	self:Berserk(600)
-	wipe(marksUsed)
+	marksUsed = {}
 	self:CDBar(143494, 10) -- Sundering Blow
 	self:Bar(143638, 15.5) -- Bonecracker
 	addWaveCounter = 1
 	self:Bar(-7920, 46, CL.count:format(CL.adds, addWaveCounter), "achievement_guildperk_everybodysfriend") -- adds
 	if not self:LFR() then
 		self:OpenProximity("proximity", 10) -- Heroic Shockwave , Magistrike is 8 yard
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+		self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	end
 end
 
@@ -173,7 +173,7 @@ end
 
 -- Adds
 function mod:ArcaneShock(args)
-	if UnitGUID("focus") == args.sourceGUID then
+	if self:UnitGUID("focus") == args.sourceGUID then
 		self:MessageOld("arcane_shock", "blue", "alert", L.arcane_shock_message, args.spellId)
 	end
 end
@@ -194,7 +194,7 @@ function mod:HealingTideTotem(args)
 end
 
 function mod:ChainHeal(args)
-	if UnitGUID("focus") == args.sourceGUID then
+	if self:UnitGUID("focus") == args.sourceGUID then
 		self:MessageOld("chain_heal", "blue", "alert", L.chain_heal_message, args.spellId)
 	end
 end
@@ -220,7 +220,7 @@ function mod:Fixate(args)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unit)
+function mod:UNIT_HEALTH(event, unit)
 	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
 	if hp < 17 then
 		self:MessageOld(-7920, "cyan", "info", CL.soon:format(L.extra_adds))
@@ -274,7 +274,7 @@ do
 	end
 	function mod:HeroicShockwave(_, unit, _, spellId)
 		if spellId == 143500 then -- Heroic Shockwave
-			self:GetBossTarget(warnShockwave, 0.2, UnitGUID(unit))
+			self:GetBossTarget(warnShockwave, 0.2, self:UnitGUID(unit))
 		end
 	end
 end
@@ -305,7 +305,7 @@ do
 			for i = 1, 7 do
 				if marksUsed[i] == args.destName then
 					marksUsed[i] = false
-					SetRaidTarget(args.destName, 0)
+					self:CustomIcon(false, args.destName, 0)
 				end
 			end
 		end
@@ -314,7 +314,7 @@ do
 	local function markBonecrackers(destName)
 		for i = 1, 7 do
 			if not marksUsed[i] then
-				SetRaidTarget(destName, i)
+				mod:CustomIcon(false, destName, i)
 				marksUsed[i] = destName
 				return
 			end

@@ -95,7 +95,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	self:Bar("balls", 11, L["balls"], 138321)
 	self:Berserk(600) -- XXX assumed
 	animaCounter = 1
@@ -287,7 +287,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
+function mod:UNIT_HEALTH(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 43 then
 		self:MessageOld("stages", "cyan", "info", CL["soon"]:format(CL["phase"]:format(2)), false)

@@ -72,7 +72,7 @@ function mod:OnEngage(diff)
 	self:Berserk(self:Heroic() and 420 or 720)
 	self:Bar(122735, 11) -- Furious Swipe
 	if self:Heroic() then
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PrePhase2", "boss1", "boss2", "boss3", "boss4", "boss5")
+		self:RegisterUnitEvent("UNIT_HEALTH", "PrePhase2", "boss1", "boss2", "boss3", "boss4", "boss5")
 		self:Bar(122774, 28, CL["count"]:format(self:SpellName(122774), 1), 122082) -- Crush
 	end
 end
@@ -165,7 +165,7 @@ function mod:FuriousSwipe(args)
 end
 
 function mod:PrePhase2(event, unitId)
-	local id = self:MobId(UnitGUID(unitId))
+	local id = self:MobId(self:UnitGUID(unitId))
 	if id == 62164 or id == 63191 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 38 then -- phase starts at 33

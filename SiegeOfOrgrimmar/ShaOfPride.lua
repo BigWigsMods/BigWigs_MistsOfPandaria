@@ -82,8 +82,8 @@ end
 
 function mod:OnEngage()
 	swellingPrideCounter, titanCounter = 1, 1
-	wipe(titans)
-	wipe(auraOfPrideGroup)
+	titans = {}
+	auraOfPrideGroup = {}
 	auraOfPrideOnMe = nil
 	self:Bar(146595, 7) -- Titan Gift
 	self:Bar(144400, 77, CL.count:format(self:SpellName(144400), swellingPrideCounter)) -- Swelling Pride
@@ -91,7 +91,7 @@ function mod:OnEngage()
 	self:DelayedMessage(-8262, 55, "orange", CL.spawning:format(CL.big_add), 144379)
 	self:Bar(144800, 25, CL.small_adds)
 	self:Bar(144563, 52.5) -- Imprison
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	if self:Mythic() then
 		self:Bar(145215, 37.4) -- Banishment
 		wrChecker = nil
@@ -133,13 +133,13 @@ function mod:WeakenedResolveBegin(args)
 end
 
 do
-	local mobTbl, counter, UnitGUID = {}, 8, UnitGUID
+	local mobTbl, counter = {}, 8
 	local function CheckUnit(event, firedUnit)
 		local unit = firedUnit and firedUnit.."target" or "mouseover"
-		local guid = UnitGUID(unit)
+		local guid = mod:UnitGUID(unit)
 		if guid and not mobTbl[guid] and mod:MobId(guid) == 72569 then
 			mobTbl[guid] = true
-			SetRaidTarget(unit, counter)
+			mod:CustomIcon(false, unit, counter)
 			counter = counter - 1
 			if counter == 6 then
 				mod:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
@@ -159,7 +159,7 @@ do
 			scheduled = self:ScheduleTimer(warnBanishment, 0.2, args.spellId)
 
 			if self.db.profile.custom_off_fragment_mark then
-				wipe(mobTbl)
+				mobTbl = {}
 				counter = 8
 				self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", CheckUnit)
 				self:RegisterEvent("UNIT_TARGET", CheckUnit)
@@ -195,7 +195,7 @@ function mod:Unleashed() -- Final Gift
 	end
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
+function mod:UNIT_HEALTH(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 34 then -- 30%
 		self:MessageOld(144832, "cyan", "info", CL.soon:format(self:SpellName(144832))) -- Unleashed
@@ -244,7 +244,7 @@ end
 
 function mod:AuraOfPrideRemoved(args)
 	self:CloseProximity(args.spellId)
-	wipe(auraOfPrideGroup)
+	auraOfPrideGroup = {}
 	auraOfPrideOnMe = nil
 end
 
@@ -319,14 +319,14 @@ do
 			mod:OpenProximity(146595, 8, titans, true)
 		end
 		titanCounter = 1
-		wipe(titans)
+		titans = {}
 	end
 	function mod:TitanGiftRemoved(args)
 		if self:Me(args.destGUID) then
 			self:CloseProximity(146595)
 		end
 		if self.db.profile.custom_off_titan_mark then
-			SetRaidTarget(args.destName, 0)
+			self:CustomIcon(false, args.destName)
 		end
 	end
 	function mod:TitanGiftApplied(args)
@@ -347,9 +347,9 @@ do
 			if prideExpires then
 				local remaining = prideExpires-GetTime()
 				self:TargetBar(146595, remaining, args.destName, L.titan_pride)
-				self:ScheduleTimer(SetRaidTarget, remaining, args.destName, titanCounter)
+				self:ScheduleTimer("CustomIcon", remaining, false, args.destName, titanCounter)
 			else
-				SetRaidTarget(args.destName, titanCounter)
+				self:CustomIcon(false, args.destName, titanCounter)
 			end
 			titanCounter = titanCounter + 1
 		end

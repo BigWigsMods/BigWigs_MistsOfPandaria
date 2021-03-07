@@ -75,9 +75,9 @@ function mod:OnEngage()
 	self:Bar(-6346, 30, CL["count"]:format(self:SpellName(122994), 1)) -- Unseen Strike
 	self:Bar(123474, 15, L["assault_message"])
 	self:OpenProximity(123175, 8)
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	self:Berserk(self:LFR() and 600 or 490)
-	wipe(usedMarks)
+	usedMarks = {}
 	phase = 1
 	strikeCounter = 1
 
@@ -104,7 +104,7 @@ do
 		local mark = GetAvailableMark()
 		if not mark then return end
 
-		SetRaidTarget(args.destName, mark)
+		self:CustomIcon(false, args.destName, mark)
 		usedMarks[mark] = args.destName
 	end
 	function mod:WindStepRemoved(args)
@@ -112,7 +112,7 @@ do
 		for i=1, 6 do
 			if usedMarks[i] == args.destName then
 				usedMarks[i] = nil
-				SetRaidTarget(args.destName, 0)
+				self:CustomIcon(false, args.destName)
 			end
 		end
 	end
@@ -193,7 +193,7 @@ do
 
 	local casts = {}
 	function mod:InstructorUnseenStrike(_, unit, spellCastGUID, spellId)
-		if spellId == 122949 and not casts[spellCastGUID] and self:MobId(UnitGUID(unit)) == 64340 then
+		if spellId == 122949 and not casts[spellCastGUID] and self:MobId(self:UnitGUID(unit)) == 64340 then
 			self:Sync("Strike", spellCastGUID) -- Instructor Maltik
 		end
 	end
@@ -217,7 +217,7 @@ function mod:AssaultCast(args)
 	self:CDBar(args.spellId, 20.4, L["assault_message"])
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
+function mod:UNIT_HEALTH(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 25 and phase == 1 then -- phase starts at 20
 		self:MessageOld(-6350, "green", "long", CL["soon"]:format(CL["phase"]:format(2)))

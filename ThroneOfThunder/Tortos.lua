@@ -97,8 +97,8 @@ function mod:OnEngage()
 	if self.db.profile.custom_off_turtlemarker then
 		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	end
-	wipe(markableMobs)
-	wipe(marksUsed)
+	markableMobs = {}
+	marksUsed = {}
 	markTimer = nil
 end
 
@@ -138,7 +138,7 @@ function mod:CrystalShellRemoved(args)
 end
 
 function mod:SnappingBite(args)
-	if self:Me(UnitGUID("boss1target")) then
+	if self:Me(self:UnitGUID("boss1target")) then
 		self:MessageOld(args.spellId, "yellow", self:Heroic() and "warning")
 	end
 	self:CDBar(args.spellId, 7)
@@ -168,15 +168,13 @@ function mod:GrowingFury(args)
 end
 
 do
-	local kicked, coloredName = {}, mod:NewTargetList()
+	local kicked = {}
 	function mod:KickShell(args)
 		if kicked[args.destGUID] then return end -- prevent multiple people kicking the same turtle from messing up the count
 		kicked[args.destGUID] = true
 
 		kickable = kickable - 1
-		coloredName[1] = args.sourceName
-		self:MessageOld("kick", "yellow", nil, L["kicked_message"]:format(coloredName[1], kickable), args.spellId)
-		wipe(coloredName)
+		self:MessageOld("kick", "yellow", nil, L["kicked_message"]:format(self:ColorName(args.sourceName), kickable), args.spellId)
 	end
 
 	function mod:ShellBlockRemoved(args)
@@ -234,7 +232,7 @@ do
 	local function setMark(unit, guid)
 		for mark=8, 1, -1 do
 			if not marksUsed[mark] then
-				SetRaidTarget(unit, mark)
+				mod:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return
@@ -261,7 +259,7 @@ do
 	end
 
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local guid = UnitGUID("mouseover")
+		local guid = self:UnitGUID("mouseover")
 		if guid and markableMobs[guid] == true then
 			setMark("mouseover", guid)
 		end

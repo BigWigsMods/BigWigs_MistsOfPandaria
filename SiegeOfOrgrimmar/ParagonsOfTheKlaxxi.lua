@@ -15,11 +15,11 @@ mod.engageId = 1593
 -- Locals
 --
 
-local UnitDetailedThreatSituation, UnitExists, UnitIsUnit, UnitGUID = UnitDetailedThreatSituation, UnitExists, UnitIsUnit, UnitGUID
+local UnitDetailedThreatSituation, UnitExists, UnitIsUnit = UnitDetailedThreatSituation, UnitExists, UnitIsUnit
 
 local function getBossByMobId(mobId)
 	for i=1, 5 do
-		if mod:MobId(UnitGUID("boss"..i)) == mobId then
+		if mod:MobId(mod:UnitGUID("boss"..i)) == mobId then
 			return "boss"..i
 		end
 	end
@@ -213,7 +213,7 @@ function mod:OnEngage()
 	mutateCastCounter = 1
 	youAte = nil
 	parasiteCounter = 0
-	wipe(parasites)
+	parasites = {}
 	calculateCounter = 1
 	aimCounter = 1
 	dissectorRikkalDead = nil
@@ -249,25 +249,20 @@ function mod:AimRemoved(args)
 end
 
 --Rik'kal the Dissector
-do
-	local parasiteEater = mod:NewTargetList()
-	function mod:Prey(args)
-		if not parasites[args.destGUID] then
-			parasiteCounter = parasiteCounter - 1
-			parasites[args.destGUID] = true
-			if self:Me(args.sourceGUID) then
-				self:MessageOld(143339, "green", "info", L.you_ate:format(parasiteCounter))
-				youAte = true
-			else
-				parasiteEater[1] = args.sourceName
-				local raidIcon = CombatLog_String_GetIcon(args.destRaidFlags) -- Raid icon string
-				self:MessageOld(143339, "yellow", nil, L.other_ate:format(parasiteEater[1], raidIcon, parasiteCounter), 99315) -- spell called parasite, worm look like icon
-				wipe(parasiteEater)
-			end
+function mod:Prey(args)
+	if not parasites[args.destGUID] then
+		parasiteCounter = parasiteCounter - 1
+		parasites[args.destGUID] = true
+		if self:Me(args.sourceGUID) then
+			self:MessageOld(143339, "green", "info", L.you_ate:format(parasiteCounter))
+			youAte = true
+		else
+			local raidIcon = CombatLog_String_GetIcon(args.destRaidFlags) -- Raid icon string
+			self:MessageOld(143339, "yellow", nil, L.other_ate:format(self:ColorName(args.sourceName), raidIcon, parasiteCounter), 99315) -- spell called parasite, worm look like icon
 		end
-		if self.db.profile.custom_off_parasite_marks then
-			self:FreeMarkByGUID(args.destGUID)
-		end
+	end
+	if self.db.profile.custom_off_parasite_marks then
+		self:FreeMarkByGUID(args.destGUID)
 	end
 end
 
@@ -333,7 +328,7 @@ do
 	local function setMark(unit, guid)
 		for mark = 1, 7 do
 			if not marksUsed[mark] then
-				SetRaidTarget(unit, mark)
+				mod:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return
@@ -369,7 +364,7 @@ do
 		end
 	end
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local guid = UnitGUID("mouseover")
+		local guid = self:UnitGUID("mouseover")
 		if guid and markableMobs[guid] == true then
 			setMark("mouseover", guid)
 		end
@@ -559,7 +554,7 @@ local function iyyokukSelected()
 		for unit in mod:IterateGroup() do
 			local name = mod:UnitName(unit)
 			if (results.shape and results[results.shape][name]) or (results.color and results[results.color][name]) or (results.number and results[results.number][name]) then
-				SetRaidTarget(unit, count)
+				mod:CustomIcon(false, unit, count)
 				count = count + 1
 				if count > 8 then break end
 			end
@@ -626,22 +621,21 @@ do
 end
 
 do
-	local redPlayers = {}
 	local matches = {
-		[mod:SpellName(142532)] = {[142725] = "ff0000ff", [142729] = "ff9900FF", [142730] = "ff008000", proximityN = redPlayers, proximityH = redPlayers}, -- blue
+		[mod:SpellName(142532)] = {[142725] = "ff0000ff", [142729] = "ff9900FF", [142730] = "ff008000"}, -- blue
 		[mod:SpellName(142533)] = {[142726] = "ffff0000", [142729] = "ff9900FF", [142728] = "ffFF9900"}, -- red
-		[mod:SpellName(142534)] = {[142727] = "ffFFFF00", [142730] = "ff008000", [142728] = "ffFF9900", proximityN = redPlayers} -- yellow
+		[mod:SpellName(142534)] = {[142727] = "ffFFFF00", [142730] = "ff008000", [142728] = "ffFF9900"} -- yellow
 	}
 	local function handleCatalystProximity()
-		wipe(redPlayers)
-		for unit in mod:IterateGroup() do
-			if not UnitIsUnit("player", unit) and (mod:UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and mod:UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
-				redPlayers[#redPlayers+1] = mod:UnitName(unit)
-			end
-		end
 		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533), 142533) or mod:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
 		if myDebuff then
-			mod:OpenProximity(-8034, 10, matches[myDebuff][mod:Mythic() and "proximityH" or "proximityN"])
+			local redPlayers = {}
+			for unit in mod:IterateGroup() do
+				if not UnitIsUnit("player", unit) and (mod:UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and mod:UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
+					redPlayers[#redPlayers+1] = mod:UnitName(unit)
+				end
+			end
+			mod:OpenProximity(-8034, 10, redPlayers)
 		end
 		mod:MessageOld(-8034, "cyan", nil, CL.soon:format(mod:SpellName(-8034)))
 	end
@@ -779,8 +773,8 @@ function mod:ReadyToFight(args)
 		end
 		parasiteCounter = 0
 		if self.db.profile.custom_off_parasite_marks then
-			wipe(markableMobs)
-			wipe(marksUsed)
+			markableMobs = {}
+			marksUsed = {}
 			markTimer = nil
 			self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 		end

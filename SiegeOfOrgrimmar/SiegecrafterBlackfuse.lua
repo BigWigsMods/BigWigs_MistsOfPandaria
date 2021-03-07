@@ -124,8 +124,8 @@ function mod:OnEngage()
 	self:Bar(-8199, 35, nil, "INV_MISC_ARMORKIT_27") -- Shredder Engage
 	self:CDBar(-8195, 9) -- Sawblade
 	if self.db.profile.custom_off_mine_marker then
-		wipe(markableMobs)
-		wipe(marksUsed)
+		markableMobs = {}
+		marksUsed = {}
 		markTimer = nil
 	end
 end
@@ -140,7 +140,7 @@ do
 	local function setMark(unit, guid)
 		for mark = 1, 8 do
 			if not marksUsed[mark] then
-				SetRaidTarget(unit, mark)
+				mod:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return
@@ -160,10 +160,10 @@ do
 	end
 
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local guid = UnitGUID("mouseover")
+		local guid = self:UnitGUID("mouseover")
 		if guid and markableMobs[guid] == true then
 			setMark("mouseover", guid)
-		elseif guid and UnitName("mouseover") == L.overcharged_crawler_mine and not markableMobs[guid] then -- overcharged crawler mine
+		elseif guid and self:UnitName("mouseover") == L.overcharged_crawler_mine and not markableMobs[guid] then -- overcharged crawler mine
 			markableMobs[guid] = true
 			setMark("mouseover", guid)
 		end
@@ -182,8 +182,8 @@ do
 		local mobId = self:MobId(args.destGUID)
 		self:MessageOld(-8408, "red", nil, CL.other:format(args.spellName, itemNames[mobId]), false)
 		if self.db.profile.custom_off_mine_marker and mobId == 71790 then -- mines
-			wipe(markableMobs)
-			wipe(marksUsed)
+			markableMobs = {}
+			marksUsed = {}
 			markTimer = nil
 			self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 			if not markTimer then
@@ -197,16 +197,15 @@ end
 
 do
 	-- this helps people trying to figure out tactics
-	local items = {}
 	local function beltItems(count)
+		local items = {}
 		for i=1, 5 do
-			local mobId = mod:MobId(UnitGUID("boss"..i))
+			local mobId = mod:MobId(self:UnitGUID("boss"..i))
 			if mobId > 0 and mobId ~= 71504 then
 				items[#items+1] = itemNames[mobId]
 			end
 		end
 		mod:MessageOld(-8202, "cyan", nil, L.assembly_line_items:format(count, table.concat(items, " - ")), false)
-		wipe(items)
 	end
 	function mod:AssemblyLine()
 		self:ScheduleTimer(beltItems, 13, assemblyLineCounter)
@@ -255,7 +254,7 @@ function mod:RAID_BOSS_WHISPER(_, msg, sender)
 		self:Flash(-8212)
 	elseif msg:find("143266", nil, true) then -- Sawblade
 		-- this is faster than target scanning, hence why we do it
-		sawbladeTarget = UnitGUID("player")
+		sawbladeTarget = self:UnitGUID("player")
 		self:MessageOld(-8195, "green", "info", CL.you:format(self:SpellName(143266)))
 		self:PrimaryIcon(-8195, "player")
 		self:Flash(-8195)
@@ -331,7 +330,7 @@ function mod:ProtectiveFrenzy(args)
 	for i=1, 5 do
 		local boss = "boss"..i
 		if UnitExists(boss) and UnitIsDead(boss) then
-			local mobId = self:MobId(UnitGUID(boss))
+			local mobId = self:MobId(self:UnitGUID(boss))
 			self:MessageOld(-8202, "green", nil, CL.other:format(L.disabled, itemNames[mobId]), false)
 		end
 	end

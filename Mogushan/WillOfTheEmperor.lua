@@ -206,7 +206,7 @@ do
 			comboCounter[unitId] = comboCounter[unitId] + 1
 
 			if UnitIsUnit("target", unitId) then
-				local boss = UnitName(unitId)
+				local boss = self:UnitName(unitId)
 				self:MessageOld("arc", "orange", nil, ("%s: %s (%d)"):format(boss, self:SpellName(spellId), comboCounter[unitId]), arcs[spellId])
 			end
 		elseif spellId == 118365 then -- Energize
@@ -216,7 +216,7 @@ do
 				comboCounter[unitId] = 0
 
 				if UnitIsUnit("target", unitId) or self:Healer() then
-					local boss = UnitName(unitId)
+					local boss = self:UnitName(unitId)
 					self:Bar("combo", 20, CL["other"]:format(boss, L["combo"]), spellId)
 					self:DelayedMessage("combo", 17, "blue", L["combo_message"]:format(boss), L.arc_icon, "long")
 				end

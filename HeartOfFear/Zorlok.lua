@@ -71,7 +71,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	forceCount, platform, danceTracker = 0, 0, true
 	self:Berserk(self:Heroic() and 660 or 600)
 end
@@ -126,7 +126,7 @@ function mod:ForceAndVerse(args)
 	self:Flash("force", args.spellId)
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
+function mod:UNIT_HEALTH(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if platform == 0 then
 		if hp < 83 then

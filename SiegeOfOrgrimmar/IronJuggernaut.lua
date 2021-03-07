@@ -73,8 +73,8 @@ function mod:OnEngage()
 	-- no need to start bars here we do it at regeneration
 	phase = 1
 	if self.db.profile.custom_off_mine_marks then
-		wipe(markableMobs)
-		wipe(marksUsed)
+		markableMobs = {}
+		marksUsed = {}
 		markTimer = nil
 	end
 end
@@ -87,7 +87,7 @@ do
 	local function setMark(unit, guid)
 		for mark = 1, 3 do
 			if not marksUsed[mark] then
-				SetRaidTarget(unit, mark)
+				self:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return
@@ -114,7 +114,7 @@ do
 	end
 
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local guid = UnitGUID("mouseover")
+		local guid = self:UnitGUID("mouseover")
 		if guid then
 			if markableMobs[guid] == true then
 				setMark("mouseover", guid)
@@ -138,8 +138,8 @@ do
 		self:UnregisterEvent("UPDATE_MOUSEOVER_UNIT")
 		self:CancelTimer(markTimer)
 		markTimer = nil
-		wipe(markableMobs)
-		wipe(marksUsed)
+		markableMobs = {}
+		marksUsed = {}
 	end
 end
 

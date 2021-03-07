@@ -88,7 +88,7 @@ function mod:OnEngage()
 		self:Berserk(600)
 	end
 	nextPower, joltCounter, siphonAnimaCounter = 1, 1, 1
-	wipe(matterSwapTargets)
+	matterSwapTargets = {}
 	local _, class = UnitClass("player")
 	caster = self:Healer() or (UnitPowerType("player") == 0 and class ~= "PALADIN")
 end
@@ -181,7 +181,7 @@ end
 
 function mod:BossEngage()
 	self:CheckBossStatus()
-	if self:MobId(UnitGUID("boss1")) == 69427 then
+	if self:MobId(self:UnitGUID("boss1")) == 69427 then
 		if self:Heroic() then
 			self:Bar(138644, 120, CL["count"]:format(self:SpellName(138644), 1)) -- Siphon Anima
 		else
@@ -208,7 +208,7 @@ do
 	end
 	function mod:ExplosiveSlam(args)
 		local golem = self:GetUnitIdByGUID(args.sourceGUID)
-		if (golem and UnitGUID(golem.."target") == args.destGUID) or (args.destName and self:Tank(args.destName)) then -- don't care about non-tanks gaining stacks
+		if (golem and self:UnitGUID(golem.."target") == args.destGUID) or (args.destName and self:Tank(args.destName)) then -- don't care about non-tanks gaining stacks
 			if not scheduled[args.destName] then
 				scheduled[args.destName] = self:ScheduleTimer(warnSlam, 1, args.destName, args.spellName)
 			end

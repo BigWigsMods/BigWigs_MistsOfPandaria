@@ -203,7 +203,7 @@ do
 	-- Dispeller warning
 	function mod:CleansingWatersDispel(args)
 		local mobId = self:MobId(args.destGUID)
-		if self:Dispeller("magic", true) and (mobId == 60583 or mobId == 60585 or mobId == 60586) and args.destGUID == UnitGUID(getKillTarget()) then
+		if self:Dispeller("magic", true) and (mobId == 60583 or mobId == 60585 or mobId == 60586) and args.destGUID == self:UnitGUID(getKillTarget()) then
 			self:MessageOld(117309, "red", "info", CL["on"]:format(args.spellName, args.destName)) --onboss
 		end
 	end
@@ -211,7 +211,7 @@ do
 	-- Tank warning
 	function mod:CleansingWatersTank(_, unitId, _, spellId)
 		if spellId == 122851 and self:Tank() and UnitIsUnit(unitId, getKillTarget()) then
-			local bossName = UnitName(unitId)
+			local bossName = self:UnitName(unitId)
 			self:MessageOld(117309, "orange", "alert", L["under"]:format(self:SpellName(117309), bossName))
 		end
 	end

@@ -76,7 +76,7 @@ function mod:OnEngage(diff)
 	if self:Heroic() then
 		self:Bar(-6698, 6.7, L["shadowy_message"]:format(shadowCounter), 117222)
 	end
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "FrenzyCheck", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "FrenzyCheck", "boss1")
 end
 
 --------------------------------------------------------------------------------
@@ -103,7 +103,7 @@ do
 		if msg == "DollsApplied" and not voodooList[guid] then
 			voodooList[guid] = true
 			for unit in self:IterateGroup() do
-				if guid == UnitGUID(unit) then
+				if guid == self:UnitGUID(unit) then
 					voodooDollList[#voodooDollList+1] = self:UnitName(unit)
 					if #voodooDollList == 1 then
 						self:ScheduleTimer("TargetMessageOld", 0.3, 122151, voodooDollList, "red")
@@ -129,7 +129,7 @@ do
 						self:StopBar(L["totem_message"]:format(totemCounter))
 						self:StopBar(L["banish_message"])
 					end
-					self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+					self:UnregisterUnitEvent("UNIT_HEALTH", "boss1")
 				elseif msg == "Banish" then
 					self:Bar(116272, self:Heroic() and 70 or 65, L["banish_message"])
 					self:MessageOld(116272, "orange", self:Tank() and "alarm" or nil, L["banish_message"])

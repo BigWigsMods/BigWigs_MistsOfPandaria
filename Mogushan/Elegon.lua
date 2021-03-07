@@ -81,7 +81,7 @@ function mod:OnEngage()
 	self:Berserk(570)
 	drawPowerCounter, annihilateCounter = 0, 0
 	phaseCount = 0
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseWarn", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "PhaseWarn", "boss1")
 end
 
 --------------------------------------------------------------------------------
@@ -165,7 +165,7 @@ function mod:UnstableEnergyRemoved(args)
 		drawPowerCounter, annihilateCounter = 0, 0
 		self:MessageOld("stages", "green", nil, CL["phase"]:format(1), false)
 		self:Bar("adds", 15, CL["next_add"], 117954)
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseWarn", "boss1")
+		self:RegisterUnitEvent("UNIT_HEALTH", "PhaseWarn", "boss1")
 	end
 end
 

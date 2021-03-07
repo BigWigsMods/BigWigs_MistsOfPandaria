@@ -92,12 +92,12 @@ function mod:OnEngage(diff)
 	self:CDBar(122406, 60) -- Rain of Blades
 	self:CDBar(122409, 19) -- Korthik Strike
 	self:Berserk(self:LFR() and 600 or 480)
-	wipe(korthikStrikeWarned)
+	korthikStrikeWarned = {}
 	primaryAmberIcon, secondaryAmberIcon, phase = nil, nil, 0
 	firstKorthikStrikeDone = nil
 
 	self:RegisterEvent("UNIT_AURA")
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseChange", "boss1", "boss2", "boss3", "boss4")
+	self:RegisterUnitEvent("UNIT_HEALTH", "PhaseChange", "boss1", "boss2", "boss3", "boss4")
 end
 
 --------------------------------------------------------------------------------
@@ -108,7 +108,7 @@ function mod:INSTANCE_ENCOUNTER_ENGAGE_UNIT()
 	self:CheckBossStatus()
 	for i = 1, 5 do
 		-- Random spawn, check for unit
-		local guid = UnitGUID(("boss%d"):format(i))
+		local guid = self:UnitGUID(("boss%d"):format(i))
 		if guid and self:MobId(guid) == 62451 then -- The Sra'thik
 			if phase == 2 then
 				self:CloseProximity(131830)
@@ -206,7 +206,7 @@ do
 end
 
 function mod:Mending(args)
-	if UnitGUID("focus") == args.sourceGUID then
+	if self:UnitGUID("focus") == args.sourceGUID then
 		self:MessageOld("mending", "blue", "alert", L["mending_warning"], args.spellId)
 		self:Bar("mending", 37, L["mending_bar"], args.spellId)
 	end
@@ -277,7 +277,7 @@ function mod:ImpalingSpearRemoved(args)
 end
 
 function mod:PhaseChange(event, unitId)
-	if self:MobId(UnitGUID(unitId)) == 62397 then
+	if self:MobId(self:UnitGUID(unitId)) == 62397 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 79 and phase == 0 then -- phase starts at 75
 			self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), 131830)
@@ -289,7 +289,7 @@ function mod:PhaseChange(event, unitId)
 			self:StopBar(122406) -- Rain of Blades, first after p2 seems random
 			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4")
 			for i = 1, 5 do
-				local guid = UnitGUID(("boss%d"):format(i))
+				local guid = self:UnitGUID(("boss%d"):format(i))
 				if guid and self:MobId(guid) == 62451 then -- The Sra'thik
 					return
 				end

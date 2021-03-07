@@ -19,7 +19,6 @@ mod.engageId = 1598
 --
 local UnitHealth = UnitHealth
 local UnitHealthMax = UnitHealthMax
-local UnitGUID = UnitGUID
 
 local marksUsed = {}
 local darkMeditationTimer
@@ -108,8 +107,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1", "boss2", "boss3")
-	wipe(intermission)
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1", "boss2", "boss3")
+	intermission = {}
 	darkMeditationTimer = nil
 	infernoTarget, infernoTimer = nil, nil
 	self:OpenProximity("proximity", 5) -- this might not be needed in LFR
@@ -184,7 +183,7 @@ do
 			for i = 1, 5 do
 				if marksUsed[i] == args.destName then
 					marksUsed[i] = false
-					SetRaidTarget(args.destName, 0)
+					self:CustomIcon(false, args.destName, 0)
 				end
 			end
 		end
@@ -193,7 +192,7 @@ do
 	local function markBane(destName)
 		for i = 1, 5 do
 			if not marksUsed[i] then
-				SetRaidTarget(destName, i)
+				mod:CustomIcon(false, args.destName, i)
 				marksUsed[i] = destName
 				return
 			end
@@ -206,7 +205,7 @@ do
 			local t = GetTime()
 			if t-prev > 2 then
 				prev = t
-				wipe(marksUsed)
+				marksUsed = {}
 			end
 			-- no _DOSE for this so gotta get stacks like this:
 			local _, amount = self:UnitDebuff(args.destName, args.spellName)
@@ -303,7 +302,7 @@ do
 		if self:Tank() then
 			for i = 1, 5 do
 				local unit = ("boss%d"):format(i)
-				if UnitGUID(unit) == args.sourceGUID and self:Me(UnitGUID(unit.."target")) then
+				if self:UnitGUID(unit) == args.sourceGUID and self:Me(self:UnitGUID(unit.."target")) then
 					self:MessageOld(143330, "orange", "warning")
 					self:CDBar(143330, 29)
 					prev = GetTime()
@@ -447,13 +446,13 @@ do
 		if spellId == 143019 then -- Corrupted Brew
 			-- timer is all over the place, need to figure out if something delays it or what
 			self:CDBar(spellId, 11)
-			self:GetBossTarget(printTarget, 0.4, UnitGUID(unitId))
+			self:GetBossTarget(printTarget, 0.4, self:UnitGUID(unitId))
 		elseif spellId == 143961 then
 			if UnitDetailedThreatSituation("player", unitId) then
 				self:CDBar(-7958, 10)
 				self:MessageOld(-7958, "orange", "alarm")
 			end
-		elseif spellId == 138175 and self:MobId(UnitGUID(unitId)) == 71481 then -- Despawn Area Triggers
+		elseif spellId == 138175 and self:MobId(self:UnitGUID(unitId)) == 71481 then -- Despawn Area Triggers
 			self:CloseProximity(-7959)
 			self:OpenProximity("proximity", 5)
 			self:PrimaryIcon(-7959)
@@ -474,7 +473,7 @@ end
 function mod:VengefulStrikes(args)
 	-- only warn for the tank targeted by the mob
 	local unit = self:GetUnitIdByGUID(args.sourceGUID)
-	if self:Me(UnitGUID(unit.."target")) then -- or self:Healer()
+	if self:Me(self:UnitGUID(unit.."target")) then -- or self:Healer()
 		self:MessageOld(args.spellId, "orange", "alarm")
 		self:Bar(args.spellId, 4, CL.cast:format(args.spellName))
 		self:CDBar(args.spellId, 22)
@@ -511,16 +510,16 @@ function mod:Heal(args)
 	self:MessageOld(args.spellId, "green", "warning", CL.other:format(self:SpellName(37455), args.sourceName)) -- "Healing"
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
-	local mobId = self:MobId(UnitGUID(unitId))
+function mod:UNIT_HEALTH(event, unitId)
+	local mobId = self:MobId(self:UnitGUID(unitId))
 	if mobId == 71475 or mobId == 71479 or mobId == 71480 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 70 and not intermission[mobId] then -- 66%
-			local boss = UnitName(unitId)
+			local boss = self:UnitName(unitId)
 			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(self:SpellName(L.intermission), boss)), false)
 			intermission[mobId] = 1
 		elseif hp < 37 and intermission[mobId] == 1 then -- 33%
-			local boss = UnitName(unitId)
+			local boss = self:UnitName(unitId)
 			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(self:SpellName(L.intermission), boss)), false)
 			intermission[mobId] = 2
 			if intermission[71475] == 2 and intermission[71479] == 2 and intermission[71480] == 2 then

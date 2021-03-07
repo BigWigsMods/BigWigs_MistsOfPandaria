@@ -80,7 +80,7 @@ function mod:OnEngage()
 	self:CDBar(137162, 13) -- Static Burst
 	self:Berserk(self:Heroic() and 360 or 540)
 	if self:Heroic() then -- Ionization
-		wipe(ionized)
+		ionized = {}
 		openedForMe = nil
 		self:Bar(138732, 60) -- Ionization
 	end

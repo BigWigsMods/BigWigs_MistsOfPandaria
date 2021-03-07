@@ -95,7 +95,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DAMAGE", "BurningAmber", 122504)
 	self:Log("SPELL_MISSED", "BurningAmber", 122504)
 
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "MonstrosityInc", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "MonstrosityInc", "boss1")
 	self:RegisterUnitEvent("UNIT_SPELLCAST_INTERRUPTED", "Interrupt", "player", "focus")
 	self:RegisterUnitEvent("UNIT_SPELLCAST_STOP", "MonstrosityStopCast", "boss1", "boss2")
 
@@ -172,7 +172,7 @@ function mod:ReshapeLife(args)
 	if self:Me(args.destGUID) then
 		self:Bar("explosion_by_you", 15, L["explosion_by_you_bar"], 122398)
 		self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "MyWillpower", "player")
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "BreakFreeHP", "player")
+		self:RegisterUnitEvent("UNIT_HEALTH", "BreakFreeHP", "player")
 	elseif UnitIsUnit("focus", args.destName) then
 		self:TargetBar("explosion_by_other", 15, args.destName, explosion, 122398)
 	end
@@ -181,7 +181,7 @@ end
 function mod:ReshapeLifeRemoved(args)
 	if self:Me(args.destGUID) then
 		self:UnregisterUnitEvent("UNIT_POWER_FREQUENT", "player")
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "player")
+		self:UnregisterUnitEvent("UNIT_HEALTH", "player")
 		self:StopBar(CL["cast"]:format(explosion))
 		self:StopBar(L["explosion_by_you_bar"])
 	elseif UnitIsUnit("focus", args.destName) then
@@ -225,7 +225,8 @@ do
 		elseif UnitIsUnit("focus", args.sourceName) then
 			self:Flash("explosion_casting_by_other", args.spellId)
 			self:TargetBar("explosion_by_other", 13, args.sourceName, explosion, args.spellId) -- cooldown
-			self:Bar("explosion_casting_by_other", 2.5, CL["cast"]:format(CL["other"]:format(args.sourceName:gsub("%-.+", "*"), explosion)), args.spellId)
+			local cName = self:ColorName(args.sourceName)
+			self:Bar("explosion_casting_by_other", 2.5, CL["cast"]:format(CL["other"]:format(cName, explosion)), args.spellId)
 			self:TargetMessageOld("explosion_casting_by_other", args.sourceName, "red", "alert", explosion, args.spellId, true) -- associate the message with the casting toggle option
 		end
 	end
@@ -237,9 +238,9 @@ function mod:Interrupt(_, unitId, _, spellId)
 		if unitId == "player" then
 			self:StopBar(CL["cast"]:format(explosion))
 		elseif unitId == "focus" then
-			local player, server = UnitName(unitId)
-			if server and server ~= "" then player = player.."*" end
-			self:StopBar(CL["cast"]:format(CL["other"]:format(player, explosion)))
+			local player = self:UnitName(unitId)
+			local cName = self:ColorName(player)
+			self:StopBar(CL["cast"]:format(CL["other"]:format(cName, explosion)))
 		end
 	end
 end

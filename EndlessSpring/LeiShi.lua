@@ -81,17 +81,17 @@ end
 function mod:OnEngage(diff)
 	hiding = nil
 	nextProtectWarning = 85
+	markableMobs = {}
+	marksUsed = {}
+	markTimer = nil
 	self:CDBar("special", 32, L["special"], L.special_icon)
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "HealthCheck", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "HealthCheck", "boss1")
 	self:Berserk(self:Heroic() and 420 or 600)
 	self:OpenProximity(123121, 4)
 	-- marking
 	if self.db.profile.custom_off_addmarker then
 		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	end
-	wipe(markableMobs)
-	wipe(marksUsed)
-	markTimer = nil
 end
 
 --------------------------------------------------------------------------------
@@ -198,15 +198,16 @@ function mod:Protect(args)
 end
 
 function mod:ProtectRemoved()
+	-- marking
+	markableMobs = {}
+	marksUsed = {}
+
 	local left = nextSpecial - GetTime()
 	if left > 4 then -- restart the bar if there are more than a few seconds left on the special's cd
 		self:CDBar("special", left, L["special"], L.special_icon)
 	else
 		self:MessageOld("special", "yellow", nil, CL["soon"]:format(L["special"]), L.special_icon)
 	end
-	-- marking
-	wipe(markableMobs)
-	wipe(marksUsed)
 end
 
 function mod:Kill(_, _, _, spellId)
@@ -221,7 +222,7 @@ do
 	local function setMark(unit, guid)
 		for mark=8, 1, -1 do
 			if not marksUsed[mark] then
-				SetRaidTarget(unit, mark)
+				mod:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return
@@ -248,7 +249,7 @@ do
 	end
 
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local guid = UnitGUID("mouseover")
+		local guid = self:UnitGUID("mouseover")
 		if guid and markableMobs[guid] == true then
 			setMark("mouseover", guid)
 		end

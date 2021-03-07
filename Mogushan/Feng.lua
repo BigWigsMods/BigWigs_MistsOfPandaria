@@ -109,9 +109,9 @@ function mod:OnEngage()
 	p2, p3 = nil, nil
 	counter = 1
 	if self:Heroic() then
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseChangeHC", "boss1")
+		self:RegisterUnitEvent("UNIT_HEALTH", "PhaseChangeHC", "boss1")
 	else
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "PhaseChange", "boss1")
+		self:RegisterUnitEvent("UNIT_HEALTH", "PhaseChange", "boss1")
 	end
 	self:Berserk(600)
 end
@@ -273,7 +273,7 @@ do
 			resonanceTargets[2] = resonanceMarkers[2]
 		end
 		mod:TargetMessageOld(spellId, resonanceTargets, "orange", "alert", resonance)
-		wipe(resonanceMarkers)
+		resonanceMarkers = {}
 	end
 	function mod:ArcaneResonanceApplied(args)
 		resonanceMarkers[#resonanceMarkers+1] = args.destName

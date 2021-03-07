@@ -75,7 +75,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_REMOVED", "HeartOfFearRemoved", 123845)
 
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "PoorMansDissonanceTimers", "boss1")
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "Phase3Warn", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "Phase3Warn", "boss1")
 
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 	self:Death("Win", 62837)
@@ -108,7 +108,7 @@ function mod:Dispatch(args)
 	local diff = self:Difficulty()
 	self:CDBar(124077, (diff == 3 or diff == 5) and 22 or 12)
 	self:MessageOld(args.spellId, "orange", "long")
-	if UnitGUID("target") == args.sourceGUID or UnitGUID("focus") == args.sourceGUID then
+	if self:UnitGUID("target") == args.sourceGUID or self:UnitGUID("focus") == args.sourceGUID then
 		self:Flash(args.spellId)
 	end
 end

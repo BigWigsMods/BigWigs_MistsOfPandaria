@@ -154,13 +154,13 @@ function mod:OnEngage(diff)
 	mcCounter = 1
 	phase = 1
 	bombardmentCounter, maliceCounter = 1, 1
-	wipe(markableMobs)
-	wipe(marksUsed)
+	markableMobs = {}
+	marksUsed = {}
 	markTimer = nil
 	if self.db.profile.custom_off_shaman_marker then
 		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	end
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1", "boss2", "boss3")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1", "boss2", "boss3")
 end
 
 --------------------------------------------------------------------------------
@@ -307,7 +307,7 @@ do
 	local function setMark(unit, guid)
 		for mark = 1, 7 do
 			if not marksUsed[mark] then
-				SetRaidTarget(unit, mark)
+				self:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return
@@ -334,7 +334,7 @@ do
 	end
 
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local guid = UnitGUID("mouseover")
+		local guid = self:UnitGUID("mouseover")
 		if guid and markableMobs[guid] == true then
 			setMark("mouseover", guid)
 		end
@@ -372,8 +372,8 @@ do
 		end
 
 		if args.spellId == 145037 and self.db.profile.custom_off_minion_marker then
-			wipe(markableMobs)
-			wipe(marksUsed)
+			markableMobs = {}
+			marksUsed = {}
 			self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 			if not markTimer then
 				markTimer = self:ScheduleRepeatingTimer(markMobs, 0.1)
@@ -394,7 +394,7 @@ do
 end
 
 function mod:ChainHeal(args)
-	if UnitGUID("focus") == args.sourceGUID then
+	if self:UnitGUID("focus") == args.sourceGUID then
 		self:MessageOld("chain_heal", "blue", "alert", L.chain_heal_message, args.spellId)
 	end
 end
@@ -512,7 +512,7 @@ do
 					self:Bar(145065, 15, 67229, 145065) -- Mind Control
 				end
 				self:Bar(144985, 30, CL.count:format(self:SpellName(144985), whirlingCounter)) -- Whirling Corruption
-				self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1", "boss2", "boss3")
+				self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1", "boss2", "boss3")
 				-- warn for empowered abilities
 				local power = UnitPower("boss1")
 				while power >= warnPower do -- can he hit 100 energy before p3? that would be some shenanigans
@@ -552,8 +552,8 @@ do
 end
 
 -- General
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
-	if self:MobId(UnitGUID(unitId)) ~= 71865 then return end
+function mod:UNIT_HEALTH(event, unitId)
+	if self:MobId(self:UnitGUID(unitId)) ~= 71865 then return end
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if hp < 16 then -- 10%
 		self:MessageOld("stages", "cyan", "info", CL.soon:format(CL.phase:format(phase+1)), false)

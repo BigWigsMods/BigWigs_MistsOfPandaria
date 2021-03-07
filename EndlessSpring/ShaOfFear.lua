@@ -116,8 +116,8 @@ function mod:OnEngage(diff)
 	atSha = true
 	nextFear = 0
 	submergeCounter = 0
-	wipe(dreadSpawns)
-	wipe(usedMarks)
+	dreadSpawns = {}
+	usedMarks = {}
 	phase = 1
 end
 
@@ -160,7 +160,7 @@ do
 		if self.db.profile.custom_off_huddle then
 			local mark = GetAvailableMark()
 			if mark then
-				SetRaidTarget(args.destName, mark)
+				self:CustomIcon(false, args.destName, mark)
 				usedMarks[mark] = args.destName
 			end
 		end
@@ -180,7 +180,7 @@ do
 			for i=1, 6 do
 				if usedMarks[i] == args.destName then
 					usedMarks[i] = nil
-					SetRaidTarget(args.destName, 0)
+					self:CustomIcon(false, args.destName)
 				end
 			end
 		end
@@ -315,7 +315,7 @@ do
 	local eerieSkull = mod:SpellName(119519)
 	local function skullWarn(unitId)
 		fired = fired + 1
-		local player = UnitName("boss1target")
+		local player = mod:UnitName("boss1target")
 		if player and ((not UnitDetailedThreatSituation("boss1target", "boss1") and not mod:Tank("boss1target")) or fired > 13) then
 			-- If we've done 14 (0.7s) checks and still not passing the threat check, it's probably being cast on the tank
 			if UnitIsUnit("boss1target", "player") then
@@ -395,7 +395,7 @@ end
 
 function mod:Fearless(args)
 	if self:Me(args.destGUID) then
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "target", "focus") -- backup
+		self:UnregisterUnitEvent("UNIT_HEALTH", "target", "focus") -- backup
 		self:OpenProximity("proximity", 4) -- Penetrating Bolt
 		atSha = true
 		self:CancelDelayedMessage(CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
@@ -431,7 +431,7 @@ end
 
 function mod:OminousCackleRemoved(args) -- set it here, because at this point we are surely out of range of the other platforms
 	if self:Me(args.destGUID) then
-		self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "BlossomPreWarn", "target", "focus")
+		self:RegisterUnitEvent("UNIT_HEALTH", "BlossomPreWarn", "target", "focus")
 	end
 end
 
@@ -457,7 +457,7 @@ do
 end
 
 function mod:BlossomPreWarn(event, unitId)
-	local mobId = self:MobId(UnitGUID(unitId))
+	local mobId = self:MobId(self:UnitGUID(unitId))
 	if mobId == 61046 or mobId == 61038 or mobId == 61042 then
 		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 		if hp < 30 then

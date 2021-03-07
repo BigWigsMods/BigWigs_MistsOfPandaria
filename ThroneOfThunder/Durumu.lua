@@ -111,10 +111,10 @@ function mod:OnEngage()
 	if self:Heroic() then
 		self:Bar(-6889, 127) -- Ice Wall
 		self:Bar(133597, 60) -- Dark Parasite
-		wipe(marksUsed)
+		marksUsed = {}
 	end
 	lifeDrainCasts = 0
-	wipe(lingeringGaze)
+	lingeringGaze = {}
 	openedForMe = nil
 	deadAdds = 0
 	blueController, redController, yellowController = nil, nil, nil
@@ -131,7 +131,7 @@ do
 			for i = 3, 5 do
 				if marksUsed[i] == args.destName then
 					marksUsed[i] = false
-					SetRaidTarget(args.destName, 0)
+					self:CustomIcon(false, args.destName)
 				end
 			end
 		end
@@ -140,7 +140,7 @@ do
 	local function markParasite(destName)
 		for i = 3, 5 do
 			if not marksUsed[i] then
-				SetRaidTarget(destName, i)
+				self:CustomIcon(false, destName, i)
 				marksUsed[i] = destName
 				return
 			end
@@ -160,7 +160,7 @@ end
 
 local function mark(unit, mark)
 	if not unit or not mark or not mod.db.profile.custom_off_ray_controllers then return end
-	SetRaidTarget(unit, mark)
+	mod:CustomIcon(false, unit, mark)
 end
 
 -- Clear icons on wipe/win
@@ -173,7 +173,7 @@ function mod:OnBossDisable()
 		for i = 3, 5 do
 			local n = marksUsed[i]
 			if n then
-				SetRaidTarget(n, 0)
+				self:CustomIcon(false, n)
 			end
 		end
 	end

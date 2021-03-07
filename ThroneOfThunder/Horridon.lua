@@ -136,7 +136,7 @@ function mod:OnEngage()
 	if self:Heroic() then
 		self:Bar(137458, 61) -- Dire Call
 	end
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", "LastPhase", "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", "LastPhase", "boss1")
 end
 
 --------------------------------------------------------------------------------
@@ -147,10 +147,10 @@ end
 
 function mod:BossEngage()
 	self:CheckBossStatus()
-	if self:MobId(UnitGUID("boss2")) == 69374 then -- War-God Jalak
+	if self:MobId(self:UnitGUID("boss2")) == 69374 then -- War-God Jalak
 		self:StopBar(-7087)
 		self:MessageOld("adds", "cyan", "info", -7087, false) -- War-God Jalak
-		self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1")
+		self:UnregisterUnitEvent("UNIT_HEALTH", "boss1")
 		self:Bar(136817, 5) -- Bestial Cry
 	end
 end
@@ -232,7 +232,7 @@ do
 	local prev = 0
 	function mod:ChainLightning(args)
 		local t = GetTime()
-		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
+		if t-prev > 3 and self:UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
 			self:MessageOld("chain_lightning", "blue", "alert", L["chain_lightning_message"], args.spellId)
 		end
@@ -243,7 +243,7 @@ do
 	local prev = 0
 	function mod:Fireball(args)
 		local t = GetTime()
-		if t-prev > 3 and UnitGUID("focus") == args.sourceGUID then -- don't spam
+		if t-prev > 3 and self:UnitGUID("focus") == args.sourceGUID then -- don't spam
 			prev = t
 			self:MessageOld("fireball", "blue", "alert", L["fireball_message"], args.spellId)
 		end
@@ -312,7 +312,7 @@ do
 end
 
 function mod:VenomBoltVolley(args)
-	if UnitGUID("focus") == args.sourceGUID then
+	if self:UnitGUID("focus") == args.sourceGUID then
 		self:MessageOld("venom_bolt_volley", "blue", "alert", L["venom_bolt_volley_message"], args.spellId)
 		self:Bar("venom_bolt_volley", 16, L["venom_bolt_volley_bar"], args.spellId)
 	end

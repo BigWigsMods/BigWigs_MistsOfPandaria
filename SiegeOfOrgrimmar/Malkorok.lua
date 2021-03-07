@@ -84,7 +84,7 @@ do
 			self:CloseProximity(args.spellId)
 		end
 		if self.db.profile.custom_off_energy_marks then
-			SetRaidTarget(args.destName, 0)
+			self:CustomIcon(false, args.destName, 0)
 		end
 	end
 
@@ -109,7 +109,7 @@ do
 				prev = t
 				counter = 1
 			end
-			SetRaidTarget(args.destName, counter)
+			self:CustomIcon(false, args.destName, counter)
 			counter = counter + 1
 		end
 	end

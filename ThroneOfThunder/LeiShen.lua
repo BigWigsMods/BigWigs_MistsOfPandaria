@@ -24,7 +24,7 @@ local whipCounter = 1
 local function isConduitAlive(mobId)
 	for i=1, 5 do
 		local boss = ("boss%d"):format(i)
-		if mobId == mod:MobId(UnitGUID(boss)) then
+		if mobId == mod:MobId(mod:UnitGUID(boss)) then
 			return boss
 		end
 	end
@@ -126,12 +126,12 @@ function mod:OnEngage()
 	ballLightningTimer = nil
 	phase = 1
 	tooCloseForOvercharged = nil
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1")
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
 	self:CDBar(134912, 40) -- Decapitate
 	self:CDBar(135095, 25) -- Thunderstruck
-	wipe(adds)
-	wipe(marksUsed)
-	wipe(activeProximityAbilities)
+	adds = {}
+	marksUsed = {}
+	activeProximityAbilities = {}
 	thunderstruckCounter = 1
 	whipCounter = 1
 
@@ -177,7 +177,7 @@ do
 	end
 
 	function mod:UPDATE_MOUSEOVER_UNIT()
-		local GUID = UnitGUID("mouseover")
+		local GUID = self:UnitGUID("mouseover")
 		if not GUID then return end
 		local mobId = self:MobId(GUID)
 		if mobId == 69014 or mobId == 69012 or mobId == 69013 then
@@ -185,7 +185,7 @@ do
 				adds[GUID] = "marked"
 				local mark = getMark()
 				if mark then
-					SetRaidTarget("mouseover", mark)
+					self:CustomIcon(false, "mouseover", mark)
 					marksUsed[mark] = GUID
 				end
 			end
@@ -199,7 +199,7 @@ do
 				local mark = getMark()
 				if unitId and mark then
 					adds[GUID] = "marked"
-					SetRaidTarget(unitId, mark)
+					self:CustomIcon(false, unitId, mark)
 					marksUsed[mark] = GUID
 				end
 			end
@@ -355,7 +355,7 @@ function mod:IntermissionEnd(msg)
 	self:StopBar(135695) -- Static Shock
 	self:StopBar(136366) -- Bouncing Bolt
 	self:StopBar(135991) -- Diffusion Chain
-	self:RegisterUnitEvent("UNIT_HEALTH_FREQUENT", nil, "boss1") -- just to be efficient
+	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1") -- just to be efficient
 
 	-- stage 2
 	activeProximityAbilities[2] = true
@@ -411,7 +411,7 @@ function mod:IntermissionStart(args)
 	self:StopBar(136850) -- Lightning Whip
 	self:StopBar(136620) -- Ball Lightning
 	self:StopBar(136478) -- Furious Slash
-	self:UnregisterUnitEvent("UNIT_HEALTH_FREQUENT", "boss1") -- just to be efficient
+	self:UnregisterUnitEvent("UNIT_HEALTH", "boss1") -- just to be efficient
 	activeProximityAbilities[4] = nil
 	local diff = self:Difficulty()
 	if diff == 3 or diff == 5 or diff == 7 then -- 10 mans and assume LFR too
@@ -439,7 +439,7 @@ function mod:IntermissionStart(args)
 	self:DelayedMessage("stages", 40, "green", L["last_inermission_ability"])
 end
 
-function mod:UNIT_HEALTH_FREQUENT(event, unitId)
+function mod:UNIT_HEALTH(event, unitId)
 	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
 	if phase == 1 and hp < 68 then
 		self:MessageOld("stages", "cyan", "info", CL["soon"]:format(CL.intermission), false)
@@ -581,7 +581,7 @@ do
 		updateProximity()
 	end
 	function mod:DiffusionChain(args)
-		wipe(diffusionList)
+		diffusionList = mod:NewTargetList()
 		self:ScheduleTimer(warnDiffusionAdds, 0.2)
 		if self.db.profile.custom_off_diffused_marker and not markerTimer then
 			markerTimer = self:ScheduleRepeatingTimer("MarkCheck", 0.2)
@@ -644,7 +644,7 @@ do
 		end
 		scheduled = nil
 		staticShockOnMe = nil
-		wipe(staticShockList)
+		staticShockList = {}
 	end
 	local timeLeft, timer = 8, nil
 	local function staticShockSayCountdown()

@@ -111,8 +111,8 @@ function mod:OnEngage()
 	prevEnrage = 0
 	massiveCrates = 2
 	stoutCrates = 6
-	wipe(setToBlow)
-	wipe(bossUnitPowers)
+	setToBlow = {}
+	bossUnitPowers = {}
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", nil, "boss1", "boss2")
 	--self:RegisterWidgetEvent(527, "UpdateBerserkTimer") -- XXX get the correct widget
 	self:OpenProximity("proximity", 3)
@@ -128,7 +128,7 @@ function mod:UNIT_POWER_FREQUENT(_, unit, powerType)
 	local power = UnitPower(unit, 10) -- Enum.PowerType.Alternate = 10
 	if power == 0 then return end -- might be needed when you change rooms
 
-	local mobId = self:MobId(UnitGUID(unit))
+	local mobId = self:MobId(self:UnitGUID(unit))
 	if bossUnitPowers[mobId] == power then return end -- don't fire twice for the same value
 	local change = power - (bossUnitPowers[mobId] or 0)
 	bossUnitPowers[mobId] = power
