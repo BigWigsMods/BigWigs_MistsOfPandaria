@@ -99,6 +99,9 @@ do
 		["Frenzy"] = 0,
 		["Banish"] = 0,
 	}
+	local function wipe()
+		voodooList = {}
+	end
 	function mod:BigWigs_BossComm(_, msg, guid)
 		if msg == "DollsApplied" and not voodooList[guid] then
 			voodooList[guid] = true
@@ -107,7 +110,7 @@ do
 					voodooDollList[#voodooDollList+1] = self:UnitName(unit)
 					if #voodooDollList == 1 then
 						self:ScheduleTimer("TargetMessageOld", 0.3, 122151, voodooDollList, "red")
-						self:ScheduleTimer(wipe, 0.3, voodooList)
+						self:ScheduleTimer(wipe, 0.3)
 					end
 					break
 				end

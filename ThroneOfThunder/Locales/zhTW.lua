@@ -145,14 +145,7 @@ L = BigWigs:NewBossLocale("Iron Qon", "zhTW")
 if L then
 	L.molten_energy = "熔岩之力"
 
-	L.overload_casting = "正在施放 熔岩超載"
-	L.overload_casting_desc = "當正在施放熔岩超載時發出警報。"
-
 	L.arcing_lightning_cleared = "弧光閃電"
-
-	L.custom_off_spear_target = "投擲長矛目標"
-	L.custom_off_spear_target_desc = "嘗試警報投擲長矛目標。將提高CPU使用率，有時會顯示錯誤的目標，預設關閉。\n|cFFADFF2F提示：設置為坦克角色會有助於提高警報準確性。|r"
-	L.possible_spear_target = "預測長矛目標"
 end
 
 L = BigWigs:NewBossLocale("Twin Consorts", "zhTW")

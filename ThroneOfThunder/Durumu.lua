@@ -140,7 +140,7 @@ do
 	local function markParasite(destName)
 		for i = 3, 5 do
 			if not marksUsed[i] then
-				self:CustomIcon(false, destName, i)
+				mod:CustomIcon(false, destName, i)
 				marksUsed[i] = destName
 				return
 			end

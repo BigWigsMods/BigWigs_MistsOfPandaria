@@ -87,7 +87,7 @@ do
 	local function setMark(unit, guid)
 		for mark = 1, 3 do
 			if not marksUsed[mark] then
-				self:CustomIcon(false, unit, mark)
+				mod:CustomIcon(false, unit, mark)
 				markableMobs[guid] = "marked"
 				marksUsed[mark] = guid
 				return

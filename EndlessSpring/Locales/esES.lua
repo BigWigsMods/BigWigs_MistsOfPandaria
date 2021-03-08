@@ -35,9 +35,6 @@ if L then
 	L.swing = "Golpea"
 	L.swing_desc = "Cuenta el número de golpes antes de Vapulear."
 
-	L.damage = "Daño"
-	L.miss = "Fallo"
-
 	L.throw = "¡Lanzar!"
 	L.ball_dropped = "¡Bola al suelo!"
 	L.ball_you = "¡Tienes la bola!"

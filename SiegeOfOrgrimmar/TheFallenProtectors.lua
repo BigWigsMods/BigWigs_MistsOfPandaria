@@ -192,7 +192,7 @@ do
 	local function markBane(destName)
 		for i = 1, 5 do
 			if not marksUsed[i] then
-				mod:CustomIcon(false, args.destName, i)
+				mod:CustomIcon(false, destName, i)
 				marksUsed[i] = destName
 				return
 			end
@@ -448,7 +448,7 @@ do
 			self:CDBar(spellId, 11)
 			self:GetBossTarget(printTarget, 0.4, self:UnitGUID(unitId))
 		elseif spellId == 143961 then
-			if UnitDetailedThreatSituation("player", unitId) then
+			if self:Tanking(unitId) then
 				self:CDBar(-7958, 10)
 				self:MessageOld(-7958, "orange", "alarm")
 			end

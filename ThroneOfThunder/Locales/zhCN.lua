@@ -145,14 +145,7 @@ L = BigWigs:NewBossLocale("Iron Qon", "zhCN")
 if L then
 	L.molten_energy = "熔火能量"
 
-	L.overload_casting = "正在施放 熔火过载"
-	L.overload_casting_desc = "当正在施放熔火过载时发出警报。"
-
 	L.arcing_lightning_cleared = "弧形闪电"
-
-	L.custom_off_spear_target = "投掷长矛目标"
-	L.custom_off_spear_target_desc = "尝试警报投掷长矛目标。此方法将提高 CPU 使用率，有时会显示错误的目标，所以它在默认情况下是被禁用。\n|cFFADFF2F提示：设置为坦克职业会有助于提高警报准确性。|r"
-	L.possible_spear_target = "可能的长矛"
 end
 
 L = BigWigs:NewBossLocale("Twin Consorts", "zhCN")

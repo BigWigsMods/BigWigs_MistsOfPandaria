@@ -15,7 +15,7 @@ mod.engageId = 1593
 -- Locals
 --
 
-local UnitDetailedThreatSituation, UnitExists, UnitIsUnit = UnitDetailedThreatSituation, UnitExists, UnitIsUnit
+local UnitExists, UnitIsUnit = UnitExists, UnitIsUnit
 
 local function getBossByMobId(mobId)
 	for i=1, 5 do
@@ -397,7 +397,7 @@ end
 
 function mod:InjectionCast(args)
 	local boss = self:GetUnitIdByGUID(args.sourceGUID)
-	if UnitDetailedThreatSituation("player", boss) then
+	if self:Tanking(boss) then
 		self:Bar("injection_tank", 9.6, args.spellId)
 	end
 end
@@ -438,7 +438,7 @@ do
 		if not boss then return end
 		local target = boss.."target"
 		if not UnitExists(target) then return end
-		if not UnitDetailedThreatSituation(target, boss) and lastWhirlTarget ~= mod:UnitName(target) then
+		if not mod:Tanking(boss, target) and lastWhirlTarget ~= mod:UnitName(target) then
 			lastWhirlTarget = mod:UnitName(target)
 			if UnitIsUnit("player", target) then
 				mod:MessageOld(143701, "blue", "info", CL.you:format(mod:SpellName(143701)))
@@ -688,7 +688,7 @@ do
 		local boss = getBossByMobId(71161)
 		if not boss then return end
 		local target = boss.."target"
-		if not UnitExists(target) or mod:Tank(target) or UnitDetailedThreatSituation(target, boss) then return end
+		if not UnitExists(target) or mod:Tank(target) or mod:Tanking(boss, target) then return end
 
 		local name = mod:UnitName(target)
 		if UnitIsUnit("player", target) then

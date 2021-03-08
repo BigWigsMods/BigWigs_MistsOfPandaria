@@ -200,7 +200,7 @@ do
 	local function beltItems(count)
 		local items = {}
 		for i=1, 5 do
-			local mobId = mod:MobId(self:UnitGUID("boss"..i))
+			local mobId = mod:MobId(mod:UnitGUID("boss"..i))
 			if mobId > 0 and mobId ~= 71504 then
 				items[#items+1] = itemNames[mobId]
 			end

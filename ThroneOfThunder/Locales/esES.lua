@@ -145,14 +145,7 @@ L = BigWigs:NewBossLocale("Iron Qon", "esES") or BigWigs:NewBossLocale("Iron Qon
 if L then
 	L.molten_energy = "Energía de arrabio"
 
-	L.overload_casting = "Casteando Sobrecarga de arrabio"
-	L.overload_casting_desc = "Avisa cuando está casteando Sobrecarga de arrabio"
-
 	L.arcing_lightning_cleared = "Raid limpia de Arco de relámpagos"
-
-	L.custom_off_spear_target = "Objetivo de Lanzar lanza"
-	L.custom_off_spear_target_desc = "Intentará avisar del objetivo de Lanzar lanza. Esto requiere un uso elevado de la CPU y a veces muestra un objetivo equivocado así que esta deshabilitado por defecto.\n|cFFADFF2FCONSEJO: Crear roles de TANQUE debería ayudar a aumentar la precisión del aviso.|r"
-	L.possible_spear_target = "Posible Lanza"
 end
 
 L = BigWigs:NewBossLocale("Twin Consorts", "esES") or BigWigs:NewBossLocale("Twin Consorts", "esMX")

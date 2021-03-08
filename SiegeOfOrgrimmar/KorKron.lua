@@ -118,7 +118,6 @@ do
 	local function markMist(destName)
 		for i = 1, 7 do
 			if not marksUsed[i] then
-				SetRaidTarget(destName, i)
 				mod:CustomIcon(false, destName, i)
 				marksUsed[i] = destName
 				return
@@ -154,7 +153,7 @@ function mod:FroststormStrike(args)
 		self:Bar(args.spellId, 6)
 	else -- if tanking Haromm
 		local boss = self:GetUnitIdByGUID(args.sourceGUID)
-		if UnitDetailedThreatSituation("player", boss) then
+		if self:Tanking(boss) then
 			self:Bar(args.spellId, 6)
 		end
 	end

@@ -119,7 +119,7 @@ local function isBossActiveById(bossId, bossIdTwo)
 	for i=1, 5 do
 		local unitId = ("boss%d"):format(i)
 		if UnitExists(unitId) then
-			local id = mod:MobId(self:UnitGUID(unitId))
+			local id = mod:MobId(mod:UnitGUID(unitId))
 			if id == bossId or id == bossIdTwo then
 				return true
 			end

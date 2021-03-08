@@ -102,15 +102,14 @@ end
 
 do
 	-- Spear target scanning
-	local UnitDetailedThreatSituation, UnitExists, UnitIsUnit = UnitDetailedThreatSituation, UnitExists, UnitIsUnit
+	local UnitExists, UnitIsUnit = UnitExists, UnitIsUnit
 	local spearTimer, spearStartTimer = nil, nil
 	local initialTarget = nil
 	local function checkSpearTarget()
-		if not UnitExists("boss1target") or mod:Tank("boss1target") or UnitDetailedThreatSituation("boss1target", "boss2") then return end
+		if not UnitExists("boss1target") or mod:Tank("boss1target") or mod:Tanking("boss2", "boss1target") then return end
 
 		-- healer aggro in p1
-		local tanking, status = UnitDetailedThreatSituation("boss1target", "boss1")
-		if tanking or status == 3 then return end
+		if mod:TopThreat("boss1", "boss1target") then return end
 		if initialTarget and UnitIsUnit("boss1target", initialTarget) then return end
 
 		local name = mod:UnitName("boss1target")
