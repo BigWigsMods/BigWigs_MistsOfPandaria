@@ -1,4 +1,4 @@
-## Interface: 90002
+## Interface: 90005
 
 ## Title: BigWigs [|cffeda55fMists of Pandaria|r]
 ## Title-zhCN: BigWigs [|cffeda55f熊猫人之谜|r]
