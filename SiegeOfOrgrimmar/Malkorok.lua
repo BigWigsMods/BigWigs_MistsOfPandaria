@@ -142,7 +142,7 @@ end
 
 function mod:FatalStrike(args)
 	if args.amount > 8 and args.amount % 3 == 0 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 

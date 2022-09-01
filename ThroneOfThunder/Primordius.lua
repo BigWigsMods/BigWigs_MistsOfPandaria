@@ -190,7 +190,7 @@ end
 function mod:MalformedBlood(args)
 	-- 9s cooldown (6s with Metabolic Boost)
 	if args.amount % 2 == 0 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow", args.amount > 5 and "warning")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow", args.amount > 5 and "warning")
 	end
 end
 

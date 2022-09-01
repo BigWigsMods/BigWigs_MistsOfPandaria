@@ -387,7 +387,7 @@ end
 
 function mod:Impale(args)
 	local amount = args.amount or 1
-	self:StackMessage(args.spellId, args.destName, amount, "green", amount > 1 and "warning")
+	self:StackMessageOld(args.spellId, args.destName, amount, "green", amount > 1 and "warning")
 	self:CDBar(args.spellId, 20)
 end
 

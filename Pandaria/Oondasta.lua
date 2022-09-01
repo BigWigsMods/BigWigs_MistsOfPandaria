@@ -44,7 +44,7 @@ end
 --
 
 function mod:Crush(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info")
 end
 
 function mod:PiercingRoar(args)

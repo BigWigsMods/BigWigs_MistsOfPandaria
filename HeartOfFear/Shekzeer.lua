@@ -237,7 +237,7 @@ end
 function mod:Eyes(args)
 	local buffStack = args.amount or 1
 	self:CDBar("eyes", 10.5, L["eyes_message"], args.spellId)
-	self:StackMessage("eyes", args.destName, buffStack, "orange", buffStack > 2 and "info", L["eyes_message"], args.spellId)
+	self:StackMessageOld("eyes", args.destName, buffStack, "orange", buffStack > 2 and "info", L["eyes_message"], args.spellId)
 end
 
 function mod:UltimateCorruption(args)

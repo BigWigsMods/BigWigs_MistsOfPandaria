@@ -157,7 +157,7 @@ do
 	}
 	function mod:TankAlerts(args)
 		local stack = args.amount or 1
-		self:StackMessage("tank", args.destName, stack, "orange", stack > 1 and "info", msgTbl[args.spellId], args.spellId)
+		self:StackMessageOld("tank", args.destName, stack, "orange", stack > 1 and "info", msgTbl[args.spellId], args.spellId)
 	end
 end
 

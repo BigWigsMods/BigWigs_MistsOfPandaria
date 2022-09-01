@@ -134,7 +134,7 @@ end
 
 function mod:Pungency(args)
 	if args.amount % 2 == 0 and args.amount > ((self:LFR() and 13) or (self:Heroic() and 3) or 7) then
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 

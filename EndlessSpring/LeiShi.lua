@@ -120,7 +120,7 @@ do
 			end
 		end
 		local player = mod:UnitName(highestStackPlayer)
-		mod:StackMessage(123705, player, highestStack, "yellow")
+		mod:StackMessageOld(123705, player, highestStack, "yellow")
 		scheduled = nil
 	end
 
@@ -144,7 +144,7 @@ end
 function mod:Spray(args)
 	local amount = args.amount or 1
 	if UnitIsPlayer(args.destName) and amount > (self:LFR() and 11 or 5) and amount % 2 == 0 then
-		self:StackMessage(args.spellId, args.destName, amount, "orange", "info")
+		self:StackMessageOld(args.spellId, args.destName, amount, "orange", "info")
 	end
 end
 

@@ -224,7 +224,7 @@ function mod:LifeDrainStunRemoved(args)
 end
 
 function mod:LifeDrainDose(args)
-	self:StackMessage(133798, args.destName, args.amount, "red")
+	self:StackMessageOld(133798, args.destName, args.amount, "red")
 	if self:Me(args.destGUID) and not self:LFR() then
 		self:Say(args.spellId, L["life_drain_say"]:format(args.amount)) -- this spams but is needed, hack even yell would be better
 	end
@@ -398,11 +398,11 @@ end
 
 function mod:SeriousWound(args)
 	local amount = args.amount or 1
-	self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 4 and "info")
+	self:StackMessageOld(args.spellId, args.destName, amount, "yellow", amount > 4 and "info")
 end
 
 function mod:ArterialCut(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "alarm")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "alarm")
 end
 
 function mod:Deaths(args)

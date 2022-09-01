@@ -271,7 +271,7 @@ end
 
 function mod:ElectricalShock(args)
 	if args.amount % 5 == 0 then -- don't be too spammy, should be taunting when your debuff wears off (somewhere between 10 and 15)
-		self:StackMessage(args.spellId, args.destName, args.amount, "red", "warning", L["shock"])
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "red", "warning", L["shock"])
 	end
 end
 

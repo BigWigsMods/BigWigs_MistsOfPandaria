@@ -225,7 +225,7 @@ do
 end
 
 function mod:FanOfFlames(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info")
 	self:CDBar(args.spellId, 11)
 end
 

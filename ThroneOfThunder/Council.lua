@@ -292,7 +292,7 @@ end
 
 function mod:FrigidAssault(args)
 	if args.amount % 5 == 0 or args.amount > 10 then -- don't spam on low stacks, but spam close to 15 (spam so hard)
-		self:StackMessage(-7054, args.destName, args.amount, "orange", "info", L["assault_message"])
+		self:StackMessageOld(-7054, args.destName, args.amount, "orange", "info", L["assault_message"])
 	end
 end
 

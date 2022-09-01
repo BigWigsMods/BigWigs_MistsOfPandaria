@@ -270,7 +270,7 @@ end
 function mod:GrippingDespair(args)
 	local amount = args.amount or 1
 	-- force Gripping Despair text to keep it short
-	self:StackMessage(145183, args.destName, amount, "yellow", amount > 2 and not self:Me(args.destGUID) and "warning")
+	self:StackMessageOld(145183, args.destName, amount, "yellow", amount > 2 and not self:Me(args.destGUID) and "warning")
 	if args.spellId == 145195 then -- Empowered (Explosive Despair)
 		self:TargetBar(-8325, 10, args.destName)
 	end

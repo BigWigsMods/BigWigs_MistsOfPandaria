@@ -253,7 +253,7 @@ end
 
 function mod:SelfDoubt(args)
 	local amount = args.amount or 1
-	self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 2 and "info")
+	self:StackMessageOld(args.spellId, args.destName, amount, "yellow", amount > 2 and "info")
 	self:CDBar(args.spellId, 16)
 end
 

@@ -180,7 +180,7 @@ end
 
 -- Assault mode
 function mod:IgniteArmor(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 	self:CDBar(args.spellId, 9)
 end
 

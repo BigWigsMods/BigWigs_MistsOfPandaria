@@ -165,7 +165,7 @@ end
 function mod:FlamesOfGalakrondStacking(args)
 	if args.amount > 2 then
 		if self:Me(args.destGUID) or (self:Tank() and self:Tank(args.destName)) then
-			self:StackMessage(147068, args.destName, args.amount, "yellow", nil, 71393, args.spellId) -- 71393 = "Flames"
+			self:StackMessageOld(147068, args.destName, args.amount, "yellow", nil, 71393, args.spellId) -- 71393 = "Flames"
 		end
 	end
 end

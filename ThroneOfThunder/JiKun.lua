@@ -254,13 +254,13 @@ function mod:FeedYoung(_, _, _, spellId)
 end
 
 function mod:TalonRake(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info")
 	self:CDBar(args.spellId, 22)
 end
 
 function mod:InfectedTalons(args)
 	if args.amount % 2 == 0 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 

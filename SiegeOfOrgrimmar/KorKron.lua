@@ -149,7 +149,7 @@ end
 function mod:FroststormStrike(args)
 	local amount = args.amount or 1
 	if amount == 2 or amount > 3 then
-		self:StackMessage(args.spellId, args.destName, amount, "yellow", amount > 4 and "warning")
+		self:StackMessageOld(args.spellId, args.destName, amount, "yellow", amount > 4 and "warning")
 		self:Bar(args.spellId, 6)
 	else -- if tanking Haromm
 		local boss = self:GetUnitIdByGUID(args.sourceGUID)

@@ -97,7 +97,7 @@ end
 
 function mod:CorrosiveBlastStack(args)
 	if self:Tank() and self:Tank(args.destName) then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "warning")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "warning")
 	end
 end
 

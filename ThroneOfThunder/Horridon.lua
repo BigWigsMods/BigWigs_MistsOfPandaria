@@ -385,7 +385,7 @@ function mod:Swipe(args)
 end
 
 function mod:Puncture(args)
-	self:StackMessage(-7078, args.destName, args.amount, "orange")
+	self:StackMessageOld(-7078, args.destName, args.amount, "orange")
 	self:CDBar(-7078, 10.9)
 end
 

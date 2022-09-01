@@ -336,7 +336,7 @@ function mod:BoneCracker(args)
 end
 
 function mod:SunderingBlow(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "yellow", "info")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow", "info")
 	self:CDBar(args.spellId, 8)
 end
 

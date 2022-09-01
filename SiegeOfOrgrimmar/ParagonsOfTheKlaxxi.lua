@@ -739,7 +739,7 @@ end
 
 function mod:ExposedVeins(args)
 	if args.amount > 5 and args.amount % 3 == 0 then -- XXX this probably needs adjustment
-		self:StackMessage(args.spellId, args.destName, args.amount, "yellow")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow")
 	end
 end
 

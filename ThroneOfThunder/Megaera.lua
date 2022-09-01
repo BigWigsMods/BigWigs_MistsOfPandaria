@@ -219,7 +219,7 @@ end
 
 function mod:ArcticFreeze(args)
 	if args.amount > 3 then
-		self:StackMessage(args.spellId, args.destName, args.amount, "orange", "warning")
+		self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "warning")
 	end
 end
 

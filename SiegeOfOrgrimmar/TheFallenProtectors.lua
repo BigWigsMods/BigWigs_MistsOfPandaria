@@ -246,7 +246,7 @@ do
 	function mod:LingeringAnguish(args)
 		-- inform the player with the debuff if stacks are getting high, the values might need adjusting (one warning about every 6 sec atm)
 		if anguishOnMe and (args.amount > 7 and args.amount % 2 == 0) then -- Mark of Anguish
-			self:StackMessage(143840, args.destName, args.amount, "blue", "info", 144176, 144176)
+			self:StackMessageOld(143840, args.destName, args.amount, "blue", "info", 144176, 144176)
 		end
 	end
 

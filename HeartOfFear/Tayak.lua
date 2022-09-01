@@ -209,7 +209,7 @@ do
 end
 
 function mod:Assault(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "orange", "info", L["assault_message"])
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info", L["assault_message"])
 end
 
 function mod:AssaultCast(args)

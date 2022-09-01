@@ -251,7 +251,7 @@ function mod:TankDebuffCasts(_, _, _, spellId)
 end
 
 function mod:TankDebuff(args)
-	self:StackMessage(args.spellId, args.destName, args.amount, "yellow", not self:Me(args.destGUID) and "warning")
+	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow", not self:Me(args.destGUID) and "warning")
 end
 
 function mod:YetiDeath(args)
