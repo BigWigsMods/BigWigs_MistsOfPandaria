@@ -227,7 +227,7 @@ do
 	local hpWarn = { 87, 68, 53, 28, 0 } -- Last is 0 to prevent errors, saves on having a hpWarn[hpWarned] existence check being called every time it fires
 	local warnings = { -8125, -8126, -8127, -8120 } -- Poisonmist, Foulstream, Ashflare, Bloodlust.
 	function mod:TotemWarn(event, unit)
-		local hp = UnitHealth(unit)/UnitHealthMax(unit) * 100
+		local hp = self:GetHealth(unit)
 		if hp < hpWarn[hpWarned] then
 			local msg = CL.soon:format(self:SpellName(warnings[hpWarned]))
 			hpWarned = hpWarned + 1

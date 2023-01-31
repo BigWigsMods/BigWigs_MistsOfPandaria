@@ -221,7 +221,7 @@ function mod:Fixate(args)
 end
 
 function mod:UNIT_HEALTH(event, unit)
-	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+	local hp = self:GetHealth(unit)
 	if hp < 17 then
 		self:MessageOld(-7920, "cyan", "info", CL.soon:format(L.extra_adds))
 		self:UnregisterUnitEvent(event, unit)

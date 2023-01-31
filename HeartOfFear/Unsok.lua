@@ -262,20 +262,20 @@ do
 	end
 end
 
-function mod:MonstrosityInc(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:MonstrosityInc(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 75 then -- phase starts at 70
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 		self:MessageOld("stages", "green", "long", CL["soon"]:format(self:SpellName(-6254)), false) -- Monstrosity
 	end
 end
 
 do
 	local prev = 0
-	function mod:BreakFreeHP(_, unitId)
+	function mod:BreakFreeHP(_, unit)
 		local t = GetTime()
 		if t-prev > 1 then
-			local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+			local hp = self:GetHealth(unit)
 			if hp < 21 then
 				prev = t
 				self:MessageOld(123060, "blue", nil, L["break_free_message"]:format(hp))

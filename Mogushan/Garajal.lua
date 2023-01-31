@@ -181,11 +181,11 @@ function mod:SoulSeverRemoved(args)
 	end
 end
 
-function mod:FrenzyCheck(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:FrenzyCheck(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 25 then -- phase starts at 20
 		self:MessageOld(-5759, "green", "info", CL["soon"]:format(self:SpellName(-5759)))
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 

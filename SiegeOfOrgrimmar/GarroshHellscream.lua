@@ -12,7 +12,7 @@ mod.engageId = 1623
 -- Locals
 --
 
-local UnitHealth, UnitHealthMax, UnitPower, GetTime = UnitHealth, UnitHealthMax, UnitPower, GetTime
+local UnitPower, GetTime = UnitPower, GetTime
 local markableMobs = {}
 local marksUsed = {}
 local markTimer = nil
@@ -552,9 +552,9 @@ do
 end
 
 -- General
-function mod:UNIT_HEALTH(event, unitId)
-	if self:MobId(self:UnitGUID(unitId)) ~= 71865 then return end
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:UNIT_HEALTH(event, unit)
+	if self:MobId(self:UnitGUID(unit)) ~= 71865 then return end
+	local hp = self:GetHealth(unit)
 	if hp < 16 then -- 10%
 		self:MessageOld("stages", "cyan", "info", CL.soon:format(CL.phase:format(phase+1)), false)
 		self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3")

@@ -234,9 +234,9 @@ function mod:Fusion(args)
 	self:MessageOld(args.spellId, "yellow", nil, CL.count:format(args.spellName, amount))
 end
 
-function mod:UNIT_HEALTH(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
-	if hp < 56 and self:MobId(self:UnitGUID(unitId)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
+function mod:UNIT_HEALTH(event, unit)
+	local hp = self:GetHealth(unit)
+	if hp < 56 and self:MobId(self:UnitGUID(unit)) == 72276 then -- 50%, don't trigger a p2 soon message for healers going into the other realm.
 		self:MessageOld("stages", "cyan", "info", CL.soon:format(CL.phase:format(2)), 146179)
 		self:UnregisterUnitEvent(event, "boss1")
 	end

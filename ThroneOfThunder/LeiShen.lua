@@ -439,14 +439,14 @@ function mod:IntermissionStart(args)
 	self:DelayedMessage("stages", 40, "green", L["last_inermission_ability"])
 end
 
-function mod:UNIT_HEALTH(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:UNIT_HEALTH(event, unit)
+	local hp = self:GetHealth(unit)
 	if phase == 1 and hp < 68 then
 		self:MessageOld("stages", "cyan", "info", CL["soon"]:format(CL.intermission), false)
 		phase = 2
 	elseif phase == 2 and hp < 33 then
 		self:MessageOld("stages", "cyan", "info", CL["soon"]:format(CL.intermission), false)
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 		phase = 3
 	end
 end

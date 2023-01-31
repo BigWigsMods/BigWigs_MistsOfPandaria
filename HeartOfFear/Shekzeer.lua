@@ -248,11 +248,11 @@ function mod:UltimateCorruption(args)
 	self:Bar(124849, 10) -- Consuming Terror
 end
 
-function mod:Phase3Warn(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:Phase3Warn(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 35 then -- phase starts at 30
 		self:MessageOld("phases", "green", "info", CL["soon"]:format(CL["phase"]:format(3)), L.phases_icon)
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 

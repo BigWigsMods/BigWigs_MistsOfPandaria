@@ -195,8 +195,8 @@ function mod:Unleashed() -- Final Gift
 	end
 end
 
-function mod:UNIT_HEALTH(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:UNIT_HEALTH(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 34 then -- 30%
 		self:MessageOld(144832, "cyan", "info", CL.soon:format(self:SpellName(144832))) -- Unleashed
 		self:UnregisterUnitEvent(event, "boss1")

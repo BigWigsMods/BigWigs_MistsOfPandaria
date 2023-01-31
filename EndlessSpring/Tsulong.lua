@@ -53,7 +53,7 @@ function mod:GetOptions()
 end
 
 function mod:VerifyEnable(unit)
-	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+	local hp = self:GetHealth(unit)
 	if hp > 8 and UnitCanAttack("player", unit) then
 		return true
 	end

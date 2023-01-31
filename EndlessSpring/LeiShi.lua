@@ -55,7 +55,7 @@ function mod:GetOptions()
 end
 
 function mod:VerifyEnable(unit)
-	local hp = UnitHealth(unit) / UnitHealthMax(unit) * 100
+	local hp = self:GetHealth(unit)
 	if hp > 8 and UnitCanAttack("player", unit) then
 		return true
 	end
@@ -157,7 +157,7 @@ do
 	local getAwayStartHP
 	function mod:GetAwayApplied(args)
 		if UnitHealthMax("boss1") > 0 then
-			getAwayStartHP = UnitHealth("boss1") / UnitHealthMax("boss1") * 100
+			getAwayStartHP = self:GetHealth("boss1")
 			self:MessageOld(args.spellId, "red", "alarm")
 		end
 	end
@@ -169,8 +169,8 @@ do
 
 	local prev = 0
 	local lastHpToGo
-	function mod:HealthCheck(_, unitId)
-		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+	function mod:HealthCheck(_, unit)
+		local hp = self:GetHealth(unit)
 		if hp < nextProtectWarning then
 			self:MessageOld(123250, "green", nil, CL["soon"]:format(self:SpellName(123250))) -- Protect
 			nextProtectWarning = hp - 20

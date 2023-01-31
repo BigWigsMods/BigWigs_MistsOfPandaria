@@ -169,16 +169,16 @@ function mod:UnstableEnergyRemoved(args)
 	end
 end
 
-function mod:PhaseWarn(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:PhaseWarn(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 88 and phaseCount == 0 then -- phase starts at 85
 		self:MessageOld("stages", "green", "info", CL["soon"]:format(CL["phase"]:format(2)), false)
 		phaseCount = 1
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 	elseif hp < 53 and phaseCount == 1 then
 		self:MessageOld("stages", "green", "info", CL["soon"]:format(CL["phase"]:format(2)), false)
 		phaseCount = 2
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 

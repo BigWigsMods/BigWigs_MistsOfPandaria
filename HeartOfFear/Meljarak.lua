@@ -276,9 +276,9 @@ function mod:ImpalingSpearRemoved(args)
 	end
 end
 
-function mod:PhaseChange(event, unitId)
-	if self:MobId(self:UnitGUID(unitId)) == 62397 then
-		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:PhaseChange(event, unit)
+	if self:MobId(self:UnitGUID(unit)) == 62397 then
+		local hp = self:GetHealth(unit)
 		if hp < 79 and phase == 0 then -- phase starts at 75
 			self:MessageOld("stages", "green", nil, CL["soon"]:format(CL["phase"]:format(2)), 131830)
 			phase = 1

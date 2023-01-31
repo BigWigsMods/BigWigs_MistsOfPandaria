@@ -126,8 +126,8 @@ function mod:ForceAndVerse(args)
 	self:Flash("force", args.spellId)
 end
 
-function mod:UNIT_HEALTH(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:UNIT_HEALTH(event, unit)
+	local hp = self:GetHealth(unit)
 	if platform == 0 then
 		if hp < 83 then
 			self:MessageOld("stages", "green", "info", CL["soon"]:format(L["platform_message"]), "ability_vehicle_launchplayer")
@@ -140,7 +140,7 @@ function mod:UNIT_HEALTH(event, unitId)
 		end
 	elseif platform == 2 and hp < (self:Heroic() and 47 or 43) then
 		self:MessageOld("stages", "green", "info", CL["soon"]:format(CL["phase"]:format(2)), "ability_vehicle_launchplayer")
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 

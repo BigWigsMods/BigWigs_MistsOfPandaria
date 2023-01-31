@@ -456,10 +456,10 @@ do
 	end
 end
 
-function mod:BlossomPreWarn(event, unitId)
-	local mobId = self:MobId(self:UnitGUID(unitId))
+function mod:BlossomPreWarn(event, unit)
+	local mobId = self:MobId(self:UnitGUID(unit))
 	if mobId == 61046 or mobId == 61038 or mobId == 61042 then
-		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+		local hp = self:GetHealth(unit)
 		if hp < 30 then
 			self:MessageOld(119888, "yellow", nil, CL["soon"]:format(self:SpellName(119888))) -- Death Blossom
 			self:UnregisterUnitEvent(event, "target", "focus")

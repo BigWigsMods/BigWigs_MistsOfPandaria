@@ -329,10 +329,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 	end
 end
 
-function mod:BossSwap(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:BossSwap(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 38 then -- next boss at 30% (Qiang -> Subetai -> Zian -> Meng)
-		local id = self:MobId(self:UnitGUID(unitId))
+		local id = self:MobId(self:UnitGUID(unit))
 		if bossWarned == 0 and (id == 60709 or id == 61423) then -- Qiang
 			self:MessageOld("bosses", "green", "info", CL["soon"]:format(subetai), false)
 			bossWarned = 1

@@ -217,14 +217,14 @@ function mod:AssaultCast(args)
 	self:CDBar(args.spellId, 20.4, L["assault_message"])
 end
 
-function mod:UNIT_HEALTH(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:UNIT_HEALTH(event, unit)
+	local hp = self:GetHealth(unit)
 	if hp < 25 and phase == 1 then -- phase starts at 20
 		self:MessageOld(-6350, "green", "long", CL["soon"]:format(CL["phase"]:format(2)))
 		phase = 2
 	elseif hp < 14 and phase == 2 then
 		self:MessageOld(-6350, "green", "long", CL["soon"]:format(L["side_swap"]))
-		self:UnregisterUnitEvent(event, unitId)
+		self:UnregisterUnitEvent(event, unit)
 	end
 end
 

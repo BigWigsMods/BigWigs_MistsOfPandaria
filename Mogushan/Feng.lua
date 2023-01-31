@@ -161,21 +161,21 @@ do
 	end
 end
 
-function mod:PhaseChange(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:PhaseChange(event, unit)
+	local hp = self:GetHealth(unit)
 	--a 5% warning is like forever away from the actual transition (especially in LFR, lol)
 	if (hp < 68 and not p2) or (hp < 35) then --66/33
 		self:MessageOld("stages", "green", "info", L["phase_message"], false)
 		if not p2 then
 			p2 = true
 		else
-			self:UnregisterUnitEvent(event, unitId)
+			self:UnregisterUnitEvent(event, unit)
 		end
 	end
 end
 
-function mod:PhaseChangeHC(event, unitId)
-	local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+function mod:PhaseChangeHC(event, unit)
+	local hp = self:GetHealth(unit)
 	--a 5% warning is like forever away from the actual transition (especially in LFR, lol)
 	if (hp < 77 and not p2) or (hp < 52 and not p3) or (hp < 27) then --75/50/25
 		self:MessageOld("stages", "green", "info", L["phase_message"], false)
@@ -184,7 +184,7 @@ function mod:PhaseChangeHC(event, unitId)
 		elseif not p3 then
 			p3 = true
 		else
-			self:UnregisterUnitEvent(event, unitId)
+			self:UnregisterUnitEvent(event, unit)
 		end
 	end
 end

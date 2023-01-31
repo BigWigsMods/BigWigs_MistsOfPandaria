@@ -17,8 +17,6 @@ mod.engageId = 1598
 --------------------------------------------------------------------------------
 -- Locals
 --
-local UnitHealth = UnitHealth
-local UnitHealthMax = UnitHealthMax
 
 local marksUsed = {}
 local darkMeditationTimer
@@ -510,16 +508,16 @@ function mod:Heal(args)
 	self:MessageOld(args.spellId, "green", "warning", CL.other:format(self:SpellName(37455), args.sourceName)) -- "Healing"
 end
 
-function mod:UNIT_HEALTH(event, unitId)
-	local mobId = self:MobId(self:UnitGUID(unitId))
+function mod:UNIT_HEALTH(event, unit)
+	local mobId = self:MobId(self:UnitGUID(unit))
 	if mobId == 71475 or mobId == 71479 or mobId == 71480 then
-		local hp = UnitHealth(unitId) / UnitHealthMax(unitId) * 100
+		local hp = self:GetHealth(unit)
 		if hp < 70 and not intermission[mobId] then -- 66%
-			local boss = self:UnitName(unitId)
+			local boss = self:UnitName(unit)
 			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(self:SpellName(L.intermission), boss)), false)
 			intermission[mobId] = 1
 		elseif hp < 37 and intermission[mobId] == 1 then -- 33%
-			local boss = self:UnitName(unitId)
+			local boss = self:UnitName(unit)
 			self:MessageOld("intermission", "cyan", "info", CL.soon:format(("%s (%s)"):format(self:SpellName(L.intermission), boss)), false)
 			intermission[mobId] = 2
 			if intermission[71475] == 2 and intermission[71479] == 2 and intermission[71480] == 2 then
