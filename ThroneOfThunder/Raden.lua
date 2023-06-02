@@ -63,12 +63,12 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	if not self.assistWarned then
-		if not IsAddOnLoaded("BigWigs_Ra-denAssist") then
-			BigWigs:Print(L.assistPrint)
-		end
-		self.assistWarned = true
-	end
+	--if not self.assistWarned then
+	--	if not IsAddOnLoaded("BigWigs_Ra-denAssist") then
+	--		BigWigs:Print(L.assistPrint)
+	--	end
+	--	self.assistWarned = true
+	--end
 
 	-- Anima abilities
 	self:Log("SPELL_CAST_START", "Worm", 138338)
