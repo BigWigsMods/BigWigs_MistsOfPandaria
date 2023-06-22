@@ -128,7 +128,7 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
 		-- first 3 lower, second 3 upper with 9/10 and 15/16 happening at the same time
 		if nestCounter == 8 or nestCounter == 14 then -- up and down at same time
 			self:Bar("nest", 40, ("(%d) %s + (%d) %s"):format(nextNest, L["up"], nextNest+1, L["down"]), 134347)
-		elseif nestCounter == 9 or nestCounter == 15 then
+		--elseif nestCounter == 9 or nestCounter == 15 then
 			-- no bar for second of double nests
 		elseif nestCounter % 6 > 2 then
 				self:Bar("nest", 40, ("(%d) %s"):format(nextNest, L["upper_nest"]), "misc_arrowlup")

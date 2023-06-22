@@ -141,9 +141,9 @@ do
 			self:CancelTimer(darkMeditationTimer)
 			darkMeditationTimer = nil
 		end
-		if not self:Mythic() then
+		--if not self:Mythic() then
 			--self:CDBar(143027, ) -- Clash
-		end
+		--end
 		self:CDBar(143491, 30) -- Calamity
 		if self:Dispeller("magic", nil, 143446) then
 			self:CDBar(143446, 17) -- Bane
@@ -319,10 +319,10 @@ function mod:HeIntermission(args)
 end
 
 function mod:HeIntermissionEnd(args)
-	if not self:Mythic() then
+	--if not self:Mythic() then
 		--self:CDBar(143491, ) -- Calamity
 		--self:CDBar(143027, ) -- Clash
-	end
+	--end
 	self:CDBar(143330, 23) -- Gouge
 end
 

@@ -261,10 +261,10 @@ do
 		self:PrimaryIcon(args.spellId, matterSwapTargets[1])
 
 		last = nil
-		if not timer and not self:LFR() and self.db.profile.matterswap > 0 then -- pretty wasteful to do the scanning if the option isn't on
+		--if not timer and not self:LFR() and self.db.profile.matterswap > 0 then -- pretty wasteful to do the scanning if the option isn't on
 			-- XXX no range checking now
 			--timer = self:ScheduleRepeatingTimer(warnSwapTarget, 0.5)
-		end
+		--end
 	end
 
 	function mod:MatterSwapRemoved(args)
