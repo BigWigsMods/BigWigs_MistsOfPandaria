@@ -223,21 +223,21 @@ end
 function mod:UNIT_HEALTH(event, unit)
 	local hp = self:GetHealth(unit)
 	if hp < 17 then
-		self:MessageOld(-7920, "cyan", "info", CL.soon:format(L.extra_adds))
+		self:MessageOld(-7920, "cyan", "info", CL.soon:format(L.extra_adds), false)
 		self:UnregisterUnitEvent(event, unit)
 	end
 end
 
 function mod:ExtraAdds()
-	self:MessageOld(-7920, "cyan", "long", "10% - ".. L.extra_adds)
+	self:MessageOld(-7920, "cyan", "long", "10% - ".. L.extra_adds, false)
 end
 
 function mod:Adds()
 	local mobs = self:Mythic() and addsMythic[addWaveCounter] or addsNormal[addWaveCounter]
 	if addWaveCounter == 10 then
-		self:MessageOld(-7920, "cyan", "long", L.add_wave:format(L.final_wave, addWaveCounter, mobs))
+		self:MessageOld(-7920, "cyan", "long", L.add_wave:format(L.final_wave, addWaveCounter, mobs), false)
 	else
-		self:MessageOld(-7920, "cyan", "long", L.add_wave:format(CL.adds, addWaveCounter, mobs))
+		self:MessageOld(-7920, "cyan", "long", L.add_wave:format(CL.adds, addWaveCounter, mobs), false)
 	end
 
 	addWaveCounter = addWaveCounter + 1

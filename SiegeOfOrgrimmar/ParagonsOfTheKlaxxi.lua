@@ -371,8 +371,8 @@ do
 	end
 	function mod:ParasiteFixate(args)
 		if self:Me(args.destGUID) then
-			self:Flash(-8065)
-			self:MessageOld(-8065, "blue", "info", CL.you:format(self:SpellName(-8065)))
+			self:Flash(-8065, args.spellId)
+			self:MessageOld(-8065, "blue", "info", CL.you:format(self:SpellName(-8065)), args.spellId)
 		end
 		if self.db.profile.custom_off_parasite_marks then
 			if not markableMobs[args.sourceGUID] then
@@ -627,7 +627,7 @@ do
 		[mod:SpellName(142534)] = {[142727] = "ffFFFF00", [142730] = "ff008000", [142728] = "ffFF9900"} -- yellow
 	}
 	local function handleCatalystProximity()
-		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533), 142533) or mod:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
+		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533), 142533) or mod:UnitDebuff("player", mod:SpellName(142534), 142534) -- blue, red, yellow
 		if myDebuff then
 			local redPlayers = {}
 			for unit in mod:IterateGroup() do

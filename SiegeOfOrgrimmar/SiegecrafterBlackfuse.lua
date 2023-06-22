@@ -221,7 +221,7 @@ do
 		local t = GetTime()
 		if t-prev > 5 then
 			prev = t
-			self:MessageOld(-8212, "orange", nil, -8212, 77976) -- mine like icon
+			self:MessageOld(-8212, "orange", nil, -8212, "inv_misc_bomb_02") -- mine like icon
 		end
 	end
 end
@@ -250,8 +250,8 @@ function mod:RAID_BOSS_WHISPER(_, msg, sender)
 		self:Flash(-8208)
 		self:Say(-8208, 143444) -- 143444 = "Laser"
 	elseif msg:find("Ability_Siege_Engineer_Detonate", nil, true) then -- mine fixate
-		self:MessageOld(-8212, "blue", "info", CL.you:format(sender))
-		self:Flash(-8212)
+		self:MessageOld(-8212, "blue", "info", CL.you:format(sender), "inv_misc_bomb_02")
+		self:Flash(-8212, "inv_misc_bomb_02")
 	elseif msg:find("143266", nil, true) then -- Sawblade
 		-- this is faster than target scanning, hence why we do it
 		sawbladeTarget = self:UnitGUID("player")
