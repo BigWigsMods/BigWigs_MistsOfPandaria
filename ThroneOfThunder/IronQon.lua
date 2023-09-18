@@ -124,7 +124,7 @@ do
 
 	function mod:StartSpearScan()
 		if not spearTimer then
-			if phase == 1 and UnitExists("boss1target") and UnitGroupRolesAssigned("boss1target") ~= "DAMAGER" then -- unassigned or healer (or tank, but they're already ignored)
+			if phase == 1 and UnitExists("boss1target") and not self:Damager("boss1target") then -- unassigned or healer (or tank, but they're already ignored)
 				initialTarget = self:UnitName("boss1target")
 			else
 				initialTarget = nil
