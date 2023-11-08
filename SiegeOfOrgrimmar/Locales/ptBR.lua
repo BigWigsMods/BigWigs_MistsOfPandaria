@@ -115,5 +115,8 @@ L["ironstar_rolling"] = "Estrela de Ferro rolando!"
 L["manifest_rage"] = "Manifestar Raiva"
 L["manifest_rage_desc"] = "Quando Garrosh chega a 100 de energia, ele irá conjurar Manifestar Raiva por 2 segundos, e então canalizar. Enquanto é canalizada ela sumona adds grandes. Leve a Estrela de Ferro até Garrosh para atordoá-lo e interrompê-lo."
 L["phase_3_end_trigger"] = "Você acha que GANHOU?" -- Needs review
+
+	--L.warmup_yell_chat_trigger1 = "It is not too late, Garrosh" -- It is not too late, Garrosh. Lay down the mantle of Warchief. We can end this here, now, with no more bloodshed."
+	--L.warmup_yell_chat_trigger2 = "Do you remember nothing of Honor" -- Ha! Do you remember nothing of Honor? Of glory on the battlefield?  You who would parlay with the humans, who allowed warlocks to practice their dark magics right under our feet.  You are weak.
 end
 

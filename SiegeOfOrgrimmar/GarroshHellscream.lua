@@ -69,6 +69,9 @@ if L then
 	L.custom_off_minion_marker = "Minion marker"
 	L.custom_off_minion_marker_desc = "To help separate Empowered Whirling Corruption adds, mark them with {rt1}{rt2}{rt3}{rt4}{rt5}{rt6}{rt7}, requires promoted or leader."
 	L.custom_off_minion_marker_icon = 1
+
+	L.warmup_yell_chat_trigger1 = "It is not too late, Garrosh" -- It is not too late, Garrosh. Lay down the mantle of Warchief. We can end this here, now, with no more bloodshed."
+	L.warmup_yell_chat_trigger2 = "Do you remember nothing of Honor" -- Ha! Do you remember nothing of Honor? Of glory on the battlefield?  You who would parlay with the humans, who allowed warlocks to practice their dark magics right under our feet.  You are weak.
 end
 L = mod:GetLocale()
 
@@ -86,7 +89,7 @@ function mod:GetOptions()
 		"custom_off_minion_marker",
 		{147209, "FLASH", "ICON", "SAY"}, 147235, "bombardment", {147665, "FLASH", "ICON"}, {"clump_check", "FLASH", "PROXIMITY"}, "manifest_rage", -- phase 4
 		{144758, "SAY", "FLASH", "ICON"},
-		"stages", "berserk",
+		"stages", "warmup", "berserk",
 	}, {
 		[-8298] = -8288, -- phase 1
 		[-8294] = -8294, -- Farseer
@@ -100,6 +103,9 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
+	self:BossYell("Warmup", L.warmup_yell_chat_trigger1)
+	self:BossYell("WarmupBackup", L.warmup_yell_chat_trigger2)
+
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1", "boss2", "boss3")
 	self:RegisterUnitEvent("UNIT_SPELLCAST_CHANNEL_STOP", "IronStarRolling", "boss1", "boss2", "boss3")
 
@@ -161,6 +167,14 @@ function mod:OnEngage(diff)
 		self:RegisterEvent("UPDATE_MOUSEOVER_UNIT")
 	end
 	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1", "boss2", "boss3")
+end
+
+function mod:Warmup()
+	self:Bar("warmup", 122, CL.active, "achievement_boss_garrosh")
+end
+
+function mod:WarmupBackup()
+	self:Bar("warmup", {110, 122}, CL.active, "achievement_boss_garrosh")
 end
 
 --------------------------------------------------------------------------------
