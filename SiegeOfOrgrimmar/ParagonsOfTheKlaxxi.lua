@@ -257,7 +257,7 @@ function mod:Prey(args)
 			self:MessageOld(143339, "green", "info", L.you_ate:format(parasiteCounter))
 			youAte = true
 		else
-			local raidIcon = CombatLog_String_GetIcon(args.destRaidFlags) -- Raid icon string
+			local raidIcon = self:GetIconTexture(self:GetIcon(args.destRaidFlags)) or "" -- Raid icon string
 			self:MessageOld(143339, "yellow", nil, L.other_ate:format(self:ColorName(args.sourceName), raidIcon, parasiteCounter), 99315) -- spell called parasite, worm look like icon
 		end
 	end

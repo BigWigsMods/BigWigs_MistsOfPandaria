@@ -8,21 +8,19 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "ruRU")
 if L then
-	L.focus_only = "|cffff0000Оповещения только для фокуса.|r "
-
 	L.charge_trigger = "останавливает свой взгляд"
 	L.door_trigger = "прибывают"
 	L.orb_trigger = "направляет"
 
-	L.chain_lightning_desc = L.focus_only .. "{-7124}"
+	L.chain_lightning_desc = "|cffff0000Оповещения только для фокуса.|r {-7124}"
 	L.chain_lightning_message = "Ваш фокус читает Цепную молнию!"
 	L.chain_lightning_bar = "Фокус: Цепная молния"
 
-	L.fireball_desc = L.focus_only .. "{-7122}"
+	L.fireball_desc = "|cffff0000Оповещения только для фокуса.|r {-7122}"
 	L.fireball_message = "Ваш фокус читает Огненный шар!"
 	L.fireball_bar = "Фокус: Огненный шар"
 
-	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
+	L.venom_bolt_volley_desc = "|cffff0000Оповещения только для фокуса.|r {-7112}"
 	L.venom_bolt_volley_message = "Ваш фокус читает Залп!"
 	L.venom_bolt_volley_bar = "Фокус: Залп"
 

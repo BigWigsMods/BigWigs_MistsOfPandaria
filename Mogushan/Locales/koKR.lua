@@ -85,11 +85,9 @@ if L then
 	L.gas_trigger = "고대 모구 기계가 부서집니다!"
 	L.gas_overdrive_trigger = "고대 모구 기계가 폭주합니다!"
 
-	L.target_only = "|cFFFF0000이 경고는 당신이 대상으로 지정한 우두머리만 표시합니다.|r "
-
-	L.combo_desc = L.target_only .. "{-5672}"
+	L.combo_desc = "|cFFFF0000이 경고는 당신이 대상으로 지정한 우두머리만 표시합니다.|r {-5672}"
 	L.combo_message = "%s: 곧 연타 공격!"
 
-	L.arc_desc = L.target_only .. "{-5673}"
+	L.arc_desc = "|cFFFF0000이 경고는 당신이 대상으로 지정한 우두머리만 표시합니다.|r {-5673}"
 end
 

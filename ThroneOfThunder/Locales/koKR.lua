@@ -8,21 +8,19 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "koKR")
 if L then
-	L.focus_only = "|cffff0000주시 대상 경고만 표시합니다.|r "
-
 	L.charge_trigger = "호리돈이 시선을" -- 호리돈이 시선을 PLAYERNAME에게 고정하고 꼬리를 바닥에 쿵쿵 내려칩니다!
 	L.door_trigger = "쏟아져 나옵니다!" -- 파락키 부족 문에서 파락키 병력들이 쏟아져 나옵니다!
 	L.orb_trigger = "돌진하게 합니다!" -- PLAYERNAME|1이;가; 호리돈을 파락키 문에 돌진하게 합니다!
 
-	L.chain_lightning_desc = L.focus_only .. "{-7124}"
+	L.chain_lightning_desc = "|cffff0000주시 대상 경고만 표시합니다.|r {-7124}"
 	L.chain_lightning_message = "당신의 주시 대상이 연쇄 번개를 시전합니다!"
 	L.chain_lightning_bar = "주시 대상: 연쇄 번개"
 
-	L.fireball_desc = L.focus_only .. "{-7122}"
+	L.fireball_desc = "|cffff0000주시 대상 경고만 표시합니다.|r {-7122}"
 	L.fireball_message = "당신의 주시 대상이 화염구를 시전합니다!"
 	L.fireball_bar = "주시 대상: 화염구"
 
-	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
+	L.venom_bolt_volley_desc = "|cffff0000주시 대상 경고만 표시합니다.|r {-7112}"
 	L.venom_bolt_volley_message = "당신의 주시 대상이 일제 사격을 시전합니다!"
 	L.venom_bolt_volley_bar = "주시 대상: 일제 사격"
 

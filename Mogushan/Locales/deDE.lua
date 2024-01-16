@@ -85,11 +85,9 @@ if L then
 	L.gas_trigger = "Die uralte Mogumaschine bricht zusammen!"
 	L.gas_overdrive_trigger = "Die uralte Mogumaschine schaltet in den Schnellgang!"
 
-	L.target_only = "|cFFFF0000Diese Warnung wird nur für den Boss angezeigt, welchen du anvisierst.|r "
-
-	L.combo_desc = L.target_only .. "{-5672}"
+	L.combo_desc = "|cFFFF0000Diese Warnung wird nur für den Boss angezeigt, welchen du anvisierst.|r {-5672}"
 	L.combo_message = "%s: Combo bald!"
 
-	L.arc_desc = L.target_only .. "{-5673}"
+	L.arc_desc = "|cFFFF0000Diese Warnung wird nur für den Boss angezeigt, welchen du anvisierst.|r {-5673}"
 end
 

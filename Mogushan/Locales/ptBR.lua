@@ -85,11 +85,9 @@ if L then
 	L.gas_trigger = "A Máquina Mogu Ancestral quebrou!"
 	L.gas_overdrive_trigger = "The Ancient Mogu Machine goes into overdrive!"
 
-	L.target_only = "|cFFFF0000Este aviso só será mostrado para o chefe que você estiver com alvo.|r "
-
-	L.combo_desc = L.target_only .. "{-5672}"
+	L.combo_desc = "|cFFFF0000Este aviso só será mostrado para o chefe que você estiver com alvo.|r {-5672}"
 	L.combo_message = "%s: Combo soon!"
 
-	L.arc_desc = L.target_only .. "{-5673}"
+	L.arc_desc = "|cFFFF0000Este aviso só será mostrado para o chefe que você estiver com alvo.|r {-5673}"
 end
 

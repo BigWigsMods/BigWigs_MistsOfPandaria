@@ -8,21 +8,19 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "esES") or BigWigs:NewBossLocale("Horridon", "esMX")
 if L then
-	L.focus_only = "|cffff0000Solo alertas de Foco.|r "
-
 	L.charge_trigger = "fija la vista" -- Horridon sets his eyes on PLAYERNAME and stamps his tail!
 	L.door_trigger = "salen en tropel" -- Farraki forces pour from the Farraki Tribal Door!
 	--L.orb_trigger = "charge" -- PLAYERNAME forces Horridon to charge the Farraki door!
 
-	L.chain_lightning_desc = L.focus_only .. "{-7124}"
+	L.chain_lightning_desc = "|cffff0000Solo alertas de Foco.|r {-7124}"
 	L.chain_lightning_message = "¡Tu foco está casteando Cadena de relámpagos!"
 	L.chain_lightning_bar = "Foco: Cadena de relámpagos"
 
-	L.fireball_desc = L.focus_only .. "{-7122}"
+	L.fireball_desc = "|cffff0000Solo alertas de Foco.|r {-7122}"
 	L.fireball_message = "¡Tu foco está casteando Bola de Fuego!"
 	L.fireball_bar = "Foco: Bola de Fuego"
 
-	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
+	L.venom_bolt_volley_desc = "|cffff0000Solo alertas de Foco.|r {-7112}"
 	L.venom_bolt_volley_message = "¡Tu foco está casteando Salva!"
 	L.venom_bolt_volley_bar = "Foco: Salva"
 

@@ -8,21 +8,19 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "frFR")
 if L then
-	L.focus_only = "|cffff0000Alertes de la cible de focalisation uniquement.|r "
-
 	L.charge_trigger = "pose les yeux sur"
 	L.door_trigger = "surgissent de la porte"
 	L.orb_trigger = "enfoncer" -- PLAYERNAME forces Horridon to charge the Farraki door!
 
-	L.chain_lightning_desc = L.focus_only .. "{-7124}"
+	L.chain_lightning_desc = "|cffff0000Alertes de la cible de focalisation uniquement.|r {-7124}"
 	L.chain_lightning_message = "Votre focalisation est entrain d'incanter Chaîne d'éclairs !"
 	L.chain_lightning_bar = "Focalisation : Chaîne d'éclairs"
 
-	L.fireball_desc = L.focus_only .. "{-7122}"
+	L.fireball_desc = "|cffff0000Alertes de la cible de focalisation uniquement.|r {-7122}"
 	L.fireball_message = "Votre focalisation est en train d'incanter Boule de feu !"
 	L.fireball_bar = "Focalisation : Boule de feu"
 
-	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
+	L.venom_bolt_volley_desc = "|cffff0000Alertes de la cible de focalisation uniquement.|r {-7112}"
 	L.venom_bolt_volley_message = "Votre focalisation est en train d'incanter Salve !"
 	L.venom_bolt_volley_bar = "Focalisation : Salve"
 

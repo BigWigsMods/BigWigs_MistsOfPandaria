@@ -8,21 +8,19 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "zhCN")
 if L then
-	L.focus_only = "|cffff0000只警报焦点目标。|r "
-
 	L.charge_trigger = "开始拍打他的尾巴"
 	L.door_trigger = "之门中涌出"
 	L.orb_trigger = "冲向" -- PLAYERNAME forces Horridon to charge the Farraki door!
 
-	L.chain_lightning_desc = L.focus_only .. "{-7124}"
+	L.chain_lightning_desc = "|cffff0000只警报焦点目标。|r {-7124}"
 	L.chain_lightning_message = "焦点：>闪电链<！"
 	L.chain_lightning_bar = "焦点：闪电链"
 
-	L.fireball_desc = L.focus_only .. "{-7122}"
+	L.fireball_desc = "|cffff0000只警报焦点目标。|r {-7122}"
 	L.fireball_message = "焦点：>火球术<！"
 	L.fireball_bar = "焦点：火球术"
 
-	L.venom_bolt_volley_desc = L.focus_only .. "{-7112}"
+	L.venom_bolt_volley_desc = "|cffff0000只警报焦点目标。|r {-7112}"
 	L.venom_bolt_volley_message = "焦点：>毒箭之雨<！"
 	L.venom_bolt_volley_bar = "焦点：毒箭之雨"
 

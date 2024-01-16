@@ -31,14 +31,12 @@ if L then
 	L.gas_trigger = "The Ancient Mogu Machine breaks down!"
 	L.gas_overdrive_trigger = "The Ancient Mogu Machine goes into overdrive!"
 
-	L.target_only = "|cFFFF0000This warning only shows for the boss you're targeting.|r "
-
 	L.combo = -5672
-	L.combo_desc = L.target_only .. "{-5672}"
+	L.combo_desc = "|cFFFF0000This warning only shows for the boss you're targeting.|r {-5672}"
 	L.combo_message = "%s: Combo soon!"
 
 	L.arc = -5673
-	L.arc_desc = L.target_only .. "{-5673}"
+	L.arc_desc = "|cFFFF0000This warning only shows for the boss you're targeting.|r {-5673}"
 	L.arc_icon = 116835
 
 	L.rage, L.rage_desc = -5678, -5678

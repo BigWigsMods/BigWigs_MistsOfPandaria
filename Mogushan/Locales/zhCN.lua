@@ -85,11 +85,9 @@ if L then
 	L.gas_trigger = "上古魔古机器损坏了！"
 	L.gas_overdrive_trigger = "皇帝之息渐灭。"
 
-	L.target_only = "|cFFFF0000该提示信息仅在你为首领目标时显示。|r "
-
-	L.combo_desc = L.target_only .. "{-5672}"
+	L.combo_desc = "|cFFFF0000该提示信息仅在你为首领目标时显示。|r {-5672}"
 	L.combo_message = "%s：即将连击！"
 
-	L.arc_desc = L.target_only .. "{-5673}"
+	L.arc_desc = "|cFFFF0000该提示信息仅在你为首领目标时显示。|r {-5673}"
 end
 
