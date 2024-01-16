@@ -8,8 +8,6 @@ end
 
 L = BigWigs:NewBossLocale("Horridon", "zhTW")
 if L then
-	L.focus_only = ""
-
 	L.charge_trigger = "用力拍動尾巴!"
 	L.door_trigger = "的門蜂擁而出!"
 	--L.orb_trigger = "charge" -- PLAYERNAME forces Horridon to charge the Farraki door!
