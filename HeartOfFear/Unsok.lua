@@ -294,10 +294,10 @@ function mod:AmberCarapace(args)
 	self:DelayedMessage("explosion_by_other", 40, "yellow", CL["custom_sec"]:format(explosion, 15), 122402)
 	self:DelayedMessage("explosion_by_other", 45, "yellow", CL["custom_sec"]:format(explosion, 10), 122402)
 	self:DelayedMessage("explosion_by_other", 50, "yellow", CL["custom_sec"]:format(explosion, 5), 122402)
-	self:CDBar("explosion_by_other", 55, L["monstrosity_is_casting"], 122402) -- Monstrosity Explosion
+	self:Bar("explosion_by_other", 55, L["monstrosity_is_casting"], 122402) -- Monstrosity Explosion
 
-	self:CDBar(122408, 22) -- Massive Stomp
-	self:CDBar(122413, 30) -- Fling
+	self:Bar(122408, 22) -- Massive Stomp
+	self:Bar(122413, 30) -- Fling
 end
 
 do
@@ -313,7 +313,7 @@ do
 		self:DelayedMessage("explosion_by_other", 35, "yellow", CL["custom_sec"]:format(explosion, 10), args.spellId)
 		self:DelayedMessage("explosion_by_other", 40, "yellow", CL["custom_sec"]:format(explosion, 5), args.spellId)
 		self:Bar("explosion_casting_by_other", 2.5, "<".. L["monstrosity_is_casting"] ..">", 122398)
-		self:CDBar("explosion_by_other", 45, L["monstrosity_is_casting"], args.spellId) -- cooldown, don't move this
+		self:Bar("explosion_by_other", 45, L["monstrosity_is_casting"], args.spellId) -- cooldown, don't move this
 		if self:UnitDebuff("player", self:SpellName(122784), 122370) then -- Reshape Life
 			self:Flash("explosion_casting_by_other", args.spellId)
 			warningSpam(args.spellName)
@@ -333,13 +333,13 @@ function mod:Fling(args)
 	if self:Me(args.destGUID) then
 		self:Bar(122413, 6, L["fling_message"], 68659)
 	end
-	self:CDBar(122413, 28) --Fling
+	self:Bar(122413, 28) --Fling
 	self:TargetMessageOld(122413, args.destName, "orange", "alarm") --Fling
 end
 
 function mod:MassiveStomp(args)
 	self:MessageOld(args.spellId, "orange", "alarm")
-	self:CDBar(args.spellId, 18)
+	self:Bar(args.spellId, 18)
 end
 
 ------------

@@ -70,8 +70,8 @@ function mod:OnEngage()
 	if self:Heroic() then
 		self:Bar(125310, 60) -- Blade Tempest
 	end
-	self:CDBar(122842, 9.8) -- Tempest Slash
-	self:CDBar(123175, 20.5) -- Wind Step
+	self:Bar(122842, 9.8) -- Tempest Slash
+	self:Bar(123175, 20.5) -- Wind Step
 	self:Bar(-6346, 30, CL["count"]:format(self:SpellName(122994), 1)) -- Unseen Strike
 	self:Bar(123474, 15, L["assault_message"])
 	self:OpenProximity(123175, 8)
@@ -125,7 +125,7 @@ function mod:BladeTempest(args)
 end
 
 function mod:WindStep(args)
-	self:CDBar(args.spellId, 26.5)
+	self:Bar(args.spellId, 26.5)
 end
 
 do
@@ -171,14 +171,14 @@ do
 	end
 	function mod:TayakCasts(_, _, _, spellId)
 		if spellId == 122949 then --Unseen Strike
-			self:CDBar(-6346, 53, CL["count"]:format(self:SpellName(122994), strikeCounter+1)) -- Unseen Strike, 53-60
+			self:Bar(-6346, 53, CL["count"]:format(self:SpellName(122994), strikeCounter+1)) -- Unseen Strike, 53-60
 			self:DelayedMessage(-6346, 48, "yellow", L["unseenstrike_soon"]:format(strikeCounter+1), false, "alarm")
 			if not timer then
 				timer = self:ScheduleRepeatingTimer(warnStrike, 0.05) -- ~1s faster than boss emote
 			end
 			self:ScheduleTimer(removeIcon, 6.2)
 		elseif spellId == 122839 then --Tempest Slash
-			self:CDBar(122842, self:LFR() and 20.5 or 15.6)
+			self:Bar(122842, self:LFR() and 20.5 or 15.6)
 		elseif spellId == 123814 then --Storm Unleashed (Phase 2)
 			self:MessageOld(-6350, "green", "long", "20% - "..CL["phase"]:format(2))
 			self:StopBar(125310) --Blade Tempest
@@ -214,7 +214,7 @@ end
 
 function mod:AssaultCast(args)
 	-- If a tank dies from an assault, it will never apply, and the CD bar won't show. Show it on cast instead.
-	self:CDBar(args.spellId, 20.4, L["assault_message"])
+	self:Bar(args.spellId, 20.4, L["assault_message"])
 end
 
 function mod:UNIT_HEALTH(event, unit)

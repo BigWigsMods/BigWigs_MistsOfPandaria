@@ -140,7 +140,7 @@ end
 function mod:OnEngage()
 	self:Berserk(600)
 	marksUsed = {}
-	self:CDBar(143494, 10) -- Sundering Blow
+	self:Bar(143494, 10) -- Sundering Blow
 	self:Bar(143638, 15.5) -- Bonecracker
 	addWaveCounter = 1
 	self:Bar(-7920, 46, CL.count:format(CL.adds, addWaveCounter), "achievement_guildperk_everybodysfriend") -- adds
@@ -165,7 +165,7 @@ end
 
 function mod:Execute(args)
 	self:MessageOld(args.spellId, "red", "warning", CL.casting:format(args.spellName))
-	self:CDBar(args.spellId, 18) -- varies a bit due to ability casts
+	self:Bar(args.spellId, 18) -- varies a bit due to ability casts
 	if UnitIsUnit("player", "boss1target") then -- poor mans target check
 		self:Flash(args.spellId)
 	end
@@ -337,6 +337,6 @@ end
 
 function mod:SunderingBlow(args)
 	self:StackMessageOld(args.spellId, args.destName, args.amount, "yellow", "info")
-	self:CDBar(args.spellId, 8)
+	self:Bar(args.spellId, 8)
 end
 

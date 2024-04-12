@@ -89,8 +89,8 @@ end
 
 function mod:OnEngage(diff)
 	self:Bar(121896, 36) -- Whirling Blade
-	self:CDBar(122406, 60) -- Rain of Blades
-	self:CDBar(122409, 19) -- Korthik Strike
+	self:Bar(122406, 60) -- Rain of Blades
+	self:Bar(122409, 19) -- Korthik Strike
 	self:Berserk(self:LFR() and 600 or 480)
 	korthikStrikeWarned = {}
 	primaryAmberIcon, secondaryAmberIcon, phase = nil, nil, 0
@@ -138,7 +138,7 @@ do
 				korthikStrikeWarned[player] = true
 				self:ScheduleTimer(allowKorthikStrike, 10, player)
 				self:TargetMessageOld(122409, player, "orange", "alarm")
-				self:CDBar(122409, firstKorthikStrikeDone and 50 or 30) -- 2nd one ~30, then cooldown 50 sec
+				self:Bar(122409, firstKorthikStrikeDone and 50 or 30) -- 2nd one ~30, then cooldown 50 sec
 				firstKorthikStrikeDone = true
 			end
 		end
@@ -189,7 +189,7 @@ end
 
 function mod:RainOfBlades(args)
 	self:MessageOld(args.spellId, "red", "alert")
-	self:CDBar(args.spellId, phase == 2 and 48 or 60)
+	self:Bar(args.spellId, phase == 2 and 48 or 60)
 end
 
 do
@@ -214,7 +214,7 @@ end
 
 function mod:WhirlingBlade(args)
 	self:MessageOld(args.spellId, "orange", "alarm")
-	self:CDBar(args.spellId, phase == 2 and 30 or 45)
+	self:Bar(args.spellId, phase == 2 and 30 or 45)
 	if not self:LFR() then
 		self:Flash(args.spellId)
 	end
@@ -285,7 +285,7 @@ function mod:PhaseChange(event, unit)
 		elseif hp < 75.1 and phase ~= 2 then
 			phase = 2
 			self:MessageOld("stages", "green", "info", "75% - "..CL["phase"]:format(2), 131830)
-			self:CDBar(121896, 30) -- Whirling Blade (reset cd)
+			self:Bar(121896, 30) -- Whirling Blade (reset cd)
 			self:StopBar(122406) -- Rain of Blades, first after p2 seems random
 			self:UnregisterUnitEvent(event, "boss1", "boss2", "boss3", "boss4")
 			for i = 1, 5 do

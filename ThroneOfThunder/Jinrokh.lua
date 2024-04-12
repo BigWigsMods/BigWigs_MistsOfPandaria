@@ -77,7 +77,7 @@ end
 function mod:OnEngage()
 	self:Bar(137313, 93, L["storm_short"]) -- Lightning Storm
 	self:Bar(137175, 30) -- Thundering Throw
-	self:CDBar(137162, 13) -- Static Burst
+	self:Bar(137162, 13) -- Static Burst
 	self:Berserk(self:Heroic() and 360 or 540)
 	if self:Heroic() then -- Ionization
 		ionized = {}
@@ -126,7 +126,7 @@ function mod:PersonalIonization(args)
 end
 
 function mod:Ionization(args)
-	self:CDBar(-7741, 13) -- Focused Lightning
+	self:Bar(-7741, 13) -- Focused Lightning
 	self:MessageOld(args.spellId, "red", "long")
 	self:Bar(args.spellId, 92)
 end
@@ -193,14 +193,14 @@ do
 		end
 	end
 	function mod:FocusedLightning(args)
-		self:CDBar(-7741, 11)
+		self:Bar(-7741, 11)
 		self:GetBossTarget(printTarget, 0.5, args.sourceGUID)
 	end
 end
 
 function mod:StaticBurst(args)
 	self:MessageOld(args.spellId, "yellow")
-	self:CDBar(args.spellId, 23)
+	self:Bar(args.spellId, 23)
 end
 
 function mod:StaticWound(args)

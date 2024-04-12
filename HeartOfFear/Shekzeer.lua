@@ -106,7 +106,7 @@ end
 
 function mod:Dispatch(args)
 	local diff = self:Difficulty()
-	self:CDBar(124077, (diff == 3 or diff == 5) and 22 or 12)
+	self:Bar(124077, (diff == 3 or diff == 5) and 22 or 12)
 	self:MessageOld(args.spellId, "orange", "long")
 	if self:UnitGUID("target") == args.sourceGUID or self:UnitGUID("focus") == args.sourceGUID then
 		self:Flash(args.spellId)
@@ -120,12 +120,12 @@ function mod:Poison(args)
 end
 
 function mod:DreadScreech(args)
-	self:CDBar(args.spellId, 6)
+	self:Bar(args.spellId, 6)
 end
 
 function mod:ConsumingTerror(args)
 	self:MessageOld(args.spellId, "red", "alert")
-	self:CDBar(args.spellId, 31)
+	self:Bar(args.spellId, 31)
 	self:Flash(args.spellId)
 end
 
@@ -236,7 +236,7 @@ end
 
 function mod:Eyes(args)
 	local buffStack = args.amount or 1
-	self:CDBar("eyes", 10.5, L["eyes_message"], args.spellId)
+	self:Bar("eyes", 10.5, L["eyes_message"], args.spellId)
 	self:StackMessageOld("eyes", args.destName, buffStack, "orange", buffStack > 2 and "info", L["eyes_message"], args.spellId)
 end
 

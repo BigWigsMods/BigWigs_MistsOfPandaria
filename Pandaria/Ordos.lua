@@ -51,9 +51,9 @@ end
 
 function mod:OnEngage()
 	self:Berserk(300) -- Eternal Agony
-	self:CDBar(144688, 10) -- Magma Crush
-	self:CDBar(144689, 23) -- Burning Soul
-	self:CDBar(144695, 44) -- Ancient Flame
+	self:Bar(144688, 10) -- Magma Crush
+	self:Bar(144689, 23) -- Burning Soul
+	self:Bar(144695, 44) -- Ancient Flame
 end
 
 --------------------------------------------------------------------------------
@@ -62,12 +62,12 @@ end
 
 function mod:MagmaCrush(args)
 	self:MessageOld(args.spellId, "orange", nil, CL["casting"]:format(args.spellName))
-	self:CDBar(args.spellId, 12)
+	self:Bar(args.spellId, 12)
 end
 
 function mod:PoolOfFire(args)
 	self:MessageOld(args.spellId, "yellow", "alarm")
-	self:CDBar(args.spellId, 32)
+	self:Bar(args.spellId, 32)
 end
 
 do
@@ -85,7 +85,7 @@ end
 
 function mod:AncientFlame(args)
 	self:MessageOld(args.spellId, "yellow")
-	self:CDBar(args.spellId, 44)
+	self:Bar(args.spellId, 44)
 end
 
 do
@@ -104,7 +104,7 @@ end
 do
 	local coloredNames, burningSoulList, isOnMe, scheduled = mod:NewTargetList(), {}, nil, nil
 	local function warnBurningSoul(spellId)
-		mod:CDBar(spellId, 24)
+		mod:Bar(spellId, 24)
 		mod:Bar(spellId, 10, L.burning_soul_bar)
 		if isOnMe then
 			mod:Bar(spellId, 10, L.burning_soul_self_bar)

@@ -89,7 +89,7 @@ do
 	function mod:Convert(args)
 		convertList[#convertList + 1] = args.destName
 		if not scheduled then
-			self:CDBar(args.spellId, 36)
+			self:Bar(args.spellId, 36)
 			scheduled = self:ScheduleTimer(warnConvert, 0.1, args.spellId)
 		end
 	end

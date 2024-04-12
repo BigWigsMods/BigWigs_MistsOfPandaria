@@ -379,7 +379,7 @@ do
 				self:Bar(144985, 50, CL.count:format(self:SpellName(144985), whirlingCounter))
 			end
 			if desecrateCounter == 3 and whirlingCounter == 3 then -- Whirling arrived first, delay Desecrate to the end of the cast
-				self:CDBar(144758, 8.5) -- Desecrate, delayed by Whirling: 2.5s cast and 6s channel = 8.5s
+				self:Bar(144758, 8.5) -- Desecrate, delayed by Whirling: 2.5s cast and 6s channel = 8.5s
 			end
 		else
 			self:Bar(144985, 50, CL.count:format(self:SpellName(144985), whirlingCounter))
@@ -548,7 +548,7 @@ do
 			if not self:Solo() then
 				self:Bar(145065, 29, 67229, 145065) -- Mind Control
 			end
-			self:CDBar(144758, 20) -- Desecrate
+			self:Bar(144758, 20) -- Desecrate
 		elseif spellId == 146984 then -- phase 4 Enter Realm of Garrosh
 			phase = 4
 			self:MessageOld("stages", "cyan", nil, CL.phase:format(phase), false)
@@ -602,7 +602,7 @@ do
 			cd = desecrateCounter == 1 and 34 or 25
 		end
 		if cd > 0 then
-			self:CDBar(144758, cd)
+			self:Bar(144758, cd)
 		end
 		desecrateCounter = desecrateCounter + 1
 	end

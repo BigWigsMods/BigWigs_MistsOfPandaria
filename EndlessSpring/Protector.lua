@@ -69,8 +69,8 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:CDBar(117309, 11) -- Cleansing Waters
-	self:CDBar(117436, 15) -- Lightning Prison
+	self:Bar(117309, 11) -- Cleansing Waters
+	self:Bar(117436, 15) -- Lightning Prison
 	bossDead = 0
 	firstDeath = nil
 	self:Berserk(self:LFR() and 660 or 490)
@@ -91,9 +91,9 @@ function mod:ShaCorruptionFirst(args)
 	if mobId == 60583 then -- Kaolan
 		self:Bar(117986, 11) -- Defiled Ground
 	elseif mobId == 60585 then -- Regail
-		self:CDBar(118077, 26) -- Lightning Storm
+		self:Bar(118077, 26) -- Lightning Storm
 	elseif mobId == 60586 then -- Asani
-		self:CDBar(117227, 11) -- Corrupted Waters
+		self:Bar(117227, 11) -- Corrupted Waters
 	end
 
 	if not firstDeath then
@@ -157,7 +157,7 @@ do
 			self:OpenProximity(117436, 7)
 		end
 		if not scheduled then
-			self:CDBar(117436, 25)
+			self:Bar(117436, 25)
 			scheduled = self:ScheduleTimer(warnPrison, 0.2)
 		end
 	end
@@ -171,7 +171,7 @@ end
 
 function mod:LightningStorm(args)
 	self:MessageOld(args.spellId, "orange", "alarm")
-	self:CDBar(args.spellId, bossDead < 3 and 42 or 32)
+	self:Bar(args.spellId, bossDead < 3 and 42 or 32)
 	self:Flash(args.spellId)
 end
 
@@ -182,7 +182,7 @@ function mod:CleansingWaters(args)
 		self:MessageOld(args.spellId, "yellow", self:Dispeller("magic", true) and "alert", CL["soon"]:format(args.spellName))
 	end
 	self:Bar(args.spellId, 6, L["heal"]:format(args.spellName), 55888) -- orb hitting the ground (water orb icon)
-	self:CDBar(args.spellId, bossDead > 0 and 42 or 32)
+	self:Bar(args.spellId, bossDead > 0 and 42 or 32)
 end
 
 do
@@ -219,7 +219,7 @@ end
 
 function mod:CorruptedWaters(args)
 	self:MessageOld(args.spellId, "yellow")
-	self:CDBar(args.spellId, 42)
+	self:Bar(args.spellId, 42)
 end
 
 function mod:BossDeaths(args)

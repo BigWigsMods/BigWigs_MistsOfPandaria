@@ -62,7 +62,7 @@ function mod:OnEngage()
 	self:Bar(143309, 20.8) -- Swirl
 	self:Bar(143436, 10) -- Corrosive Blast
 	if self:Mythic() then
-		self:CDBar(143574, 10) -- Swelling Corruption
+		self:Bar(143574, 10) -- Swelling Corruption
 	end
 end
 
@@ -73,7 +73,7 @@ end
 -- Mythic
 function mod:SwellingCorruption(args)
 	self:MessageOld(args.spellId, "yellow", "alert")
-	self:CDBar(args.spellId, 77)
+	self:Bar(args.spellId, 77)
 end
 
 function mod:ShaCorruption(args)
@@ -90,7 +90,7 @@ do
 	local blastTimers = { 34, 23, 30 } -- 23s cd, reset with swirl it seems
 	function mod:CorrosiveBlast(args)
 		self:MessageOld(args.spellId, "orange", "alarm")
-		self:CDBar(args.spellId, blastTimers[blastCounter] or 23)
+		self:Bar(args.spellId, blastTimers[blastCounter] or 23)
 		blastCounter = blastCounter + 1
 	end
 end
@@ -122,7 +122,7 @@ function mod:Reform()
 		self:StopBar(143469) -- Reform, assuming it was started
 	end
 	if self:Mythic() then
-		self:CDBar(143574, 10) -- Swelling Corruption
+		self:Bar(143574, 10) -- Swelling Corruption
 	end
 end
 

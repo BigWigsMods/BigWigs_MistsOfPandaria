@@ -80,7 +80,7 @@ function mod:OnEngage(diff)
 	self:Berserk(600) -- XXX assumed
 	self:Bar(134380, (diff == 4 or diff == 6) and 42 or 60) -- Quills
 	self:Bar(134370, 90) -- Down Draft
-	self:CDBar(134366, 24) -- Talon Rake
+	self:Bar(134366, 24) -- Talon Rake
 	nestCounter, quillCounter, draftCounter = 0, 0, 0
 end
 
@@ -90,7 +90,7 @@ end
 
 function mod:Caw(args)
 	self:MessageOld(args.spellId, "yellow", nil, CL["incoming"]:format(args.spellName))
-	--self:CDBar(args.spellId, 18) -- 18-30s
+	--self:Bar(args.spellId, 18) -- 18-30s
 end
 
 function mod:CHAT_MSG_MONSTER_EMOTE(_, msg)
@@ -249,13 +249,13 @@ function mod:FeedYoung(_, _, _, spellId)
 		self:MessageOld(spellId, "green", "info") -- Positive because it is green!
 		local diff = self:Difficulty()
 		local is25 = diff == 4 or diff == 6
-		self:CDBar(spellId, is25 and 30 or 41)
+		self:Bar(spellId, is25 and 30 or 41)
 	end
 end
 
 function mod:TalonRake(args)
 	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info")
-	self:CDBar(args.spellId, 22)
+	self:Bar(args.spellId, 22)
 end
 
 function mod:InfectedTalons(args)

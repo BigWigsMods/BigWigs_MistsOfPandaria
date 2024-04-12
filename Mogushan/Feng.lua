@@ -195,19 +195,19 @@ end
 
 function mod:LightningPhase()
 	self:MessageOld("stages", "green", nil, L["phase_lightning"], 116363)
-	self:CDBar(116018, 18, CL["count"]:format(self:SpellName(116018), counter)) -- Epicenter
-	self:CDBar(116157, 12) -- Lightning Fists
+	self:Bar(116018, 18, CL["count"]:format(self:SpellName(116018), counter)) -- Epicenter
+	self:Bar(116157, 12) -- Lightning Fists
 end
 
 function mod:LightningFists(args)
 	self:MessageOld(116157, "orange")
-	self:CDBar(116157, 13)
+	self:Bar(116157, 13)
 end
 
 function mod:Epicenter(args)
 	self:MessageOld(args.spellId, "red", "alarm", CL["count"]:format(args.spellName, counter))
 	counter = counter + 1
-	self:CDBar(args.spellId, 30, CL["count"]:format(args.spellName, counter))
+	self:Bar(args.spellId, 30, CL["count"]:format(args.spellName, counter))
 end
 
 --------------------------------------------------------------------------------
@@ -216,7 +216,7 @@ end
 
 function mod:FlamePhase()
 	self:MessageOld("stages", "green", nil, L["phase_flame"], 116363)
-	self:CDBar(116711, 35, CL["count"]:format(self:SpellName(116711), counter)) -- Draw Flame
+	self:Bar(116711, 35, CL["count"]:format(self:SpellName(116711), counter)) -- Draw Flame
 end
 
 do
@@ -250,7 +250,7 @@ end
 function mod:DrawFlame(args)
 	self:MessageOld(args.spellId, "red", "alarm", CL["count"]:format(args.spellName, counter))
 	counter = counter + 1
-	self:CDBar(args.spellId, 35, CL["count"]:format(args.spellName, counter))
+	self:Bar(args.spellId, 35, CL["count"]:format(args.spellName, counter))
 end
 
 --------------------------------------------------------------------------------
@@ -283,7 +283,7 @@ do
 			self:Say(args.spellId, resonance)
 		end
 		if not scheduled then
-			self:CDBar(args.spellId, 15.4, resonance)
+			self:Bar(args.spellId, 15.4, resonance)
 			scheduled = self:ScheduleTimer(warnResonance, 0.15, args.spellId)
 		end
 	end
@@ -297,7 +297,7 @@ end
 function mod:ArcaneVelocity(args)
 	self:MessageOld(args.spellId, "red", "alarm", CL["count"]:format(args.spellName, counter))
 	counter = counter + 1
-	self:CDBar(args.spellId, 28, CL["count"]:format(args.spellName, counter))
+	self:Bar(args.spellId, 28, CL["count"]:format(args.spellName, counter))
 	self:DelayedMessage(args.spellId, 25.5, "yellow", CL["soon"]:format(CL["count"]:format(args.spellName, counter)))
 end
 
@@ -306,7 +306,7 @@ end
 --
 
 function mod:ShadowPhase()
-	self:CDBar(118071, 4, CL["count"]:format(self:SpellName(118071), counter)) -- Siphoning Shield
+	self:Bar(118071, 4, CL["count"]:format(self:SpellName(118071), counter)) -- Siphoning Shield
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
@@ -314,7 +314,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 		local spellName = self:SpellName(spellId)
 		self:MessageOld(118071, "red", "alarm", CL["count"]:format(spellName, counter))
 		counter = counter + 1
-		self:CDBar(118071, 35, CL["count"]:format(spellName, counter))
+		self:Bar(118071, 35, CL["count"]:format(spellName, counter))
 	elseif spellId == 122410 then -- Throw Mainhand (end of phase)
 		--SHUT. DOWN. EVERYTHING.
 		self:CancelDelayedMessage(CL["soon"]:format(CL["count"]:format(self:SpellName(116364), counter)))

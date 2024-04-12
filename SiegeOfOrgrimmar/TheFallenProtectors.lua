@@ -112,11 +112,11 @@ function mod:OnEngage()
 	self:OpenProximity("proximity", 5) -- this might not be needed in LFR
 	self:Berserk(self:Mythic() and 600 or 900)
 	self:Bar(144396, 7) -- Vengeful Strikes
-	self:CDBar(143019, 18) -- Corrupted Brew
-	self:CDBar(143027, 44) -- Clash
-	self:CDBar(143330, 23) -- Gouge
+	self:Bar(143019, 18) -- Corrupted Brew
+	self:Bar(143027, 44) -- Clash
+	self:Bar(143330, 23) -- Gouge
 	if self:Dispeller("magic", nil, 143446) then
-		self:CDBar(143446, 14) -- Bane
+		self:Bar(143446, 14) -- Bane
 	end
 	self:Bar(143491, 29) -- Calamity
 	hcCalamityCount = 30
@@ -142,11 +142,11 @@ do
 			darkMeditationTimer = nil
 		end
 		--if not self:Mythic() then
-			--self:CDBar(143027, ) -- Clash
+			--self:Bar(143027, ) -- Clash
 		--end
-		self:CDBar(143491, 30) -- Calamity
+		self:Bar(143491, 30) -- Calamity
 		if self:Dispeller("magic", nil, 143446) then
-			self:CDBar(143446, 17) -- Bane
+			self:Bar(143446, 17) -- Bane
 		end
 	end
 
@@ -165,7 +165,7 @@ do
 end
 
 function mod:Calamity(args)
-	self:CDBar(args.spellId, 40)
+	self:Bar(args.spellId, 40)
 	self:Bar(args.spellId, 5, CL.cast:format(args.spellName))
 	if self:Mythic() then
 		self:MessageOld(args.spellId, "yellow", nil, ("%s (%d%%)"):format(CL.casting:format(args.spellName), hcCalamityCount))
@@ -217,7 +217,7 @@ end
 function mod:Bane(args)
 	if self:Dispeller("magic", nil, args.spellId) then
 		self:MessageOld(args.spellId, "orange", "alarm")
-		self:CDBar(args.spellId, 14)
+		self:Bar(args.spellId, 14)
 	end
 end
 
@@ -291,7 +291,7 @@ do
 		if (t-prev) > 10 and msg:find("143330", nil, true) then
 			prev = t
 			self:MessageOld(143330, "orange", "warning")
-			self:CDBar(143330, 29)
+			self:Bar(143330, 29)
 		end
 	end
 
@@ -302,7 +302,7 @@ do
 				local unit = ("boss%d"):format(i)
 				if self:UnitGUID(unit) == args.sourceGUID and self:Me(self:UnitGUID(unit.."target")) then
 					self:MessageOld(143330, "orange", "warning")
-					self:CDBar(143330, 29)
+					self:Bar(143330, 29)
 					prev = GetTime()
 				end
 			end
@@ -320,10 +320,10 @@ end
 
 function mod:HeIntermissionEnd(args)
 	--if not self:Mythic() then
-		--self:CDBar(143491, ) -- Calamity
-		--self:CDBar(143027, ) -- Clash
+		--self:Bar(143491, ) -- Calamity
+		--self:Bar(143027, ) -- Clash
 	--end
-	self:CDBar(143330, 23) -- Gouge
+	self:Bar(143330, 23) -- Gouge
 end
 
 -- Rook Stonetoe
@@ -429,7 +429,7 @@ end
 
 function mod:Clash(args)
 	self:MessageOld(args.spellId, "yellow")
-	self:CDBar(args.spellId, self:Mythic() and 50 or 46)
+	self:Bar(args.spellId, self:Mythic() and 50 or 46)
 end
 
 do
@@ -443,11 +443,11 @@ do
 	function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 		if spellId == 143019 then -- Corrupted Brew
 			-- timer is all over the place, need to figure out if something delays it or what
-			self:CDBar(spellId, 11)
+			self:Bar(spellId, 11)
 			self:GetBossTarget(printTarget, 0.4, self:UnitGUID(unitId))
 		elseif spellId == 143961 then
 			if self:Tanking(unitId) then
-				self:CDBar(-7958, 10)
+				self:Bar(-7958, 10)
 				self:MessageOld(-7958, "orange", "alarm")
 			end
 		elseif spellId == 138175 and self:MobId(self:UnitGUID(unitId)) == 71481 then -- Despawn Area Triggers
@@ -474,7 +474,7 @@ function mod:VengefulStrikes(args)
 	if self:Me(self:UnitGUID(unit.."target")) then -- or self:Healer()
 		self:MessageOld(args.spellId, "orange", "alarm")
 		self:Bar(args.spellId, 4, CL.cast:format(args.spellName))
-		self:CDBar(args.spellId, 22)
+		self:Bar(args.spellId, 22)
 	end
 end
 
@@ -486,20 +486,20 @@ function mod:RookIntermission(args)
 	if not self:Mythic() then
 		self:StopBar(143491) -- Calamity
 	end
-	self:CDBar(-7958, 9) -- Defiled Ground (first cast not limited to her tank, obviously)
-	self:CDBar(-7959, 7) -- Inferno Strike
-	self:CDBar(143958, 5) -- Corruption Shock
+	self:Bar(-7958, 9) -- Defiled Ground (first cast not limited to her tank, obviously)
+	self:Bar(-7959, 7) -- Inferno Strike
+	self:Bar(143958, 5) -- Corruption Shock
 end
 
 function mod:RookIntermissionEnd(args)
 	self:StopBar(-7958) -- Defiled Ground
 	self:OpenProximity("proximity", 5)
 	if not self:Mythic() then
-		self:CDBar(143491, 5) -- Calamity
-		self:CDBar(143027, 57) -- Clash
+		self:Bar(143491, 5) -- Calamity
+		self:Bar(143027, 57) -- Clash
 	end
-	self:CDBar(144396, 7) -- Vengeful Strikes
-	self:CDBar(143019, 12) -- Corrupted Brew
+	self:Bar(144396, 7) -- Vengeful Strikes
+	self:Bar(143019, 12) -- Corrupted Brew
 end
 
 

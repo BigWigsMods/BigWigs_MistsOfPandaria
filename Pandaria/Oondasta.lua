@@ -50,11 +50,11 @@ end
 function mod:PiercingRoar(args)
 	roarCounter = roarCounter + 1
 	self:MessageOld(args.spellId, "yellow", UnitPowerType("player") == 0 and "long", CL["count"]:format(args.spellName, roarCounter)) -- sound for mana users
-	self:CDBar(args.spellId, 25, CL["count"]:format(args.spellName, roarCounter+1))
+	self:Bar(args.spellId, 25, CL["count"]:format(args.spellName, roarCounter+1))
 end
 
 function mod:FrillBlast(args)
 	self:MessageOld(args.spellId, "red", "alert")
-	self:CDBar(args.spellId, 25)
+	self:Bar(args.spellId, 25)
 end
 

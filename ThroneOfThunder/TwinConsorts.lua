@@ -97,9 +97,9 @@ function mod:OnEngage()
 	if not self:LFR() then
 		self:OpenProximity("proximity", 8)
 	end
-	self:CDBar(-7631, 14) -- Cosmic Barrage
-	self:CDBar(-7643, 28) -- Tears of the Sun
-	self:CDBar(-7634, 50) -- Beast of Nightmares
+	self:Bar(-7631, 14) -- Cosmic Barrage
+	self:Bar(-7643, 28) -- Tears of the Sun
+	self:Bar(-7634, 50) -- Beast of Nightmares
 	inferno = nil
 	phase3 = nil
 end
@@ -133,8 +133,8 @@ do
 					self:StopBar(137404) -- Tears of the Sun
 					self:StopBar(-7634) -- Beast of Nightmares
 					self:StopBar(-7631) -- Cosmic Barrage
-					self:CDBar(-7649, 18) -- Ice Comet
-					self:CDBar(137408, 11) -- Fan of Flames
+					self:Bar(-7649, 18) -- Ice Comet
+					self:Bar(137408, 11) -- Fan of Flames
 					if self:Heroic() then
 						self:Bar(137491, 50) -- Nuclear Inferno
 					end
@@ -142,14 +142,14 @@ do
 					phase3 = true
 					self:MessageOld("stages", "green", "long", CL["phase"]:format(3), 137401)
 					self:StopBar(137408) -- Fan of Flames
-					self:CDBar(-7649, 17) -- Ice Comet
+					self:Bar(-7649, 17) -- Ice Comet
 					self:Bar(137531, self:Heroic() and 19 or 34) -- Tidal Force
 					if self:Heroic() then
 						self:Bar(137491, 63) -- Nuclear Inferno
 					end
 				elseif msg == "TidalForce" then
 					self:MessageOld(137531, "orange", "alarm")
-					self:CDBar(137531, 71)
+					self:Bar(137531, 71)
 				elseif msg == "TearsOfTheSunApplied" then
 					self:MessageOld(-7643, "yellow", "warning")
 					self:Bar(-7643, 41)
@@ -162,10 +162,10 @@ do
 					self:ScheduleTimer(infernoOver, 12)
 				elseif msg == "IceComet" then
 					self:MessageOld(-7649, "green")
-					self:CDBar(-7649, phase3 and 30 or 20)
+					self:Bar(-7649, phase3 and 30 or 20)
 				elseif msg == "CosmicBarrage" then
 					self:MessageOld(-7631, "orange", "alarm")
-					self:CDBar(-7631, 20)
+					self:Bar(-7631, 20)
 					self:ScheduleTimer("MessageOld", 4.5, -7631, "orange", "alarm", L["barrage_fired"]) -- This is when the little orbs start to move
 				end
 			end
@@ -226,7 +226,7 @@ end
 
 function mod:FanOfFlames(args)
 	self:StackMessageOld(args.spellId, args.destName, args.amount, "orange", "info")
-	self:CDBar(args.spellId, 11)
+	self:Bar(args.spellId, 11)
 end
 
 -- Phase 1
@@ -291,9 +291,9 @@ function mod:Deaths(args)
 		self:StopBar(137531) -- Tidal Force
 		if args.mobId == 68905 then -- Lu'lin
 			self:StopBar(-7631) -- Cosmic Barrage
-			self:CDBar(137408, 15) -- Fan of Flames
+			self:Bar(137408, 15) -- Fan of Flames
 		elseif args.mobId == 68904 then -- Suen
-			self:CDBar(-7634, 55) -- Beasts of Nightmare
+			self:Bar(-7634, 55) -- Beasts of Nightmare
 		end
 	end
 end

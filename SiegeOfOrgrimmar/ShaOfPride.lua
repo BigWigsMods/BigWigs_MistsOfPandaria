@@ -97,7 +97,7 @@ function mod:OnEngage()
 		wrChecker = nil
 	end
 	if not self:LFR() then
-		self:CDBar(144358, 11) -- Wounded Pride
+		self:Bar(144358, 11) -- Wounded Pride
 		self:Berserk(600)
 	end
 	self:OpenAltPower("altpower", 144343) -- Pride
@@ -172,7 +172,7 @@ end
 function mod:UnleashedStart(args)
 	self:MessageOld(args.spellId, "cyan", "info", "30% - ".. CL.casting:format(args.spellName))
 	if not self:LFR() then
-		self:CDBar(144358, 11) -- Wounded Pride
+		self:Bar(144358, 11) -- Wounded Pride
 	end
 	self:StopBar(CL.count:format(self:SpellName(144400), swellingPrideCounter)) -- Swelling Pride
 	self:StopBar(144563) -- Imprison
@@ -232,7 +232,7 @@ function mod:WoundedPride(args)
 		self:Flash(args.spellId)
 	end
 	self:TargetMessageOld(args.spellId, args.destName, "red", notOnMe and "warning", nil, nil, true) -- play sound for the other tanks
-	self:CDBar(args.spellId, 30)
+	self:Bar(args.spellId, 30)
 end
 
 function mod:MarkOfArrogance(args)
@@ -270,7 +270,7 @@ do
 	end
 	function mod:SwellingPrideSuccess(args)
 		if not self:LFR() then
-			self:CDBar(144358, 10.5) -- Wounded Pride, 10-11.2
+			self:Bar(144358, 10.5) -- Wounded Pride, 10-11.2
 		end
 		if self:Mythic() then
 			self:Bar(145215, 37.4) -- Banishment

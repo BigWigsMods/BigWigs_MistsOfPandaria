@@ -122,7 +122,7 @@ function mod:OnEngage()
 	self:Berserk(self:Mythic() and 540 or 600)
 	assemblyLineCounter = 1
 	self:Bar(-8199, 35, nil, "INV_MISC_ARMORKIT_27") -- Shredder Engage
-	self:CDBar(-8195, 9) -- Sawblade
+	self:Bar(-8195, 9) -- Sawblade
 	if self.db.profile.custom_off_mine_marker then
 		markableMobs = {}
 		marksUsed = {}
@@ -316,7 +316,7 @@ end
 -- Siegecrafter Blackfuse
 
 function mod:ElectrostaticCharge(args)
-	self:CDBar(args.spellId, 17)
+	self:Bar(args.spellId, 17)
 end
 
 function mod:ElectrostaticChargeApplied(args)
@@ -347,7 +347,7 @@ do
 		end
 	end
 	function mod:Sawblade(args)
-		self:CDBar(-8195, 11)
+		self:Bar(-8195, 11)
 		sawbladeTarget = nil
 		self:GetBossTarget(warnSawblade, 0.4, args.sourceGUID)
 	end

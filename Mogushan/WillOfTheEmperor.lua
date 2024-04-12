@@ -166,13 +166,13 @@ function mod:Bosses()
 	self:Bar("bosses", 13, L["bosses"], L.bosses_icon)
 	self:DelayedMessage("bosses", 13, "yellow", L["bosses"], L.bosses_icon)
 	if not self:Heroic() then
-		self:CDBar(-5670, 123) -- Titan Gas
+		self:Bar(-5670, 123) -- Titan Gas
 	end
 end
 
 do
 	local function fireNext()
-		mod:CDBar(-5670, 120)
+		mod:Bar(-5670, 120)
 	end
 	function mod:TitanGas()
 		gasCounter = gasCounter + 1

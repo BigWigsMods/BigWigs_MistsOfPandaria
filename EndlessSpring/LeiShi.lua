@@ -84,7 +84,7 @@ function mod:OnEngage(diff)
 	markableMobs = {}
 	marksUsed = {}
 	markTimer = nil
-	self:CDBar("special", 32, L["special"], L.special_icon)
+	self:Bar("special", 32, L["special"], L.special_icon)
 	self:RegisterUnitEvent("UNIT_HEALTH", "HealthCheck", "boss1")
 	self:Berserk(self:Heroic() and 420 or 600)
 	self:OpenProximity(123121, 4)
@@ -103,7 +103,7 @@ function mod:EngageCheck()
 	if hiding then
 		hiding = nil
 		self:MessageOld(123244, "yellow", nil, CL["over"]:format(self:SpellName(123244))) -- Hide
-		self:CDBar("special", 32, L["special"], L.special_icon)
+		self:Bar("special", 32, L["special"], L.special_icon)
 		nextSpecial = GetTime() + 32
 	end
 end
@@ -129,7 +129,7 @@ do
 			self:OpenProximity(args.spellId, 4)
 		end
 		if not scheduled then
-			self:CDBar(args.spellId, 19)
+			self:Bar(args.spellId, 19)
 			scheduled = self:ScheduleTimer(reportFog, 0.2, args.spellName)
 		end
 	end
@@ -163,7 +163,7 @@ do
 	end
 	function mod:GetAwayRemoved()
 		getAwayStartHP = nil
-		self:CDBar("special", 32, L["special"], L.special_icon)
+		self:Bar("special", 32, L["special"], L.special_icon)
 		nextSpecial = GetTime() + 32
 	end
 
@@ -204,7 +204,7 @@ function mod:ProtectRemoved()
 
 	local left = nextSpecial - GetTime()
 	if left > 4 then -- restart the bar if there are more than a few seconds left on the special's cd
-		self:CDBar("special", left, L["special"], L.special_icon)
+		self:Bar("special", left, L["special"], L.special_icon)
 	else
 		self:MessageOld("special", "yellow", nil, CL["soon"]:format(L["special"]), L.special_icon)
 	end

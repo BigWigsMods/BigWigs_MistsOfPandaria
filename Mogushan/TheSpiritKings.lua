@@ -166,7 +166,7 @@ end
 
 function mod:MaddeningShout(args)
 	self:MessageOld(args.spellId, "orange", "alarm")
-	self:CDBar(args.spellId, isBossActiveById(60708, 61429) and 46.7 or 76)
+	self:Bar(args.spellId, isBossActiveById(60708, 61429) and 46.7 or 76)
 end
 
 function mod:Delirious(args)
@@ -194,7 +194,7 @@ end
 function mod:Pillage(args)
 	self:MessageOld(args.spellId, "orange", "alarm")
 	if isBossActiveById(60710, 61427) then
-		self:CDBar(args.spellId, 40)
+		self:Bar(args.spellId, 40)
 	else
 		self:Bar(args.spellId, 75.5)
 	end
@@ -284,7 +284,7 @@ function mod:EngageCheck()
 				self:MessageOld("bosses", "green", nil, subetai, 118122) -- Rain of Arrows icon
 			elseif (id == 60708 or id == 61429) and not bossActivated[60708] then -- Meng
 				bossActivated[60708] = true
-				self:CDBar(117708, self:Heroic() and 40 or 21) -- Maddening Shout
+				self:Bar(117708, self:Heroic() and 40 or 21) -- Maddening Shout
 				if self:Heroic() then
 					self:Bar(117837, 20) -- Delirious
 				end
@@ -318,13 +318,13 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 			end
 		elseif (id == 60708 or id == 61429) then -- Meng
 			self:StopBar(117837)
-			self:CDBar(117708, 30) -- Maddening Shout
+			self:Bar(117708, 30) -- Maddening Shout
 		end
 	elseif spellId == 118121 then -- Rain of Arrows for Pinned Down
 		if self:Heroic() then
 			self:Bar(118122, 41) -- Rain of Arrows
 		else
-			self:CDBar(118122, 51) -- Rain of Arrows
+			self:Bar(118122, 51) -- Rain of Arrows
 		end
 	end
 end

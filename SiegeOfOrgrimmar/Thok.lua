@@ -89,8 +89,8 @@ function mod:OnEngage()
 	accCount = 0
 	self:Berserk(600)
 	self:OpenProximity("proximity", 10) -- Too close to another group. Tactic dependant - needed for mythic
-	self:CDBar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
-	self:CDBar(143766, 12, 143426, 143766) -- Fearsome Roar with correct icon
+	self:Bar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
+	self:Bar(143766, 12, 143426, 143766) -- Fearsome Roar with correct icon
 end
 
 --------------------------------------------------------------------------------
@@ -147,9 +147,9 @@ do
 			-- XXX maybe add scheduled message once we know exact timer (videos)
 			-- timer still need verification and still looking for a better event to start bars (don't seem to be any)
 			if mythicAdd == "bats" then
-				mod:CDBar("adds", 12, mod:SpellName(-8584), 24733) -- bat icon
+				mod:Bar("adds", 12, mod:SpellName(-8584), 24733) -- bat icon
 			elseif mythicAdd == "yeti" then
-				mod:CDBar("adds", 10, mod:SpellName(-8582), 26010) -- yeti icon
+				mod:Bar("adds", 10, mod:SpellName(-8582), 26010) -- yeti icon
 				mythicAdd = nil
 			end
 		end
@@ -157,8 +157,8 @@ do
 	function mod:BloodFrenzyOver(args)
 		self:OpenProximity("proximity", 10)
 		self:MessageOld(-7981, "cyan", "long", CL.over:format(args.spellName))
-		self:CDBar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
-		self:CDBar(143766, 12, 17086, "ability_hunter_pet_devilsaur") -- Breath. 143766 isn't exactly a combined option but it's one of the breaths.
+		self:Bar(-7963, self:LFR() and 18 or 14) -- Deafening Screech
+		self:Bar(143766, 12, 17086, "ability_hunter_pet_devilsaur") -- Breath. 143766 isn't exactly a combined option but it's one of the breaths.
 		if self:Mythic() then
 			self:ScheduleTimer(checkPrisonerKilled, 10)
 		end
@@ -226,7 +226,7 @@ do
 end
 
 function mod:TailLash(args)
-	self:CDBar(args.spellId, 10) -- don't think this needs a message
+	self:Bar(args.spellId, 10) -- don't think this needs a message
 end
 
 do
@@ -244,9 +244,9 @@ end
 
 function mod:TankDebuffCasts(_, _, _, spellId)
 	if spellId == 143426 then -- Fearsome Roar
-		self:CDBar(143766, 11, spellId, 143766) -- Blizzard gave Fearsome Roar the wrong icon
+		self:Bar(143766, 11, spellId, 143766) -- Blizzard gave Fearsome Roar the wrong icon
 	elseif spellId == 143780 or spellId == 143773 or spellId == 143767 then -- Acid Breath, Freezing Breath, Scorching Breath
-		self:CDBar(spellId, 11) -- 11-15s
+		self:Bar(spellId, 11) -- 11-15s
 	end
 end
 

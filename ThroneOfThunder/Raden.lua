@@ -196,7 +196,7 @@ function mod:Vita(args)
 	self:StopBar(L["worm"]) -- Worm
 	self:StopBar(138333) -- Murderous Strike
 	self:Bar(138339, 8) -- Summon Craclking Stalker -- XXX shorten maybe?
-	self:CDBar(138334, 10) -- Fatal Strike
+	self:Bar(138334, 10) -- Fatal Strike
 end
 
 function mod:CracklingStalker(args)
@@ -273,7 +273,7 @@ end
 
 function mod:FatalStrike(args)
 	self:TargetMessageOld(args.spellId, args.destName, "cyan")
-	self:CDBar(args.spellId, 10)
+	self:Bar(args.spellId, 10)
 end
 
 ----------------------------------------
@@ -282,7 +282,7 @@ end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
 	if spellId == 139040 then
-		self:CDBar("corruptedballs", 16, L["corruptedballs"], 139071)
+		self:Bar("corruptedballs", 16, L["corruptedballs"], 139071)
 		self:MessageOld("corruptedballs", "red", "alarm", L["corruptedballs"], 139071)
 	end
 end

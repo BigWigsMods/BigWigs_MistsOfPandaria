@@ -141,7 +141,7 @@ do
 		self:TargetMessageOld(-8132, name, "green", "alarm")
 	end
 	function mod:FoulStream(args)
-		self:CDBar(-8132, 32)
+		self:Bar(-8132, 32)
 		self:GetBossTarget(printTarget, 0.4, args.sourceGUID)
 	end
 end

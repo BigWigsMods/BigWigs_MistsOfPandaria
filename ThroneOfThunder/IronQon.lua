@@ -83,7 +83,7 @@ end
 function mod:OnEngage()
 	self:Berserk(720)
 	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "PowerWarn", "boss2")
-	self:CDBar(134926, 33) -- Throw Spear
+	self:Bar(134926, 33) -- Throw Spear
 	self:ScheduleTimer("StartSpearScan", 25)
 	if self:Heroic() then
 		self:OpenProximity(136192, 12) -- Lightning Storm (12 to be safe)
@@ -144,7 +144,7 @@ do
 			self:MessageOld(args.spellId, "orange", "alarm")
 		end
 		self:StopSpearScan()
-		self:CDBar(args.spellId, 33)
+		self:Bar(args.spellId, 33)
 		spearStartTimer = self:ScheduleTimer("StartSpearScan", 25)
 		self:ScheduleTimer("SecondaryIcon", 3, args.spellId) -- wait until the lines go out (mark is quicker to spot than the spear in the ground)
 	end
@@ -285,7 +285,7 @@ do
 		end
 		local t = GetTime()
 		if t-prev > 1 then
-			self:CDBar(-6870, phase == 3 and 33 or 8) -- apparently won't happen during Dead Zone, so can be quite delayed while Dam'ren is up
+			self:Bar(-6870, phase == 3 and 33 or 8) -- apparently won't happen during Dead Zone, so can be quite delayed while Dam'ren is up
 			prev = t
 		end
 	end
@@ -329,12 +329,12 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 		self:Bar(77333, 30)
 	elseif spellId == 139181 then -- Frost Spike
 		self:MessageOld(139180, "yellow")
-		self:CDBar(139180, 13)
+		self:Bar(139180, 13)
 	elseif spellId == 137656 then -- Rushing Winds
 		if phase == 2 then
 			self:MessageOld(-6877, "green", nil, CL["over"]:format(self:SpellName(-6877))) -- Windstorm
 			self:Bar(-6877, 70) -- Windstorm
-			self:CDBar(136192, 17) -- Lightning Storm
+			self:Bar(136192, 17) -- Lightning Storm
 		end
 	elseif spellId == 50630 then -- Eject All Passangers (Heroic phase change)
 		self:StopSpearScan()
@@ -344,7 +344,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 			self:StopBar(137221) -- Molten Overload
 			self:StopBar(-6870) -- Unleashed Flame
 			self:StopBar(77333) -- Whirling Wind
-			self:CDBar(134926, 33) -- Throw Spear
+			self:Bar(134926, 33) -- Throw Spear
 			self:ScheduleTimer("StartSpearScan", 25)
 			self:Bar(-6877, 50) -- Windstorm
 		elseif unit == "boss3" then -- Quet'zal
@@ -356,8 +356,8 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 				self:CloseProximity(136192) -- Lightning Storm
 				self:OpenProximity(-6870, 10) -- Unleashed Flame
 			end
-			self:CDBar(-6870, 17) -- Unleashed Flame
-			self:CDBar(134926, 33) -- Throw Spear
+			self:Bar(-6870, 17) -- Unleashed Flame
+			self:Bar(134926, 33) -- Throw Spear
 			self:ScheduleTimer("StartSpearScan", 25)
 			self:Bar(-6914, 7) -- Dead Zone
 		elseif unit == "boss4" then -- Dam'ren
@@ -378,7 +378,7 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 		smashCounter = smashCounter + 1
 		self:Bar(-6917, 7.5, CL["cast"]:format(spellName))
 		if self:Heroic() then
-			self:CDBar(-6917, 25, CL["count"]:format(spellName, smashCounter)) -- 25 - 30
+			self:Bar(-6917, 25, CL["count"]:format(spellName, smashCounter)) -- 25 - 30
 		else
 			self:Bar(-6917, 20, CL["count"]:format(spellName, smashCounter))
 		end
@@ -388,7 +388,7 @@ end
 function mod:Impale(args)
 	local amount = args.amount or 1
 	self:StackMessageOld(args.spellId, args.destName, amount, "green", amount > 1 and "warning")
-	self:CDBar(args.spellId, 20)
+	self:Bar(args.spellId, 20)
 end
 
 function mod:Deaths(args)
@@ -405,7 +405,7 @@ function mod:Deaths(args)
 			self:StopBar(137221) -- Molten Overload
 			self:CloseProximity(-6870) -- Unleashed Flame
 			self:OpenProximity(136192, 12) -- Lightning Storm (12 to be safe)
-			self:CDBar(134926, 33) -- Throw Spear
+			self:Bar(134926, 33) -- Throw Spear
 			self:Bar(-6877, 50) -- Windstorm
 			self:Bar(136192, 17) -- Lightning Storm
 		end
@@ -417,7 +417,7 @@ function mod:Deaths(args)
 		end
 		if not self:Heroic() then
 			self:StopBar(-6877) -- Windstorm
-			self:CDBar(134926, 33) -- Throw Spear
+			self:Bar(134926, 33) -- Throw Spear
 			self:Bar(-6914, 7) -- Dead Zone
 		end
 		quetzalDead = true

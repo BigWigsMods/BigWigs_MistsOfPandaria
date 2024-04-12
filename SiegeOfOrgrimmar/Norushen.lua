@@ -101,7 +101,7 @@ end
 -- TANK
 function mod:TitanicSmash(args)
 	self:MessageOld(args.spellId, "yellow", "info")
-	self:CDBar(args.spellId, 15)
+	self:Bar(args.spellId, 15)
 end
 
 function mod:HurlCorruption(args)
@@ -118,7 +118,7 @@ end
 -- DPS
 function mod:TearReality(args)
 	self:MessageOld(args.spellId, "yellow", "info")
-	self:CDBar(args.spellId, 8) -- any point for this?
+	self:Bar(args.spellId, 8) -- any point for this?
 end
 
 do
@@ -180,7 +180,7 @@ do
 				self:MessageOld("big_adds", "orange", nil, CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
 			else
 				self:MessageOld("big_adds", "orange", "alarm", CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
-				self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
+				self:Bar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
 			end
 		elseif msg == "OutsideBigAddDeath" and not bigAddKills[guid] then
 			bigAddKills[guid] = true
@@ -205,7 +205,7 @@ do
 						self:MessageOld("big_adds", "orange", nil, ("%d%% - "):format(percent) .. CL.soon:format(L.big_add:format(bigAddSpawnCounter)), 147082)
 					else
 						self:MessageOld("big_adds", "orange", "alarm", ("%d%% - "):format(percent) .. CL.custom_sec:format(L.big_add:format(bigAddSpawnCounter), 5), 147082)
-						self:CDBar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
+						self:Bar("big_adds", 5, L.big_add:format(bigAddSpawnCounter), 147082)
 					end
 					percent = percent - 10
 				end
@@ -248,12 +248,12 @@ end
 
 function mod:UnleashedAnger(args)
 	self:MessageOld(-8218, "yellow")
-	self:CDBar(-8218, 10)
+	self:Bar(-8218, 10)
 end
 
 function mod:SelfDoubt(args)
 	local amount = args.amount or 1
 	self:StackMessageOld(args.spellId, args.destName, amount, "yellow", amount > 2 and "info")
-	self:CDBar(args.spellId, 16)
+	self:Bar(args.spellId, 16)
 end
 

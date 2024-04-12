@@ -127,8 +127,8 @@ function mod:OnEngage()
 	phase = 1
 	tooCloseForOvercharged = nil
 	self:RegisterUnitEvent("UNIT_HEALTH", nil, "boss1")
-	self:CDBar(134912, 40) -- Decapitate
-	self:CDBar(135095, 25) -- Thunderstruck
+	self:Bar(134912, 40) -- Decapitate
+	self:Bar(135095, 25) -- Thunderstruck
 	adds = {}
 	marksUsed = {}
 	activeProximityAbilities = {}
@@ -335,7 +335,7 @@ do
 end
 
 function mod:FusionSlash(args)
-	self:CDBar(args.spellId, 42)
+	self:Bar(args.spellId, 42)
 	self:MessageOld(args.spellId, "red", "warning")
 end
 
@@ -361,32 +361,32 @@ function mod:IntermissionEnd(msg)
 	activeProximityAbilities[2] = true
 	updateProximity()
 	if phase == 2 then
-		self:CDBar(136478, 46) -- Fusion Slash
+		self:Bar(136478, 46) -- Fusion Slash
 		self:Bar(136850, 29) -- Lightning Whip
 		if self:Heroic() then -- XXX these are probably not time based either and need to add abilities for all conduits
 			if msg:find("135681") then -- Diffusion Adds
-				self:CDBar(135991, 14)
+				self:Bar(135991, 14)
 			elseif msg:find("135682") then -- Overcharged
-				self:CDBar(136295, 14)
+				self:Bar(136295, 14)
 			elseif msg:find("135683") then -- Bouncing Bolt
-				self:CDBar(136366, 14)
+				self:Bar(136366, 14)
 			elseif msg:find("135680") then -- Static Shock
-				self:CDBar(135695, 14)
+				self:Bar(135695, 14)
 			end
 		end
 	elseif phase == 3 then -- XXX should start bars for already disabled conduits too
-		self:CDBar(135095, 36, CL["count"]:format(self:SpellName(135095), thunderstruckCounter)) -- Thunderstruck
+		self:Bar(135095, 36, CL["count"]:format(self:SpellName(135095), thunderstruckCounter)) -- Thunderstruck
 		self:Bar(136850, 22, CL["count"]:format(self:SpellName(136850), whipCounter)) -- Lightning Whip
-		self:CDBar(136889, 20) -- Violent Gale Winds
+		self:Bar(136889, 20) -- Violent Gale Winds
 		if self:Heroic() then
 			if msg:find("135681") then -- Diffusion Adds
-				self:CDBar(135991, 28)
+				self:Bar(135991, 28)
 			elseif msg:find("135682") then -- Overcharged
-				self:CDBar(136295, 28)
+				self:Bar(136295, 28)
 			elseif msg:find("135683") then -- Bouncing Bolt
-				self:CDBar(136366, 30)
+				self:Bar(136366, 30)
 			elseif msg:find("135680") then -- Static Shock
-				self:CDBar(135695, 28)
+				self:Bar(135695, 28)
 			end
 		end
 	end
@@ -415,19 +415,19 @@ function mod:IntermissionStart(args)
 	activeProximityAbilities[4] = nil
 	local diff = self:Difficulty()
 	if diff == 3 or diff == 5 or diff == 7 then -- 10 mans and assume LFR too
-		if isConduitAlive(68398) then self:CDBar(135695, 18) end -- Static Shock
-		if isConduitAlive(68697) then self:CDBar(136295, 7) end -- Overcharged
-		if isConduitAlive(68698) then self:CDBar(136366, 8.5) end -- Bouncing Bolt
+		if isConduitAlive(68398) then self:Bar(135695, 18) end -- Static Shock
+		if isConduitAlive(68697) then self:Bar(136295, 7) end -- Overcharged
+		if isConduitAlive(68698) then self:Bar(136366, 8.5) end -- Bouncing Bolt
 		if isConduitAlive(68696) then
-			self:CDBar(135991, 7)
+			self:Bar(135991, 7)
 			self:ScheduleTimer(warnDiffusionChainSoon, 2, true)
 		end
 	else -- 25 man
-		if isConduitAlive(68398) then self:CDBar(135695, 19) end -- Static Shock
-		if isConduitAlive(68697) then self:CDBar(136295, 7) end -- Overcharged
-		if isConduitAlive(68698) then self:CDBar(136366, 14) end -- Bouncing Bolt
+		if isConduitAlive(68398) then self:Bar(135695, 19) end -- Static Shock
+		if isConduitAlive(68697) then self:Bar(136295, 7) end -- Overcharged
+		if isConduitAlive(68698) then self:Bar(136366, 14) end -- Bouncing Bolt
 		if isConduitAlive(68696) then
-			self:CDBar(135991, 6)
+			self:Bar(135991, 6)
 			self:ScheduleTimer(warnDiffusionChainSoon, 1, true)
 		end
 	end
@@ -474,13 +474,13 @@ function mod:Thunderstruck(args)
 		thunderstruckCounter = thunderstruckCounter + 1
 		self:Bar(args.spellId, 30, CL["count"]:format(args.spellName, thunderstruckCounter))
 	else
-		self:CDBar(args.spellId, 46)
+		self:Bar(args.spellId, 46)
 		self:MessageOld(args.spellId, "yellow", "alert")
 	end
 end
 
 function mod:Decapitate(args)
-	self:CDBar(args.spellId, 50)
+	self:Bar(args.spellId, 50)
 	self:TargetMessageOld(args.spellId, args.destName, "blue", "warning", nil, nil, true)
 	if self:Tank() then
 		self:Flash(args.spellId)

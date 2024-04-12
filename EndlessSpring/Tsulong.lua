@@ -96,16 +96,16 @@ function mod:EngageCheck()
 	if UnitExists("boss2") and self:MobId(self:UnitGUID("boss2")) == 62969 then
 		bigAddCounter = bigAddCounter + 1
 		if bigAddCounter < 3 then
-			self:CDBar("embodied_terror", 40, CL["count"]:format(L["embodied_terror"], bigAddCounter+1), L.embodied_terror_icon)
+			self:Bar("embodied_terror", 40, CL["count"]:format(L["embodied_terror"], bigAddCounter+1), L.embodied_terror_icon)
 		end
 		self:MessageOld("embodied_terror", "yellow", nil, CL["count"]:format(L["embodied_terror"], bigAddCounter), L.embodied_terror_icon)
-		self:CDBar(123011, 5) -- Terrorize (overwrites the previous bar)
+		self:Bar(123011, 5) -- Terrorize (overwrites the previous bar)
 	end
 end
 
 function mod:Terrorize(args)
 	self:MessageOld(args.spellId, "red", self:Dispeller("magic") and "alert")
-	self:CDBar(args.spellId, 41)
+	self:Bar(args.spellId, 41)
 end
 
 function mod:DreadShadows(args)
@@ -126,7 +126,7 @@ function mod:SunBreath(args)
 end
 
 function mod:ShadowBreath(args)
-	self:CDBar(args.spellId, 25)
+	self:Bar(args.spellId, 25)
 	self:MessageOld(args.spellId, "orange")
 end
 

@@ -146,7 +146,7 @@ end
 
 function mod:AnimaRing(args)
 	self:MessageOld(args.spellId, "red", "alert")
-	self:CDBar(args.spellId, 22)
+	self:Bar(args.spellId, 22)
 end
 
 do

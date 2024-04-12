@@ -142,7 +142,7 @@ function mod:MendLeg(args)
 	legCounter = legCounter + 1
 	if legCounter < 4 then -- don't start a timer if it has all 4 legs
 		self:MessageOld(args.spellId, "orange")
-		self:CDBar(args.spellId, 30)
+		self:Bar(args.spellId, 30)
 	else
 		-- all legs grew back, no need to start a bar, :BrokenLeg will start it
 		mendLegTimerRunning = nil
@@ -153,7 +153,7 @@ function mod:BrokenLeg()
 	legCounter = legCounter - 1
 	-- this is just a way to start the bar after 1st legs death
 	if not mendLegTimerRunning then
-		self:CDBar(123495, 30) -- Mend Leg
+		self:Bar(123495, 30) -- Mend Leg
 		mendLegTimerRunning = true
 	end
 end

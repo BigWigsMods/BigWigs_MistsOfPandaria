@@ -149,7 +149,7 @@ end
 function mod:VolatilePathogen(args)
 	self:PrimaryIcon(args.spellId, args.destName)
 	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm", nil, nil, self:Healer() and true)
-	self:CDBar(args.spellId, 30)
+	self:Bar(args.spellId, 30)
 	if self:Healer() then
 		self:TargetBar(args.spellId, 10, args.destName)
 	end
@@ -179,12 +179,12 @@ end
 
 function mod:CausticGas(args)
 	self:MessageOld(args.spellId, "orange")
-	self:CDBar(args.spellId, 12)
+	self:Bar(args.spellId, 12)
 end
 
 function mod:PrimordialStrike(args)
 	self:MessageOld(args.spellId, "yellow")
-	self:CDBar(args.spellId, 19)
+	self:Bar(args.spellId, 19)
 end
 
 function mod:MalformedBlood(args)

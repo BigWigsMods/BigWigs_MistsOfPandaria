@@ -102,8 +102,8 @@ function mod:OnEngage()
 	if not self:LFR() then
 		self:OpenProximity("proximity", 7) -- for Quicksand
 	end
-	self:CDBar("priestess_adds", 27, L["priestess_adds_message"], L.priestess_adds_icon)
-	self:CDBar(-7062, 7) -- Quicksand
+	self:Bar("priestess_adds", 27, L["priestess_adds_message"], L.priestess_adds_icon)
+	self:Bar(-7062, 7) -- Quicksand
 	self:Bar(136990, 9.7) -- Frostbite -- might be 7.5?
 	frostBiteStart, bitingColdStart = nil, nil
 	sandGuyDead = nil
@@ -153,7 +153,7 @@ end
 
 function mod:PriestessAdds(args)
 	self:MessageOld("priestess_adds", "red", "alarm", args.spellId)
-	self:CDBar("priestess_adds", 33, L["priestess_adds_message"], L.priestess_adds_icon)
+	self:Bar("priestess_adds", 33, L["priestess_adds_message"], L.priestess_adds_icon)
 end
 
 -- Sul the Sandcrawler
@@ -182,7 +182,7 @@ function mod:Ensnared(args)
 end
 
 function mod:Quicksand(args)
-	self:CDBar(-7062, 33, args.spellId)
+	self:Bar(-7062, 33, args.spellId)
 end
 
 function mod:QuicksandApplied(args)
@@ -390,7 +390,7 @@ do
 		if mobId == 69131 then -- Frost King
 			self:StopBar(136992) -- Biting Cold
 			if bitingColdStart then
-				self:CDBar(136990, 45 - (GetTime() - bitingColdStart)) -- Frostbite -- CD bar because of Possessed buff travel time
+				self:Bar(136990, 45 - (GetTime() - bitingColdStart)) -- Frostbite -- CD bar because of Possessed buff travel time
 			end
 		end
 	end
