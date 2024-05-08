@@ -163,15 +163,12 @@ function mod:Sandstorm(args)
 	self:MessageOld(args.spellId, "orange", "alert")
 end
 
-do
-	local mastersCall = select(2, UnitClass("player")) == "HUNTER" and mod:SpellName(53271)
-	function mod:Entrapped(args)
-		if self:Me(args.destGUID) then
-			self:Flash(136857)
-			self:MessageOld(136857, "blue", "info")
-		elseif self:Dispeller("magic", nil, 136857) or (mastersCall and GetSpellCooldown(mastersCall) == 0) then -- Master's Call works on it, too
-			self:TargetMessageOld(136857, args.destName, "yellow", nil, nil, nil, true)
-		end
+function mod:Entrapped(args)
+	if self:Me(args.destGUID) then
+		self:Flash(136857)
+		self:MessageOld(136857, "blue", "info")
+	elseif self:Dispeller("magic", nil, 136857) then
+		self:TargetMessageOld(136857, args.destName, "yellow", nil, nil, nil, true)
 	end
 end
 
