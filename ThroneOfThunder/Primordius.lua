@@ -89,7 +89,7 @@ do
 	local function warnPlayerMutations()
 		local totalP, totalN = 0, 0
 		for _, spell in next, theGood do
-			local _, count = mod:UnitDebuff("player", spell)
+			local _, count = mod:UnitDebuff("player", spell, 136184) -- difficulty 7
 			totalP = totalP + (count or 0)
 		end
 		for _, spell in next, theBad do
@@ -167,7 +167,7 @@ end
 function mod:AcidicSpinesRemoved(args)
 	self:MessageOld(args.spellId, "green", "alert", CL["over"]:format(args.spellName))
 	self:CloseProximity(args.spellId)
-	if self:UnitBuff("boss1", self:SpellName(136246)) then -- Erupting Pustules
+	if self:UnitBuff("boss1", self:SpellName(136246), 136246) then -- Erupting Pustules, difficulty 7
 		self:OpenProximity(136246, 2)
 	end
 end

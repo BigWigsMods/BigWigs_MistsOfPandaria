@@ -132,7 +132,7 @@ do
 		korthikStrikeWarned[player] = nil
 	end
 	function mod:UNIT_AURA(_, unitId)
-		if self:UnitDebuff(unitId, korthikStrike) then
+		if self:UnitDebuff(unitId, korthikStrike, 123963) then -- difficulty 3
 			local player = self:UnitName(unitId)
 			if not korthikStrikeWarned[player] then
 				korthikStrikeWarned[player] = true

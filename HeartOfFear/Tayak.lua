@@ -143,10 +143,10 @@ do
 	end
 	local function warnStrike(notBoss)
 		local strike = mod:SpellName(122994)
-		local player = mod:UnitDebuff("boss1target", strike) and "boss1target"
+		local player = mod:UnitDebuff("boss1target", strike, 123017) and "boss1target" -- difficulty 3
 		if not player then -- Most of the time this won't run as boss1target works
 			for unit in mod:IterateGroup() do
-				player = mod:UnitDebuff(unit, strike) and unit
+				player = mod:UnitDebuff(unit, strike, 123017) and unit -- difficulty 3
 				if player then break end
 			end
 		end
