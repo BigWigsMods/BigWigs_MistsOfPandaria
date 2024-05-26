@@ -11,6 +11,7 @@ mod:RegisterEnableMob(
 	60709, 61423, -- Qiang the Merciless
 	60710, 61427 -- Subetai the Swift
 )
+mod:SetEncounterID(1436)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -56,7 +57,7 @@ function mod:GetOptions()
 		{118303, "SAY", "ICON"}, {117697, "FLASH"}, -- Zian
 		118047, 118122, 118094, {118162, "FLASH"}, -- Subetai
 		"cowardice", 117708, {117837, "DISPEL"}, -- Meng
-		"bosses", "proximity", "casting_shields", "berserk",
+		"bosses", "casting_shields", "berserk",
 	}, {
 		[117921] = -5841,
 		[118303] = -5852,
@@ -93,9 +94,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "Delirious", 117837)
 
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1", "boss2", "boss3", "boss4")
-	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "EngageCheck")
-
-	self:Death("Win", 60701, 60708, 60709, 60710)
 end
 
 function mod:OnEngage()
@@ -109,6 +107,7 @@ function mod:OnEngage()
 	self:Bar(119521, 10) -- Annihilate
 	self:Bar(117910, 25) -- Flanking Orders
 	self:MessageOld("bosses", "green", nil, qiang, 117920) -- Massive Attack icon
+	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "BossCheck")
 end
 
 --------------------------------------------------------------------------------
@@ -258,8 +257,7 @@ function mod:ShieldRemoved(args)
 	self:MessageOld(args.spellId, "green", "info", L["shield_removed"]:format(args.spellName))
 end
 
-function mod:EngageCheck()
-	self:CheckBossStatus()
+function mod:BossCheck()
 	for i=1, 5 do
 		local unitId = ("boss%d"):format(i)
 		if UnitExists(unitId) then
@@ -270,14 +268,12 @@ function mod:EngageCheck()
 				if self:Heroic() then
 					self:Bar(117697, 40) -- Shield of Darkness
 				end
-				self:OpenProximity("proximity", 8)
 				self:MessageOld("bosses", "green", nil, zian, 117628) -- Shadow Blast icon
 			elseif (id == 60710 or id == 61427) and not bossActivated[60710] then -- Subetai
 				bossActivated[60710] = true
 				if self:Heroic() then
 					self:Bar(118162, 15) -- Sleight of Hand
 				end
-				self:OpenProximity("proximity", 8)
 				self:Bar(118094, 5) -- Volley
 				self:Bar(118047, 26) -- Pillage
 				self:Bar(118122, self:Heroic() and 40 or 15) -- Rain of Arrows
@@ -304,18 +300,12 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unitId, _, spellId)
 			self:Bar(117910, 30) -- Flanking Orders
 		elseif (id == 60701 or id == 61421) then -- Zian
 			self:StopBar(117697) -- Shield of Darkness
-			if not isBossActiveById(60710, 61427) then -- don't close if Subetai is active
-				self:CloseProximity()
-			end
 		elseif (id == 60710 or id == 61427) then -- Subetai
 			self:StopBar(118162) -- Sleight of Hand
 			self:StopBar(118094) -- Volley
 			self:StopBar(118122) -- Rain of Arrows
 			self:StopBar(118047) -- Pillage
 			self:Bar(118047, 30) -- Pillage
-			if not isBossActiveById(60701, 61421) then -- don't close if Zian is active
-				self:CloseProximity()
-			end
 		elseif (id == 60708 or id == 61429) then -- Meng
 			self:StopBar(117837)
 			self:Bar(117708, 30) -- Maddening Shout
