@@ -519,7 +519,7 @@ local function parseDebuff(player)
 			return "mantid", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = mod:UnitDebuff(player, staff[i])
+		_, count = mod:UnitDebuff(player, staff[i], 143630) -- difficulty 17
 		if count then
 			return "staff", colors[i], (count == 0) and 1 or count
 		end
