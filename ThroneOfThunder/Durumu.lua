@@ -83,7 +83,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "LifeDrainStunApplied", 137727)
 	self:Log("SPELL_AURA_REMOVED", "LifeDrainStunRemoved", 137727)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "LifeDrainDose", 133798)
-	self:Log("SPELL_DAMAGE", "LingeringGazeDamage", 134044)
+	--self:Log("SPELL_DAMAGE", "LingeringGazeDamage", 134044) -- Invalid ID as of 10.2.7?
 	self:Log("SPELL_AURA_REMOVED", "LingeringGazeRemoved", 134626)
 	self:Log("SPELL_AURA_APPLIED", "LingeringGazeApplied", 134626)
 	self:Log("SPELL_CAST_START", "HardStare", 133765)
@@ -346,18 +346,18 @@ function mod:CHAT_MSG_MONSTER_EMOTE(_, msg, _, _, _, target)
 	end
 end
 
-do
-	local prev = 0
-	function mod:LingeringGazeDamage(args)
-		if not self:Me(args.destGUID) then return end
-		local t = GetTime()
-		if t-prev > 2 then
-			prev = t
-			self:MessageOld(134626, "blue", "info", CL["underyou"]:format(args.spellName))
-			self:Flash(134626)
-		end
-	end
-end
+--do
+--	local prev = 0
+--	function mod:LingeringGazeDamage(args)
+--		if not self:Me(args.destGUID) then return end
+--		local t = GetTime()
+--		if t-prev > 2 then
+--			prev = t
+--			self:MessageOld(134626, "blue", "info", CL["underyou"]:format(args.spellName))
+--			self:Flash(134626)
+--		end
+--	end
+--end
 
 function mod:LingeringGazeRemoved(args)
 	if self:Me(args.destGUID) then
