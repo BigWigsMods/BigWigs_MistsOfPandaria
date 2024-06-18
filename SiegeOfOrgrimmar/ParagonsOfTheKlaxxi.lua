@@ -631,7 +631,7 @@ do
 		if myDebuff then
 			local redPlayers = {}
 			for unit in mod:IterateGroup() do
-				if not UnitIsUnit("player", unit) and (mod:UnitDebuff(unit, mod:SpellName(142533)) or (mod:Mythic() and mod:UnitDebuff(unit, mod:SpellName(142534)))) then -- red or mythic and yellow
+				if not UnitIsUnit("player", unit) and (mod:UnitDebuff(unit, mod:SpellName(142533), 142533) or (mod:Mythic() and mod:UnitDebuff(unit, mod:SpellName(142534), 142534))) then -- red or mythic and yellow
 					redPlayers[#redPlayers+1] = mod:UnitName(unit)
 				end
 			end
@@ -641,7 +641,7 @@ do
 	end
 	function mod:Catalysts(args)
 		self:Bar(-8034, 25, -8036, -8034) -- Choose Catalyst
-		local myDebuff = self:UnitDebuff("player", mod:SpellName(142532)) or self:UnitDebuff("player", mod:SpellName(142533)) or self:UnitDebuff("player", mod:SpellName(142534)) -- blue, red, yellow
+		local myDebuff = self:UnitDebuff("player", mod:SpellName(142532)) or self:UnitDebuff("player", mod:SpellName(142533), 142533) or self:UnitDebuff("player", mod:SpellName(142534), 142534) -- blue, red, yellow
 		self:MessageOld(-8034, "cyan", "alert", (myDebuff and matches[myDebuff][args.spellId]) and L.catalyst_match:format(matches[myDebuff][args.spellId]) or args.spellName, args.spellId)
 		self:CancelTimer(catalystProximityHandler) -- stop our previous timer it should have happened by now, but first one is tricky, so be safe and just stop it, 2nd one will be accurate
 		catalystProximityHandler = self:ScheduleTimer(handleCatalystProximity, 20)
