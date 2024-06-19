@@ -96,7 +96,7 @@ BigWigs:AddColors("Durumu the Forgotten", {
 	[133767] = {"blue","yellow"},
 	[133768] = {"blue","orange"},
 	[133798] = {"blue","green","red"},
-	[134626] = {"blue","orange"},
+	[134626] = "orange",
 	[140502] = "blue",
 	["adds"] = {"green","orange","yellow"},
 	["initial_life_drain"] = {"blue","orange"},
