@@ -32,6 +32,7 @@
 ## X-License: All Rights Reserved: You are free to fork and modify on GitHub, please ask us about anything else.
 ## X-Curse-Project-ID: 86782
 ## X-WoWI-ID: 23493
+## X-Wago-ID: rN4VvxKD
 ## X-BigWigs-ExtraMenu: -424
 ## X-BigWigs-LoadOn-InstanceId: 996, 1008, 1009, 1098, 1136
 ## X-BigWigs-LoadOn-WorldBoss: -376, 62346, -379, 60491, -504, 69099, -507, 69161, -554, 72057
