@@ -280,7 +280,7 @@ do
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
 			self:OpenProximity(args.spellId, 6)
-			self:Say(args.spellId, resonance)
+			self:Say(args.spellId, resonance, nil, "Arcane Resonance")
 		end
 		if not scheduled then
 			self:Bar(args.spellId, 15.4, resonance)
