@@ -188,7 +188,7 @@ do
 		self:TargetMessageOld(-7741, player, "green", "alarm")
 		self:PrimaryIcon(-7741, player)
 		if self:Me(guid) then
-			self:Say(-7741)
+			self:Say(-7741, nil, nil, "Focused Lightning")
 			self:OpenProximity(-7741, 8)
 		end
 	end

@@ -155,7 +155,7 @@ do
 			timer = nil
 			local name = mod:UnitName(player)
 			if UnitIsUnit(player, "player") then
-				mod:Say(-6346)
+				mod:Say(-6346, nil, nil, "Unseen Strike")
 			else
 				mod:OpenProximity(-6346, 5, name, true)
 			end

@@ -349,7 +349,7 @@ function mod:Charge(msg, _, _, _, player)
 	self:Bar(-7080, 51)
 	if UnitIsUnit("player", player) then
 		self:Flash(-7080)
-		self:Say(-7080)
+		self:Say(-7080, nil, nil, "Charge")
 	end
 end
 

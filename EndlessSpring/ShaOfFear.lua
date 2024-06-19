@@ -169,7 +169,7 @@ do
 		warnNext()
 		huddleList[#huddleList + 1] = args.destName
 		if self:Me(args.destGUID) then
-			self:Say(args.spellId)
+			self:Say(args.spellId, nil, nil, "Huddle in Terror")
 		end
 		if not scheduled then
 			scheduled = self:ScheduleTimer(warnHuddle, 0.3, args.spellId)
@@ -320,7 +320,7 @@ do
 			-- If we've done 14 (0.7s) checks and still not passing the threat check, it's probably being cast on the tank
 			if UnitIsUnit("boss1target", "player") then
 				mod:MessageOld(119519, "orange", "alarm", CL["you"]:format(eerieSkull))
-				mod:Say(119519, eerieSkull)
+				mod:Say(119519, eerieSkull, nil, "Eerie Skull")
 				mod:Flash(119519)
 			end
 			mod:CancelTimer(timer)

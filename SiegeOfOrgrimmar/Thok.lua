@@ -175,7 +175,7 @@ end
 
 function mod:FixateApplied(args)
 	if self:Me(args.destGUID) then
-		self:Say(-7980)
+		self:Say(-7980, nil, nil, "Fixate")
 		self:Flash(-7980)
 	end
 	self:TargetMessageOld(-7980, args.destName, "orange", "alarm")

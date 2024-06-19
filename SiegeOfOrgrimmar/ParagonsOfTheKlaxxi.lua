@@ -443,7 +443,7 @@ do
 			if UnitIsUnit("player", target) then
 				mod:MessageOld(143701, "blue", "info", CL.you:format(mod:SpellName(143701)))
 				mod:Flash(143701)
-				mod:Say(143701)
+				mod:Say(143701, nil, nil, "Whirling")
 			end
 		end
 	end
@@ -533,7 +533,7 @@ local function iyyokukSelected()
 		mod:Flash(-8055)
 		mod:MessageOld(-8055, "blue", "info", L.edge_message)
 		mod:Bar(-8055, 9, mod:SpellName(142809), 142809) -- Fiery Edge
-		mod:Say(-8055, mod:SpellName(142809))
+		mod:Say(-8055, mod:SpellName(142809), nil, "Fiery Edge")
 	end
 
 	if mod.db.profile.custom_off_edge_marks then
@@ -693,7 +693,7 @@ do
 		local name = mod:UnitName(target)
 		if UnitIsUnit("player", target) then
 			mod:Flash(-8008)
-			mod:Say(-8008)
+			mod:Say(-8008, nil, nil, "Death from Above")
 			mod:TargetMessageOld(-8008, name, "orange", "alarm")
 		else
 			mod:TargetMessageOld(-8008, name, "orange")

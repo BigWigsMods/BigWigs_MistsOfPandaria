@@ -227,7 +227,7 @@ do
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
 			self:Bar(args.spellId, 5, CL["you"]:format(wildfire))
-			self:Say(args.spellId, wildfire)
+			self:Say(args.spellId, wildfire, nil, "Wildfire")
 		end
 	end
 	function mod:WildfireSparkRemoved(args)

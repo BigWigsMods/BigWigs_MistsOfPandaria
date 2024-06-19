@@ -256,7 +256,7 @@ end
 function mod:Ravager(args)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Ravager")
 	end
 	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm")
 end

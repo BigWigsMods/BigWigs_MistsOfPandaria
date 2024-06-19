@@ -298,7 +298,7 @@ end
 
 function mod:CHAT_MSG_RAID_BOSS_WHISPER(_, msg, sender)
 	if sender == self:SpellName(138485) then -- Crimson Wake
-		self:Say(138485)
+		self:Say(138485, nil, nil, "Crimson Wake")
 		self:Bar(138485, 30, CL["you"]:format(sender))
 		self:DelayedMessage(138485, 30, "green", CL["over"]:format(sender))
 		self:MessageOld(138485, "orange", "alarm", CL["you"]:format(sender))

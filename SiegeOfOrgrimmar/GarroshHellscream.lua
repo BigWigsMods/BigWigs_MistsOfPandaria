@@ -249,7 +249,7 @@ function mod:MaliceApplied(args)
 	self:TargetBar(args.spellId, 14, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Malice")
 	end
 	maliceCounter = maliceCounter + 1
 	self:Bar(args.spellId, 30, CL.count:format(args.spellName, maliceCounter))
@@ -581,7 +581,7 @@ do
 		self:ScheduleTimer("SecondaryIcon", 7, 144758)
 		if self:Me(guid) then
 			self:Flash(144758)
-			self:Say(144758)
+			self:Say(144758, nil, nil, "Desecrate")
 		end
 		self:TargetMessageOld(144758, name, "orange", "alarm")
 	end

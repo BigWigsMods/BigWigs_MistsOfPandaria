@@ -264,7 +264,7 @@ function mod:BitingColdApplied(args)
 	self:Bar(args.spellId, 45)
 	self:SecondaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Biting Cold")
 		if sandGuyDead then
 			self:OpenProximity(args.spellId, 4)
 		end

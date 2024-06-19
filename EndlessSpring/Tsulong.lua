@@ -135,7 +135,7 @@ do
 		self:TargetMessageOld(122777, name, "red", "alert")
 		if self:Me(guid) then
 			self:Flash(122777)
-			self:Say(122777)
+			self:Say(122777, nil, nil, "Nightmares")
 		end
 	end
 

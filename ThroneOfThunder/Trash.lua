@@ -87,7 +87,11 @@ do
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
 			self:OpenProximity(args.spellId, 10)
-			self:Say(args.spellId)
+			if args.spellId == 139900 then
+				self:Say(args.spellId, nil, nil, "Stormcloud")
+			else
+				self:Say(args.spellId, nil, nil, "Storm Energy")
+			end
 		end
 		if not scheduled then
 			scheduled = self:ScheduleTimer(warnStorms, 0.2, args.spellId)

@@ -159,7 +159,7 @@ do
 	end
 	function mod:AmberPrison(args)
 		if self:Me(args.destGUID) then
-			self:Say(args.spellId)
+			self:Say(args.spellId, nil, nil, "Amber Prison")
 		end
 		prisonList[#prisonList + 1] = args.destName
 		if not scheduled then
@@ -223,7 +223,7 @@ end
 function mod:WindBomb(args)
 	if self:Me(args.sourceGUID) then
 		self:Flash(131830)
-		self:Say(131830)
+		self:Say(131830, nil, nil, "Wind Bomb")
 	end
 	self:TargetMessageOld(131830, args.sourceName, "orange", "alarm")
 end
@@ -256,7 +256,7 @@ end
 
 function mod:Resin(args)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Corrosive Resin")
 		self:Flash(args.spellId)
 		self:MessageOld(args.spellId, "blue", "info", CL["you"]:format(args.spellName))
 	end

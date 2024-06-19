@@ -360,7 +360,7 @@ function mod:AmberGlobule(args)
 	self:TargetMessageOld(-6548, args.destName, "red", "alert")
 	if self:Me(args.destGUID) then
 		self:Flash(-6548)
-		self:Say(-6548)
+		self:Say(-6548, nil, nil, "Amber Globule")
 	end
 	if not primaryIcon then
 		self:PrimaryIcon(-6548, args.destName)

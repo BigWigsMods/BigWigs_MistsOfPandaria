@@ -28,7 +28,7 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		144688, {144689, "FLASH", "SAY", "PROXIMITY"}, 144692, 144695,
+		144688, {144689, "FLASH", "PROXIMITY"}, 144692, 144695,
 		"berserk",
 	}
 end
@@ -128,7 +128,6 @@ do
 	function mod:BurningSoul(args)
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
-			self:Say(args.spellId)
 			self:OpenProximity(args.spellId, 10)
 			isOnMe = true
 		end

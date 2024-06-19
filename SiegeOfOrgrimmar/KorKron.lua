@@ -135,7 +135,7 @@ do
 	local function printTarget(self, name, guid)
 		self:PrimaryIcon(-8132, name)
 		if self:Me(guid) then
-			self:Say(-8132)
+			self:Say(-8132, nil, nil, "Foul Stream")
 			self:Flash(-8132)
 		end
 		self:TargetMessageOld(-8132, name, "green", "alarm")
@@ -207,7 +207,7 @@ end
 do
 	local function printTarget(self, name, guid)
 		if self:Me(guid) then
-			self:Say(144005)
+			self:Say(144005, nil, nil, "Toxic Storm")
 		end
 		self:TargetMessageOld(144005, name, "orange", "alert")
 	end

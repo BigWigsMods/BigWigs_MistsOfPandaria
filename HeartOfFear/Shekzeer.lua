@@ -100,7 +100,7 @@ function mod:HeartOfFearApplied(args)
 	self:PrimaryIcon(args.spellId, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Heart of Fear")
 	end
 end
 
@@ -169,7 +169,7 @@ do
 	function mod:Visions(args)
 		visionsList[#visionsList + 1] = args.destName
 		if self:Me(args.destGUID) then
-			self:Say(args.spellId, L["visions_message"])
+			self:Say(args.spellId, L["visions_message"], nil, "Visions")
 			self:Flash(args.spellId)
 			self:OpenProximity(args.spellId, 8)
 		end

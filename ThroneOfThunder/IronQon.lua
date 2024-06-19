@@ -117,7 +117,7 @@ do
 		mod:SecondaryIcon(134926, name)
 		if UnitIsUnit("player", "boss1target") then
 			mod:Flash(134926)
-			mod:Say(134926)
+			mod:Say(134926, nil, nil, "Throw Spear")
 		end
 		mod:StopSpearScan()
 	end
@@ -233,7 +233,7 @@ function mod:LightningStormApplied(args)
 	self:TargetMessageOld(args.spellId, args.destName, "orange") -- no point for sound since the guy stunned can't do anything
 	self:Bar(args.spellId, 20)
 	if self:Me(args.destGUID) then
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Lightning Storm")
 	end
 end
 

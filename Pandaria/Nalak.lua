@@ -34,7 +34,7 @@ L = mod:GetLocale()
 --
 
 function mod:GetOptions()
-	return { 136338, {136339, "FLASH"}, {136340, "PROXIMITY", "SAY"}, "ability" }
+	return { 136338, {136339, "FLASH"}, {136340, "PROXIMITY"}, "ability" }
 end
 
 function mod:OnBossEnable()
@@ -94,7 +94,6 @@ do
 		end
 		if self:Me(args.destGUID) then
 			self:MessageOld(args.spellId, "blue", "alert", CL["you"]:format(args.spellName))
-			self:Say(args.spellId)
 			self:OpenProximity(args.spellId, 10)
 			openedForMe = true
 		end

@@ -226,7 +226,7 @@ end
 function mod:LifeDrainDose(args)
 	self:StackMessageOld(133798, args.destName, args.amount, "red")
 	if self:Me(args.destGUID) and not self:LFR() then
-		self:Say(args.spellId, L["life_drain_say"]:format(args.amount)) -- this spams but is needed, hack even yell would be better
+		self:Say(args.spellId, L["life_drain_say"]:format(args.amount), nil, ("%dx Drain"):format(args.amount)) -- this spams but is needed, hack even yell would be better
 	end
 end
 
@@ -309,7 +309,7 @@ end
 function mod:ForceOfWill(args)
 	if self:Me(args.destGUID) then
 		self:Flash(-6905)
-		self:Say(-6905)
+		self:Say(-6905, nil, nil, "Force of Will")
 	end
 	self:TargetMessageOld(-6905, args.destName, "yellow", "long")
 	self:Bar(-6905, 20)

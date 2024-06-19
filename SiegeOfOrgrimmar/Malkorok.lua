@@ -95,7 +95,7 @@ do
 	end
 	function mod:DisplacedEnergyApplied(args)
 		if self:Me(args.destGUID) then
-			self:Say(args.spellId)
+			self:Say(args.spellId, nil, nil, "Displaced Energy")
 			self:Flash(args.spellId)
 			self:OpenProximity(args.spellId, 8)
 		end

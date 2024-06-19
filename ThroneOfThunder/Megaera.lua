@@ -207,7 +207,7 @@ do
 			if UnitIsUnit(unit, "player") then
 				self:TargetBar(139866, duration, player)
 				self:Flash(139866)
-				self:Say(139866)
+				self:Say(139866, nil, nil, "Torrent of Ice")
 			end
 			self:TargetMessageOld(139866, player, "orange", "info")
 			self:PrimaryIcon(139866, player)
@@ -246,7 +246,7 @@ function mod:CindersApplied(args)
 	self:TargetBar(args.spellId, 30, args.destName)
 	if self:Me(args.destGUID) then
 		self:Flash(args.spellId)
-		self:Say(args.spellId)
+		self:Say(args.spellId, nil, nil, "Cinders")
 	end
 end
 

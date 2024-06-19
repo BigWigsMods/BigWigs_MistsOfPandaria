@@ -153,7 +153,7 @@ do
 		lightningPrisonList[#lightningPrisonList + 1] = args.destName
 		if self:Me(args.destGUID) then
 			self:Flash(117436)
-			self:Say(117436)
+			self:Say(117436, nil, nil, "Lightning Prison")
 			self:OpenProximity(117436, 7)
 		end
 		if not scheduled then

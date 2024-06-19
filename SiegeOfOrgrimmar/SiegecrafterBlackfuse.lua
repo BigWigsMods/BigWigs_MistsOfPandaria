@@ -248,7 +248,7 @@ function mod:RAID_BOSS_WHISPER(_, msg, sender)
 		-- might wanna do syncing to get range message working
 		self:MessageOld(-8208, "blue", "info", L.laser_on_you, 144040)
 		self:Flash(-8208)
-		self:Say(-8208, 143444) -- 143444 = "Laser"
+		self:Say(-8208, 143444, nil, "Laser") -- 143444 = "Laser"
 	elseif msg:find("Ability_Siege_Engineer_Detonate", nil, true) then -- mine fixate
 		self:MessageOld(-8212, "blue", "info", CL.you:format(sender), "inv_misc_bomb_02")
 		self:Flash(-8212, "inv_misc_bomb_02")
@@ -258,7 +258,7 @@ function mod:RAID_BOSS_WHISPER(_, msg, sender)
 		self:MessageOld(-8195, "green", "info", CL.you:format(self:SpellName(143266)))
 		self:PrimaryIcon(-8195, "player")
 		self:Flash(-8195)
-		self:Say(-8195)
+		self:Say(-8195, nil, nil, "Launch Sawblade")
 	end
 end
 
@@ -366,7 +366,7 @@ function mod:Drillstorm(args)
 		self:PrimaryIcon(args.spellId, args.destName)
 		if self:Me(args.destGUID) then
 			self:Flash(args.spellId)
-			self:Say(args.spellId)
+			self:Say(args.spellId, nil, nil, "Drillstorm")
 		end
 	end
 end

@@ -537,7 +537,7 @@ do
 	end
 	function mod:Overcharged(args)
 		if self:Me(args.destGUID) then
-			self:Say("overcharged_self", args.spellId)
+			self:Say("overcharged_self", args.spellId, nil, "Overcharged")
 			self:TargetBar("overcharged_self", 6, args.destName, args.spellId)
 			overchargedOnMe = true
 		end
@@ -661,7 +661,7 @@ do
 			timeLeft = 8
 			staticShockOnMe = true
 			self:Flash("shock_self", args.spellId)
-			self:Say("shock_self", args.spellId)
+			self:Say("shock_self", args.spellId, nil, "Static Shock")
 			self:TargetBar("shock_self", 8, args.destName, args.spellId)
 			if not self:LFR() then -- Don't spam in LFR
 				timer = self:ScheduleRepeatingTimer(staticShockSayCountdown, 1)

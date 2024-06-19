@@ -225,7 +225,7 @@ function mod:ShaSear(args)
 	if infernoTarget then
 		if self:Me(args.destGUID) then -- Only during Inferno Strike phase (when people are hugging)
 			if not self:LFR() then
-				self:Say(args.spellId)
+				self:Say(args.spellId, nil, nil, "Sha Sear")
 			end
 			self:Flash(args.spellId)
 			self:TargetMessageOld(args.spellId, args.destName, "blue", "warning")
@@ -353,7 +353,7 @@ do
 		self:PrimaryIcon(-7959, name)
 		if self:Me(guid) then
 			self:Flash(-7959)
-			self:Say(-7959)
+			self:Say(-7959, nil, nil, "Inferno Strike")
 			if not self:LFR() then -- Don't spam in LFR
 				self:ScheduleTimer(startTimer, 1-t, self)
 			end
@@ -436,7 +436,7 @@ do
 	local function printTarget(self, name, guid)
 		if self:Me(guid) then
 			self:Flash(143019)
-			self:Say(143019)
+			self:Say(143019, nil, nil, "Corrupted Brew")
 		end
 		self:TargetMessageOld(143019, name, "blue", "info")
 	end
