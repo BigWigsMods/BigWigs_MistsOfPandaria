@@ -120,7 +120,7 @@ function mod:BreathUpdate(unit)
 end
 
 function mod:CrystalShell(spellName)
-	if self:UnitDebuff("player", spellName) or not UnitAffectingCombat("player") then
+	if self:UnitDebuff("player", spellName, 137633) or not UnitAffectingCombat("player") then -- diff 5
 		mod:CancelTimer(crystalTimer)
 		crystalTimer = nil
 	else

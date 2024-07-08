@@ -89,11 +89,20 @@ do
 	local function warnPlayerMutations()
 		local totalP, totalN = 0, 0
 		for _, spell in next, theGood do
-			local _, count = mod:UnitDebuff("player", spell, 136184, 136186) -- difficulty 7
+			local _, count = mod:UnitDebuff("player", spell,
+				136184, -- diff 7
+				136186, -- diff 7
+				136182, -- diff 5
+				136180 -- diff 5
+			)
 			totalP = totalP + (count or 0)
 		end
 		for _, spell in next, theBad do
-			local _, count = mod:UnitDebuff("player", spell)
+			local _, count = mod:UnitDebuff("player", spell,
+				136185, -- diff 5
+				136181, -- diff 5
+				136183 -- diff 5
+			)
 			totalN = totalN + (count or 0)
 		end
 
