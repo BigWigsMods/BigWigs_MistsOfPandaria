@@ -208,7 +208,7 @@ do
 	local concussion = mod:SpellName(136431)
 	local prev = 0
 	function mod:ShellConcussionCheck(_, unit)
-		local _, _, _, expires = self:UnitDebuff(unit, concussion)
+		local _, _, _, expires = self:UnitDebuff(unit, concussion, 136431) -- diff 5
 		if expires and expires ~= prev then
 			local t = GetTime()
 			if prev < t then -- buff fell off

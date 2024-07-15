@@ -179,11 +179,11 @@ end
 
 do
 	local scheduled = {}
-	local function checkArcLightning(spellName, checkOpen)
+	local function checkArcLightning(spellId, checkOpen)
 		if not mod.isEngaged then return end -- This can run after wipe, so check if the encounter is engaged
 		local debuffs = nil
 		for unit in mod:IterateGroup() do
-			if mod:UnitDebuff(unit, spellName) then
+			if mod:UnitDebuff(unit, spellId) then
 				debuffs = true
 				break
 			end
@@ -194,26 +194,26 @@ do
 		scheduled = nil
 		if mod:LFR() then return end
 
-		if mod:UnitDebuff("player", spellName) then
-			mod:OpenProximity(136193, 12) -- open Arcing Lighning
-		elseif checkOpen then
-			mod:CloseProximity(136193) -- close multi-target
-			-- reopen Lightning Storm/Unleashed Flame
-			if not mod:Heroic() then
-				if phase == 2 then
-					mod:OpenProximity(136192, 12) -- Lightning Storm
-				end
-			elseif phase == 3 then -- Dam'ren + Ro'shak
-				mod:OpenProximity(-6870, 10) -- Unleashed Flame
-			elseif not quetzalDead then
-				mod:OpenProximity(136192, 12) -- Lightning Storm
-			end
-		end
+		--if mod:UnitDebuff("player", spellName) then
+		--	mod:OpenProximity(136193, 12) -- open Arcing Lighning
+		--elseif checkOpen then
+		--	mod:CloseProximity(136193) -- close multi-target
+		--	-- reopen Lightning Storm/Unleashed Flame
+		--	if not mod:Heroic() then
+		--		if phase == 2 then
+		--			mod:OpenProximity(136192, 12) -- Lightning Storm
+		--		end
+		--	elseif phase == 3 then -- Dam'ren + Ro'shak
+		--		mod:OpenProximity(-6870, 10) -- Unleashed Flame
+		--	elseif not quetzalDead then
+		--		mod:OpenProximity(136192, 12) -- Lightning Storm
+		--	end
+		--end
 	end
 
 	function mod:ArcingLightningRemoved(args)
 		if not scheduled then
-			scheduled = self:ScheduleTimer(checkArcLightning, 0.5, args.spellName, true)
+			scheduled = self:ScheduleTimer(checkArcLightning, 0.5, args.spellId, true)
 		end
 	end
 
@@ -223,7 +223,7 @@ do
 			self:TargetBar(args.spellId, 30, args.destName)
 		end
 		if not scheduled then
-			scheduled = self:ScheduleTimer(checkArcLightning, 0.5, args.spellName)
+			scheduled = self:ScheduleTimer(checkArcLightning, 0.5, args.spellId)
 		end
 	end
 end
@@ -352,10 +352,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 			self:StopBar(139180) -- Frost Spike
 			self:StopBar(-6877) -- Windstorm
 			self:StopBar(136192) -- Lightning Storm
-			if not self:UnitDebuff("player", arcingLightning) then
-				self:CloseProximity(136192) -- Lightning Storm
-				self:OpenProximity(-6870, 10) -- Unleashed Flame
-			end
+			--if not self:UnitDebuff("player", arcingLightning) then
+			--	self:CloseProximity(136192) -- Lightning Storm
+			--	self:OpenProximity(-6870, 10) -- Unleashed Flame
+			--end
 			self:Bar(-6870, 17) -- Unleashed Flame
 			self:Bar(134926, 33) -- Throw Spear
 			self:ScheduleTimer("StartSpearScan", 25)
@@ -364,10 +364,10 @@ function mod:UNIT_SPELLCAST_SUCCEEDED(_, unit, _, spellId)
 			phase = 4
 			self:StopBar(-6870) -- Unleashed Flame
 			self:StopBar(-6914) -- Dead Zone
-			if not self:UnitDebuff("player", arcingLightning) then
-				self:CloseProximity(-6870) -- Unleashed Flame
-				self:OpenProximity(136192, 12) -- Lightning Storm (12 to be safe)
-			end
+			--if not self:UnitDebuff("player", arcingLightning) then
+			--	self:CloseProximity(-6870) -- Unleashed Flame
+			--	self:OpenProximity(136192, 12) -- Lightning Storm (12 to be safe)
+			--end
 			self:RegisterUnitEvent("UNIT_POWER_FREQUENT", "PowerWarn", "boss2") -- Ro'shak comes down after 12 seconds
 			self:Bar(136192, 10) -- Lightning Storm
 			self:Bar(-6917, 63, CL["count"]:format(self:SpellName(136146), 1)) -- Fist Smash
@@ -412,9 +412,9 @@ function mod:Deaths(args)
 	elseif args.mobId == 68080 then
 		-- Quet'zal
 		self:StopBar(136192) -- Lightning Storm
-		if not self:UnitDebuff("player", arcingLightning) or self:LFR() then
-			self:CloseProximity(136192) -- Lightning Storm
-		end
+		--if not self:UnitDebuff("player", arcingLightning) or self:LFR() then
+		--	self:CloseProximity(136192) -- Lightning Storm
+		--end
 		if not self:Heroic() then
 			self:StopBar(-6877) -- Windstorm
 			self:Bar(134926, 33) -- Throw Spear
