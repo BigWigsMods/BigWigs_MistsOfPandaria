@@ -4,6 +4,7 @@
 --
 
 local mod, CL = BigWigs:NewBoss("Gara'jal the Spiritbinder", 1008, 682)
+if not mod then return end
 mod:RegisterEnableMob(60143, 60385) -- Gara'jal, Zandalari War Wyvern
 
 local totemCounter, shadowCounter = 1, 1
