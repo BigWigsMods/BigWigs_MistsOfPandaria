@@ -183,7 +183,7 @@ function mod:OnBossEnable()
 	--Skeer the Bloodseeker
 	self:Log("SPELL_CAST_START", "Bloodletting", 143280)
 	--Rik'kal the Dissector
-	self:Log("SPELL_CAST_SUCCESS" , "Prey", 144286)
+	self:Log("SPELL_CAST_SUCCESS", "Prey", 144286)
 	self:Log("SPELL_CAST_START", "InjectionCast", 143339)
 	self:Log("SPELL_AURA_APPLIED", "Injection", 143339)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "Injection", 143339)
@@ -813,7 +813,7 @@ function mod:ParagonDeaths(args)
 		self:StopBar(-8008) -- Death from Above
 		self:StopDeathFromAboveScan()
 	elseif args.mobId == 71153 then --Hisek the Swarmkeeper
-		self:StopBar(-8073) --Aim
+		self:StopBar(CL.count:format(self:SpellName(-8073), aimCounter)) --Aim
 		self:StopBar(143243) --Rapid Fire
 	elseif args.mobId == 71158 then --Rik'kal the Dissector
 		dissectorRikkalDead = true
