@@ -203,7 +203,7 @@ do
 			self:SetInfo("energy", bossList[unit]+1, power)
 			self:SetInfoBar("energy", bossList[unit], power/100)
 			if power == 80 then
-				self:Message("energy", "red", CL.other:format(self:UnitName(unit), CL.energy_percent:format(power)), L.energy_icon)
+				self:Message("energy", "red", CL.other:format(self:UnitName(unit), CL.energy_percent:format(power)), false)
 				local t = GetTime()
 				if t-prevSound > 2 then
 					prevSound = t
