@@ -1,30 +1,37 @@
-
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
 
 local mod, CL = BigWigs:NewBoss("The Stone Guard", 1008, 679)
 if not mod then return end
-mod:RegisterEnableMob(60051, 60047, 60043, 59915) -- Cobalt, Amethyst, Jade, Jasper
+mod:RegisterEnableMob(60051, 60047, 60043, 59915) -- Cobalt Guardian, Amethyst Guardian, Jade Guardian, Jasper Guardian
+mod:SetEncounterID(1395)
+mod:SetRespawnTime(30)
+
+--------------------------------------------------------------------------------
+-- Locals
+--
 
 local cobaltTimer = 10.7
-local deathCount = 0
+local prevTiles = 0
 
 --------------------------------------------------------------------------------
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
-	L.petrifications = "Petrification"
-	L.petrifications_desc = "Warning for when bosses start petrification"
-	L.petrifications_icon = "inv_stone_weightstone_08"
+	L[60051] = "|T134398:0|t Cobalt" -- Cobalt Guardian
+	L[60047] = "|T134399:0|t Amethyst" -- Amethyst Guardian
+	L[60043] = "|T134397:0|t Jade" -- Jade Guardian
+	L[59915] = "|T134396:0|t Jasper" -- Jasper Guardian
 
-	L.overload = "Overload"
-	L.overload_desc = "Warning for all types of overloads."
-	L.overload_icon = "spell_nature_wispsplode"
+	L["129424_desc"] = -5772 -- Add proper description to Cobalt Mine
+
+	L.custom_on_linked_spam = CL.link_say_option_name
+	L.custom_on_linked_spam_desc = CL.link_say_option_desc
+	L.custom_on_linked_spam_icon = mod:GetMenuIcon("SAY")
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -32,36 +39,48 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		116529,
-		-5772,
-		130774,
-		{130395, "FLASH", "PROXIMITY"},
-		"overload", "petrifications", "berserk",
-	}, {
+		116529, -- Power Down
+		115852, -- Cobalt Petrification
+		129424, -- Cobalt Mine
+		116057, -- Amethyst Petrification
+		130774, -- Amethyst Pool
+		116006, -- Jade Petrification
+		116036, -- Jasper Petrification
+		{130395, "SAY", "ME_ONLY_EMPHASIZE"}, -- Jasper Chains
+		"custom_on_linked_spam",
+		{"energy", "INFOBOX"},
+		"berserk",
+	},{
 		[116529] = "heroic",
-		[-5772] = -5771,
-		[130774] = -5691,
-		[130395] = -5774,
-		overload = "general",
+		[115852] = -5771, -- Cobalt Guardian
+		[116057] = -5691, -- Amethyst Guardian
+		[116006] = -5773, -- Jade Guardian
+		[116036] = -5774, -- Jasper Guardian
+		energy = "general",
+	},{
+		[130395] = CL.link, -- Jasper Chains (Link)
 	}
 end
 
 function mod:OnBossEnable()
+	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Petrifications", "boss1", "boss2", "boss3", "boss4")
 	self:Log("SPELL_AURA_APPLIED", "JasperChainsApplied", 130395)
 	self:Log("SPELL_AURA_REMOVED", "JasperChainsRemoved", 130395)
-	self:Log("SPELL_CAST_SUCCESS", "AmethystPool", 130774)
-	self:Emote("PowerDown", "spell:116529")
-	self:Emote("Overload", L["overload"])
-
-	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
-
-	self:Death("Deaths", 60051, 60047, 60043, 59915)
+	self:Log("SPELL_AURA_APPLIED", "AmethystPoolDamage", 130774)
+	self:Log("SPELL_PERIODIC_DAMAGE", "AmethystPoolDamage", 130774)
+	self:Log("SPELL_PERIODIC_MISSED", "AmethystPoolDamage", 130774)
+	self:Log("SPELL_AURA_APPLIED", "EnergizedTilesApplied", 116541)
+	self:Log("SPELL_AURA_APPLIED_DOSE", "EnergizedTilesApplied", 116541)
+	self:RegisterUnitEvent("UNIT_POWER_FREQUENT", nil, "boss1", "boss2", "boss3", "boss4")
 end
 
-function mod:OnEngage(diff)
+function mod:OnEngage()
+	prevTiles = 0
+	self:OpenInfo("energy", CL.other:format("BigWigs", CL.energy))
+
+	local diff = self:Difficulty()
 	cobaltTimer = (diff == 3 or diff == 5) and 8.4 or 10.7
-	deathCount = (diff == 4 or diff == 6) and -1 or 0
 	self:Berserk(self:Heroic() and 420 or 480)
 end
 
@@ -69,72 +88,128 @@ end
 -- Event Handlers
 --
 
-function mod:PowerDown()
-	self:MessageOld(116529, "orange", "info", self:SpellName(116529))
-end
-
-function mod:Overload(msg, boss)
-	self:MessageOld("overload", "red", "long", msg:format(boss), L.overload_icon)
+function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg, boss, _, _, destName)
+	if msg:find("spell:116529", nil, true) then -- Power Down
+		self:Message(116529, "orange", CL.other:format(self:SpellName(116529), boss))
+		self:PlaySound(116529, "info")
+	end
 end
 
 do
-	local jasperChainsTargets = mod:NewTargetList()
-	local prevPlayer = nil
+	local prevPlayerName, prevPlayerGUID, mySaySpamTarget = nil, nil, nil
+	local function RepeatLinkSay()
+		if not mod:IsEngaged() or not mySaySpamTarget then return end
+		mod:SimpleTimer(RepeatLinkSay, 3)
+		mod:Say(false, CL.link_with:format(mySaySpamTarget), true, ("Linked with %s"):format(mySaySpamTarget))
+	end
 	function mod:JasperChainsApplied(args)
-		if not prevPlayer then
-			prevPlayer = args.destName
-			jasperChainsTargets[1] = args.destName
-		elseif prevPlayer then
-			jasperChainsTargets[2] = args.destName
-			if self:Me(args.destGUID) or UnitIsUnit(prevPlayer, "player") then
-				self:Flash(args.spellId)
-				self:MessageOld(args.spellId, "blue", nil, CL["you"]:format(args.spellName))
-				self:OpenProximity(args.spellId, 10, UnitIsUnit(prevPlayer, "player") and args.destName or prevPlayer, true)
+		if not prevPlayerName then
+			prevPlayerName, prevPlayerGUID = args.destName, args.destGUID
+		elseif prevPlayerName then
+			if self:Me(args.destGUID) then
+				mySaySpamTarget = prevPlayerName
+				if self:GetOption("custom_on_linked_spam") then
+					self:SimpleTimer(RepeatLinkSay, 3)
+				end
+				local msg = CL.link_with:format(prevPlayerName)
+				self:PersonalMessage(args.spellId, false, msg)
+				self:Say(args.spellId, msg, true, ("Linked with %s"):format(prevPlayerName))
+				self:PlaySound(args.spellId, "warning", nil, args.destName)
+			elseif self:Me(prevPlayerGUID) then
+				mySaySpamTarget = args.destName
+				if self:GetOption("custom_on_linked_spam") then
+					self:SimpleTimer(RepeatLinkSay, 3)
+				end
+				local msg = CL.link_with:format(args.destName)
+				self:PersonalMessage(args.spellId, false, msg)
+				self:Say(args.spellId, msg, true, ("Linked with %s"):format(args.destName))
+				self:PlaySound(args.spellId, "warning", nil, prevPlayerName)
 			else
-				self:TargetMessageOld(args.spellId, jasperChainsTargets, "yellow")
+				self:Message(args.spellId, "yellow", CL.link_both:format(self:ColorName(prevPlayerName), self:ColorName(args.destName)))
 			end
-			prevPlayer = nil
+			prevPlayerName = nil
 		end
 	end
+
 	function mod:JasperChainsRemoved(args)
 		if self:Me(args.destGUID) then
-			self:MessageOld(args.spellId, "blue", nil, CL["over"]:format(args.spellName))
-			self:CloseProximity(args.spellId)
+			mySaySpamTarget = nil
+			self:Say(args.spellId, CL.link_removed, true, "Link removed")
 		end
 	end
 end
 
 do
 	local prev = 0
-	function mod:AmethystPool(args)
-		if not self:Me(args.destGUID) then return end
-		local t = GetTime()
-		if t-prev > 2 then
-			prev = t
-			self:MessageOld(args.spellId, "blue", "alarm", CL["underyou"]:format(args.spellName))
+	function mod:AmethystPoolDamage(args)
+		if self:Me(args.destGUID) and args.time - prev > 5 then
+			prev = args.time
+			self:PersonalMessage(args.spellId, "underyou")
+			self:PlaySound(args.spellId, "underyou")
 		end
 	end
 end
 
 function mod:Petrifications(_, _, _, spellId)
-	-- we could be using the same colors as blizzard but they are too "faint" imo
-	if spellId == 115852 then -- cobalt
-		self:MessageOld("petrifications", nil, "alert", ("|c001E90FF%s|r"):format(self:SpellName(spellId)), spellId) -- blue
-	elseif spellId == 116006 then -- jade
-		self:MessageOld("petrifications", nil, "alert", ("|c00008000%s|r"):format(self:SpellName(spellId)), spellId) -- green
-	elseif spellId == 116036 then -- jasper
-		self:MessageOld("petrifications", nil, "alert", ("|c00FF0000%s|r"):format(self:SpellName(spellId)), spellId) -- red
-	elseif spellId == 116057 then -- amethyst
-		self:MessageOld("petrifications", nil, "alert", ("|c00FF44FF%s|r"):format(self:SpellName(spellId)), spellId) -- purple
-	elseif spellId == 129424 then
-		self:Bar(-5772, cobaltTimer)
+	if spellId == 115852 then -- Cobalt Petrification
+		self:Message(115852, "cyan")
+		self:PlaySound(115852, "alert")
+	elseif spellId == 116006 then -- Jade Petrification
+		self:Message(116006, "cyan")
+		self:PlaySound(116006, "alert")
+	elseif spellId == 116036 then -- Jasper Petrification
+		self:Message(116036, "cyan")
+		self:PlaySound(116036, "alert")
+	elseif spellId == 116057 then -- Amethyst Petrification
+		self:Message(116057, "cyan")
+		self:PlaySound(116057, "alert")
+	elseif spellId == 129424 then -- Cobalt Mine
+		self:Bar(129424, cobaltTimer)
 	end
 end
 
-function mod:Deaths()
-	deathCount = deathCount + 1
-	if deathCount > 2 then
-		self:Win()
+function mod:EnergizedTilesApplied(args)
+	local amount = args.amount or 1
+	if amount ~= prevTiles then
+		prevTiles = amount
+		if amount == 1 then
+			self:SetInfo("energy", 9, ("|T134457:0|t %s"):format(args.spellName))
+		end
+		self:SetInfo("energy", 10, amount)
 	end
 end
 
+do
+	local bossList = {
+		["boss1"] = 1,
+		["boss2"] = 3,
+		["boss3"] = 5,
+		["boss4"] = 7,
+	}
+	local prevPower = {
+		["boss1"] = 0,
+		["boss2"] = 0,
+		["boss3"] = 0,
+		["boss4"] = 0,
+	}
+	local prevSound = 0
+
+	function mod:UNIT_POWER_FREQUENT(_, unit)
+		local power = UnitPower(unit)
+		if power ~= prevPower[unit] then
+			prevPower[unit] = power
+			local name = L[self:MobId(self:UnitGUID(unit))] or "??"
+			self:SetInfo("energy", bossList[unit], name)
+			self:SetInfo("energy", bossList[unit]+1, power)
+			self:SetInfoBar("energy", bossList[unit], power/100)
+			if power == 80 then
+				self:Message("energy", "red", CL.other:format(self:UnitName(unit), CL.energy_percent:format(power)), L.energy_icon)
+				local t = GetTime()
+				if t-prevSound > 2 then
+					prevSound = t
+					self:PlaySound("energy", "long")
+				end
+			end
+		end
+	end
+end
