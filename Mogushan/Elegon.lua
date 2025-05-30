@@ -46,7 +46,7 @@ function mod:GetOptions()
 		117960,
 		"adds",
 		-6186,
-		{117878, "FLASH"},
+		117878,
 		119360,
 		{"floor", "FLASH", "EMPHASIZE", "COUNTDOWN"},
 		"stages",
@@ -62,7 +62,7 @@ end
 function mod:OnBossEnable()
 	self:Log("SPELL_AURA_APPLIED", "OverchargedApplied", 117878)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "OverchargedApplied", 117878)
-	self:Log("SPELL_AURA_REMOVED", "OverchargedRemoved", 116994)
+	self:Log("SPELL_AURA_REMOVED", "OverchargedRemoved", 117878)
 	self:Log("SPELL_AURA_APPLIED", "StabilityFlux", 117911)
 	self:Log("SPELL_CAST_START", "CelestialBreath", 117960)
 	self:Log("SPELL_CAST_START", "TotalAnnihilation", 129711)
@@ -113,7 +113,7 @@ function mod:OverchargedApplied(args)
 	end
 end
 
-function mod:OverchargedApplied(args)
+function mod:OverchargedRemoved(args)
 	if self:Me(args.destGUID) then
 		overchargedStacks = 0
 	end
