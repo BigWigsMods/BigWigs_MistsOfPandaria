@@ -205,10 +205,10 @@ do
 		["boss4"] = 7,
 	}
 	local icons = {
-		[60051] = 134398, -- Cobalt Guardian
-		[60047] = 134399, -- Amethyst Guardian
-		[60043] = 134397, -- Jade Guardian
-		[59915] = 134396, -- Jasper Guardian
+		[60051] = 115852, -- Cobalt Guardian
+		[60047] = 116057, -- Amethyst Guardian
+		[60043] = 116006, -- Jade Guardian
+		[59915] = 116036, -- Jasper Guardian
 	}
 	local prevPower = {
 		["boss1"] = 0,

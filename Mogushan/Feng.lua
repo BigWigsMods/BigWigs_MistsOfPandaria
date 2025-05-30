@@ -52,6 +52,7 @@ end
 -- Initialization
 --
 
+local arcaneResonanceMarker = mod:AddMarkerOption(false, "player", 1, 116417, 1, 2) -- Arcane Resonance
 function mod:GetOptions()
 	return {
 		116157, -- Lightning Fists
@@ -59,7 +60,8 @@ function mod:GetOptions()
 		{116784, "ICON", "SAY", "SAY_COUNTDOWN", "ME_ONLY_EMPHASIZE"}, -- Wildfire Spark
 		116793, -- Wildfire
 		116711, -- Draw Flame
-		{116417, "ICON", "SAY", "ME_ONLY_EMPHASIZE"}, -- Arcane Resonance
+		{116417, "SAY", "ME_ONLY_EMPHASIZE"}, -- Arcane Resonance
+		arcaneResonanceMarker,
 		116364, -- Arcane Velocity
 		118071, -- Siphoning Shield
 		115817, -- Nullification Barrier
@@ -79,6 +81,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
+	self:RegisterEvent("CHAT_MSG_MONSTER_YELL")
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", nil, "boss1")
 
 	self:Log("SPELL_CAST_START", "LightningFists", 116157, 116295)
@@ -90,10 +93,8 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DAMAGE", "WildfireDamage", 116793)
 	self:Log("SPELL_MISSED", "WildfireDamage", 116793)
 
-	self:Log("SPELL_CAST_SUCCESS", "ArcaneResonance", 116417)
-	self:Log("SPELL_AURA_APPLIED", "ArcaneResonanceApplied", 116417)
-	self:Log("SPELL_AURA_REMOVED", "ArcaneResonanceRemoved", 116417)
-	self:Log("SPELL_AURA_APPLIED", "ArcaneResonanceEXTRAApplied", 116576, 116574, 116577)
+	self:Log("SPELL_AURA_APPLIED", "ArcaneResonanceApplied", 116417, 116576, 116574, 116577)
+	self:Log("SPELL_AURA_REMOVED", "ArcaneResonanceRemoved", 116417, 116576, 116574, 116577)
 	self:Log("SPELL_AURA_APPLIED", "ArcaneVelocity", 116364)
 
 	self:Log("SPELL_CAST_SUCCESS", "NullificationBarrier", 115817)
@@ -105,16 +106,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_CAST_SUCCESS", "Shroud", 115911)
 	self:Log("SPELL_AURA_APPLIED", "LightningFistsReversal", 118302)
 	self:Log("SPELL_AURA_APPLIED", "LightningFistsReversalOnBoss", 115730)
-
-	-- needed so we can have bars up for abilities used straight after phase switches
-	self:BossYell("LightningPhase", L["phase_lightning_trigger"])
-	self:BossYell("FlamePhase", L["phase_flame_trigger"])
-	self:BossYell("ArcanePhase", L["phase_arcane_trigger"])
-	self:BossYell("ShadowPhase", L["phase_shadow_trigger"]) -- heroic only
-
-	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
-
-	self:Death("Win", 60009)
 end
 
 function mod:OnEngage()
@@ -131,6 +122,19 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:CHAT_MSG_MONSTER_YELL(_, msg, boss, _, _, destName)
+	-- Needed so we can have bars up for abilities used straight after phase switches
+	if msg:find(L.phase_lightning_trigger, nil, true) then
+		self:LightningPhase()
+	elseif msg:find(L.phase_flame_trigger, nil, true) then
+		self:FlamePhase()
+	elseif msg:find(L.phase_arcane_trigger, nil, true) then
+		self:ArcanePhase()
+	elseif msg:find(L.phase_shadow_trigger, nil, true) then
+		self:ShadowPhase()
+	end
+end
 
 function mod:LightningFistsReversalOnBoss(args)
 	if not self:LFR() then
@@ -289,44 +293,29 @@ end
 
 do
 	local playerList = {}
+	local prev = 0
 	local resonance = mod:SpellName(33657)
-	function mod:ArcaneResonance(args)
-		playerList = {}
-		self:Bar(args.spellId, 15.4, resonance)
-	end
 
-	local mark1, mark2 = nil, nil
 	function mod:ArcaneResonanceApplied(args)
+		if args.time - prev > 5 then
+			prev = args.time
+			playerList = {}
+			self:Bar(116417, 15.4, resonance)
+		end
+
 		local count = #playerList+1
 		playerList[count] = args.destName
-		self:TargetsMessage(args.spellId, "orange", playerList, 2, resonance)
-		if count == 1 then
-			mark1 = args.destGUID
-			mod:PrimaryIcon(args.spellId, args.destName) -- XXX use custom markers
-		else
-			mark2 = args.destGUID
-			mod:SecondaryIcon(args.spellId, args.destName)
-		end
-		if self:Me(args.destGUID) then
-			self:Say(args.spellId, resonance, nil, "Resonance")
-			self:PlaySound(args.spellId, "warning", nil, args.destName)
-		end
-	end
-
-	function mod:ArcaneResonanceRemoved(args)
-		if args.destGUID == mark1 then
-			self:PrimaryIcon(args.spellId)
-		elseif args.destGUID == mark2 then
-			self:SecondaryIcon(args.spellId)
-		end
-	end
-
-	function mod:ArcaneResonanceEXTRAApplied(args) -- XXX what is this?
-		self:TargetMessage(116417, "orange", args.destName, args.spellId.."!".. resonance)
+		playerList[args.destName] = count -- Set raid marker
+		self:TargetsMessage(116417, "orange", playerList, 2, resonance)
+		self:CustomIcon(arcaneResonanceMarker, args.destName, count)
 		if self:Me(args.destGUID) then
 			self:Say(116417, resonance, nil, "Resonance")
 			self:PlaySound(116417, "warning", nil, args.destName)
 		end
+	end
+
+	function mod:ArcaneResonanceRemoved(args)
+		self:CustomIcon(arcaneResonanceMarker, args.destName)
 	end
 end
 

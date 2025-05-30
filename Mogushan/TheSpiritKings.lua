@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -12,6 +11,7 @@ mod:RegisterEnableMob(
 	60710, 61427 -- Subetai the Swift
 )
 mod:SetEncounterID(1436)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -31,7 +31,7 @@ local bossWarned = 0
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.bosses = "Bosses"
 	L.bosses_desc = "Warnings for when a boss becomes active."
@@ -45,7 +45,6 @@ if L then
 	L.cowardice_desc = -5838
 	L.cowardice_icon = 117756
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -53,11 +52,27 @@ L = mod:GetLocale()
 
 function mod:GetOptions()
 	return {
-		117921, 119521, 117910, {117961, "FLASH"}, -- Qiang
-		{118303, "SAY", "ICON"}, {117697, "FLASH"}, -- Zian
-		118047, 118122, 118094, {118162, "FLASH"}, -- Subetai
-		"cowardice", 117708, {117837, "DISPEL"}, -- Meng
-		"bosses", "casting_shields", "berserk",
+		-- Qiang
+		117921,
+		119521,
+		117910,
+		{117961, "FLASH"},
+		-- Zian
+		{118303, "SAY", "ICON"},
+		{117697, "FLASH"},
+		 -- Subetai
+		118047,
+		118122,
+		118094,
+		{118162, "FLASH"},
+		-- Meng
+		"cowardice",
+		117708,
+		{117837, "DISPEL"},
+		-- General
+		"bosses",
+		"casting_shields",
+		"berserk",
 	}, {
 		[117921] = -5841,
 		[118303] = -5852,

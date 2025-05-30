@@ -1,4 +1,3 @@
-
 --------------------------------------------------------------------------------
 -- Module Declaration
 --
@@ -6,6 +5,8 @@
 local mod, CL = BigWigs:NewBoss("Will of the Emperor", 1008, 677)
 if not mod then return end
 mod:RegisterEnableMob(60399, 60400) -- Qin-xi, Jan-xi
+mod:SetEncounterID(1407)
+mod:SetRespawnTime(30)
 
 --------------------------------------------------------------------------------
 -- Locals
@@ -18,7 +19,7 @@ local strengthCounter = 0
 -- Localization
 --
 
-local L = mod:NewLocale("enUS", true)
+local L = mod:GetLocale()
 if L then
 	L.enable_zone = "Forge of the Endless" -- DUNGEON_FLOOR_MOGUSHANVAULTS3
 
@@ -54,7 +55,6 @@ if L then
 	L.bosses, L.bosses_desc = -5726, -5726
 	L.bosses_icon = "achievement_moguraid_06"
 end
-L = mod:GetLocale()
 
 --------------------------------------------------------------------------------
 -- Initialization
@@ -63,11 +63,15 @@ L = mod:GetLocale()
 function mod:GetOptions()
 	return {
 		116829,
-		"rage", {116525, "FLASH"},
+		"rage",
+		{116525, "FLASH"},
 		"strength",
 		"courage",
-		"bosses", "combo", "arc",
-		-5670, "berserk",
+		"bosses",
+		"combo",
+		"arc",
+		-5670,
+		"berserk",
 	}, {
 		[116829] = ("%s (%s)"):format(L["titan_spark"], CL["heroic"]),
 		rage = L["rage"],
@@ -94,7 +98,7 @@ end
 
 function mod:OnBossEnable()
 	-- Heroic
-	self:Emote("Engage", L["heroic_start_trigger"], L["normal_start_trigger"])
+	--self:Emote("Engage", L["heroic_start_trigger"], L["normal_start_trigger"])
 
 	-- Rage
 	self:BossYell("Rage", L["rage_trigger"])
@@ -119,11 +123,11 @@ function mod:OnBossEnable()
 
 	self:RegisterEvent("INSTANCE_ENCOUNTER_ENGAGE_UNIT", "CheckBossStatus")
 
-	self:Death("Win", 60399) -- Qin-xi they share hp
+	--self:Death("Win", 60399) -- Qin-xi they share hp
 end
 
 function mod:OnEngage()
-	self:Berserk(785) -- this is from heroic trigger
+	self:Berserk(785, true) -- this is from heroic trigger
 	strengthCounter = 0
 	gasCounter = 0
 end
