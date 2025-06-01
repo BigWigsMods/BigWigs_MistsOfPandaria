@@ -68,8 +68,8 @@ function mod:GetOptions()
 		"strength",
 		"courage",
 		"bosses",
-		"combo",
-		"arc",
+		{"combo", "NAMEPLATE"},
+		{"arc", "NAMEPLATE"},
 		-5670,
 		"berserk",
 	}, {
@@ -97,8 +97,7 @@ function mod:OnRegister()
 end
 
 function mod:OnBossEnable()
-	-- Heroic
-	--self:Emote("Engage", L["heroic_start_trigger"], L["normal_start_trigger"])
+	self:RegisterEvent("ENCOUNTER_START")
 
 	-- Rage
 	self:BossYell("Rage", L["rage_trigger"])
@@ -135,6 +134,12 @@ end
 --------------------------------------------------------------------------------
 -- Event Handlers
 --
+
+function mod:ENCOUNTER_START(_, id)
+	if id == self:GetEncounterID() then
+		self:Engage()
+	end
+end
 
 function mod:Rage()
 	self:MessageOld("rage", "yellow", nil, CL["custom_sec"]:format(self:SpellName(L["rage"]), 13), L.rage_icon)
@@ -208,9 +213,21 @@ do
 		if arcs[spellId] then
 			comboCounter[unitId] = comboCounter[unitId] + 1
 
-			if UnitIsUnit("target", unitId) then
+			self:ClearNameplate(self:UnitGUID(unitId))
+			if UnitIsUnit("target", unitId) or self:UnitWithinRange(unitId, 10) then
+				if spellId == 116968 then -- Left
+					self:Nameplate("arc", 3.5, self:UnitGUID(unitId), 450906) -- misc_arrowleft
+				elseif spellId == 116971 then -- Right
+					self:Nameplate("arc", 3.5, self:UnitGUID(unitId), 450908) -- misc_arrowright
+				elseif spellId == 116972 then -- Center
+					self:Nameplate("arc", 4, self:UnitGUID(unitId), 450907) -- misc_arrowlup
+				--elseif spellId == 132425 then -- Stomp
+					--self:Nameplate("arc", 2.5, self:UnitGUID(unitId), 132368) -- ability_warstomp
+				--elseif spellId == 116969 then -- Stomp
+					--self:Nameplate("arc", 2.5, self:UnitGUID(unitId), 132368) -- ability_warstomp
+				end
 				local boss = self:UnitName(unitId)
-				self:MessageOld("arc", "orange", nil, ("%s: %s (%d)"):format(boss, self:SpellName(spellId), comboCounter[unitId]), arcs[spellId])
+				self:Message("arc", "orange", CL.other:format(boss, CL.count:format(self:SpellName(spellId), comboCounter[unitId])), arcs[spellId])
 			end
 		elseif spellId == 118365 then -- Energize
 			local t = GetTime()
@@ -218,10 +235,12 @@ do
 				energizePrev[unitId] = t
 				comboCounter[unitId] = 0
 
-				if UnitIsUnit("target", unitId) or self:Healer() then
+				self:ClearNameplate(self:UnitGUID(unitId))
+				if UnitIsUnit("target", unitId) or self:UnitWithinRange(unitId, 10) or self:Healer() then
+					self:Nameplate("combo", 20, self:UnitGUID(unitId), 135831) -- spell_fire_windsofwoe
 					local boss = self:UnitName(unitId)
-					self:Bar("combo", 20, CL["other"]:format(boss, L["combo"]), spellId)
-					self:DelayedMessage("combo", 17, "blue", L["combo_message"]:format(boss), L.arc_icon, "long")
+					self:Bar("combo", 20, CL.other:format(boss, self:SpellName(L.combo)), spellId)
+					self:DelayedMessage("combo", 17, "orange", L.combo_message:format(boss), L.arc_icon, "long")
 				end
 			end
 		end
