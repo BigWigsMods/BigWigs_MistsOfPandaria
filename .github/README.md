@@ -10,3 +10,4 @@ A collection of BigWigs modules from the **Mists of Pandaria** era, including:
 
 ## Download
 <https://www.curseforge.com/wow/addons/bigwigs_mistsofpandaria>
+<https://addons.wago.io/addons/bigwigs-mistsofpandaria>
