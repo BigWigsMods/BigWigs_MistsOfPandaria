@@ -1,4 +1,4 @@
-local L = BigWigs:NewBossLocale("Nalak", "ptBR")
+local L = BigWigs:NewBossLocale("Nalak", "esMX")
 if L then
 	--L.engage_yell = "Can you feel a chill wind blow? The storm is coming..."
 
@@ -6,7 +6,7 @@ if L then
 	--L.ability_desc = "Cooldown timer for the next ability."
 end
 
-L = BigWigs:NewBossLocale("Ordos", "ptBR")
+L = BigWigs:NewBossLocale("Ordos", "esMX")
 if L then
 	--L.engage_yell = "You will take my place on the eternal brazier."
 
