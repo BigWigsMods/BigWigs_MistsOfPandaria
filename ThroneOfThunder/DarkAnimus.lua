@@ -135,7 +135,7 @@ function mod:AnimaFontApplied(args)
 end
 
 function mod:AnimaFontRefresh(args)
-	local _, _, _, expires = self:UnitDebuff(args.destName, args.spellName)
+	local _, _, _, expires = self:UnitDebuff(args.destName, args.spellName, 138691) -- 138691 on 3
 	local duration = expires - GetTime()
 	self:TargetBar(args.spellId, duration, args.destName)
 end

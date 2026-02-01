@@ -100,7 +100,8 @@ do
 			local _, count = mod:UnitDebuff("player", spell,
 				136185, -- diff 5
 				136181, -- diff 5
-				136183 -- diff 5
+				136183, -- diff 5
+				136187 -- diff 4
 			)
 			totalN = totalN + (count or 0)
 		end
@@ -139,7 +140,7 @@ function mod:EruptingPustulesRemoved(args)
 end
 
 function mod:EruptingPustulesApplied(args)
-	if not self:UnitBuff("boss1", self:SpellName(136218)) then -- Acidic Spines
+	if not self:UnitBuff("boss1", self:SpellName(136218), 136218) then -- Acidic Spines, 136218 on 4
 		self:OpenProximity(args.spellId, 2)
 	end
 	self:MessageOld(args.spellId, "yellow")
