@@ -65,7 +65,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
+	self:RegisterEvent("RAID_BOSS_EMOTE")
 	self:RegisterUnitEvent("UNIT_SPELLCAST_SUCCEEDED", "Petrifications", "boss1", "boss2", "boss3", "boss4")
 	self:Log("SPELL_CAST_SUCCESS", "JasperChains", 130395)
 	self:Log("SPELL_AURA_APPLIED", "JasperChainsApplied", 130395)
@@ -75,7 +75,6 @@ function mod:OnBossEnable()
 	self:Log("SPELL_PERIODIC_MISSED", "AmethystPoolDamage", 130774)
 	self:Log("SPELL_AURA_APPLIED", "EnergizedTilesApplied", 116541)
 	self:Log("SPELL_AURA_APPLIED_DOSE", "EnergizedTilesApplied", 116541)
-	self:RegisterUnitEvent("UNIT_POWER_UPDATE", nil, "boss1", "boss2", "boss3", "boss4")
 end
 
 function mod:OnEngage()
@@ -83,6 +82,7 @@ function mod:OnEngage()
 	cobaltCount = 1
 	currentPetri = 0
 	self:OpenInfo("energy", CL.other:format("BigWigs", CL.energy))
+	self:RegisterUnitEvent("UNIT_POWER_UPDATE", nil, "boss1", "boss2", "boss3", "boss4")
 
 	local diff = self:Difficulty()
 	cobaltTimer = (diff == 3 or diff == 5) and 8.4 or 10.7
@@ -93,7 +93,7 @@ end
 -- Event Handlers
 --
 
-function mod:CHAT_MSG_RAID_BOSS_EMOTE(_, msg, boss, _, _, destName)
+function mod:RAID_BOSS_EMOTE(_, msg, boss)
 	if msg:find("spell:116529", nil, true) then -- Power Down
 		prevTiles = 0
 		self:SetInfo("energy", 10, "")
@@ -163,6 +163,7 @@ do
 end
 
 function mod:Petrifications(_, _, _, spellId)
+	if self:IsSecret(spellId) then return end
 	if spellId == 115852 then -- Cobalt Petrification
 		currentPetri = 60051
 		self:Message(115852, "cyan")

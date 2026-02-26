@@ -124,6 +124,7 @@ end
 --
 
 function mod:CHAT_MSG_MONSTER_YELL(_, msg, boss, _, _, destName)
+	if self:IsSecret(msg) then return end
 	-- Needed so we can have bars up for abilities used straight after phase switches
 	if msg:find(L.phase_lightning_trigger, nil, true) then
 		self:LightningPhase()
@@ -336,6 +337,7 @@ function mod:ShadowPhase()
 end
 
 function mod:UNIT_SPELLCAST_SUCCEEDED(_, _, _, spellId)
+	if self:IsSecret(spellId) then return end
 	if spellId == 117203 then -- Siphoning Shield
 		local spellName = self:SpellName(spellId)
 		self:Message(118071, "red", CL["count"]:format(spellName, counter))
