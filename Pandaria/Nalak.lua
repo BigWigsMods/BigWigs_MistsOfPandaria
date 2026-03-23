@@ -38,6 +38,17 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
+	self:ScheduleTimer("CheckForEngage", 1)
+	self:Death("Win", 69099)
+end
+
+function mod:OnEngage()
+	self:ScheduleTimer("CheckForWipe", 3)
+
+	openedForMe = nil
+	stormcloudTargets = {}
+
+	-- World bosses will wipe but keep listening to events if you fly away, so we only register OnEngage
 	self:Log("SPELL_CAST_START", "ArcNova", 136338)
 	self:Log("SPELL_AURA_APPLIED", "LightningTether", 136339)
 	self:Log("SPELL_AURA_APPLIED", "StormcloudApplied", 136340)
@@ -45,15 +56,7 @@ function mod:OnBossEnable()
 	self:Log("SPELL_DAMAGE", "StormcloudDamage", 136345)
 	self:Log("SPELL_MISSED", "StormcloudDamage", 136345)
 
-	self:RegisterEvent("PLAYER_REGEN_DISABLED", "CheckForEngage")
-	self:RegisterEvent("PLAYER_REGEN_ENABLED", "CheckForWipe")
-	self:Death("Win", 69099)
-end
-
-function mod:OnEngage()
 	self:Bar("ability", 10, L["ability"], L.ability_icon)
-	openedForMe = nil
-	stormcloudTargets = {}
 end
 
 --------------------------------------------------------------------------------
