@@ -35,7 +35,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage()
-	self:CheckForWipe()
+	self:ScheduleTimer("CheckForWipe", 3)
 
 	-- World bosses will wipe but keep listening to events if you fly away, so we only register OnEngage
 	self:RegisterEvent("CHAT_MSG_RAID_BOSS_EMOTE")
