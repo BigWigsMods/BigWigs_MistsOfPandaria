@@ -5,7 +5,7 @@
 
 local mod, CL = BigWigs:NewBoss("Throne of Thunder Trash", 1098)
 if not mod then return end
-mod.displayName = CL.trash
+mod:SetTrashModule(true)
 mod:RegisterEnableMob(
 	70236, -- Zandalari Storm-Caller
 	70445, -- Stormbringer Draz'kil
