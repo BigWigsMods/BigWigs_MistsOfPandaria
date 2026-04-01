@@ -6,7 +6,7 @@ local mod, CL = BigWigs:NewBoss("Nalak", -504, 814)
 if not mod then return end
 mod:RegisterEnableMob(69099)
 mod.otherMenu = -424
-mod.worldBoss = 69099
+mod:SetWorldModule(true)
 
 --------------------------------------------------------------------------------
 -- Locals
