@@ -9,6 +9,7 @@ BigWigs:AddColors("Jin'rokh the Breaker", {
 	[138349] = {"blue","orange"},
 	[138732] = {"green","red"},
 	[139467] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Jin'rokh the Breaker", {
@@ -19,6 +20,7 @@ BigWigs:AddSounds("Jin'rokh the Breaker", {
 	[138349] = "alert",
 	[138732] = {"info","long"},
 	[139467] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Horridon", {
@@ -41,6 +43,7 @@ BigWigs:AddColors("Horridon", {
 	[137240] = "green",
 	[137458] = "orange",
 	["adds"] = "cyan",
+	["berserk"] = {"orange","red","yellow"},
 	["chain_lightning"] = "blue",
 	["fireball"] = "blue",
 	["venom_bolt_volley"] = {"blue","red"},
@@ -60,6 +63,7 @@ BigWigs:AddSounds("Horridon", {
 	[136741] = "long",
 	[136821] = "long",
 	["adds"] = "info",
+	["berserk"] = "alarm",
 	["chain_lightning"] = "alert",
 	["fireball"] = "alert",
 	["venom_bolt_volley"] = {"alarm","alert"},
@@ -79,6 +83,7 @@ BigWigs:AddColors("Council of Elders", {
 	[137203] = "yellow",
 	[137350] = {"blue","orange"},
 	[137650] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["priestess_adds"] = "red",
 })
 
@@ -94,6 +99,7 @@ BigWigs:AddSounds("Council of Elders", {
 	[137122] = "info",
 	[137350] = "alert",
 	[137650] = "info",
+	["berserk"] = "alarm",
 	["priestess_adds"] = "alarm",
 })
 
@@ -106,6 +112,7 @@ BigWigs:AddColors("Tortos", {
 	[136294] = "orange",
 	[137633] = "blue",
 	["bats"] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 	["kick"] = "yellow",
 })
 
@@ -117,6 +124,7 @@ BigWigs:AddSounds("Tortos", {
 	[136010] = "alarm",
 	[137633] = {"alarm","info"},
 	["bats"] = "warning",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Megaera", {
@@ -149,6 +157,7 @@ BigWigs:AddColors("Ji-Kun", {
 	[138923] = "yellow",
 	[140092] = {"blue","yellow"},
 	[140741] = "green",
+	["berserk"] = {"orange","red","yellow"},
 	["nest"] = {"orange","yellow"},
 })
 
@@ -158,6 +167,7 @@ BigWigs:AddSounds("Ji-Kun", {
 	[134370] = "long",
 	[134380] = "warning",
 	[137528] = "info",
+	["berserk"] = "alarm",
 	["nest"] = "alert",
 })
 
@@ -173,6 +183,7 @@ BigWigs:AddColors("Durumu the Forgotten", {
 	[134626] = "orange",
 	[140502] = "blue",
 	["adds"] = {"green","orange","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 	["initial_life_drain"] = {"blue","orange"},
 })
 
@@ -186,6 +197,7 @@ BigWigs:AddSounds("Durumu the Forgotten", {
 	[134626] = "alarm",
 	[140502] = "info",
 	["adds"] = {"info","warning"},
+	["berserk"] = "alarm",
 	["initial_life_drain"] = "long",
 })
 
@@ -200,6 +212,7 @@ BigWigs:AddColors("Primordius", {
 	[136228] = {"blue","green","orange","red"},
 	[136245] = "yellow",
 	[136246] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Primordius", {
@@ -208,6 +221,7 @@ BigWigs:AddSounds("Primordius", {
 	[136050] = "warning",
 	[136218] = {"alert","long"},
 	[136228] = {"alarm","alert","long"},
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Dark Animus", {
@@ -220,6 +234,7 @@ BigWigs:AddColors("Dark Animus", {
 	[138729] = "red",
 	[138763] = {"blue","yellow"},
 	[138780] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["matterswap"] = "blue",
 })
 
@@ -232,6 +247,7 @@ BigWigs:AddSounds("Dark Animus", {
 	[138691] = "alarm",
 	[138729] = "long",
 	[138763] = "long",
+	["berserk"] = "alarm",
 	["matterswap"] = "info",
 })
 
@@ -250,6 +266,7 @@ BigWigs:AddColors("Iron Qon", {
 	[137668] = "blue",
 	[137669] = "blue",
 	[139180] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["molten_energy"] = {"orange","red","yellow"},
 })
 
@@ -262,6 +279,7 @@ BigWigs:AddSounds("Iron Qon", {
 	[136520] = "info",
 	[137668] = "info",
 	[137669] = "info",
+	["berserk"] = "alarm",
 	["molten_energy"] = "long",
 })
 
@@ -279,6 +297,7 @@ BigWigs:AddColors("Twin Consorts", {
 	[138306] = "green",
 	[138318] = "green",
 	[138855] = "green",
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "green",
 })
 
@@ -291,6 +310,7 @@ BigWigs:AddSounds("Twin Consorts", {
 	[137440] = "info",
 	[137491] = "alert",
 	[137531] = "alarm",
+	["berserk"] = "alarm",
 	["stages"] = "long",
 })
 
@@ -308,6 +328,7 @@ BigWigs:AddColors("Lei Shen", {
 	[136889] = "red",
 	[136914] = {"blue","red"},
 	[139011] = {"blue","orange"},
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = {"cyan","green","yellow"},
 })
 
@@ -324,6 +345,7 @@ BigWigs:AddSounds("Lei Shen", {
 	[136889] = "long",
 	[136914] = "warning",
 	[139011] = "alert",
+	["berserk"] = "alarm",
 	["stages"] = "info",
 })
 
@@ -335,6 +357,7 @@ BigWigs:AddColors("Ra-den", {
 	[138339] = "yellow",
 	[138372] = "blue",
 	["balls"] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 	["corruptedballs"] = "red",
 	["stages"] = "cyan",
 	["unstablevitajumptarget"] = "blue",
@@ -345,6 +368,7 @@ BigWigs:AddSounds("Ra-den", {
 	[138297] = "info",
 	[138372] = "info",
 	["balls"] = "warning",
+	["berserk"] = "alarm",
 	["corruptedballs"] = "alarm",
 	["stages"] = "info",
 	["unstablevitajumptarget"] = {"info","long"},

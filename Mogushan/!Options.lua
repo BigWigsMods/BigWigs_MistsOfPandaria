@@ -8,6 +8,7 @@ BigWigs:AddColors("The Stone Guard", {
 	[116529] = "orange",
 	[130395] = {"blue","yellow"},
 	[130774] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["energy"] = "red",
 })
 
@@ -19,6 +20,7 @@ BigWigs:AddSounds("The Stone Guard", {
 	[116529] = "info",
 	[130395] = "warning",
 	[130774] = "underyou",
+	["berserk"] = "alarm",
 	["energy"] = "long",
 })
 
@@ -33,6 +35,7 @@ BigWigs:AddColors("Feng the Accursed", {
 	[116784] = {"blue","orange"},
 	[116793] = "blue",
 	[118071] = "red",
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "cyan",
 	["tank"] = {"blue","purple"},
 })
@@ -47,6 +50,7 @@ BigWigs:AddSounds("Feng the Accursed", {
 	[116784] = "warning",
 	[116793] = "underyou",
 	[118071] = "alarm",
+	["berserk"] = "alarm",
 	["stages"] = "info",
 	["tank"] = "info",
 })
@@ -56,11 +60,13 @@ BigWigs:AddColors("Gara'jal the Spiritbinder", {
 	[116272] = "orange",
 	[117752] = "red",
 	[122151] = {"blue","red"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Gara'jal the Spiritbinder", {
 	[116272] = "alarm",
 	[117752] = "long",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("The Spirit Kings", {
@@ -75,6 +81,7 @@ BigWigs:AddColors("The Spirit Kings", {
 	[118162] = "red",
 	[118303] = "blue",
 	[119521] = "orange",
+	["berserk"] = {"orange","red"},
 	["bosses"] = "cyan",
 	["cowardice"] = {"blue","green","orange","yellow"},
 })
@@ -90,6 +97,7 @@ BigWigs:AddSounds("The Spirit Kings", {
 	[118162] = "alert",
 	[118303] = "info",
 	[119521] = "alarm",
+	["berserk"] = "alarm",
 	["bosses"] = "info",
 })
 
@@ -98,6 +106,7 @@ BigWigs:AddColors("Elegon", {
 	[117878] = "blue",
 	[119360] = "yellow",
 	["adds"] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["floor"] = "blue",
 	["stages"] = "green",
 })
@@ -105,6 +114,7 @@ BigWigs:AddColors("Elegon", {
 BigWigs:AddSounds("Elegon", {
 	[-6186] = "alert",
 	[117878] = "info",
+	["berserk"] = "alarm",
 	["floor"] = "alarm",
 	["stages"] = "info",
 })
@@ -114,6 +124,7 @@ BigWigs:AddColors("Will of the Emperor", {
 	[116525] = "blue",
 	[116829] = {"blue","yellow"},
 	["arc"] = "orange",
+	["berserk"] = {"orange","red"},
 	["bosses"] = "yellow",
 	["combo"] = "orange",
 	["courage"] = "yellow",
@@ -125,5 +136,6 @@ BigWigs:AddSounds("Will of the Emperor", {
 	[-5670] = "alarm",
 	[116525] = "info",
 	[116829] = "info",
+	["berserk"] = "alarm",
 	["combo"] = "long",
 })

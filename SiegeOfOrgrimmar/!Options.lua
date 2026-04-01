@@ -8,6 +8,7 @@ BigWigs:AddColors("Immerseus", {
 	[143469] = "cyan",
 	[143574] = "yellow",
 	[143579] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Immerseus", {
@@ -16,6 +17,7 @@ BigWigs:AddSounds("Immerseus", {
 	[143436] = {"alarm","warning"},
 	[143574] = "alert",
 	[143579] = "info",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("The Fallen Protectors", {
@@ -35,6 +37,7 @@ BigWigs:AddColors("The Fallen Protectors", {
 	[143958] = "blue",
 	[144367] = "blue",
 	[144396] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 	["defile_you"] = "blue",
 	["inferno_self"] = {"blue","orange"},
 	["intermission"] = {"cyan","red"},
@@ -54,6 +57,7 @@ BigWigs:AddSounds("The Fallen Protectors", {
 	[143958] = "info",
 	[144367] = "info",
 	[144396] = "alarm",
+	["berserk"] = "alarm",
 	["defile_you"] = "info",
 	["inferno_self"] = "warning",
 	["intermission"] = {"alert","info"},
@@ -69,6 +73,7 @@ BigWigs:AddColors("Norushen", {
 	[145132] = "yellow",
 	[145226] = "red",
 	[146124] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 	["big_adds"] = {"orange","yellow"},
 	["stages"] = "cyan",
 })
@@ -81,6 +86,7 @@ BigWigs:AddSounds("Norushen", {
 	[144649] = "warning",
 	[145226] = "long",
 	[146124] = "info",
+	["berserk"] = "alarm",
 	["big_adds"] = {"alarm","alert"},
 	["stages"] = {"info","warning"},
 })
@@ -101,6 +107,7 @@ BigWigs:AddColors("Sha of Pride", {
 	[146595] = {"cyan","green"},
 	[146817] = "blue",
 	[147207] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Sha of Pride", {
@@ -114,6 +121,7 @@ BigWigs:AddSounds("Sha of Pride", {
 	[144832] = "info",
 	[146595] = "long",
 	[146817] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Galakras", {
@@ -156,6 +164,7 @@ BigWigs:AddColors("Iron Juggernaut", {
 	[144467] = {"blue","yellow"},
 	[144485] = "yellow",
 	[144498] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 	["stages"] = "cyan",
 })
 
@@ -164,6 +173,7 @@ BigWigs:AddSounds("Iron Juggernaut", {
 	[-8179] = "info",
 	[144485] = "alert",
 	[144498] = "info",
+	["berserk"] = "alarm",
 	["stages"] = "long",
 })
 
@@ -178,6 +188,7 @@ BigWigs:AddColors("Kor'kron Dark Shaman", {
 	[144302] = "cyan",
 	[144328] = "red",
 	[144330] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Kor'kron Dark Shaman", {
@@ -190,6 +201,7 @@ BigWigs:AddSounds("Kor'kron Dark Shaman", {
 	[144302] = "info",
 	[144328] = "long",
 	[144330] = "warning",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("General Nazgrim", {
@@ -208,6 +220,7 @@ BigWigs:AddColors("General Nazgrim", {
 	[143716] = {"blue","orange"},
 	[143872] = {"blue","orange"},
 	["arcane_shock"] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["chain_heal"] = "blue",
 })
 
@@ -226,6 +239,7 @@ BigWigs:AddSounds("General Nazgrim", {
 	[143716] = "alarm",
 	[143872] = "alarm",
 	["arcane_shock"] = "alert",
+	["berserk"] = "alarm",
 	["chain_heal"] = "alert",
 })
 
@@ -237,6 +251,7 @@ BigWigs:AddColors("Malkorok", {
 	[142913] = {"blue","orange"},
 	[142986] = "orange",
 	[142990] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Malkorok", {
@@ -245,6 +260,7 @@ BigWigs:AddSounds("Malkorok", {
 	[142879] = "long",
 	[142913] = "alert",
 	[142986] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Spoils of Pandaria", {
@@ -294,6 +310,7 @@ BigWigs:AddColors("Thok the Bloodthirsty", {
 	[145974] = {"blue","orange"},
 	[146589] = {"blue","green","yellow"},
 	[148145] = "red",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Thok the Bloodthirsty", {
@@ -307,6 +324,7 @@ BigWigs:AddSounds("Thok the Bloodthirsty", {
 	[145974] = "alert",
 	[146589] = {"alert","warning"},
 	[148145] = "warning",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Siegecrafter Blackfuse", {
@@ -325,6 +343,7 @@ BigWigs:AddColors("Siegecrafter Blackfuse", {
 	[145365] = "yellow",
 	[145444] = "orange",
 	[146479] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Siegecrafter Blackfuse", {
@@ -339,6 +358,7 @@ BigWigs:AddSounds("Siegecrafter Blackfuse", {
 	[144466] = "long",
 	[145365] = "long",
 	[146479] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Paragons of the Klaxxi", {
@@ -364,6 +384,7 @@ BigWigs:AddColors("Paragons of the Klaxxi", {
 	[143974] = {"blue","orange"},
 	[148589] = {"blue","red"},
 	[148677] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Paragons of the Klaxxi", {
@@ -386,6 +407,7 @@ BigWigs:AddSounds("Paragons of the Klaxxi", {
 	[143974] = "alarm",
 	[148589] = "warning",
 	[148677] = "long",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Garrosh Hellscream", {
@@ -404,6 +426,7 @@ BigWigs:AddColors("Garrosh Hellscream", {
 	[147209] = {"blue","orange"},
 	[147235] = "blue",
 	[147665] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 	["bombardment"] = "yellow",
 	["chain_heal"] = "blue",
 	["clump_check"] = "red",
@@ -421,6 +444,7 @@ BigWigs:AddSounds("Garrosh Hellscream", {
 	[147209] = "alarm",
 	[147235] = "alert",
 	[147665] = "warning",
+	["berserk"] = "alarm",
 	["chain_heal"] = "alert",
 	["clump_check"] = "long",
 	["manifest_rage"] = "warning",

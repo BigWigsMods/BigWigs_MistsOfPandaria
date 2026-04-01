@@ -8,6 +8,7 @@ BigWigs:AddColors("Protectors of the Endless", {
 	[117975] = "orange",
 	[117986] = "blue",
 	[118077] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Protectors of the Endless", {
@@ -16,6 +17,7 @@ BigWigs:AddSounds("Protectors of the Endless", {
 	[117436] = "alert",
 	[117986] = "info",
 	[118077] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Tsulong", {
@@ -26,6 +28,7 @@ BigWigs:AddColors("Tsulong", {
 	[122789] = "green",
 	[122855] = "orange",
 	[123011] = "red",
+	["berserk"] = {"orange","red","yellow"},
 	["embodied_terror"] = "yellow",
 	["phases"] = {"green","yellow"},
 	["unstable_sha"] = "red",
@@ -36,6 +39,7 @@ BigWigs:AddSounds("Tsulong", {
 	[122768] = "info",
 	[122777] = "alert",
 	[123011] = "alert",
+	["berserk"] = "alarm",
 	["phases"] = "alert",
 	["unstable_sha"] = "alert",
 })
@@ -46,6 +50,7 @@ BigWigs:AddColors("Lei Shi", {
 	[123250] = {"green","red"},
 	[123461] = {"green","red"},
 	[123705] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 	["special"] = "yellow",
 })
 
@@ -53,6 +58,7 @@ BigWigs:AddSounds("Lei Shi", {
 	[123121] = "info",
 	[123250] = "alarm",
 	[123461] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Sha of Fear", {
@@ -72,7 +78,7 @@ BigWigs:AddColors("Sha of Fear", {
 	[120672] = "yellow",
 	[129147] = {"blue","orange"},
 	[129378] = "green",
-	["berserk"] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["swing"] = "green",
 })
 
@@ -88,4 +94,5 @@ BigWigs:AddSounds("Sha of Fear", {
 	[120669] = "info",
 	[120672] = "alarm",
 	[129378] = "long",
+	["berserk"] = "alarm",
 })

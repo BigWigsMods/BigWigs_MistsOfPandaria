@@ -53,10 +53,12 @@ BigWigs:AddColors("Ordos", {
 	[144689] = {"blue","orange"},
 	[144692] = {"blue","yellow"},
 	[144695] = {"blue","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Ordos", {
 	[144689] = "alert",
 	[144692] = {"alarm","info"},
 	[144695] = "info",
+	["berserk"] = "alarm",
 })

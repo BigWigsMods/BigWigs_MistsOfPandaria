@@ -4,12 +4,14 @@ BigWigs:AddColors("Imperial Vizier Zor'lok", {
 	[122740] = {"blue","yellow"},
 	[122761] = {"blue","red"},
 	["attenuation"] = {"orange","yellow"},
+	["berserk"] = {"orange","red","yellow"},
 	["force"] = {"orange","red"},
 	["stages"] = "green",
 })
 
 BigWigs:AddSounds("Imperial Vizier Zor'lok", {
 	["attenuation"] = {"alarm","alert"},
+	["berserk"] = "alarm",
 	["force"] = "long",
 	["stages"] = "info",
 })
@@ -19,6 +21,7 @@ BigWigs:AddColors("Blade Lord Ta'yak", {
 	[-6346] = {"blue","orange","yellow"},
 	[123474] = {"blue","orange"},
 	[125310] = "red",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Blade Lord Ta'yak", {
@@ -26,6 +29,7 @@ BigWigs:AddSounds("Blade Lord Ta'yak", {
 	[-6346] = {"alarm","alert"},
 	[123474] = "info",
 	[125310] = "alarm",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Garalon", {
@@ -36,6 +40,7 @@ BigWigs:AddColors("Garalon", {
 	[123081] = {"blue","yellow"},
 	[123120] = "blue",
 	[123495] = "orange",
+	["berserk"] = {"orange","red","yellow"},
 })
 
 BigWigs:AddSounds("Garalon", {
@@ -43,6 +48,7 @@ BigWigs:AddSounds("Garalon", {
 	[122774] = "alarm",
 	[122835] = {"alarm","info"},
 	[123120] = "alert",
+	["berserk"] = "alarm",
 })
 
 BigWigs:AddColors("Wind Lord Mel'jarak", {
@@ -57,6 +63,7 @@ BigWigs:AddColors("Wind Lord Mel'jarak", {
 	[122406] = "red",
 	[122409] = {"blue","orange"},
 	[131830] = {"blue","orange"},
+	["berserk"] = {"orange","red","yellow"},
 	["mending"] = "blue",
 	["recklessness"] = "yellow",
 	["stages"] = "green",
@@ -72,6 +79,7 @@ BigWigs:AddSounds("Wind Lord Mel'jarak", {
 	[122406] = "alert",
 	[122409] = "alarm",
 	[131830] = "alarm",
+	["berserk"] = "alarm",
 	["mending"] = "alert",
 	["recklessness"] = "info",
 	["stages"] = "info",
@@ -86,6 +94,7 @@ BigWigs:AddColors("Amber-Shaper Un'sok", {
 	[122784] = {"blue","orange"},
 	[123020] = "blue",
 	[123060] = "blue",
+	["berserk"] = {"orange","red","yellow"},
 	["explosion_by_other"] = "yellow",
 	["explosion_casting_by_other"] = {"blue","red"},
 	["explosion_casting_by_you"] = "blue",
@@ -100,6 +109,7 @@ BigWigs:AddSounds("Amber-Shaper Un'sok", {
 	[122413] = "alarm",
 	[122784] = "alarm",
 	[123020] = "alarm",
+	["berserk"] = "alarm",
 	["explosion_casting_by_other"] = "alert",
 	["explosion_casting_by_you"] = "info",
 	["stages"] = "long",
@@ -115,6 +125,7 @@ BigWigs:AddColors("Grand Empress Shek'zeer", {
 	[124862] = {"blue","red","yellow"},
 	[125390] = {"blue","yellow"},
 	[125826] = "yellow",
+	["berserk"] = {"orange","red","yellow"},
 	["eyes"] = {"blue","orange"},
 	["phases"] = "green",
 })
@@ -127,6 +138,7 @@ BigWigs:AddSounds("Grand Empress Shek'zeer", {
 	[124849] = "alert",
 	[124862] = {"alarm","alert"},
 	[125390] = "info",
+	["berserk"] = "alarm",
 	["eyes"] = "info",
 	["phases"] = "info",
 })
