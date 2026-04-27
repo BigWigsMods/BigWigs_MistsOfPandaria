@@ -13,7 +13,6 @@ mod:RegisterEnableMob(68078, 68079, 68080, 68081) -- Iron Qon, Ro'shak, Quet'zal
 
 local arcingLightning = mod:SpellName(136193)
 local phase, smashCounter = 1, 1
-local quetzalDead = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -93,7 +92,6 @@ function mod:OnEngage()
 		self:OpenProximity(-6870, 10) -- Unleashed Flame
 	end
 	phase, smashCounter = 1, 1
-	quetzalDead = nil
 end
 
 --------------------------------------------------------------------------------
@@ -420,7 +418,6 @@ function mod:Deaths(args)
 			self:Bar(134926, 33) -- Throw Spear
 			self:Bar(-6914, 7) -- Dead Zone
 		end
-		quetzalDead = true
 	elseif args.mobId == 68081 then
 		-- Dam'ren
 		self:StopBar(-6914) -- Dead Zone

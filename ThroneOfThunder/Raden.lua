@@ -13,7 +13,6 @@ mod:RegisterEnableMob(69473)
 local animaCounter = 1
 local ballCounter = 1
 --local cooldownCounter = 1
-local lastPower = nil
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -101,7 +100,6 @@ function mod:OnEngage()
 	animaCounter = 1
 	ballCounter = 1
 	--cooldownCounter = 1
-	lastPower = nil
 end
 
 --------------------------------------------------------------------------------
@@ -113,7 +111,6 @@ end
 --
 
 function mod:Anima(args)
-	lastPower = "Anima"
 	self:StopBar(138339) -- Crackling Stalker
 	self:StopBar(138334) -- Fatal Strike
 	self:StopBar(138297) -- Unstable Vita
@@ -191,7 +188,6 @@ end
 --
 
 function mod:Vita(args)
-	lastPower = "Vita"
 	self:StopBar(CL["count"]:format(self:SpellName(138288), animaCounter)) -- Unstable Anima
 	self:StopBar(L["worm"]) -- Worm
 	self:StopBar(138333) -- Murderous Strike

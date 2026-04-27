@@ -611,7 +611,8 @@ function mod:StaticShockRemoved(args)
 end
 
 do
-	local staticShockList, staticShockOnMe, scheduled, coloredNames = {}, nil, nil, mod:NewTargetList()
+	--local staticShockList = {}
+	local staticShockOnMe, scheduled, coloredNames = nil, nil, mod:NewTargetList()
 	local function warnStaticShock(spellId)
 		if not UnitExists("boss1") then -- poor mans intermission check
 			mod:Bar(spellId, 20, spellId)
@@ -644,7 +645,7 @@ do
 		end
 		scheduled = nil
 		staticShockOnMe = nil
-		staticShockList = {}
+		--staticShockList = {}
 	end
 	local timeLeft, timer = 8, nil
 	local function staticShockSayCountdown()
@@ -670,7 +671,7 @@ do
 			self:TargetBar(args.spellId, 8, args.destName)
 		end
 		coloredNames[#coloredNames+1] = args.destName
-		staticShockList[args.destName] = true
+		--staticShockList[args.destName] = true
 		if not scheduled then
 			scheduled = self:ScheduleTimer(warnStaticShock, 0.1, args.spellId)
 		end
