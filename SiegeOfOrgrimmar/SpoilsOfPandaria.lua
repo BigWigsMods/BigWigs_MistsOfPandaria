@@ -182,7 +182,7 @@ function mod:BreathOfFire(args)
 	-- XXX no range checking now
 	if not player then --or self:Range(player) < 30 then
 		self:MessageOld(args.spellId, "yellow")
-		if self:UnitDebuff("player", self:SpellName(146217)) then -- Keg Toss
+		if self:UnitDebuff("player", self:SpellName(146217), 146217) then -- Keg Toss
 			self:PlaySound(args.spellId, "long")
 			self:Flash(146217) -- flash again
 		end
