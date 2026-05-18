@@ -42,27 +42,23 @@ EndlessSpring\Protector.lua
 EndlessSpring\Tsulong.lua
 EndlessSpring\LeiShi.lua
 EndlessSpring\ShaOfFear.lua
-EndlessSpring\locales.xml
 HeartOfFear\Zorlok.lua
 HeartOfFear\Tayak.lua
 HeartOfFear\Garalon.lua
 HeartOfFear\Meljarak.lua
 HeartOfFear\Unsok.lua
 HeartOfFear\Shekzeer.lua
-HeartOfFear\locales.xml
 Mogushan\TheStoneGuard.lua
 Mogushan\Feng.lua
 Mogushan\Garajal.lua
 Mogushan\TheSpiritKings.lua
 Mogushan\Elegon.lua
 Mogushan\WillOfTheEmperor.lua
-Mogushan\locales.xml
 Pandaria\ShaOfAnger.lua
 Pandaria\Salyis.lua
 Pandaria\Nalak.lua
 Pandaria\Oondasta.lua
 Pandaria\Ordos.lua
-Pandaria\locales.xml
 SiegeOfOrgrimmar\Immerseus.lua
 SiegeOfOrgrimmar\TheFallenProtectors.lua
 SiegeOfOrgrimmar\Norushen.lua
@@ -77,7 +73,6 @@ SiegeOfOrgrimmar\Thok.lua
 SiegeOfOrgrimmar\SiegecrafterBlackfuse.lua
 SiegeOfOrgrimmar\ParagonsOfTheKlaxxi.lua
 SiegeOfOrgrimmar\GarroshHellscream.lua
-SiegeOfOrgrimmar\locales.xml
 ThroneOfThunder\Jinrokh.lua
 ThroneOfThunder\Horridon.lua
 ThroneOfThunder\Council.lua
@@ -92,6 +87,6 @@ ThroneOfThunder\TwinConsorts.lua
 ThroneOfThunder\LeiShen.lua
 ThroneOfThunder\Raden.lua
 ThroneOfThunder\Trash.lua
-ThroneOfThunder\locales.xml
 
+!Locales\[TextLocale].lua [AllowLoadTextLocale deDE, esES, esMX, frFR, itIT, koKR, ptBR, ruRU, zhCN, zhTW]
 !Options.lua
