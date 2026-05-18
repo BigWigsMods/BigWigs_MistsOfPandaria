@@ -490,36 +490,36 @@ end
 
 local colors = { 				"red", 				"purple", 				"blue",				 "green", 				"yellow"}
 
-local sword  = {mod:SpellName(143605), mod:SpellName(143606), mod:SpellName(143607), mod:SpellName(143608), mod:SpellName(143609)}
-local drum   = {mod:SpellName(143610), mod:SpellName(143611), mod:SpellName(143612), mod:SpellName(143613), mod:SpellName(143614)}
-local bomb   = {mod:SpellName(143615), mod:SpellName(143616), mod:SpellName(143617), mod:SpellName(143618), mod:SpellName(143619)}
-local mantid = {mod:SpellName(143620), mod:SpellName(143621), mod:SpellName(143622), mod:SpellName(143623), mod:SpellName(143624)}
-local staff  = {mod:SpellName(143627), mod:SpellName(143628), mod:SpellName(143629), mod:SpellName(143630), mod:SpellName(143631)}
+local sword  = {143605, 143606, 143607, 143608, 143609}
+local drum   = {143610, 143611, 143612, 143613, 143614}
+local bomb   = {143615, 143616, 143617, 143618, 143619}
+local mantid = {143620, 143621, 143622, 143623, 143624}
+local staff  = {143627, 143628, 143629, 143630, 143631}
 
 local function parseDebuff(player)
 	local _, count
 	for i=1, 5 do
-		_, count = mod:UnitDebuff(player, sword[i])
+		_, count = mod:UnitDebuff(player, mod:SpellName(sword[i]), sword[i])
 		if count then
 			return "sword", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = mod:UnitDebuff(player, drum[i])
+		_, count = mod:UnitDebuff(player, mod:SpellName(drum[i]), drum[i])
 		if count then
 			return "drum", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = mod:UnitDebuff(player, bomb[i])
+		_, count = mod:UnitDebuff(player, mod:SpellName(bomb[i]), bomb[i])
 		if count then
 			return "bomb", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = mod:UnitDebuff(player, mantid[i])
+		_, count = mod:UnitDebuff(player, mod:SpellName(mantid[i]), mantid[i])
 		if count then
 			return "mantid", colors[i], (count == 0) and 1 or count
 		end
 
-		_, count = mod:UnitDebuff(player, staff[i], 143630) -- difficulty 17
+		_, count = mod:UnitDebuff(player, mod:SpellName(staff[i]), staff[i])
 		if count then
 			return "staff", colors[i], (count == 0) and 1 or count
 		end
@@ -627,7 +627,7 @@ do
 		[mod:SpellName(142534)] = {[142727] = "ffFFFF00", [142730] = "ff008000", [142728] = "ffFF9900"} -- yellow
 	}
 	local function handleCatalystProximity()
-		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532)) or mod:UnitDebuff("player", mod:SpellName(142533), 142533) or mod:UnitDebuff("player", mod:SpellName(142534), 142534) -- blue, red, yellow
+		local myDebuff = mod:UnitDebuff("player", mod:SpellName(142532), 142532) or mod:UnitDebuff("player", mod:SpellName(142533), 142533) or mod:UnitDebuff("player", mod:SpellName(142534), 142534) -- blue, red, yellow
 		if myDebuff then
 			local redPlayers = {}
 			for unit in mod:IterateGroup() do
