@@ -41,18 +41,22 @@ if L then
 	L.arc_desc = "|cFFFF0000This warning only shows for the boss you're targeting.|r {-5673}"
 	L.arc_icon = 116835
 
-	L.rage, L.rage_desc = -5678, -5678
+	L.rage = -5678
+	L.rage_desc = -5678
 	L.rage_icon = 38771 -- rage like icon
 
-	L.strength, L.strength_desc = -5677, -5677
+	L.strength = -5677
+	L.strength_desc = -5677
 	L.strength_icon = 80471 -- strength like icon
 
-	L.courage, L.courage_desc = -5676, -5676
+	L.courage = -5676
+	L.courage_desc = -5676
 	L.courage_icon = 126030 -- shield like icon
 
 	L.titan_spark = -5674
 
-	L.bosses, L.bosses_desc = -5726, -5726
+	L.bosses = -5726
+	L.bosses_desc = -5726
 	L.bosses_icon = "achievement_moguraid_06"
 end
 
