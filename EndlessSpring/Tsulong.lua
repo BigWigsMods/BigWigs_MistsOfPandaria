@@ -24,10 +24,12 @@ if L then
 	L.phases = "Phases"
 	L.phases_desc = "Warning for phase changes."
 
-	L.unstable_sha, L.unstable_sha_desc = -6320, -6320
+	L.unstable_sha = -6320
+	L.unstable_sha_desc = -6320
 	L.unstable_sha_icon = 122938
 
-	L.embodied_terror, L.embodied_terror_desc = -6316, -6316
+	L.embodied_terror = -6316
+	L.embodied_terror_desc = -6316
 	L.embodied_terror_icon = 130142 -- white and black sha-y icon
 
 	L.sunbeam_spawn = "New Sunbeam!"
