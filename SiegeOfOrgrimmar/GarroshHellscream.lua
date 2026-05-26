@@ -25,6 +25,7 @@ local waveTimer, waveCounter = nil, 1
 local whirlingCounter = 1
 local bombardmentCounter, maliceCounter = 1, 1
 local hopeTimer = nil
+local maliceOnMe = false
 
 --------------------------------------------------------------------------------
 -- Localization
@@ -145,6 +146,7 @@ function mod:OnBossEnable()
 end
 
 function mod:OnEngage(diff)
+	maliceOnMe = false
 	waveCounter = 1
 	waveTimer = self:ScheduleTimer("NewWave", 2)
 	self:Bar(-8292, 2, nil, 144582) -- Kor'kron Warbringer aka add waves
@@ -232,7 +234,7 @@ do
 		end
 
 		local t = GetTime()
-		if t-prev > 1 and self:UnitDebuff("player", self:SpellName(147209)) then -- Malice Debuff
+		if t-prev > 1 and maliceOnMe then -- Malice Debuff
 			prev = t
 			self:Bar(args.spellId, 2) -- Bar for when you as the player with Malice will spread Malicious Blast to others
 		end
@@ -240,17 +242,21 @@ do
 end
 
 function mod:MaliceRemoved(args)
+	if self:Me(args.destGUID) then
+		maliceOnMe = false
+	end
 	self:SecondaryIcon(args.spellId)
 end
 
 function mod:MaliceApplied(args)
-	self:SecondaryIcon(args.spellId, args.destName)
-	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm")
-	self:TargetBar(args.spellId, 14, args.destName)
 	if self:Me(args.destGUID) then
+		maliceOnMe = true
 		self:Flash(args.spellId)
 		self:Say(args.spellId, nil, nil, "Malice")
 	end
+	self:SecondaryIcon(args.spellId, args.destName)
+	self:TargetMessageOld(args.spellId, args.destName, "orange", "alarm")
+	self:TargetBar(args.spellId, 14, args.destName)
 	maliceCounter = maliceCounter + 1
 	self:Bar(args.spellId, 30, CL.count:format(args.spellName, maliceCounter))
 end
