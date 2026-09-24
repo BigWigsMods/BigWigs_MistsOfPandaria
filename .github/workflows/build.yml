@@ -14,6 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     concurrency:
         group: packager
+        queue: max
 
     steps:
       - name: Checkout addon
@@ -39,7 +40,7 @@ jobs:
         with:
           run_luacheck: false
           custom_script: https://raw.githubusercontent.com/BigWigsMods/BigWigs/refs/heads/master/gen_option_values.lua
-          custom_args: BigWigs_MistsOfPandaria_Mists.toc BigWigs_MistsOfPandaria_Mainline.toc
+          custom_args: BigWigs_MistsOfPandaria.toc
 
       - name: Clean up common locale
         run: rm -rf Locales
