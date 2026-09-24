@@ -1,4 +1,5 @@
-## Interface: 120100, 120005, 120007
+## Interface: 50504, 50503, 120100, 120105, 120007
+## AllowLoadGameType: standard, mists
 
 ## Title: BigWigs [|cffeda55fMists of Pandaria|r]
 ## Title-zhCN: BigWigs [|cffeda55f熊猫人之谜|r]
