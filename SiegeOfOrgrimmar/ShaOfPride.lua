@@ -55,7 +55,7 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	if IsEncounterInProgress() then
+	if self:UnitGUID("boss1") then
 		self:OpenAltPower("altpower", 144343) -- Pride
 	end
 

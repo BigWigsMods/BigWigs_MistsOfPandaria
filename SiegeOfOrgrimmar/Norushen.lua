@@ -51,8 +51,12 @@ function mod:GetOptions()
 end
 
 function mod:OnBossEnable()
-	if IsEncounterInProgress() then
-		self:OpenAltPower("altpower", 147800, "AZ", true) -- Corruption
+	if self:UnitGUID("boss1") then
+		local sync = false
+		if self:MistsOfPandaria() then
+			sync = true
+		end
+		self:OpenAltPower("altpower", 147800, "AZ", sync) -- Corruption
 	end
 
 	self:BossYell("Warmup", L.warmup_trigger)
@@ -90,7 +94,11 @@ function mod:OnEngage()
 	self:Berserk(self:LFR() and 600 or 418)
 	self:Bar(145226, 25) -- Blind Hatred
 	percent = 50
-	self:OpenAltPower("altpower", 147800, "AZ", true) -- Corruption
+	local sync = false
+	if self:MistsOfPandaria() then
+		sync = true
+	end
+	self:OpenAltPower("altpower", 147800, "AZ", sync) -- Corruption
 end
 
 --------------------------------------------------------------------------------
